@@ -21,8 +21,6 @@ class _OrganizeEventState extends State<OrganizeEvent> {
     const LocationTab(),
     const AboutTab(),
     const NameTab(),
-    const DescTab(),
-    const AdditionalInfo()
 
   ];
 
@@ -63,7 +61,7 @@ class _OrganizeEventState extends State<OrganizeEvent> {
             child: Container(
               padding: const EdgeInsets.only(bottom: 20,left: 20,right: 20),
               child: StepProgressIndicator(
-                totalSteps: 5,
+                totalSteps: 3,
                 currentStep: _selectedTab,
                 size: 10,
                 selectedColor: const Color(0xffff1f6f),
@@ -103,7 +101,7 @@ class _OrganizeEventState extends State<OrganizeEvent> {
                   onTap: ()
                   {
                     setState(() {
-                      if(_selectedTab<5) {
+                      if(_selectedTab<3) {
                         _selectedTab += 1;
                       }
                     });
@@ -119,7 +117,7 @@ class _OrganizeEventState extends State<OrganizeEvent> {
                         borderRadius: BorderRadius.circular(10)
                     ),
                     alignment: Alignment.center,
-                    child:  Text(_selectedTab ==5? "Publish event" : "Next",
+                    child:  Text(_selectedTab ==3? "Publish event" : "Next",
                       style: const TextStyle(color: Colors.white,fontFamily: "Helvetica_Bold"),),
                   ),
                 ),

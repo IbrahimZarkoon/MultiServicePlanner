@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:socialapp/LocationPage.dart';
 import 'package:socialapp/Routes/customRoute.dart';
 import 'package:socialapp/Screens/SearchPage.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../Screens/Dashboard.dart';
 
 class CustomAppBar extends StatefulWidget {
@@ -27,6 +29,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
     super.dispose();
   }
 
+  Future<Map<String, dynamic>> getLocationInfo(double latitude, double longitude) async {
+    final apiKey = 'AIzaSyAZF17_nequz3Y6dsuoQrYuE303OBU-bEE';
+    final url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=$apiKey';
+
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data;
+    } else {
+      throw Exception('Failed to load location data');
+    }
+  }
+
 
 
   @override
@@ -45,7 +60,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
       actions: [
 
         InkWell(
-          onTap: () => Navigator.push(context, customRoute(const LocationPage())),
+          onTap: ()async{
+
+            LatLng result = await Navigator.push(context, customRoute(const LocationPage()));
+
+            print("Popped LATLNG: $result");
+
+            getLocationInfo(result.latitude, result.longitude);
+
+
+
+
+          },
           child: Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(right: 10),

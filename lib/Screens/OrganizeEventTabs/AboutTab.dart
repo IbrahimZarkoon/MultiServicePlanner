@@ -219,45 +219,90 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
                 //   ),
                 // ),
 
-                GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 0.9,
+
+                // Text("Sport",
+                //   style: TextStyle(fontFamily: "Helvetica_Bold",color: Colors.black.withOpacity(0.8),fontSize: 22),),
+
+                Container(
+                  margin: const EdgeInsets.only(bottom: 15),
+
+                  padding: const EdgeInsets.only(left: 0,right: 0,bottom: 15,top: 15),
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 15, // spacing between the interest containers
+                    runSpacing: 15, // spacing between lines
+
+                    children: <Widget>[
+
+                      interestCon(context, "Dance and Movement",true),
+
+                      interestCon(context, "Painting",i2),
+
+                      interestCon(context, "Line Dancing",true),
+
+                      interestCon(context, "Belly Dance",i4),
+
+                      interestCon(context, "Argentine Tango",i5),
+
+                      interestCon(context, "Painting",i6),
+
+                      interestCon(context, "Dance and Movement",i7),
+
+                      interestCon(context, "Line Dancing",i8),
+
+                      interestCon(context, "Belly Dance",i9),
+
+                      interestCon(context, "Argentine Tango",i10),
+
+
+
+
+
+
+                    ],
                   ),
-                  scrollDirection: Axis.vertical,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.only(left: 0,right: 0,top: 10,bottom: 10),
-                  shrinkWrap: true,
-                  children: [
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=1938&format=png","Technology"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=40569&format=png","Education"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=aanJRSdBR4ug&format=png","Music"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=59&format=png","Sports"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=68463&format=png","Cinema"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=HzPzzQ84vzT3&format=png","Art"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=40569&format=png","Education"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=aanJRSdBR4ug&format=png","Music"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=59&format=png","Sports"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=68463&format=png","Cinema"),
-
-                    interestCon(context,"https://img.icons8.com/?size=512&id=HzPzzQ84vzT3&format=png","Art"),
-
-
-
-                  ],
                 ),
+
+
+                // GridView(
+                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //     crossAxisCount: 3,
+                //     mainAxisSpacing: 20,
+                //     crossAxisSpacing: 20,
+                //     childAspectRatio: 0.9,
+                //   ),
+                //   scrollDirection: Axis.vertical,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   padding: const EdgeInsets.only(left: 0,right: 0,top: 10,bottom: 10),
+                //   shrinkWrap: true,
+                //   children: [
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=1938&format=png","Technology"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=40569&format=png","Education"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=aanJRSdBR4ug&format=png","Music"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=59&format=png","Sports"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=68463&format=png","Cinema"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=HzPzzQ84vzT3&format=png","Art"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=40569&format=png","Education"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=aanJRSdBR4ug&format=png","Music"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=59&format=png","Sports"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=68463&format=png","Cinema"),
+                //
+                //     interestCon(context,"https://img.icons8.com/?size=512&id=HzPzzQ84vzT3&format=png","Art"),
+                //
+                //
+                //
+                //   ],
+                // ),
 
               ],
             ),
@@ -267,7 +312,36 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
     );
   }
 
-  Widget interestCon(BuildContext context,String image,String name)
+  Widget interestCon(BuildContext context,String txt,bool T)
+  {
+    return InkWell(
+        onTap: ()
+        {
+
+        },
+        child: Container(
+
+          //alignment: Alignment.center,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: T?  const Color(0xffff1f6f) : Colors.white,
+              border: Border.all(color:const Color(0xffff1f6f),width: 0.5)
+          ),
+          padding: const EdgeInsets.only(top: 8,bottom: 8,left: 15,right: 15),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(txt,style: TextStyle(
+                  color: T? Colors.white : const Color(0xffff1f6f),fontSize: 12
+              ),),
+            ],
+          ),
+        )
+    );
+  }
+
+  Widget interestCon1(BuildContext context,String image,String name)
   {
     final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
 

@@ -9,7 +9,7 @@ import 'package:socialapp/Screens/Organizers.dart';
 import '../CustomWidgets/CustomAppBar.dart';
 import '../CustomWidgets/RoundedBottomBar.dart';
 import 'HomePage.dart';
-import 'ProfileDrawer/profileDrawer.dart';
+import 'ProfileDrawer/userDrawer.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({Key? key, required this.userTabIndex}) : super(key: key);

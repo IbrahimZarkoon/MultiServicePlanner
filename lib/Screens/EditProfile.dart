@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:socialapp/CustomWidgets/Headings.dart';
+import 'package:socialapp/LocationPage.dart';
+import 'package:socialapp/Screens/ProfileDrawer/EditPreferences.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -10,6 +12,18 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+
+  TextEditingController emailC = TextEditingController();
+  TextEditingController dateC = TextEditingController();
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +48,12 @@ class _EditProfileState extends State<EditProfile> {
             onTap: () => Navigator.pop(context),
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 18,horizontal: 18),
-              child: Text("Save",style: TextStyle(color: Color(0xff009ed9),fontSize: 14),),
+              child: Text("Save",style: TextStyle(color: Color(0xffff1f6f),fontSize: 14),),
             ),
           ),
         ],
       ),
-      
+
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
@@ -47,7 +61,7 @@ class _EditProfileState extends State<EditProfile> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
+
             //Top Container
             Container(
               padding: const EdgeInsets.only(top: 20,bottom: 20),
@@ -56,9 +70,9 @@ class _EditProfileState extends State<EditProfile> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                
+
                 children: [
-                  
+
                   //Image Container
                   Container(
                     margin: const EdgeInsets.only(bottom: 20),
@@ -75,7 +89,7 @@ class _EditProfileState extends State<EditProfile> {
                   ),
 
                   const Text("Change photo",style: TextStyle(
-                    color: Color(0xff009ed9),
+                    color: Color(0xffff1f6f),
                     fontFamily: "Helvetica_Bold",fontSize: 13
                   ),)
 
@@ -126,7 +140,7 @@ class _EditProfileState extends State<EditProfile> {
                               const SizedBox(height: 10,),
 
                               Text("Ibrahim Khan Zarkoon",
-                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: ""),),
 
                             ],
                           ),
@@ -139,30 +153,33 @@ class _EditProfileState extends State<EditProfile> {
                         ),
 
                         //Location Container
-                        Container(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                        InkWell(
+                          onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => LocationPage())),
+                          child: Container(
+                            padding: const EdgeInsets.all(15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
 
-                                  Text("Location",
-                                    style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 12,fontFamily: "Helvetica_Bold"),),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
 
-                                  const SizedBox(height: 10,),
+                                    Text("Location",
+                                      style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 12,fontFamily: "Helvetica_Bold"),),
 
-                                  Text("APO",
-                                    style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                                    const SizedBox(height: 10,),
 
-                                ],
-                              ),
-                              
-                              Icon(Icons.arrow_forward_ios,color: Colors.black.withOpacity(0.4),size: 18,)
-                            ],
+                                    Text("APO",
+                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: ""),),
+
+                                  ],
+                                ),
+
+                                Icon(Icons.arrow_forward_ios,color: Colors.black.withOpacity(0.4),size: 18,)
+                              ],
+                            ),
                           ),
                         ),
 
@@ -174,32 +191,51 @@ class _EditProfileState extends State<EditProfile> {
 
                         //Email Container
                         Container(
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.only(left: 15,right: 15,top: 15),
                           child: Row(
+
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
 
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
 
-                                  Text("Email",
-                                    style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 12,fontFamily: "Helvetica_Bold"),),
+                                    Text("Email",
+                                      style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 12,fontFamily: "Helvetica_Bold"),),
 
-                                  const SizedBox(height: 10,),
+                                    const SizedBox(height: 0,),
 
-                                  Text("ibrahimkhanzarkoon@techonza.com",
-                                    style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                                   TextField(
 
-                                ],
+                                     maxLines: 1,
+                                       controller: emailC,
+                                       onChanged: (string)
+                                     {
+                                       setState(() {
+                                         emailC.text = string;
+                                       });
+                                     },
+                                     style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14),
+                                     decoration: InputDecoration(
+                                       border: InputBorder.none,
+                                       hintText: "ibrahimkhanzarkoon@techonza.com",
+                                       hintStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14)
+                                     ),
+
+                                   )
+                                  ],
+                                ),
                               ),
 
                               Icon(Icons.arrow_forward_ios,color: Colors.black.withOpacity(0.4),size: 18,)
                             ],
                           ),
                         ),
-                        
+
                         shadowLine(context)
 
 
@@ -212,7 +248,7 @@ class _EditProfileState extends State<EditProfile> {
 
             //Additional info
             Container(
-              margin: const EdgeInsets.only(top: 50),
+              margin: const EdgeInsets.only(top: 30),
               //color: Colors.red,
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height*0.4,
@@ -242,8 +278,9 @@ class _EditProfileState extends State<EditProfile> {
 
                         //Birthdate Container
                         Container(
-                          padding: const EdgeInsets.all(15),
+                          padding: const EdgeInsets.only(left: 15,right: 15,top: 15),
                           child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -251,11 +288,31 @@ class _EditProfileState extends State<EditProfile> {
                               Text("Birthdate",
                                 style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 12,fontFamily: "Helvetica_Bold"),),
 
-                              const SizedBox(height: 10,),
+                              const SizedBox(height: 0,),
 
-                              Text("MM/DD/YYYY",
-                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                              TextField(
+                                maxLines: 1,
+                                  style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12),
+                                controller: dateC,
+                                onChanged: (text) {
+                                  if (text.length == 2 || text.length == 7) {
+                                    setState(() {
+                                      dateC.text = '$text / ';
+                                      dateC.selection = TextSelection.fromPosition(
+                                        TextPosition(offset: dateC.text.length),
+                                      );
+                                    });
 
+                                  }
+                                },
+                                keyboardType: TextInputType.datetime,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "MM/DD/YYYY",
+                                  hintStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12)
+                                ),
+
+                              )
                             ],
                           ),
                         ),
@@ -280,7 +337,7 @@ class _EditProfileState extends State<EditProfile> {
                               const SizedBox(height: 10,),
 
                               Text("Male",
-                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: ""),),
 
                             ],
                           ),
@@ -292,53 +349,56 @@ class _EditProfileState extends State<EditProfile> {
                           child: shadowLine(context),
                         ),
 
-                        Container(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                        InkWell(
+                          onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => EditPreferences())),
+                          child: Container(
+                            padding: const EdgeInsets.all(15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
 
-                                  Text("What you're looking for",
-                                    style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 12,fontFamily: "Helvetica_Bold"),),
+                                    Text("What you're looking for",
+                                      style: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 12,fontFamily: "Helvetica_Bold"),),
 
-                                  const SizedBox(height: 10,),
+                                    const SizedBox(height: 10,),
 
-                                  Text("Select options",
-                                    style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                                    Text("Edit Interests",
+                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: ""),),
 
-                                ],
-                              ),
+                                  ],
+                                ),
 
-                              Icon(Icons.arrow_forward_ios,color: Colors.black.withOpacity(0.4),size: 18,)
+                                Icon(Icons.arrow_forward_ios,color: Colors.black.withOpacity(0.4),size: 18,)
 
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-
-                        //Shadow Line
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15,right: 15),
-                          child: shadowLine(context),
-                        ),
-
-                        //Interest Container
-                        Container(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Text("Edit Interests",
-                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
-
-                              Icon(Icons.arrow_forward_ios,color: Colors.black.withOpacity(0.4),size: 18,)
-                            ],
-                          ),
-                        ),
+                        //
+                        // //Shadow Line
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 15,right: 15),
+                        //   child: shadowLine(context),
+                        // ),
+                        //
+                        // //Interest Container
+                        // Container(
+                        //   padding: const EdgeInsets.all(15),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     children: [
+                        //
+                        //       Text("Edit Interests",
+                        //         style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                        //
+                        //       Icon(Icons.arrow_forward_ios,color: Colors.black.withOpacity(0.4),size: 18,)
+                        //     ],
+                        //   ),
+                        // ),
 
                         shadowLine(context)
 
@@ -358,7 +418,7 @@ class _EditProfileState extends State<EditProfile> {
 
             //Privacy Con
             Container(
-              margin: const EdgeInsets.only(top: 50),
+              margin: const EdgeInsets.only(top: 30),
               //color: Colors.red,
               width: MediaQuery.of(context).size.width,
               //height: MediaQuery.of(context).size.height*0.4,
@@ -394,13 +454,13 @@ class _EditProfileState extends State<EditProfile> {
                             children: [
 
                               Text("Show groups on profile",
-                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: ""),),
 
                               CupertinoSwitch(
                                   value: true,
                                   thumbColor: Colors.white,
                                   trackColor: Colors.black.withOpacity(0.25),
-                                  activeColor: const Color(0xff009ed9),
+                                  activeColor: const Color(0xffff1f6f),
                                   onChanged: (value){
 
                               })
@@ -426,7 +486,7 @@ class _EditProfileState extends State<EditProfile> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text("Show interests on profile",
-                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: ""),),
+                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: ""),),
 
                                     const SizedBox(height: 10,),
 
@@ -440,7 +500,7 @@ class _EditProfileState extends State<EditProfile> {
                                   value: true,
                                   thumbColor: Colors.white,
                                   trackColor: Colors.black.withOpacity(0.25),
-                                  activeColor: const Color(0xff009ed9),
+                                  activeColor: const Color(0xffff1f6f),
                                   onChanged: (value){
 
                                   })

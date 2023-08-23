@@ -12,7 +12,7 @@ import '../CustomWidgets/TodaySlider.dart';
 import '../CustomWidgets/UpComingEventsSlider.dart';
 import '../Providers/CacheManager.dart';
 import 'MyProfile.dart';
-import 'ProfileDrawer/profileDrawer.dart';
+import 'ProfileDrawer/userDrawer.dart';
 
 class SingleOrganizer extends StatefulWidget {
    SingleOrganizer({Key? key,required this.name, required this.image}) : super(key: key);

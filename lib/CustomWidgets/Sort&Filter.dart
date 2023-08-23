@@ -1118,7 +1118,7 @@ class _SortandFilterState extends State<SortandFilter> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: const Color(0xffff1f6f),
-                    borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "View results",
                   style:

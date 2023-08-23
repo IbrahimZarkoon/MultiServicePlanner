@@ -4,9 +4,12 @@ import 'package:socialapp/Providers/CacheManager.dart';
 import 'package:socialapp/Screens/Dashboard.dart';
 import 'package:socialapp/Screens/HomePage.dart';
 import 'package:socialapp/Screens/SplashScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

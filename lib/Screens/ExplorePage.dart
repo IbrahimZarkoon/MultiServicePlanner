@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:socialapp/CustomWidgets/CategoriesGrid.dart';
 import 'package:socialapp/CustomWidgets/Headings.dart';
 import 'package:socialapp/CustomWidgets/PopularNowSlider.dart';
+import 'package:socialapp/LocationPage.dart';
 
 import '../CustomWidgets/CustomAppBar.dart';
 import '../CustomWidgets/Sort&Filter.dart';
@@ -22,6 +27,74 @@ class _ExplorePageState extends State<ExplorePage> {
 
   Color inDoorColor = const Color(0xfffcfafa);
   String _selectedSize = "Sort By";
+
+  final Completer<GoogleMapController> _controller = Completer();
+  LatLng _currentLatLng = LatLng(0, 0); // Default to (0, 0) or any other initial value
+
+  bool _locationLoaded = false;
+
+  Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition();
+
+  }
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      Position position = await determinePosition();
+
+      setState(() {
+        _currentLatLng = LatLng(position.latitude, position.longitude);
+        _locationLoaded = true; // Mark that the location has been loaded
+      });
+
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(
+        CameraUpdate.newLatLngZoom(_currentLatLng, 7),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getCurrentLocation();
+  }
 
 
   @override
@@ -315,59 +388,90 @@ class _ExplorePageState extends State<ExplorePage> {
                 // const SizedBox(height: 15,),
 
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 15,bottom: 15, top: 15),
-                  child: Row(
+                InkWell(
+                  onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => LocationPage())),
+                  child: Column(
                     children: [
-                      Text("Find events near: ",
-                      style: TextStyle(
-                        color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
-                      ),),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15,bottom: 15, top: 15),
+                        child: Row(
+                          children: [
+                            Text("Find events near: ",
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
+                            ),),
 
-                      const Text("KHI, PAK",
-                        style: TextStyle(
-                            color: Color(0xffff1f6f),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
-                        ),),
+                            const Text("KHI, PAK",
+                              style: TextStyle(
+                                  color: Color(0xffff1f6f),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
+                              ),),
 
-                      const SizedBox(width: 10,),
+                            const SizedBox(width: 10,),
 
-                      Container(
-                          decoration: const BoxDecoration(
-                            border: Border(bottom: BorderSide(color: Color(0xffff1f6f),width: 1))
-                          ),
-                          child: const Icon(Icons.edit,size: 12,color: Color(0xffff1f6f)))
-                    ],
-                  ),
-                ),
-
-                //Google Maps Container
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height*0.25,
-                  margin: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    // image: const DecorationImage(
-                    //   image: NetworkImage(
-                    //     "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US"
-                    //   ),
-                    //   fit: BoxFit.cover
-                    // )
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: CachedNetworkImage(
-                      imageUrl: "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US",
-                      cacheManager: cacheManager,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => const Center(
-                        child: CircularProgressIndicator(
-                          color: Color(0xffff1f6f),
-                          value: 5,
+                            Container(
+                                decoration: const BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Color(0xffff1f6f),width: 1))
+                                ),
+                                child: const Icon(Icons.edit,size: 12,color: Color(0xffff1f6f)))
+                          ],
                         ),
                       ),
-                      errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
-                    ),
+
+                      //Google Maps Container
+                      AbsorbPointer(
+                        absorbing: true,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height*0.25,
+                          margin: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            // image: const DecorationImage(
+                            //   image: NetworkImage(
+                            //     "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US"
+                            //   ),
+                            //   fit: BoxFit.cover
+                            // )
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: GoogleMap(
+                              onMapCreated: (GoogleMapController controller) {
+                                _controller.complete(controller);
+                              },
+                              zoomControlsEnabled: false,
+                              initialCameraPosition: _locationLoaded
+                                  ? CameraPosition(target: _currentLatLng, zoom: 7)
+                                  : CameraPosition(target: LatLng(0, 0), zoom: 7),
+
+                              mapType: MapType.normal,
+                              markers: {
+                                Marker(
+                                  markerId: MarkerId('currentLocation'),
+                                  position: _currentLatLng,
+                                  icon: BitmapDescriptor.defaultMarker,
+                                ),
+                              },
+                            ),
+                          ),
+                          // child: ClipRRect(
+                          //   borderRadius: BorderRadius.circular(8),
+                          //   child: CachedNetworkImage(
+                          //     imageUrl: "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US",
+                          //     cacheManager: cacheManager,
+                          //     fit: BoxFit.cover,
+                          //     placeholder: (context, url) => const Center(
+                          //       child: CircularProgressIndicator(
+                          //         color: Color(0xffff1f6f),
+                          //         value: 5,
+                          //       ),
+                          //     ),
+                          //     errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                          //   ),
+                          // ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
 

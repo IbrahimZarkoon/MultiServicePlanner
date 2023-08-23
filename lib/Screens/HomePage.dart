@@ -8,7 +8,7 @@ import 'package:socialapp/CustomWidgets/UpComingEventsSlider.dart';
 import 'package:socialapp/Screens/Dashboard.dart';
 import 'package:socialapp/Screens/ExplorePage.dart';
 import 'package:socialapp/Screens/MyProfile.dart';
-import 'package:socialapp/Screens/ProfileDrawer/profileDrawer.dart';
+import 'package:socialapp/Screens/ProfileDrawer/userDrawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

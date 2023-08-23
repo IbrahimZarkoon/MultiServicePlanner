@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:socialapp/Organizer/OrgScreens/Homepage.dart';
+import 'package:socialapp/Organizer/OrgScreens/OrgChats.dart';
 import 'package:socialapp/Organizer/OrgScreens/OrgNotif.dart';
 import 'package:socialapp/Organizer/OrgScreens/OrgProfile.dart';
 import 'package:socialapp/Organizer/Widgets/orgAppBar.dart';
@@ -23,6 +24,7 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
 
   final orgTabs = [
     const OrgHomePage(),
+    OrgChats(),
     const OrgNotif(),
     const OrgProfile()
   ];
@@ -32,7 +34,7 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this,initialIndex: widget.orgTabIndex);
+    _tabController = TabController(length: 4, vsync: this,initialIndex: widget.orgTabIndex);
   }
 
   @override
@@ -147,13 +149,20 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
               Tab(
                 iconMargin: const EdgeInsets.only(bottom: 5),
 
-                icon: Icon(widget.orgTabIndex == 1? Icons.notifications : Icons.notifications_none_outlined),
+                icon: Icon(widget.orgTabIndex == 1? CupertinoIcons.chat_bubble_2_fill : CupertinoIcons.chat_bubble_2),
+                text: 'Chats',
+              ),
+
+              Tab(
+                iconMargin: const EdgeInsets.only(bottom: 5),
+
+                icon: Icon(widget.orgTabIndex == 2? Icons.notifications : Icons.notifications_none_outlined),
                 text: 'Notifications',
               ),
               Tab(
                 iconMargin: const EdgeInsets.only(bottom: 5),
 
-                icon: Icon(widget.orgTabIndex == 2? CupertinoIcons.person_fill : CupertinoIcons.person),
+                icon: Icon(widget.orgTabIndex == 3? CupertinoIcons.person_fill : CupertinoIcons.person),
                 text: 'Profile',
               ),
 

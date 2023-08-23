@@ -13,6 +13,7 @@ import 'package:socialapp/CustomWidgets/CommentWidgets.dart';
 import 'package:socialapp/CustomWidgets/Headings.dart';
 import 'package:socialapp/CustomWidgets/PopularNowSlider.dart';
 import 'package:socialapp/CustomWidgets/UpComingEventsSlider.dart';
+import 'package:socialapp/Screens/EventChatScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -993,194 +994,180 @@ class _SingleEventState extends State<SingleEvent> {
 
           ),
           child: //Request to join Container
-          InkWell(
-            onTap: () async{
-              if (request == false && widget.repeat == false) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      margin: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height-(2.75*kToolbarHeight),
-                      ),
-                      behavior: SnackBarBehavior.floating,
-                      showCloseIcon: true,
-                      content: const Text(
-                        "Your request has been sent.",
-                        style: TextStyle(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                flex: 2,
+                child: InkWell(
+                  onTap: () async{
+                    if (request == false && widget.repeat == false) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            margin: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height-(2.75*kToolbarHeight),
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                            showCloseIcon: true,
+                            content: const Text(
+                              "Your request has been sent.",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Helvetica_Bold",
+                                fontSize: 12,
+                              ),
+                            ),
+                            backgroundColor: const Color(0xffbe1651),
+                            duration: const Duration(seconds: 2),
+                          ));
+                      setState(() {
+                        request = true;
+                      });
+                    }
+
+                    if(widget.repeat == true && request == false)
+                      {
+                       bool result = await showModalBottomSheet(context: context,
+                            isDismissible: true,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))
+
+                            ),
+                            isScrollControlled: true,
+                            builder: (BuildContext context) {
+                              return repeatDaysBottomSheet();
+                            });
+                       if(result == true)
+                       {
+                         setState(() {
+                           request = true;
+                         });
+                       }
+
+                       ScaffoldMessenger.of(context).showSnackBar(
+
+                           SnackBar(
+                             margin: EdgeInsets.only(
+                               bottom: MediaQuery.of(context).size.height-(2.75*kToolbarHeight),
+                             ),
+                             behavior: SnackBarBehavior.floating,
+                             showCloseIcon: true,
+                             content: const Text(
+                               "Your request has been sent.",
+                               style: TextStyle(
+                                 color: Colors.white,
+                                 fontFamily: "Helvetica_Bold",
+                                 fontSize: 12,
+                               ),
+                             ),
+                             backgroundColor: const Color(0xffbe1651),
+                             duration: const Duration(seconds: 2),
+                           ));
+                      }
+                  },
+                  child: request
+                      ? Container(
+                    constraints: BoxConstraints(
+                        maxHeight: 45
+                    ),
+                    padding: const EdgeInsets.only(
+                        top: 15, bottom: 15, left: 25, right: 25),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 1.5,
+                          offset: const Offset(0,0)
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(13),
+                      color: const Color(0xffbe1651),
+                    ),
+                    child: const Text(
+                      "Request sent",
+                      style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Helvetica_Bold",
-                          fontSize: 12,
-                        ),
-                      ),
-                      backgroundColor: const Color(0xffbe1651),
-                      duration: const Duration(seconds: 2),
-                    ));
-                setState(() {
-                  request = true;
-                });
-              }
-              
-              if(widget.repeat == true && request == false)
-                {
-                 bool result = await showModalBottomSheet(context: context,
-                      isDismissible: true,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))
-
-                      ),
-                      isScrollControlled: true,
-                      builder: (BuildContext context) {
-                        return repeatDaysBottomSheet();
-                      });
-                 if(result == true)
-                 {
-                   setState(() {
-                     request = true;
-                   });
-                 }
-
-                 ScaffoldMessenger.of(context).showSnackBar(
-
-                     SnackBar(
-                       margin: EdgeInsets.only(
-                         bottom: MediaQuery.of(context).size.height-(2.75*kToolbarHeight),
-                       ),
-                       behavior: SnackBarBehavior.floating,
-                       showCloseIcon: true,
-                       content: const Text(
-                         "Your request has been sent.",
-                         style: TextStyle(
-                           color: Colors.white,
-                           fontFamily: "Helvetica_Bold",
-                           fontSize: 12,
-                         ),
-                       ),
-                       backgroundColor: const Color(0xffbe1651),
-                       duration: const Duration(seconds: 2),
-                     ));
-                }
-
-
-
-
-            },
-            child: request
-                ? Container(
-              padding: const EdgeInsets.only(
-                  top: 15, bottom: 15, left: 25, right: 25),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 1.5,
-                    offset: const Offset(0,0)
+                          fontSize: 13),
+                    ),
                   )
-                ],
-                borderRadius: BorderRadius.circular(13),
-                color: const Color(0xffbe1651),
+                      : Container(
+                    constraints: BoxConstraints(
+                        maxHeight: 45
+                    ),
+                    padding: const EdgeInsets.only(
+                        top: 15, bottom: 15, left: 25, right: 25),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13),
+                      color: const Color(0xffff1f6f),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 1.5,
+                            offset: const Offset(0,0)
+                        )
+                      ],
+                    ),
+                    child: const Text(
+                      "Request To Join",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Helvetica_Bold",
+                          fontSize: 13),
+                    ),
+                  ),
+                ),
               ),
-              child: const Text(
-                "Request sent",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "Helvetica_Bold",
-                    fontSize: 13),
-              ),
-            )
-                : Container(
-              padding: const EdgeInsets.only(
-                  top: 15, bottom: 15, left: 25, right: 25),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(13),
-                color: const Color(0xffff1f6f),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 1.5,
-                      offset: const Offset(0,0)
-                  )
-                ],
-              ),
-              child: const Text(
-                "Request To Join",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: "Helvetica_Bold",
-                    fontSize: 13),
-              ),
-            ),
+
+              //Chat Container
+              InkWell(
+                onTap: () => Navigator.push(context,CupertinoPageRoute(builder: (_) => EventChatScreen())),
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: 45
+                  ),
+                  margin: EdgeInsets.only(left: 15),
+                  padding: const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 1.5,
+                          offset: const Offset(0,0)
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(13),
+                    color: const Color(0xffffffff),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+                      Icon(CupertinoIcons.chat_bubble_2,size: 20,color: Color(0xffff1f6f),),
+
+                      const SizedBox(width: 5,),
+
+                      const Text(
+                        "Chat",
+                        style: TextStyle(
+                            color: Color(0xffff1f6f),
+                            fontFamily: "Helvetica_Bold",
+                            fontSize: 13),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+
+            ],
           ),
-          // child: Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   children: [
-          //     Text(
-          //       "Free",
-          //       style: TextStyle(
-          //           fontFamily: "Helvetica_Bold",
-          //           color: Colors.black.withOpacity(0.8),
-          //           fontSize: 14),
-          //     ),
-          //
-          //     //Request to join Container
-          //     InkWell(
-          //       onTap: () {
-          //         if (request == false)
-          //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          //             content: Text(
-          //               "Your request has been sent.",
-          //               style: TextStyle(
-          //                   color: Colors.white,
-          //                   fontFamily: "Helvetica_Bold",
-          //                   fontSize: 12),
-          //             ),
-          //             backgroundColor: Color(0xffbe1651),
-          //             duration: Duration(seconds: 2),
-          //           ));
-          //
-          //         setState(() {
-          //           request = true;
-          //         });
-          //       },
-          //       child: request
-          //           ? Container(
-          //         padding: EdgeInsets.only(
-          //             top: 12, bottom: 12, left: 25, right: 25),
-          //         alignment: Alignment.center,
-          //         decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(7),
-          //           color: Color(0xffbe1651),
-          //         ),
-          //         child: Text(
-          //           "Request sent",
-          //           style: TextStyle(
-          //               color: Colors.white,
-          //               fontFamily: "Helvetica_Bold",
-          //               fontSize: 13),
-          //         ),
-          //       )
-          //           : Container(
-          //         padding: EdgeInsets.only(
-          //             top: 12, bottom: 12, left: 25, right: 25),
-          //         alignment: Alignment.center,
-          //         decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(7),
-          //           color: Color(0xffff1f6f),
-          //         ),
-          //         child: Text(
-          //           "Request to join",
-          //           style: TextStyle(
-          //               color: Colors.white,
-          //               fontFamily: "Helvetica_Bold",
-          //               fontSize: 13),
-          //         ),
-          //       ),
-          //     )
-          //   ],
-          // ),
         ),)
     ]
     );
