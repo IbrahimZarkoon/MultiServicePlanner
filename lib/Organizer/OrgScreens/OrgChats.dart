@@ -20,7 +20,7 @@ class _OrgChatsState extends State<OrgChats> {
     super.initState();
     Future.delayed(Duration.zero, () {
       // Focus the text field and show the keyboard
-      _focusNode.requestFocus();
+      //_focusNode.requestFocus();
       _searchCon.selection = TextSelection.fromPosition(
           TextPosition(offset: _searchCon.text.length));
       //TextInput.showKeyboard();

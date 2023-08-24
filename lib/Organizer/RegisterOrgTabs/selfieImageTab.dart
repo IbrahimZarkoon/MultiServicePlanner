@@ -1,3 +1,6 @@
+import 'dart:io';
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,6 +21,8 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
 
   FocusNode _dobNode = FocusNode();
   FocusNode _confirmNode = FocusNode();
+
+  File? selfieIMG;
 
   @override
   void initState() {
@@ -80,10 +85,10 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
                           decoration: BoxDecoration(
                               color: const Color(0xffffffff),
                               borderRadius: BorderRadius.circular(3),
-                              image: const DecorationImage(
-                                  image: NetworkImage(
-                                      "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
-                                  fit: BoxFit.contain),
+                              // image: const DecorationImage(
+                              //     image: NetworkImage(
+                              //         "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
+                              //     fit: BoxFit.contain),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.black.withOpacity(0.2),
@@ -91,6 +96,8 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
                                     spreadRadius: 1,
                                     blurRadius: 1.5)
                               ]),
+                          child: selfieIMG != null ? Image.file(selfieIMG!) : Image.network("https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png",fit: BoxFit.contain,),
+
                         ),
 
                         Positioned(
@@ -114,14 +121,31 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
                                           onPressed: () async {
                                             final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
                                             if (image == null) return;
-                                            // final imageTemp = File(image.path);
-                                            //setState(() => Provider.of<UserClass>(context).profilePicture = imageTemp);
+
+                                            // Convert XFile to File
+                                            final imageTemp = File(image.path);
+
+                                            setState(() {
+                                              selfieIMG = imageTemp; // Assign to the File variable
+                                            });
+                                            Navigator.pop(context);
+
                                           },
                                           child: const Text("Choose Photo")),
 
                                       CupertinoActionSheetAction(
                                           onPressed: () async {
-                                            final XFile? photo = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                            final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                            if (image == null) return;
+
+                                            // Convert XFile to File
+                                            final imageTemp = File(image.path);
+
+                                            setState(() {
+                                              selfieIMG = imageTemp; // Assign to the File variable
+                                            });
+                                            Navigator.pop(context);
+
                                           },
                                           child: const Text("Take Photo")),
 

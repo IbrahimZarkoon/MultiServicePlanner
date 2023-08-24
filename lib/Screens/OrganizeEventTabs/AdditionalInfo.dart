@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +28,9 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
 
   final ImagePicker _BannerPicker = ImagePicker();
   final ImagePicker _ThumbPicker = ImagePicker();
+
+  File? bannerIMG;
+  File? thumbIMG;
 
   late AnimationController _controller;
   late Animation<Offset> _animation;
@@ -91,6 +96,9 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
 
             Stack(
               children: [
+
+                //Banner IMAGE
+
               Container(
                 margin: EdgeInsets.only(left: 15, right: 15, top: 15,bottom: MediaQuery.of(context).size.height*0.12),
                 width: MediaQuery.of(context).size.width,
@@ -98,10 +106,10 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
                 decoration: BoxDecoration(
                     color: const Color(0xffe5e5e5),
                     borderRadius: BorderRadius.circular(3),
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
-                        fit: BoxFit.contain),
+                    // image: const DecorationImage(
+                    //     image: NetworkImage(
+                    //         "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
+                    //     fit: BoxFit.contain),
                     boxShadow: [
                       BoxShadow(
                           color: Colors.black.withOpacity(0.2),
@@ -109,6 +117,8 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
                           spreadRadius: 1,
                           blurRadius: 1.5)
                     ]),
+                child: bannerIMG != null ? Image.file(bannerIMG!) : Image.network("https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png",fit: BoxFit.contain,),
+
               ),
 
                 Positioned(
@@ -132,14 +142,31 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
                                   onPressed: () async {
                                     final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
                                     if (image == null) return;
-                                    // final imageTemp = File(image.path);
-                                    //setState(() => Provider.of<UserClass>(context).profilePicture = imageTemp);
+
+                                    // Convert XFile to File
+                                    final imageTemp = File(image.path);
+
+                                    setState(() {
+                                      bannerIMG = imageTemp; // Assign to the File variable
+                                    });
+                                    Navigator.pop(context);
+
                                   },
                                   child: const Text("Choose Photo")),
 
                               CupertinoActionSheetAction(
                                   onPressed: () async {
-                                    final XFile? photo = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                    final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                    if (image == null) return;
+
+                                    // Convert XFile to File
+                                    final imageTemp = File(image.path);
+
+                                    setState(() {
+                                      bannerIMG = imageTemp; // Assign to the File variable
+                                    });
+                                    Navigator.pop(context);
+
                                   },
                                   child: const Text("Take Photo")),
 
@@ -171,6 +198,7 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
                       ),
                     )),
 
+                //Thumb IMAGE
                 Positioned(
                     bottom: 0,left: MediaQuery.of(context).size.width/3,
                     child: InkWell(
@@ -186,10 +214,10 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
                             decoration: BoxDecoration(
                                 color: const Color(0xffe5e5e5),
                                 borderRadius: BorderRadius.circular(3),
-                                image: const DecorationImage(
-                                    image: NetworkImage(
-                                        "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
-                                    fit: BoxFit.contain),
+                                // image: const DecorationImage(
+                                //     image: NetworkImage(
+                                //         "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
+                                //     fit: BoxFit.contain),
                                 boxShadow: [
                                   BoxShadow(
                                       color: Colors.black.withOpacity(0.2),
@@ -197,6 +225,8 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
                                       spreadRadius: 1,
                                       blurRadius: 1.5)
                                 ]),
+                            child: thumbIMG != null ? Image.file(thumbIMG!) : Image.network("https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png",fit: BoxFit.contain,),
+
                           ),
 
                           //Update Con
@@ -219,14 +249,31 @@ class _AdditionalInfoState extends State<AdditionalInfo> with SingleTickerProvid
                                         onPressed: () async {
                                           final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
                                           if (image == null) return;
-                                          // final imageTemp = File(image.path);
-                                          //setState(() => Provider.of<UserClass>(context).profilePicture = imageTemp);
+
+                                          // Convert XFile to File
+                                          final imageTemp = File(image.path);
+
+                                          setState(() {
+                                            thumbIMG = imageTemp; // Assign to the File variable
+                                          });
+                                          Navigator.pop(context);
+
                                         },
                                         child: const Text("Choose Photo")),
 
                                     CupertinoActionSheetAction(
                                         onPressed: () async {
-                                          final XFile? photo = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                          final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                          if (image == null) return;
+
+                                          // Convert XFile to File
+                                          final imageTemp = File(image.path);
+
+                                          setState(() {
+                                            thumbIMG = imageTemp; // Assign to the File variable
+                                          });
+                                          Navigator.pop(context);
+
                                         },
                                         child: const Text("Take Photo")),
 

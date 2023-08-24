@@ -1,3 +1,6 @@
+
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,6 +17,11 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
   late Animation<Offset> _animation;
 
   final ImagePicker _BannerPicker = ImagePicker();
+
+  File? frontIMGFile;
+  File? backIMGFile;
+
+
 
 
   FocusNode _dobNode = FocusNode();
@@ -81,10 +89,10 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
                           decoration: BoxDecoration(
                               color: const Color(0xffffffff),
                               borderRadius: BorderRadius.circular(3),
-                              image: const DecorationImage(
-                                  image: NetworkImage(
-                                      "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
-                                  fit: BoxFit.contain),
+                              // image: const  DecorationImage(
+                              //     image: NetworkImage(
+                              //         "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
+                              //     fit: BoxFit.contain),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.black.withOpacity(0.2),
@@ -92,6 +100,7 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
                                     spreadRadius: 1,
                                     blurRadius: 1.5)
                               ]),
+                          child: frontIMGFile != null ? Image.file(frontIMGFile!) : Image.network("https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png",fit: BoxFit.contain,),
                         ),
 
                         Positioned(
@@ -115,14 +124,31 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
                                           onPressed: () async {
                                             final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
                                             if (image == null) return;
-                                            // final imageTemp = File(image.path);
-                                            //setState(() => Provider.of<UserClass>(context).profilePicture = imageTemp);
+
+                                            // Convert XFile to File
+                                            final imageTemp = File(image.path);
+
+                                            setState(() {
+                                              frontIMGFile = imageTemp; // Assign to the File variable
+                                            });
+                                            Navigator.pop(context);
+                                            
                                           },
                                           child: const Text("Choose Photo")),
 
                                       CupertinoActionSheetAction(
                                           onPressed: () async {
-                                            final XFile? photo = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                            final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                            if (image == null) return;
+
+                                            // Convert XFile to File
+                                            final imageTemp = File(image.path);
+
+                                            setState(() {
+                                              frontIMGFile = imageTemp; // Assign to the File variable
+                                            });
+                                            Navigator.pop(context);
+
                                           },
                                           child: const Text("Take Photo")),
 
@@ -203,6 +229,8 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
                                     spreadRadius: 1,
                                     blurRadius: 1.5)
                               ]),
+                          child: backIMGFile != null ? Image.file(backIMGFile!) : Image.network("https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png",fit: BoxFit.contain,),
+
                         ),
 
                         Positioned(
@@ -226,14 +254,31 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
                                           onPressed: () async {
                                             final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
                                             if (image == null) return;
-                                            // final imageTemp = File(image.path);
-                                            //setState(() => Provider.of<UserClass>(context).profilePicture = imageTemp);
+
+                                            // Convert XFile to File
+                                            final imageTemp = File(image.path);
+
+                                            setState(() {
+                                              backIMGFile = imageTemp; // Assign to the File variable
+                                            });
+                                            Navigator.pop(context);
+
                                           },
                                           child: const Text("Choose Photo")),
 
                                       CupertinoActionSheetAction(
                                           onPressed: () async {
-                                            final XFile? photo = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                            final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                            if (image == null) return;
+
+                                            // Convert XFile to File
+                                            final imageTemp = File(image.path);
+
+                                            setState(() {
+                                              backIMGFile = imageTemp; // Assign to the File variable
+                                            });
+                                            Navigator.pop(context);
+
                                           },
                                           child: const Text("Take Photo")),
 
