@@ -228,6 +228,8 @@ class _EventChatScreenState extends State<EventChatScreen> {
 
         ],
       ),
+
+
       body: Column(
         children: <Widget>[
 
@@ -361,10 +363,13 @@ class _EventChatScreenState extends State<EventChatScreen> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
-        mainAxisAlignment: message.sender == 'User'
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
+        mainAxisAlignment: message.sender == 'User' ?
+        MainAxisAlignment.end
+            :
+        MainAxisAlignment.start,
         children: <Widget>[
+
+          //Message container
           Container(
             padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
             decoration: BoxDecoration(
@@ -403,6 +408,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
               ],
             ),
           ),
+
         ],
       ),
     );

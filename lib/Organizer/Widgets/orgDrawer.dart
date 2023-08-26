@@ -17,7 +17,7 @@ Widget orgDrawer(BuildContext context)
 
 
   return Container(
-    color: Color(0xfff1f1f1),
+    color: Color(0xfff9f9f9),
     margin: EdgeInsets.only(left: kToolbarHeight),
     width: MediaQuery.of(context).size.width,
     child: Column(
@@ -119,148 +119,150 @@ Widget orgDrawer(BuildContext context)
           ),
         ),
 
-        Container(
-          decoration: BoxDecoration(
-              color: Color(0xfff9f9f9),
-              ///borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    blurRadius: 1.5,
-                    spreadRadius: 1,
-                    offset: Offset(0,0)
-                )
-              ]
-          ),
-          margin: EdgeInsets.only(left: kToolbarHeight),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            padding: const EdgeInsets.only(top: 15),
-            scrollDirection: Axis.vertical,
-            //controller: profileScrollController,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
+        //Drawer Items
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+                color: Color(0xfff9f9f9),
+                ///borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
+                // boxShadow: [
+                //   BoxShadow(
+                //       color: Colors.black.withOpacity(0.15),
+                //       blurRadius: 1.5,
+                //       spreadRadius: 1,
+                //       offset: Offset(0,0)
+                //   )
+                // ]
+            ),
+            //margin: EdgeInsets.only(left: kToolbarHeight),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.only(top: 15),
+              scrollDirection: Axis.vertical,
+              //controller: profileScrollController,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
 
-                firstHeading(context, "Events"),
+                  firstHeading(context, "Events"),
 
-                InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (BuildContext context) =>
-                            const OrganizeEvent())),
-                    child:
-                    profileCon(context, "Organize a new event", Icons.event)),
+                  InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                              const OrganizeEvent())),
+                      child:
+                      profileCon(context, "Organize a new event", Icons.event)),
 
-                InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (BuildContext context) => const OrgEvents())),
-                    child: profileCon(
-                        context, "My events", Icons.manage_accounts_outlined)),
+                  InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) => const OrgEvents())),
+                      child: profileCon(
+                          context, "My events", Icons.manage_accounts_outlined)),
 
-                InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (BuildContext context) =>
-                            const EditOrgProfile())),
-                    child:
-                    profileCon(context, "Edit profile", Icons.person_outline)),
+                  InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (BuildContext context) =>
+                              const EditOrgProfile())),
+                      child:
+                      profileCon(context, "Edit profile", Icons.person_outline)),
 
-                InkWell(
-                    onTap: () {
-                      Share.share("Share Profile ");
-                    },
-                    child:
-                    profileCon(context, "Share profile", CupertinoIcons.share)),
+                  InkWell(
+                      onTap: () {
+                        Share.share("Share Profile ");
+                      },
+                      child:
+                      profileCon(context, "Share profile", CupertinoIcons.share)),
 
-                //profileCon(context, "Manage events", Icons.manage_accounts_outlined),
-                //profileCon(context, "Availability", Icons.event_available),
+                  //profileCon(context, "Manage events", Icons.manage_accounts_outlined),
+                  //profileCon(context, "Availability", Icons.event_available),
 
-                InkWell(
-                    onTap: () {
-                      Share.share("Invite Friends");
-                    },
-                    child: profileCon(context, "Invite friends", Icons.share)),
+                  InkWell(
+                      onTap: () {
+                        Share.share("Invite Friends");
+                      },
+                      child: profileCon(context, "Invite friends", Icons.share)),
 
-                Headings(context, "Settings"),
+                  Headings(context, "Settings"),
 
-                profileCon(context, "Support", Icons.support_outlined),
-                profileCon(context, "Community and legal",
-                    Icons.indeterminate_check_box_outlined),
+                  profileCon(context, "Support", Icons.support_outlined),
+                  profileCon(context, "Community and legal",
+                      Icons.indeterminate_check_box_outlined),
 
-                Headings(context, "About"),
+                  Headings(context, "About"),
 
-                profileCon(context, "Terms of service", Icons.book_outlined),
-                profileCon(context, "Cookie policy", Icons.cookie_outlined),
+                  profileCon(context, "Terms of service", Icons.book_outlined),
+                  profileCon(context, "Cookie policy", Icons.cookie_outlined),
 
-
-
-                InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                          builder: (BuildContext context) =>
-                          const OrganizerLogin())),
-                  child: Container(
-                    margin: const EdgeInsets.all(15),
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    decoration: BoxDecoration(
-                        color: const Color(0xffff1f6f),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.15),
-                              blurRadius: 1.5,
-                              spreadRadius: 1,
-                              offset: const Offset(0, 0))
-                        ],
-                        borderRadius: BorderRadius.circular(5)),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "Logout",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                  ),
-                ),
-
-
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RichText(
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: "Version ",
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.8),
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 11)),
-                          TextSpan(
-                              text: "1.0.0 (15003)",
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6),
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 11)),
-                        ]))
-                  ],
-                ),
-
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        )
+        ),
+
+        //Logout
+        InkWell(
+          onTap: () => Navigator.push(
+              context,
+              CupertinoPageRoute(
+                  builder: (BuildContext context) =>
+                  const OrganizerLogin())),
+          child: Container(
+            margin: const EdgeInsets.all(15),
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            decoration: BoxDecoration(
+                color: const Color(0xffff1f6f),
+                // boxShadow: [
+                //   BoxShadow(
+                //       color: Colors.black.withOpacity(0.15),
+                //       blurRadius: 1.5,
+                //       spreadRadius: 1,
+                //       offset: const Offset(0, 0))
+                // ],
+                borderRadius: BorderRadius.circular(5)),
+            alignment: Alignment.center,
+            child: const Text(
+              "Logout",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12),
+            ),
+          ),
+        ),
+        
+        //Version
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RichText(
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: "Version ",
+                      style: TextStyle(
+                          color: Colors.black.withOpacity(0.8),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 11)),
+                  TextSpan(
+                      text: "1.0.0 (15003)",
+                      style: TextStyle(
+                          color: Colors.black.withOpacity(0.6),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 11)),
+                ]))
+          ],
+        ),
+
+        const SizedBox(
+          height: 15,
+        ),
       ],
     ),
   );

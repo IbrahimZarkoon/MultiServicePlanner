@@ -1,11 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:socialapp/Organizer/OrgScreens/Homepage.dart';
 import 'package:socialapp/Organizer/OrgScreens/OrgChats.dart';
 import 'package:socialapp/Organizer/OrgScreens/OrgNotif.dart';
 import 'package:socialapp/Organizer/OrgScreens/OrgProfile.dart';
 import 'package:socialapp/Organizer/Widgets/orgAppBar.dart';
 import 'package:socialapp/Organizer/Widgets/orgDrawer.dart';
+
+import '../../Providers/CacheManager.dart';
 
 class OrgDashboard extends StatefulWidget {
   OrgDashboard({Key? key, required this.orgTabIndex}) : super(key: key);
@@ -39,6 +43,7 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
 
     return SafeArea(
       child: Scaffold(
@@ -53,7 +58,24 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
           centerTitle: false,
           title: Container(
             alignment: Alignment.centerLeft,
-            child: const Text("BRAND ORGANIZER",style: TextStyle(color: Color(0xffff1f6f),fontFamily: "Helvetica_Bold",fontSize: 22),),
+            child: ClipRRect(
+
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                color: Color(0xffff1f6f),
+                height: kToolbarHeight-10,
+                imageUrl: "https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
+                cacheManager: cacheManager,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(
+                    color: Color(0xffff1f6f),
+                    value: 5,
+                  ),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+              ),
+            ),
           ),
           backgroundColor: const Color(0xffffffff),
 

@@ -87,10 +87,11 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
+                  margin: EdgeInsets.only(bottom: kToolbarHeight-20),
                   constraints: BoxConstraints(
                       maxWidth: MediaQuery.of(context).size.width*0.6
                   ),
-                  child: Image.asset("assets/images/8f4940ab2b110be46a20fe7efd88e9826c801ce7-3840x2160.png",
+                  child: Image.network("https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
                     color: const Color(0xffff1f6f),fit: BoxFit.cover,),
                 ),
               ],

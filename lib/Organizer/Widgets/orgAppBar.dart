@@ -1,4 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../Providers/CacheManager.dart';
 
 class orgAppBar extends StatefulWidget {
    orgAppBar({Key? key,required this.scaffoldKey}) : super(key: key);
@@ -9,8 +13,15 @@ class orgAppBar extends StatefulWidget {
 }
 
 class _orgAppBarState extends State<orgAppBar> {
+
+
+
   @override
   Widget build(BuildContext context) {
+
+    final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
+
+
     return AppBar(
 
       automaticallyImplyLeading: false,
@@ -18,7 +29,23 @@ class _orgAppBarState extends State<orgAppBar> {
       centerTitle: false,
       title: Container(
         alignment: Alignment.centerLeft,
-        child: const Text("BRAND ORGANIZER",style: TextStyle(color: Colors.white,fontFamily: "Helvetica_Bold",fontSize: 20),),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: CachedNetworkImage(
+            color: Colors.white,
+            height: kToolbarHeight-10,
+            imageUrl: "https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
+            cacheManager: cacheManager,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xffff1f6f),
+                value: 5,
+              ),
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+          ),
+        ),
       ),
       backgroundColor: const Color(0xffff1f6f),
 

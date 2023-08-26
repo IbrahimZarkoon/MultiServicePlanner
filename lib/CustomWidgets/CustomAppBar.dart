@@ -53,7 +53,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
       centerTitle: false,
       title: Container(
         alignment: Alignment.centerLeft,
-        child: const Text("SOCIAL BRAND",style: TextStyle(color: Colors.white,fontFamily: "Helvetica_Bold",fontSize: 20),),
+        child: Image.network("https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
+          color: const Color(0xffffffff),fit: BoxFit.cover,height: kToolbarHeight-10,),
       ),
       backgroundColor: const Color(0xffff1f6f),
 
