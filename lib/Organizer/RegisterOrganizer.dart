@@ -60,12 +60,12 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
 
               Transform.rotate(
                   angle: 3.142,
-                  child: const Icon(Icons.arrow_right_alt,size: 25,color: Color(0xffff1f6f),)),
+                  child: const Icon(Icons.arrow_right_alt,size: 25,color: Color(0xff09426d),)),
 
               const SizedBox(width: 2,),
 
               const Text("Back",style: TextStyle(
-                color: Color(0xffff1f6f),fontSize: 14,
+                color: Color(0xff09426d),fontSize: 14,
               ),)
             ],
           ),
@@ -91,8 +91,8 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
                   constraints: BoxConstraints(
                       maxWidth: MediaQuery.of(context).size.width*0.6
                   ),
-                  child: Image.network("https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
-                    color: const Color(0xffff1f6f),fit: BoxFit.cover,),
+                  child: Image.asset("assets/images/logos/LOGO.png",
+                    color: const Color(0xff09426d),fit: BoxFit.cover,),
                 ),
               ],
             ),
@@ -136,7 +136,7 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
                             minWidth: 220,
                           ),
                           decoration: BoxDecoration(
-                              color: const Color(0xffff1f6f),
+                              color: const Color(0xff09426d),
                               borderRadius: BorderRadius.circular(30)
                           ),
                           alignment: Alignment.center,

@@ -93,11 +93,11 @@ class _DocVerificationState extends State<DocVerification> with SingleTickerProv
                           fit: BoxFit.scaleDown,
                           placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xffff1f6f),
+                              color: Color(0xff09426d),
                               value: 5,
                             ),
                           ),
-                          errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                          errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
                         ),
                       )),
                 Container(

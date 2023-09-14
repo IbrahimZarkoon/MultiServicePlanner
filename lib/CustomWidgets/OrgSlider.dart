@@ -70,58 +70,44 @@ Widget discoverOrgGrid(BuildContext context)
     children: [
 
       orgCon(context,
-          "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png",
-          "Facebook",
-          "Popular",
+          "https://img.freepik.com/free-photo/handsome-african-guy-with-stylish-haircut-taking-photo-digital-camera_171337-1345.jpg?w=2000&t=st=1694217855~exp=1694218455~hmac=284011734ce2c9f335e4295039fb3d9957163bdec4784ae193076a83754348c4",
+          "Harry",
+          "Photographer",
           true
       ),
 
       orgCon(context,
-          "https://pbs.twimg.com/media/FY0CAnOXgAYINm3.jpg:large",
-          "Urvashi",
-          "Recommended",
+          "https://img.freepik.com/free-photo/teammates-working-together_1098-342.jpg?w=2000&t=st=1694219959~exp=1694220559~hmac=285c9ea3ea9e020667ec25884d5f2b577476a19b63555218dfa7171431256ae0",
+          "EnchantingSpaces Decor",
+          "Decorator",
           true
       ),
 
       orgCon(context,
-          "https://img.freepik.com/premium-vector/purple-gradiend-social-media-logo_197792-1883.jpg?w=2000",
-          "Instagram",
-          "Popular",
+          "https://img.freepik.com/free-photo/happy-young-waiter-holding-glass-champagne-towel_171337-5290.jpg?w=2000&t=st=1694219751~exp=1694220351~hmac=657837dd691241a6effb2c82a3870ce1b2f0ca4925d6c54deb577c25eb975670",
+          "Gourmet Delights",
+          "Caterer",
           true
       ),
 
       orgCon(context,
-          "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png",
-          "Instagram",
-          "Popular",
+          "https://img.freepik.com/free-photo/handsome-african-guy-with-stylish-haircut-taking-photo-digital-camera_171337-1345.jpg?w=2000&t=st=1694217855~exp=1694218455~hmac=284011734ce2c9f335e4295039fb3d9957163bdec4784ae193076a83754348c4",
+          "Harry",
+          "Photographer",
           true
       ),
 
       orgCon(context,
-          "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png",
-          "Facebook",
-          "Popular",
+          "https://img.freepik.com/free-photo/teammates-working-together_1098-342.jpg?w=2000&t=st=1694219959~exp=1694220559~hmac=285c9ea3ea9e020667ec25884d5f2b577476a19b63555218dfa7171431256ae0",
+          "EnchantingSpaces Decor",
+          "Decorator",
           true
       ),
 
       orgCon(context,
-          "https://pbs.twimg.com/media/FY0CAnOXgAYINm3.jpg:large",
-          "Urvashi",
-          "Recommended",
-          true
-      ),
-
-      orgCon(context,
-          "https://img.freepik.com/premium-vector/purple-gradiend-social-media-logo_197792-1883.jpg?w=2000",
-          "Instagram",
-          "Popular",
-          true
-      ),
-
-      orgCon(context,
-          "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png",
-          "Instagram",
-          "Popular",
+          "https://img.freepik.com/free-photo/happy-young-waiter-holding-glass-champagne-towel_171337-5290.jpg?w=2000&t=st=1694219751~exp=1694220351~hmac=657837dd691241a6effb2c82a3870ce1b2f0ca4925d6c54deb577c25eb975670",
+          "Gourmet Delights",
+          "Caterer",
           true
       ),
 
@@ -278,12 +264,12 @@ Widget orgCon(BuildContext context,String img,String title,String status,bool ve
                 fit: BoxFit.scaleDown,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: Color(0xff09426d),
                     value: 2,
                     strokeWidth: 1,
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
               ),
             ),
           ),
@@ -296,7 +282,7 @@ Widget orgCon(BuildContext context,String img,String title,String status,bool ve
 
               const SizedBox(width: 3,),
 
-              verified? const Icon(Icons.verified,size: 13,color: Color(0xffff1f6f),) : const SizedBox()
+              verified? const Icon(Icons.verified,size: 13,color: Color(0xffffc107),) : const SizedBox()
             ],
           ),
 
@@ -312,9 +298,9 @@ Widget orgCon(BuildContext context,String img,String title,String status,bool ve
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: const Color(0xffff1f6f)
+                color: const Color(0xff09426d)
             ),
-            child: const Text("Follow",
+            child: const Text("Visit",
               style: TextStyle(color: Colors.white,fontSize: 11,fontWeight: FontWeight.bold),),
           )
 
@@ -391,7 +377,7 @@ Widget gridCon(BuildContext context,String img,String title,String status,bool v
 
             const SizedBox(width: 3,),
 
-            verified? const Icon(Icons.verified,size: 13,color: Color(0xffff1f6f),) : const SizedBox()
+            verified? const Icon(Icons.verified,size: 13,color: Color(0xff09426d),) : const SizedBox()
           ],
         ),
 
@@ -407,7 +393,7 @@ Widget gridCon(BuildContext context,String img,String title,String status,bool v
           alignment: Alignment.center,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: const Color(0xffff1f6f)
+              color: const Color(0xff09426d)
           ),
           child: const Text("Visit",
             style: TextStyle(color: Colors.white,fontSize: 11,fontWeight: FontWeight.bold),),

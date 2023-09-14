@@ -96,13 +96,13 @@ class _EventChatScreenState extends State<EventChatScreen> {
     return Scaffold(
 
       appBar: AppBar(
-        backgroundColor: const Color(0xffff1f6f),
+        backgroundColor: const Color(0xff09426d),
         elevation: 0.5,
         leadingWidth: 30,
         title: InkWell(
           onTap: ()
           {
-            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => SingleServiceProvider(name: "Nafeel Techonza", image: "https://img.icons8.com/?size=512&id=0lg0kb05hrOz&format=png")));
+            //Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => SingleServiceProvider(name: "Nafeel Techonza", image: "https://img.icons8.com/?size=512&id=0lg0kb05hrOz&format=png")));
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -122,7 +122,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
                 ),
               ),
 
-              const Text('Nafeel Techonza',style: TextStyle(color: Colors.white,fontSize: 14),),
+              const Text('Zarkoon',style: TextStyle(color: Colors.white,fontSize: 14),),
             ],
           ),
         ),
@@ -256,7 +256,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.white,
                           image: const DecorationImage(
-                              image: NetworkImage("https://climatepledgearena.com/wp-content/uploads/2023/05/23-50CENT_CPA-Web_1600x900.jpg"),
+                              image: NetworkImage("https://lh3.googleusercontent.com/p/AF1QipN1emH09g5A1MDC6DXc44yaZhqiOnosRZPqZQma=s1360-w1360-h1020"),
                               fit: BoxFit.cover
                           )
                       ),
@@ -270,11 +270,11 @@ class _EventChatScreenState extends State<EventChatScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
-                            Text('Oasis Party',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 14),),
+                            Text('The Beach Hut',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 14),),
 
                             const SizedBox(height: 5,),
 
-                            Text('\$ 29.99',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 12),),
+                            Text('150,000 PKR',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 12),),
 
 
                           ],
@@ -304,7 +304,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
                 stream: getMessagesStream("Chat1"), // Replace 'chatId' with the appropriate chat identifier
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(child: const CircularProgressIndicator(color: Color(0xffff1f6f),)); // Loading indicator
+                    return Center(child: const CircularProgressIndicator(color: Color(0xff09426d),)); // Loading indicator
                   }
 
                   final messages = snapshot.data;
@@ -374,7 +374,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
             padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
             decoration: BoxDecoration(
               color: message.sender == 'User'
-                  ? const Color(0xffff1f6f)
+                  ? const Color(0xff09426d)
                   : const Color(0xff939393),
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -426,7 +426,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
       child: Row(
         children: <Widget>[
           IconButton(
-            icon: const Icon(Icons.attach_file,color: Color(0xffff1f6f),),
+            icon: const Icon(Icons.attach_file,color: Color(0xff09426d),),
             onPressed: () {
 
               // Implement attachment functionality
@@ -444,7 +444,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
               controller: messageCon,
               //textInputAction: TextInputAction.send,
               keyboardType: TextInputType.text,
-              cursorColor: const Color(0xffff1f6f),
+              cursorColor: const Color(0xff09426d),
               decoration: const InputDecoration.collapsed(
                 hintText: 'Send a message...',
               ),
@@ -452,7 +452,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.send,color: Color(0xffff1f6f),),
+            icon: const Icon(Icons.send,color: Color(0xff09426d),),
             onPressed: () {
               // Implement send message functionality
 

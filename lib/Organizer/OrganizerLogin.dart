@@ -87,7 +87,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                 decoration: const BoxDecoration(
 
                     image: DecorationImage(
-                        image: AssetImage("assets/images/OrgLogin2.jpg"),
+                        image: AssetImage("assets/images/userLogin.jpg"),
                         fit: BoxFit.cover,
                         alignment: Alignment.topCenter,
                         filterQuality: FilterQuality.high
@@ -122,7 +122,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:  [
 
-                              const Text("Welcome Organizer!",overflow: TextOverflow.ellipsis,
+                              const Text("Welcome Vendor!",overflow: TextOverflow.ellipsis,
                                   style:
                                   TextStyle(fontFamily: "",color: Colors.white,fontWeight: FontWeight.bold, fontSize: 35)),
                             ],
@@ -154,11 +154,12 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
                           child:  TextField(
                             focusNode: _emailNode,
+                            controller: _emailCtrl,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 5),
 
                               border: InputBorder.none,
-                              hintText: "Email Address",
+                              hintText: "Username / Email",
                               hintStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12),
                               icon: Icon(CupertinoIcons.person,color: Colors.black.withOpacity(0.8),),
                               //suffixIcon: Icon(CupertinoIcons.eye,color: Colors.black.withOpacity(0.5),)
@@ -187,6 +188,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                             children: [
                               Expanded(
                                 child: TextField(
+                                  controller: _passCtrl,
                                   focusNode: _passNode,
                                   obscureText: obPass,
 
@@ -279,7 +281,28 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                         GestureDetector(
                           onTap: ()
                           {
-                            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => OrgDashboard(orgTabIndex: 0,)));
+                            if (_emailCtrl.text == "admin" && _passCtrl.text == "admin") {
+                              // Both email and password are "admin"
+                              //Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => OrgDashboard(orgTabIndex: 0,)));
+
+
+                            } else {
+                              // Email and/or password do not match "admin"
+                              // Display a custom Snackbar at the center of the screen
+
+                              final snackBar = SnackBar(
+                                content: Text("Invalid email or password"),
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 0), // Adjust margin as needed
+                                duration: Duration(seconds: 3), // Adjust the duration as needed
+                              );
+
+                              // Show the custom Snackbar
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
                           },
                           child: Container(
                             margin: const EdgeInsets.only(left: 15,right: 15,top: 15,bottom: 15),
@@ -297,7 +320,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                                 //   Colors.white,
                                 //   Color(0xffda291c)
                                 // ]),
-                                color: const Color(0xffff1f6f)
+                                color: const Color(0xff09426d)
                             ),
                             child: const Text("Login",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                           ),
@@ -310,7 +333,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                             Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => const Login()));
                           },
                           child: Container(
-                            margin: const EdgeInsets.only(left: 15,right: 15,top: 0,bottom: 15),
+                            margin: const EdgeInsets.only(left: 15,right: 15,top: 0,bottom: 30),
                             padding: const EdgeInsets.only(top: 15,bottom: 15),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -327,148 +350,10 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                               // ]),
                               color: Colors.white,
                             ),
-                            child: const Text("Continue as a user",style: TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.bold),),
+                            child: const Text("Continue as a user",style: TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.bold),),
                           ),
                         ),
 
-                        //Signup Container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15,right: 15),
-                          child: Row(
-                            children: [
-
-                              Expanded(child: shadowLine(context)),
-
-                              Expanded(
-                                child: Container(
-                                  margin: const EdgeInsets.only(top: 15,bottom: 15),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-
-                                    children: [
-
-                                      Text("or continue with",style: TextStyle(color: Colors.white.withOpacity(1),fontSize: 12),),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Expanded(child: shadowLine(context))
-                            ],
-                          ),
-                        ),
-
-                        //Google,Facebook,Twitter Row
-                        Container(
-                          margin: const EdgeInsets.only(top: 5,bottom: 5),
-                          child: Row(
-
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            mainAxisSize: MainAxisSize.max,
-
-                            children: [
-
-                              //Google Row
-                              Container(
-                                constraints: const BoxConstraints(
-                                  minWidth: 100,
-                                ),
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 8,bottom: 8),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 25,
-                                      height: 25,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
-                                              )
-                                          )
-                                      ),
-                                    ),
-
-                                    Text("Google",
-                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "",fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                              ),
-
-                              //Facebook Row
-                              Container(
-                                constraints: const BoxConstraints(
-                                  minWidth: 100,
-                                ),
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 8,bottom: 8),
-
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 25,
-                                      height: 25,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"
-                                              )
-                                          )
-                                      ),
-                                    ),
-
-                                    Text("Facebook",
-                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "",fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                              ),
-
-                              //Twitter Row
-                              Container(
-                                constraints: const BoxConstraints(
-                                  minWidth: 100,
-                                ),
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 8,bottom: 8),
-
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 25,
-                                      height: 25,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png?20220821125553"
-                                              )
-                                          )
-                                      ),
-                                    ),
-
-                                    Text("Twitter",
-                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "",fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                              ),
-
-
-                            ],
-                          ),
-                        ),
-
-                        const SizedBox(height: 15,),
 
                         InkWell(
                           onTap: ()
@@ -489,7 +374,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                                 ),
                                 TextSpan(
                                   style: TextStyle(
-                                      color: Color(0xffff1f6f),
+                                      color: Color(0xff09426d),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14),
                                   text:

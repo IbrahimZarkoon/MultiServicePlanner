@@ -153,12 +153,13 @@ class _LoginState extends State<Login> {
                           ),
 
                           child:  TextField(
+                            controller: _emailCtrl,
                             focusNode: _emailNode,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(left: 5),
 
                               border: InputBorder.none,
-                              hintText: "Email Address",
+                              hintText: "Username / Email",
                               hintStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12),
                               icon: Icon(CupertinoIcons.person,color: Colors.black.withOpacity(0.8),),
                               //suffixIcon: Icon(CupertinoIcons.eye,color: Colors.black.withOpacity(0.5),)
@@ -187,6 +188,7 @@ class _LoginState extends State<Login> {
                             children: [
                               Expanded(
                                 child: TextField(
+                                  controller: _passCtrl,
                                   focusNode: _passNode,
                                   obscureText: obPass,
 
@@ -279,7 +281,29 @@ class _LoginState extends State<Login> {
                         GestureDetector(
                           onTap: ()
                           {
-                            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => DashboardPage(userTabIndex: 0,)));
+
+                            if (_emailCtrl.text == "admin" && _passCtrl.text == "admin") {
+                              // Both email and password are "admin"
+                              Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => DashboardPage(userTabIndex: 0,)));
+
+                            } else {
+                              // Email and/or password do not match "admin"
+                              // Display a custom Snackbar at the center of the screen
+
+                              final snackBar = SnackBar(
+                                content: Text("Invalid email or password"),
+                                behavior: SnackBarBehavior.floating,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                margin: EdgeInsets.symmetric(horizontal: 30, vertical: 0), // Adjust margin as needed
+                                duration: Duration(seconds: 3), // Adjust the duration as needed
+                              );
+
+                              // Show the custom Snackbar
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+
                           },
                           child: Container(
                             margin: const EdgeInsets.only(left: 15,right: 15,top: 15,bottom: 15),
@@ -327,7 +351,7 @@ class _LoginState extends State<Login> {
                                 // ]),
                                 color: Colors.white,
                             ),
-                            child: const Text("Continue as an organizer",style: TextStyle(color: appPrimary,fontWeight: FontWeight.bold),),
+                            child: const Text("Continue as a vendor",style: TextStyle(color: appPrimary,fontWeight: FontWeight.bold),),
                           ),
                         ),
 

@@ -37,9 +37,9 @@ class _SingleEventState extends State<SingleEvent> {
   int _currentSlide = 0;
 
   final List<String> carouselImages = [
-    "https://i.ytimg.com/vi/_M_6jkBZ4Ck/maxresdefault.jpg",
-    "https://www.brandcreators.com/wp-content/uploads/2023/03/ai-art-etsy-print-on-demand-game-changer.jpg",
-    "https://i.ytimg.com/vi/4_A7FmtWInc/maxresdefault.jpg",
+    "https://lh3.googleusercontent.com/p/AF1QipPGwn8inAs_Rn6d8ytRdMmE20h5Uk6MIDQDE3SV=s1360-w1360-h1020",
+    "https://lh3.googleusercontent.com/p/AF1QipPxsk-qmz_4x7jmKMKhcHt-tVk3Qk-Y0QubWua8=s1360-w1360-h1020",
+    "https://lh3.googleusercontent.com/p/AF1QipN1emH09g5A1MDC6DXc44yaZhqiOnosRZPqZQma=s1360-w1360-h1020",
   ];
 
 
@@ -159,13 +159,13 @@ class _SingleEventState extends State<SingleEvent> {
                           fit: BoxFit.cover,
                           placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xffff1f6f),
+                              color: Color(0xff09426d),
                               value: 5,
                             ),
                           ),
                           errorWidget: (context, url, error) => const Icon(
                             Icons.error,
-                            color: Color(0xffff1f6f),
+                            color: Color(0xff09426d),
                           ),
                         ),
                       ),
@@ -176,7 +176,7 @@ class _SingleEventState extends State<SingleEvent> {
                           child: Container(
                             padding: EdgeInsets.only(top: 5,bottom: 5,left: 10,right: 10),
                             decoration: BoxDecoration(
-                              color: Color(0xffff1f6f),
+                              color: Color(0xff09426d),
                               borderRadius: BorderRadius.circular(15)
                             ),
                             child: const Text("Repetitive",style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontSize: 12),),
@@ -236,7 +236,7 @@ class _SingleEventState extends State<SingleEvent> {
                         child: const Text(
                           "Music",
                           style: TextStyle(
-                              color: Color(0xffff1f6f),
+                              color: Color(0xff09426d),
                               fontWeight: FontWeight.bold,
                               fontSize: 12),
                         ),
@@ -256,9 +256,9 @@ class _SingleEventState extends State<SingleEvent> {
                             top: 5, bottom: 5, left: 15, right: 15),
                         alignment: Alignment.center,
                         child: const Text(
-                          "Rap",
+                          "Social",
                           style: TextStyle(
-                              color: Color(0xffff1f6f),
+                              color: Color(0xff09426d),
                               fontWeight: FontWeight.bold,
                               fontSize: 12),
                         ),
@@ -278,9 +278,9 @@ class _SingleEventState extends State<SingleEvent> {
                             top: 5, bottom: 5, left: 15, right: 15),
                         alignment: Alignment.center,
                         child: const Text(
-                          "Today",
+                          "Featured",
                           style: TextStyle(
-                              color: Color(0xffff1f6f),
+                              color: Color(0xff09426d),
                               fontWeight: FontWeight.bold,
                               fontSize: 12),
                         ),
@@ -288,7 +288,7 @@ class _SingleEventState extends State<SingleEvent> {
                     ],
                   ),
 
-                  //Date Container
+                  //Capacity Container
                   Container(
                     padding: const EdgeInsets.only(
                         left: 15, right: 15, bottom: 0, top: 0),
@@ -313,9 +313,9 @@ class _SingleEventState extends State<SingleEvent> {
                                         offset: const Offset(0, 0))
                                   ]),
                               child: const Icon(
-                                Icons.calendar_today_outlined,
+                                Icons.people_alt_outlined,
                                 size: 20,
-                                color: Color(0xffff1f6f),
+                                color: Color(0xff09426d),
                               ),
                             ),
 
@@ -325,13 +325,13 @@ class _SingleEventState extends State<SingleEvent> {
 
                             //Details Column
                             widget.repeat? Text(
-                              "Every Friday, Saturday & Sunday",
+                              "Upto 150 Persons",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 14,
                                   fontFamily: ""),
                             ) : Text(
-                              "Thursday, June 29, 2023",
+                              "250 / 500 / 1000 Persons",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 14,
@@ -377,7 +377,7 @@ class _SingleEventState extends State<SingleEvent> {
                               child: const Icon(
                                 Icons.access_time_rounded,
                                 size: 20,
-                                color: Color(0xffff1f6f),
+                                color: Color(0xff09426d),
                               ),
                             ),
 
@@ -387,7 +387,7 @@ class _SingleEventState extends State<SingleEvent> {
 
                             //Details Column
                             Text(
-                              "Duration about 3 hours",
+                              "3 - 12 hours",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 14,
@@ -434,7 +434,7 @@ class _SingleEventState extends State<SingleEvent> {
                               child: const Icon(
                                 Icons.location_on_outlined,
                                 size: 20,
-                                color: Color(0xffff1f6f),
+                                color: Color(0xff09426d),
                               ),
                             ),
 
@@ -444,7 +444,7 @@ class _SingleEventState extends State<SingleEvent> {
 
                             //Details Column
                             Text(
-                              "Foschini Park",
+                              "French Beach",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 14,
@@ -489,14 +489,14 @@ class _SingleEventState extends State<SingleEvent> {
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
-                                text: 'Tentative Schedule:\n\n',
+                                text: 'The Beach Hut is a popular beachside venue located in Karachi, Pakistan. It is known for providing a unique and relaxing experience for visitors who want to enjoy the beautiful Arabian Sea coastline. Heres some brief information about The Beach Hut:\n\n',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: "Helvetica_Bold",
+                                    fontFamily: "",
                                     color: Colors.black.withOpacity(0.8)),
                               ),
                               TextSpan(
-                                text: 'Day: 1\n',
+                                text: 'Location: \n',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Helvetica_Bold",
@@ -507,14 +507,12 @@ class _SingleEventState extends State<SingleEvent> {
                                       color: Colors.black.withOpacity(0.8),
                                       fontSize: 13),
                                   text:
-                                  '07:00 AM - 09:00 AM: Reach Kodaikanal on your own transport, Have Freshen Up & Breakfast.\n09:00 AM: Start trek from KodaikanaI(Dolphin Nose) to Vellagavi\n01:00 PM; Reach Campsite & have Lunch\n02:00 PM: Trek to View point'
-                                      "\n05:00 PM: Reach back to Campsite"
-                                      "\n07:00 PM: Enjoy Campfire & have Dinner(Overnight stay in Tents)"
+                                  'The Beach Hut is situated along the Clifton Beach, which is one of the most famous beach areas in Karachi. It offers stunning views of the sea and is a popular destination for both locals and tourists.'
                               ),
 
                               //Day 2
                               TextSpan(
-                                text: '\n\nDay: 2\n',
+                                text: '\n\nAmbiance:\n',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Helvetica_Bold",
@@ -525,14 +523,12 @@ class _SingleEventState extends State<SingleEvent> {
                                       color: Colors.black.withOpacity(0.8),
                                       fontSize: 13),
                                   text:
-                                  '07:00 AM - 09:00 AM: Reach Kodaikanal on your own transport, Have Freshen Up & Breakfast.\n09:00 AM: Start trek from KodaikanaI(Dolphin Nose) to Vellagavi\n01:00 PM; Reach Campsite & have Lunch\n02:00 PM: Trek to View point'
-                                      "\n05:00 PM: Reach back to Campsite"
-                                      "\n07:00 PM: Enjoy Campfire & have Dinner(Overnight stay in Tents)"
+                                  'The Beach Hut provides a laid-back and serene environment. Its a great place to unwind and escape from the hustle and bustle of the city. The venue is designed to offer a rustic and beachy atmosphere.'
                               ),
 
                               //Inclusions
                               TextSpan(
-                                text: '\n\nInclusions\n',
+                                text: '\n\nFacilities:\n',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "Helvetica_Bold",
@@ -543,9 +539,7 @@ class _SingleEventState extends State<SingleEvent> {
                                       color: Colors.black.withOpacity(0.8),
                                       fontSize: 13),
                                   text:
-                                  'Trekking Guide.\nAccomodation(Sharing Tents)\nCampfire\n1 Breakfast / 1 Lunch / 1 Dinner'
-                                      "\nForest Permissions"
-                                      "\nBasic First-Aid"
+                                  'Visitors to The Beach Hut can enjoy various amenities, including comfortable seating areas, beachside huts, and private cabanas. There are often beach games and activities available, making it a fun spot for families and friends.'
                               ),
                             ],
                           ),
@@ -571,7 +565,7 @@ class _SingleEventState extends State<SingleEvent> {
                             readDesc,
                             style: const TextStyle(
                                 fontSize: 13,
-                                color: Color(0xffff1f6f),
+                                color: Color(0xff09426d),
                                 fontFamily: "Helvetica_Bold"),
                           ),
                         ),
@@ -624,11 +618,11 @@ class _SingleEventState extends State<SingleEvent> {
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) => const Center(
                                     child: CircularProgressIndicator(
-                                      color: Color(0xffff1f6f),
+                                      color: Color(0xff09426d),
                                       value: 5,
                                     ),
                                   ),
-                                  errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                                  errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
                                 ),
                               ),
                             ),
@@ -651,7 +645,7 @@ class _SingleEventState extends State<SingleEvent> {
                                   child: const Text(
                                     "View on Google Maps",
                                     style: TextStyle(
-                                        color: Color(0xffff1f6f),
+                                        color: Color(0xff09426d),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 11),
                                   ),
@@ -666,7 +660,7 @@ class _SingleEventState extends State<SingleEvent> {
                         Row(
                           children: [
                             Text(
-                              "Foschini Park",
+                              "French Beach",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontFamily: "",
@@ -677,7 +671,7 @@ class _SingleEventState extends State<SingleEvent> {
                               width: 5,
                             ),
                             Text(
-                              "278 River St - Berlin, Germany",
+                              "Dr, Keamari, Karachi, Karachi City, Sindh",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 13),
@@ -728,11 +722,11 @@ class _SingleEventState extends State<SingleEvent> {
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(
-                                    color: Color(0xffff1f6f),
+                                    color: Color(0xff09426d),
                                     value: 5,
                                   ),
                                 ),
-                                errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xffff1f6f)),
+                                errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xff09426d)),
                               ),
                             ),
                           );
@@ -767,7 +761,7 @@ class _SingleEventState extends State<SingleEvent> {
                               margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: _currentSlide == index ? const Color(0xffff1f6f) : Colors.grey,
+                                color: _currentSlide == index ? const Color(0xff09426d) : Colors.grey,
                               ),
                             ),
                           ),
@@ -800,7 +794,7 @@ class _SingleEventState extends State<SingleEvent> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 12,
-                              color: Color(0xffff1f6f)),
+                              color: Color(0xff09426d)),
                         ),
                         const SizedBox(
                           width: 5,
@@ -810,7 +804,7 @@ class _SingleEventState extends State<SingleEvent> {
                             child: const Icon(
                               Icons.arrow_upward,
                               size: 20,
-                              color: Color(0xffff1f6f),
+                              color: Color(0xff09426d),
                             ))
                       ],
                     ),
@@ -892,63 +886,63 @@ class _SingleEventState extends State<SingleEvent> {
                       //   height: 15,
                       // ),
 
-                      //Comments Slider Container
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.275,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.only(
-                                top: 3, bottom: 3, left: 15, right: 15),
-                            itemCount: 5,
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, index) {
-                              return reviewCon(
-                                  context,
-                                  "Got to have 'em",
-                                  "States where I pretty good price and a great size I use two a day and it's something we have to buy",
-                                  "Mark$index");
-                            }),
-                      ),
-
-                      InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20))),
-                              isScrollControlled: true,
-                              builder: (BuildContext context) {
-                                return allReviews(context);
-                              });
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          margin: const EdgeInsets.only(
-                              left: 15, right: 15, bottom: 15, top: 15),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: const Color(0xfffffbfc),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 1)
-                              ]),
-                          alignment: Alignment.center,
-                          child: const Text(
-                            "View all",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: Color(0xffff1f6f)),
-                          ),
-                        ),
-                      ),
+                      // //Comments Slider Container
+                      // Container(
+                      //   width: MediaQuery.of(context).size.width,
+                      //   height: MediaQuery.of(context).size.height * 0.275,
+                      //   child: ListView.builder(
+                      //       shrinkWrap: true,
+                      //       padding: const EdgeInsets.only(
+                      //           top: 3, bottom: 3, left: 15, right: 15),
+                      //       itemCount: 5,
+                      //       physics: const BouncingScrollPhysics(),
+                      //       scrollDirection: Axis.horizontal,
+                      //       itemBuilder: (BuildContext context, index) {
+                      //         return reviewCon(
+                      //             context,
+                      //             "Got to have 'em",
+                      //             "States where I pretty good price and a great size I use two a day and it's something we have to buy",
+                      //             "Mark$index");
+                      //       }),
+                      // ),
+                      //
+                      // InkWell(
+                      //   onTap: () {
+                      //     showModalBottomSheet(
+                      //         context: context,
+                      //         shape: const RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.only(
+                      //                 topLeft: Radius.circular(20),
+                      //                 topRight: Radius.circular(20))),
+                      //         isScrollControlled: true,
+                      //         builder: (BuildContext context) {
+                      //           return allReviews(context);
+                      //         });
+                      //   },
+                      //   child: Container(
+                      //     width: MediaQuery.of(context).size.width,
+                      //     padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      //     margin: const EdgeInsets.only(
+                      //         left: 15, right: 15, bottom: 15, top: 15),
+                      //     decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(5),
+                      //         color: const Color(0xfffffbfc),
+                      //         boxShadow: [
+                      //           BoxShadow(
+                      //               color: Colors.black.withOpacity(0.1),
+                      //               spreadRadius: 1,
+                      //               blurRadius: 1)
+                      //         ]),
+                      //     alignment: Alignment.center,
+                      //     child: const Text(
+                      //       "View all",
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 12,
+                      //           color: Color(0xff09426d)),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
 
@@ -966,7 +960,7 @@ class _SingleEventState extends State<SingleEvent> {
                           children: [
                             //Heading
                             const Text(
-                              "Upcoming Events",
+                              "Similar Venues",
                               style: TextStyle(
                                   fontSize: 18, fontFamily: "Helvetica_Bold"),
                             ),
@@ -1002,7 +996,25 @@ class _SingleEventState extends State<SingleEvent> {
                 child: InkWell(
                   onTap: () async{
                     if (request == false && widget.repeat == false) {
+                      bool result = await showModalBottomSheet(context: context,
+                          isDismissible: true,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))
+
+                          ),
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return repeatDaysBottomSheet();
+                          });
+                      if(result == true)
+                      {
+                        setState(() {
+                          request = true;
+                        });
+                      }
+
                       ScaffoldMessenger.of(context).showSnackBar(
+
                           SnackBar(
                             margin: EdgeInsets.only(
                               bottom: MediaQuery.of(context).size.height-(2.75*kToolbarHeight),
@@ -1010,19 +1022,16 @@ class _SingleEventState extends State<SingleEvent> {
                             behavior: SnackBarBehavior.floating,
                             showCloseIcon: true,
                             content: const Text(
-                              "Your request has been sent.",
+                              "Your booking will be confirmed with in 24 hours.",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: "Helvetica_Bold",
                                 fontSize: 12,
                               ),
                             ),
-                            backgroundColor: const Color(0xffbe1651),
+                            backgroundColor: const Color(0xff09426d),
                             duration: const Duration(seconds: 2),
                           ));
-                      setState(() {
-                        request = true;
-                      });
                     }
 
                     if(widget.repeat == true && request == false)
@@ -1053,14 +1062,14 @@ class _SingleEventState extends State<SingleEvent> {
                              behavior: SnackBarBehavior.floating,
                              showCloseIcon: true,
                              content: const Text(
-                               "Your request has been sent.",
+                               "Your booking will be confirmed with in 24 hours.",
                                style: TextStyle(
                                  color: Colors.white,
                                  fontFamily: "Helvetica_Bold",
                                  fontSize: 12,
                                ),
                              ),
-                             backgroundColor: const Color(0xffbe1651),
+                             backgroundColor: const Color(0xff09426d),
                              duration: const Duration(seconds: 2),
                            ));
                       }
@@ -1083,10 +1092,10 @@ class _SingleEventState extends State<SingleEvent> {
                         )
                       ],
                       borderRadius: BorderRadius.circular(13),
-                      color: const Color(0xffbe1651),
+                      color: const Color(0xff09426d),
                     ),
                     child: const Text(
-                      "Request sent",
+                      "Booked",
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Helvetica_Bold",
@@ -1102,7 +1111,7 @@ class _SingleEventState extends State<SingleEvent> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(13),
-                      color: const Color(0xffff1f6f),
+                      color: const Color(0xff09426d),
                       boxShadow: [
                         BoxShadow(
                             color: Colors.black.withOpacity(0.2),
@@ -1113,7 +1122,7 @@ class _SingleEventState extends State<SingleEvent> {
                       ],
                     ),
                     child: const Text(
-                      "Request To Join",
+                      "Book now",
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Helvetica_Bold",
@@ -1150,14 +1159,14 @@ class _SingleEventState extends State<SingleEvent> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
 
-                      Icon(CupertinoIcons.chat_bubble_2,size: 20,color: Color(0xffff1f6f),),
+                      Icon(CupertinoIcons.chat_bubble_2,size: 20,color: Color(0xff09426d),),
 
                       const SizedBox(width: 5,),
 
                       const Text(
                         "Chat",
                         style: TextStyle(
-                            color: Color(0xffff1f6f),
+                            color: Color(0xff09426d),
                             fontFamily: "Helvetica_Bold",
                             fontSize: 13),
                       ),
@@ -1862,7 +1871,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
                 !date.isBefore(DateTime.now());
       },
       calendarType: CalendarDatePicker2Type.multi,
-      selectedDayHighlightColor: Color(0xffff1f6f),
+      selectedDayHighlightColor: Color(0xff09426d),
     );
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -1988,7 +1997,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
-                  color: const Color(0xffff1f6f),
+                  color: const Color(0xff09426d),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.2),
@@ -1999,7 +2008,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
                   ],
                 ),
                 child: const Text(
-                  "Request To Join",
+                  "Book now",
                   style: TextStyle(
                       color: Colors.white,
                       fontFamily: "Helvetica_Bold",

@@ -235,8 +235,9 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
         leading: InkWell(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back_outlined,size: 23,color: Colors.white,)),
-        centerTitle: true,
+        centerTitle: false,
         elevation: 0,
+        leadingWidth: 30,
         title:  Text(widget.name,
           style: const TextStyle(color: Colors.white,fontSize: 16,fontFamily: "Helvetica_Bold"),),
 
@@ -452,16 +453,18 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
                                               children: [
                                                 Padding(
                                                   padding: const EdgeInsets.symmetric(horizontal: 2),
-                                                  child: Text(
-                                                      widget.name,
-                                                      maxLines: 2,
-                                                      overflow:
-                                                      TextOverflow
-                                                          .ellipsis,
-                                                      style: const TextStyle(
-                                                          fontFamily:
-                                                          "Helvetica_Bold",
-                                                          fontSize: 17)),
+                                                  child: Flexible(
+                                                    child: Text(
+                                                        widget.name,
+                                                        maxLines: 2,
+                                                        overflow:
+                                                        TextOverflow
+                                                            .ellipsis,
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                            "Helvetica_Bold",
+                                                            fontSize: 15)),
+                                                  ),
                                                 ),
 
 
@@ -476,68 +479,68 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
                                               ],
                                             ),
 
-                                            //Following
-                                            InkWell(
-                                              onTap: ()
-                                              {
-                                                setState(() {
-                                                  following = !following;
-                                                });
-
-                                                if(following == true) {
-                                                  ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(
-                                                        behavior: SnackBarBehavior.floating,
-                                                        duration: const Duration(seconds: 2),
-                                                        showCloseIcon: true,
-                                                        padding: const EdgeInsets.all(15),
-                                                        backgroundColor: Colors.black.withOpacity(0.7),
-                                                        closeIconColor: Colors.white,
-                                                        //width: MediaQuery.of(context).size.width,
-                                                        margin: const EdgeInsets.all(15),
-                                                        content: Container(
-                                                          child: Text("You started following ${widget.name}",
-                                                            style: const TextStyle(fontSize: 12,color: Colors.white),),
-                                                        )
-                                                    )
-                                                );
-                                                }else
-                                                  {
-                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                        SnackBar(
-                                                            behavior: SnackBarBehavior.floating,
-                                                            duration: const Duration(seconds: 2),
-                                                            showCloseIcon: true,
-                                                            padding: const EdgeInsets.all(15),
-                                                            backgroundColor: Colors.black.withOpacity(0.7),
-                                                            closeIconColor: Colors.white,
-                                                            //width: MediaQuery.of(context).size.width,
-                                                            margin: const EdgeInsets.all(15),
-                                                            content: Container(
-                                                              child: Text("You stopped following ${widget.name}",
-                                                                style: const TextStyle(fontSize: 12,color: Colors.white),),
-                                                            )
-                                                        )
-                                                    );
-                                                  }
-                                              },
-                                              child: Container(
-                                                padding: const EdgeInsets.only(top: 5 , bottom: 5,left: 10,right: 10),
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                    color:following? const Color(0xff09426d) : Colors.white,
-                                                    borderRadius: BorderRadius.circular(20),
-                                                    border: Border.all(color:const Color(0xff09426d),width: 0.5)
-                                                ),
-                                                child:following? const Text("Following",
-                                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
-                                                      fontSize: 12),)
-                                                :
-                                                const Text("Follow",
-                                                  style: TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.bold,
-                                                      fontSize: 12),),
-                                              ),
-                                            )
+                                            // //Following
+                                            // InkWell(
+                                            //   onTap: ()
+                                            //   {
+                                            //     setState(() {
+                                            //       following = !following;
+                                            //     });
+                                            //
+                                            //     if(following == true) {
+                                            //       ScaffoldMessenger.of(context).showSnackBar(
+                                            //         SnackBar(
+                                            //             behavior: SnackBarBehavior.floating,
+                                            //             duration: const Duration(seconds: 2),
+                                            //             showCloseIcon: true,
+                                            //             padding: const EdgeInsets.all(15),
+                                            //             backgroundColor: Colors.black.withOpacity(0.7),
+                                            //             closeIconColor: Colors.white,
+                                            //             //width: MediaQuery.of(context).size.width,
+                                            //             margin: const EdgeInsets.all(15),
+                                            //             content: Container(
+                                            //               child: Text("You started following ${widget.name}",
+                                            //                 style: const TextStyle(fontSize: 12,color: Colors.white),),
+                                            //             )
+                                            //         )
+                                            //     );
+                                            //     }else
+                                            //       {
+                                            //         ScaffoldMessenger.of(context).showSnackBar(
+                                            //             SnackBar(
+                                            //                 behavior: SnackBarBehavior.floating,
+                                            //                 duration: const Duration(seconds: 2),
+                                            //                 showCloseIcon: true,
+                                            //                 padding: const EdgeInsets.all(15),
+                                            //                 backgroundColor: Colors.black.withOpacity(0.7),
+                                            //                 closeIconColor: Colors.white,
+                                            //                 //width: MediaQuery.of(context).size.width,
+                                            //                 margin: const EdgeInsets.all(15),
+                                            //                 content: Container(
+                                            //                   child: Text("You stopped following ${widget.name}",
+                                            //                     style: const TextStyle(fontSize: 12,color: Colors.white),),
+                                            //                 )
+                                            //             )
+                                            //         );
+                                            //       }
+                                            //   },
+                                            //   child: Container(
+                                            //     padding: const EdgeInsets.only(top: 5 , bottom: 5,left: 10,right: 10),
+                                            //     alignment: Alignment.center,
+                                            //     decoration: BoxDecoration(
+                                            //         color:following? const Color(0xff09426d) : Colors.white,
+                                            //         borderRadius: BorderRadius.circular(20),
+                                            //         border: Border.all(color:const Color(0xff09426d),width: 0.5)
+                                            //     ),
+                                            //     child:following? const Text("Following",
+                                            //       style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
+                                            //           fontSize: 12),)
+                                            //     :
+                                            //     const Text("Follow",
+                                            //       style: TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.bold,
+                                            //           fontSize: 12),),
+                                            //   ),
+                                            // )
                                           ],
                                         ),
 
@@ -750,11 +753,7 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
                                     child: Container(
                                       //alignment: Alignment.center,
                                       padding:
-                                      const EdgeInsets.only(
-
-                                          top: 10,
-                                          bottom: 10),
-                                      decoration: BoxDecoration(
+                                      const EdgeInsets.all(10),                                      decoration: BoxDecoration(
                                           color: const Color(
                                               0xff09426d),
                                           borderRadius:
@@ -766,16 +765,18 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
 
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children:  [
-                                            Text(
-                                              "Visit ${widget.name}'s site",
-                                              style: const TextStyle(
-                                                  color:
-                                                  Colors.white,
-                                                  fontFamily:
-                                                  ""),
+                                            Flexible(
+                                              child: Text(
+                                                "Visit ${widget.name}'s site",
+                                                style: const TextStyle(
+                                                    color:
+                                                    Colors.white,
+                                                    fontFamily:
+                                                    ""),
+                                              ),
                                             ),
 
-                                            const SizedBox(width: 10,),
+                                            const SizedBox(width: 5,),
 
                                             const Icon(
                                               Icons.arrow_forward,
@@ -1817,7 +1818,7 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
                             const Text(
                               "Verified User",
                               style: TextStyle(
-                                  color: Color(0xff51a81e),
+                                  color: Color(0xffffc107),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 11),
                             ),
@@ -1966,7 +1967,7 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
               opacity: 1.0,
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeIn,
-              child: Headings(context, "Discover More Organizers"),
+              child: Headings(context, "Discover More Services"),
             ),
             const SizedBox(height: 0),
 
