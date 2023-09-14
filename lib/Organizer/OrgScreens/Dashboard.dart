@@ -9,6 +9,7 @@ import 'package:socialapp/Organizer/OrgScreens/OrgProfile.dart';
 import 'package:socialapp/Organizer/Widgets/orgAppBar.dart';
 import 'package:socialapp/Organizer/Widgets/orgDrawer.dart';
 
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
 
 class OrgDashboard extends StatefulWidget {
@@ -62,18 +63,18 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
 
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(
-                color: Color(0xffff1f6f),
+                color: appPrimary,
                 height: kToolbarHeight-10,
                 imageUrl: "https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
                 cacheManager: cacheManager,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: appPrimary,
                     value: 5,
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
               ),
             ),
           ),
@@ -97,7 +98,7 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
                     color: Colors.white,
                     //color: Color(0xffffffff),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0xffff1f6f),width: 2)
+                    border: Border.all(color:  appPrimary,width: 2)
                 ),
                 child: const Icon(Icons.menu,size: 22,color: Color(0xffff1f6f),),
               ),

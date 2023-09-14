@@ -211,7 +211,7 @@ class _OrgProfileState extends State<OrgProfile> {
                         child: profileCon(context, "Organize a new event", Icons.event)),
 
                     InkWell(
-                        onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => const OrgEvents())),
+                        onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => const OrgVenues())),
 
                         child: profileCon(context, "My events", Icons.manage_accounts_outlined)),
 

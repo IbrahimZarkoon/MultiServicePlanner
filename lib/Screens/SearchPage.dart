@@ -44,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.15),
           child: Container(
-            color: const Color(0xffff1f6f),
+            color: const Color(0xff09426d),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -92,7 +92,7 @@ class _SearchPageState extends State<SearchPage> {
                                 borderRadius: BorderRadius.circular(12),
                                 color: const Color(0xffffffff)
                             ),
-                            child: const Icon(Icons.search,color: Color(0xffff1f6f), size: 22,)),
+                            child: const Icon(Icons.search,color: Color(0xff09426d), size: 22,)),
                       ),
 
                       const SizedBox(width: 10),
@@ -132,11 +132,11 @@ class _SearchPageState extends State<SearchPage> {
 
             children: [
 
-              recentSearchCon("Top Organizers"),
+              recentSearchCon("Top Service Provers"),
 
-              recentSearchCon("Events Nearby"),
+              recentSearchCon("Venues Nearby"),
 
-              recentSearchCon("Parties")
+              recentSearchCon("Party venues")
 
             ],
           ),

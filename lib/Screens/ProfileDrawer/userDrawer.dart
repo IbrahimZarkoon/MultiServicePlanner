@@ -33,7 +33,7 @@ Widget userDrawer(BuildContext context)
         //Top Container
         Container(
           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15,top: 15),
-          color: const Color(0xffff1f6f),
+          color: const Color(0xff09426d),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,13 +57,13 @@ Widget userDrawer(BuildContext context)
                         fit: BoxFit.scaleDown,
                         placeholder: (context, url) => const Center(
                           child: CircularProgressIndicator(
-                            color: Color(0xffff1f6f),
+                            color: Color(0xff09426d),
                             value: 5,
                           ),
                         ),
                         errorWidget: (context, url, error) => const Icon(
                           Icons.error,
-                          color: Color(0xffff1f6f),
+                          color: Color(0xff09426d),
                         ),
                       ),
                     ),
@@ -119,7 +119,7 @@ Widget userDrawer(BuildContext context)
                         Border.all(color: Colors.white, width: 2)),
                     child: const Icon(
                       Icons.edit_outlined,
-                      color: Color(0xffff1f6f),
+                      color: Color(0xff09426d),
                       size: 20,
                     )),
               ),
@@ -162,123 +162,123 @@ Widget userDrawer(BuildContext context)
                       child:
                       profileCon(context, "Edit Preferences", Icons.room_preferences_outlined)),
 
-                  InkWell(
-                      onTap: () {
-                        showDialog(
-                            barrierColor: Colors.black54,
-                            context: context, builder: (_)
-                        {
-                          return Center(
-
-                            child: Container(
-                              padding: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                borderRadius: BorderRadius.circular(5)
-                              ),
-                              width: MediaQuery.of(context).size.width,
-                              margin: const EdgeInsets.only(left: 15,right: 15),
-                              child: Material(
-                                child: Container(
-                                  color: Colors.white,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-
-                                    children: [
-
-                                      InkWell(
-                                        onTap: () => Navigator.pop(context),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-
-                                          children: [
-
-                                            Icon(Icons.close,color: Colors.black.withOpacity(0.8),size: 20,)
-
-                                          ],
-
-                                        ),
-                                      ),
-
-                                      const SizedBox(height: 0,),
-
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-
-                                        children: [
-
-                                          Container(
-                                            height: 250,
-                                            width: 250,
-                                            decoration: const BoxDecoration(
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                  "https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-8.jpg?w=1480&t=st=1692264507~exp=1692265107~hmac=57a22d9d2d291020b7e389ea99de7e4ca9a09b095c77785604ad2f6982363ee9"
-                                                ),
-                                                fit: BoxFit.contain
-                                              )
-                                            ),
-                                          ),
-
-                                        ],
-                                      ),
-
-                                      Text(
-                                        maxLines: 2,
-                                        "Please sign up as an organizer first!",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20,fontFamily: "Helvetica_Bold"),
-                                      ),
-
-                                      InkWell(
-                                        onTap: () => Navigator.push(
-                                            context,
-                                            CupertinoPageRoute(
-                                                builder: (BuildContext context) =>
-                                                const OrganizerLogin())),
-                                        child: Container(
-                                          margin: const EdgeInsets.only(top: 15,bottom: 0),
-                                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xffff1f6f),
-                                              // boxShadow: [
-                                              //   BoxShadow(
-                                              //       color: Colors.black.withOpacity(0.15),
-                                              //       blurRadius: 1.5,
-                                              //       spreadRadius: 1,
-                                              //       offset: const Offset(0, 0))
-                                              // ],
-                                              borderRadius: BorderRadius.circular(5)),
-                                          alignment: Alignment.center,
-                                          child: const Text(
-                                            "Continue",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12),
-                                          ),
-                                        ),
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        });
-                      },
-                      child:
-                      profileCon(context, "Organize a new event", Icons.event)),
+                  // InkWell(
+                  //     onTap: () {
+                  //       showDialog(
+                  //           barrierColor: Colors.black54,
+                  //           context: context, builder: (_)
+                  //       {
+                  //         return Center(
+                  //
+                  //           child: Container(
+                  //             padding: const EdgeInsets.all(15),
+                  //             decoration: BoxDecoration(
+                  //                 color: Colors.white,
+                  //               borderRadius: BorderRadius.circular(5)
+                  //             ),
+                  //             width: MediaQuery.of(context).size.width,
+                  //             margin: const EdgeInsets.only(left: 15,right: 15),
+                  //             child: Material(
+                  //               child: Container(
+                  //                 color: Colors.white,
+                  //                 child: Column(
+                  //                   mainAxisSize: MainAxisSize.min,
+                  //                   mainAxisAlignment: MainAxisAlignment.start,
+                  //
+                  //                   children: [
+                  //
+                  //                     InkWell(
+                  //                       onTap: () => Navigator.pop(context),
+                  //                       child: Row(
+                  //                         mainAxisAlignment: MainAxisAlignment.end,
+                  //
+                  //                         children: [
+                  //
+                  //                           Icon(Icons.close,color: Colors.black.withOpacity(0.8),size: 20,)
+                  //
+                  //                         ],
+                  //
+                  //                       ),
+                  //                     ),
+                  //
+                  //                     const SizedBox(height: 0,),
+                  //
+                  //                     Row(
+                  //                       mainAxisAlignment: MainAxisAlignment.center,
+                  //
+                  //                       children: [
+                  //
+                  //                         Container(
+                  //                           height: 250,
+                  //                           width: 250,
+                  //                           decoration: const BoxDecoration(
+                  //                             image: DecorationImage(
+                  //                               image: NetworkImage(
+                  //                                 "https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-8.jpg?w=1480&t=st=1692264507~exp=1692265107~hmac=57a22d9d2d291020b7e389ea99de7e4ca9a09b095c77785604ad2f6982363ee9"
+                  //                               ),
+                  //                               fit: BoxFit.contain
+                  //                             )
+                  //                           ),
+                  //                         ),
+                  //
+                  //                       ],
+                  //                     ),
+                  //
+                  //                     Text(
+                  //                       maxLines: 2,
+                  //                       "Please sign up as an organizer first!",
+                  //                       textAlign: TextAlign.center,
+                  //                       style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20,fontFamily: "Helvetica_Bold"),
+                  //                     ),
+                  //
+                  //                     InkWell(
+                  //                       onTap: () => Navigator.push(
+                  //                           context,
+                  //                           CupertinoPageRoute(
+                  //                               builder: (BuildContext context) =>
+                  //                               const OrganizerLogin())),
+                  //                       child: Container(
+                  //                         margin: const EdgeInsets.only(top: 15,bottom: 0),
+                  //                         padding: const EdgeInsets.only(top: 10, bottom: 10),
+                  //                         decoration: BoxDecoration(
+                  //                             color: const Color(0xff09426d),
+                  //                             // boxShadow: [
+                  //                             //   BoxShadow(
+                  //                             //       color: Colors.black.withOpacity(0.15),
+                  //                             //       blurRadius: 1.5,
+                  //                             //       spreadRadius: 1,
+                  //                             //       offset: const Offset(0, 0))
+                  //                             // ],
+                  //                             borderRadius: BorderRadius.circular(5)),
+                  //                         alignment: Alignment.center,
+                  //                         child: const Text(
+                  //                           "Continue",
+                  //                           style: TextStyle(
+                  //                               color: Colors.white,
+                  //                               fontWeight: FontWeight.bold,
+                  //                               fontSize: 12),
+                  //                         ),
+                  //                       ),
+                  //                     ),
+                  //
+                  //                   ],
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         );
+                  //       });
+                  //     },
+                  //     child:
+                  //     profileCon(context, "Organize a new event", Icons.event)),
 
                   InkWell(
                       onTap: () => Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (BuildContext context) => const OrgEvents())),
+                              builder: (BuildContext context) => const OrgVenues())),
                       child: profileCon(
-                          context, "My events", Icons.manage_accounts_outlined)),
+                          context, "My venues", Icons.manage_accounts_outlined)),
 
                   // InkWell(
                   //     onTap: () => Navigator.push(
@@ -335,7 +335,7 @@ Widget userDrawer(BuildContext context)
             margin: const EdgeInsets.all(15),
             padding: const EdgeInsets.only(top: 10, bottom: 10),
             decoration: BoxDecoration(
-                color: const Color(0xffff1f6f),
+                color: const Color(0xff09426d),
                 // boxShadow: [
                 //   BoxShadow(
                 //       color: Colors.black.withOpacity(0.15),

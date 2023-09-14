@@ -214,7 +214,7 @@ Widget orgCon(BuildContext context,String img,String title,String status,bool ve
   return GestureDetector(
     onTap: ()
     {
-      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SingleOrganizer(name: title, image: img)));
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => SingleServiceProvider(name: title, image: img)));
     },
     child: Container(
       padding: const EdgeInsets.all(5),

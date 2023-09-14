@@ -14,17 +14,17 @@ import '../Providers/CacheManager.dart';
 import 'MyProfile.dart';
 import 'ProfileDrawer/userDrawer.dart';
 
-class SingleOrganizer extends StatefulWidget {
-   SingleOrganizer({Key? key,required this.name, required this.image}) : super(key: key);
+class SingleServiceProvider extends StatefulWidget {
+   SingleServiceProvider({Key? key,required this.name, required this.image}) : super(key: key);
 
   String name;
   String image;
 
   @override
-  State<SingleOrganizer> createState() => _SingleOrganizerState();
+  State<SingleServiceProvider> createState() => _SingleServiceProviderState();
 }
 
-class _SingleOrganizerState extends State<SingleOrganizer> {
+class _SingleServiceProviderState extends State<SingleServiceProvider> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   var items = [
@@ -146,7 +146,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
   //ScrollController scrollcontroller = ScrollController();
 
   var unselected = Colors.black.withOpacity(0.6);
-  var selected = const Color(0xffff1f6f);
+  var selected = const Color(0xff09426d);
 
   // _scrollListener() {
   //   // if (scrollcontroller.offset >= scrollcontroller.position.maxScrollExtent &&
@@ -231,7 +231,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
 
 
       appBar: AppBar(
-        backgroundColor: const Color(0xffff1f6f),
+        backgroundColor: const Color(0xff09426d),
         leading: InkWell(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back_outlined,size: 23,color: Colors.white,)),
@@ -295,7 +295,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
         //                 borderRadius: BorderRadius.circular(12),
         //                 color: const Color(0xffffffff)
         //             ),
-        //             child: const Icon(Icons.search,color: Color(0xffff1f6f), size: 22,)),
+        //             child: const Icon(Icons.search,color: Color(0xff09426d), size: 22,)),
         //
         //         const SizedBox(width: 10),
         //
@@ -430,11 +430,11 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
                                         fit: BoxFit.cover,
                                         placeholder: (context, url) => const Center(
                                           child: CircularProgressIndicator(
-                                            color: Color(0xffff1f6f),
+                                            color: Color(0xff09426d),
                                             value: 5,
                                           ),
                                         ),
-                                        errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xffff1f6f)),
+                                        errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xff09426d)),
                                       ),
                                     ),
                                   ),
@@ -525,16 +525,16 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
                                                 padding: const EdgeInsets.only(top: 5 , bottom: 5,left: 10,right: 10),
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
-                                                    color:following? const Color(0xffff1f6f) : Colors.white,
+                                                    color:following? const Color(0xff09426d) : Colors.white,
                                                     borderRadius: BorderRadius.circular(20),
-                                                    border: Border.all(color:const Color(0xffff1f6f),width: 0.5)
+                                                    border: Border.all(color:const Color(0xff09426d),width: 0.5)
                                                 ),
                                                 child:following? const Text("Following",
                                                   style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,
                                                       fontSize: 12),)
                                                 :
                                                 const Text("Follow",
-                                                  style: TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.bold,
+                                                  style: TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.bold,
                                                       fontSize: 12),),
                                               ),
                                             )
@@ -661,7 +661,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
                                               ]),
                                           child: const Icon(
                                             Icons.share_outlined,
-                                            color: Color(0xffff1f6f),
+                                            color: Color(0xff09426d),
                                           ),
                                         ),
                                       ),
@@ -717,7 +717,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
                                           padding:
                                           const EdgeInsets.all(6),
                                           decoration: BoxDecoration(
-                                              color: notifications? const Color(0xffff1f6f) : Colors.white,
+                                              color: notifications? const Color(0xff09426d) : Colors.white,
                                               borderRadius:
                                               BorderRadius.circular(
                                                   10),
@@ -738,7 +738,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
                                               :
                                           const Icon(
                                             Icons.notification_add_outlined,
-                                            color: Color(0xffff1f6f),
+                                            color: Color(0xff09426d),
                                           )
                                         ),
                                       ),
@@ -756,7 +756,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
                                           bottom: 10),
                                       decoration: BoxDecoration(
                                           color: const Color(
-                                              0xffff1f6f),
+                                              0xff09426d),
                                           borderRadius:
                                           BorderRadius
                                               .circular(10)),
@@ -1059,11 +1059,11 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
               //                             fit: BoxFit.cover,
               //                             placeholder: (context, url) => const Center(
               //                               child: CircularProgressIndicator(
-              //                                 color: Color(0xffff1f6f),
+              //                                 color: Color(0xff09426d0xff09426d),
               //                                 value: 5,
               //                               ),
               //                             ),
-              //                             errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xffff1f6f)),
+              //                             errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xff09426d)),
               //                           ),
               //                         ),
               //                       ),
@@ -1236,7 +1236,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
               //                               ]),
               //                           child: const Icon(
               //                             Icons.share_outlined,
-              //                             color: Color(0xffff1f6f),
+              //                             color: Color(0xff09426d),
               //                           ),
               //                         ),
               //                       ),
@@ -1252,7 +1252,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
               //                               bottom: 10),
               //                           decoration: BoxDecoration(
               //                               color: const Color(
-              //                                   0xffff1f6f),
+              //                                   0xff09426d),
               //                               borderRadius:
               //                               BorderRadius
               //                                   .circular(10)),
@@ -1444,7 +1444,7 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
 
               progress ? const Positioned(
                 top: 0,bottom: 0,left: 0,right: 0,
-                child: Center(child: CircularProgressIndicator(strokeWidth: 3,color: Color(0xffff1f6f),),),
+                child: Center(child: CircularProgressIndicator(strokeWidth: 3,color: Color(0xff09426d),),),
               ) : const SizedBox(),
             ]),
           ),
@@ -1471,15 +1471,15 @@ class _SingleOrganizerState extends State<SingleOrganizer> {
 
 
 
-                Headings(context, "Upcoming Events"),
+                Headings(context, "Latest Events"),
 
                 //Upcoming Slider
-                todaySlider(context),
+                popularSlider(context),
 
 
                 Headings(context, "Past Events"),
 
-                todaySlider(context),
+                popularSlider(context),
 
                 Headings(context, "Cancelled Events"),
 

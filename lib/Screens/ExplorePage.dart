@@ -14,6 +14,8 @@ import 'package:socialapp/LocationPage.dart';
 
 import '../CustomWidgets/CustomAppBar.dart';
 import '../CustomWidgets/Sort&Filter.dart';
+import '../CustomWidgets/TodaySlider.dart';
+import '../CustomWidgets/UpComingEventsSlider.dart';
 import '../Providers/CacheManager.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -115,7 +117,7 @@ class _ExplorePageState extends State<ExplorePage> {
           {
             return Future.delayed(Duration(seconds: 2));
           },
-          color: const Color(0xffff1f6f),
+          color: const Color(0xff09426d),
           backgroundColor: Colors.white,
           child: SingleChildScrollView(
             padding: const EdgeInsets.only(bottom: 0),
@@ -127,6 +129,7 @@ class _ExplorePageState extends State<ExplorePage> {
 
               children: [
 
+                //Filters Con
                 Container(
                   height: MediaQuery.of(context).size.height*0.065,
 
@@ -171,19 +174,19 @@ class _ExplorePageState extends State<ExplorePage> {
                               Transform(
                                 alignment: Alignment.center,
                                 transform: Matrix4.identity()..scale(-1.0, 1.0, 1.0),
-                                child: const Icon(Icons.sort,size: 17,color: Color(0xffff1f6f)),
+                                child: const Icon(Icons.sort,size: 17,color: Color(0xff09426d)),
                               ),
 
                               const SizedBox(width: 5,),
 
                               Text(
                                 "$_selectedSize",
-                                style: const TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.bold,fontSize: 12),
+                                style: const TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.bold,fontSize: 12),
                               ),
 
                               const SizedBox(width: 5,),
 
-                              const Icon(Icons.keyboard_arrow_down,size: 18,color: Color(0xffff1f6f))
+                              const Icon(Icons.keyboard_arrow_down,size: 18,color: Color(0xff09426d))
                             ],
                           ),
                         ),
@@ -194,7 +197,7 @@ class _ExplorePageState extends State<ExplorePage> {
                         onTap: ()
                         {
                           setState(() {
-                            inDoorColor = const Color(0xffff1f6f);
+                            inDoorColor = const Color(0xff09426d);
                           });
                         },
                         child: Container(
@@ -214,7 +217,7 @@ class _ExplorePageState extends State<ExplorePage> {
                               ]),
                           child: Text(
                             "In Door",
-                            style:  TextStyle(color: (inDoorColor == const Color(0xffff1f6f))? Colors.white : Color(0xffff1f6f) ,fontWeight: FontWeight.bold,fontSize: 12),
+                            style:  TextStyle(color: (inDoorColor == const Color(0xff09426d))? Colors.white : Color(0xff09426d) ,fontWeight: FontWeight.bold,fontSize: 12),
                           ),
                         ),
                       ),
@@ -322,157 +325,88 @@ class _ExplorePageState extends State<ExplorePage> {
                   ),
                 ),
 
-                // //Searchbar
-                // Container(
-                //   color: const Color(0xffff1f6f),
-                //   child: Container(
-                //     height: 40,
-                //     //width: MediaQuery.of(context).size.width*0.8,
-                //     margin: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 20),
-                //     padding: const EdgeInsets.only(left: 10, right: 10, bottom: 5,top: 5),
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(15),
-                //       color: const Color(0xfff4f4f6),
-                //       boxShadow: [
-                //         BoxShadow(
-                //           color: Colors.black.withOpacity(0.1),
-                //           spreadRadius: 1,
-                //           blurRadius: 1,
-                //           offset: const Offset(0, 0), // changes position of shadow
-                //         ),
-                //       ],
-                //     ),
-                //
-                //     child: Row(
-                //       crossAxisAlignment: CrossAxisAlignment.center,
-                //       mainAxisAlignment: MainAxisAlignment.start,
-                //       children: [
-                //
-                //         Hero(
-                //           tag: "widget.tag",
-                //
-                //           child: Container(
-                //               padding: const EdgeInsets.only(left: 5,right: 0,top: 0,bottom: 0),
-                //               decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(12),
-                //                 color: const Color(0xfff4f4f6),
-                //
-                //               ),
-                //               child: const Icon(Icons.search,color: Colors.black, size: 20,)),
-                //         ),
-                //
-                //         const SizedBox(width: 10),
-                //
-                //         Expanded(
-                //             child: Container(
-                //               padding: const EdgeInsets.only(bottom: 0),
-                //               child: const TextField(
-                //                 cursorColor: Color(0xffff1f6f),
-                //                 //onChanged: (query) => setState(() {}),
-                //                 style: TextStyle(color: Colors.black, height: 1.1, fontSize: 14),
-                //                 decoration: InputDecoration(
-                //                   //prefixIcon: Icon(Icons.search, color: Color(0xFF5D5D67), size: 23),
-                //                     hintText: "Explore upcoming events",
-                //                     hintStyle: TextStyle(color: Color(0xFF8F8F9E), fontSize: 14),
-                //                     border: InputBorder.none),
-                //               ),
-                //             )),
-                //
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                //
-                // shadowLine(context),
-                //
-                // const SizedBox(height: 15,),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15,bottom: 15, top: 15),
+                      child: Row(
+                        children: [
+                          Text("Find events near: ",
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
+                          ),),
 
-
-                InkWell(
-                  onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => LocationPage())),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15,bottom: 15, top: 15),
-                        child: Row(
-                          children: [
-                            Text("Find events near: ",
+                          const Text("KHI, PAK",
                             style: TextStyle(
-                              color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
+                                color: Color(0xff09426d),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
                             ),),
 
-                            const Text("KHI, PAK",
-                              style: TextStyle(
-                                  color: Color(0xffff1f6f),fontWeight: FontWeight.bold,fontSize: 15,fontFamily: "Helvetica_Bold"
-                              ),),
-
-                            const SizedBox(width: 10,),
-
-                            Container(
-                                decoration: const BoxDecoration(
-                                  border: Border(bottom: BorderSide(color: Color(0xffff1f6f),width: 1))
-                                ),
-                                child: const Icon(Icons.edit,size: 12,color: Color(0xffff1f6f)))
-                          ],
-                        ),
-                      ),
-
-                      //Google Maps Container
-                      AbsorbPointer(
-                        absorbing: true,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height*0.25,
-                          margin: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            // image: const DecorationImage(
-                            //   image: NetworkImage(
-                            //     "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US"
-                            //   ),
-                            //   fit: BoxFit.cover
-                            // )
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: GoogleMap(
-                              onMapCreated: (GoogleMapController controller) {
-                                _controller.complete(controller);
-                              },
-                              zoomControlsEnabled: false,
-                              initialCameraPosition: _locationLoaded
-                                  ? CameraPosition(target: _currentLatLng, zoom: 7)
-                                  : CameraPosition(target: LatLng(0, 0), zoom: 7),
-
-                              mapType: MapType.normal,
-                              markers: {
-                                Marker(
-                                  markerId: MarkerId('currentLocation'),
-                                  position: _currentLatLng,
-                                  icon: BitmapDescriptor.defaultMarker,
-                                ),
-                              },
-                            ),
-                          ),
-                          // child: ClipRRect(
-                          //   borderRadius: BorderRadius.circular(8),
-                          //   child: CachedNetworkImage(
-                          //     imageUrl: "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US",
-                          //     cacheManager: cacheManager,
-                          //     fit: BoxFit.cover,
-                          //     placeholder: (context, url) => const Center(
-                          //       child: CircularProgressIndicator(
-                          //         color: Color(0xffff1f6f),
-                          //         value: 5,
-                          //       ),
+                          // const SizedBox(width: 10,),
+                          //
+                          // Container(
+                          //     decoration: const BoxDecoration(
+                          //       border: Border(bottom: BorderSide(color: Color(0xff09426d),width: 1))
                           //     ),
-                          //     errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
-                          //   ),
-                          // ),
-                        ),
+                          //     child: const Icon(Icons.edit,size: 12,color: Color(0xff09426d)))
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+
+                    //Google Maps Container
+                    AbsorbPointer(
+                      absorbing: true,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height*0.25,
+                        margin: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          // image: const DecorationImage(
+                          //   image: NetworkImage(
+                          //     "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US"
+                          //   ),
+                          //   fit: BoxFit.cover
+                          // )
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: GoogleMap(
+                            onMapCreated: (GoogleMapController controller) {
+                              _controller.complete(controller);
+                            },
+                            zoomControlsEnabled: false,
+                            initialCameraPosition: _locationLoaded
+                                ? CameraPosition(target: _currentLatLng, zoom: 7)
+                                : CameraPosition(target: LatLng(0, 0), zoom: 7),
+
+                            mapType: MapType.normal,
+                            markers: {
+                              Marker(
+                                markerId: MarkerId('currentLocation'),
+                                position: _currentLatLng,
+                                icon: BitmapDescriptor.defaultMarker,
+                              ),
+                            },
+                          ),
+                        ),
+                        // child: ClipRRect(
+                        //   borderRadius: BorderRadius.circular(8),
+                        //   child: CachedNetworkImage(
+                        //     imageUrl: "https://www.google.com/maps/d/thumbnail?mid=1wMZLD-KoIBt-zG0r8ziRkZeqgUA&hl=en_US",
+                        //     cacheManager: cacheManager,
+                        //     fit: BoxFit.cover,
+                        //     placeholder: (context, url) => const Center(
+                        //       child: CircularProgressIndicator(
+                        //         color: Color(0xff09426d),
+                        //         value: 5,
+                        //       ),
+                        //     ),
+                        //     errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
+                        //   ),
+                        // ),
+                      ),
+                    ),
+                  ],
                 ),
 
                 thickBorder(context),
@@ -487,118 +421,35 @@ class _ExplorePageState extends State<ExplorePage> {
 
                 //Popular Now
                 Padding(
-                  padding: const EdgeInsets.only(left: 15,top: 10),
+                  padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
                   child: Text("Popular now",
-                  style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: "Helvetica_Bold"),),
+                  style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16,fontFamily: "Helvetica_Bold"),),
                 ),
 
                 //Popular now List View
-                popNowSlider(context),
+                popularSlider(context),
 
                 //Outdoors & Adventure
                 Padding(
-                  padding: const EdgeInsets.only(left: 15,top: 10,right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text("Outdoors & Adventure",
-                        style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: "Helvetica_Bold"),),
+                  padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
 
-                      const Text("See all",
-                      style: TextStyle(
-                        color: Color(0xff000000),
-                        fontWeight: FontWeight.bold,fontSize: 13
-                      ),)
-                    ],
-                  ),
+                  child: Text("Outdoors & Adventure",
+                    style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16,fontFamily: "Helvetica_Bold"),),
                 ),
 
-                outDoorSlider(context),
+                openAirSlider(context),
 
                 //Learning
                 Padding(
-                  padding: const EdgeInsets.only(left: 15,top: 10,right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text("Learning",
-                        style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: "Helvetica_Bold"),),
+                  padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
 
-                      const Text("See all",
-                        style: TextStyle(
-                            color: Color(0xff000000),
-                            fontWeight: FontWeight.bold,fontSize: 13
-                        ),)
-                    ],
-                  ),
+                  child: Text("Surprising",
+                    style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16,fontFamily: "Helvetica_Bold"),),
                 ),
 
-                learningSlider(context),
+                inDoorSlider(context),
 
-                //Health & Wellness
-                Padding(
-                  padding: const EdgeInsets.only(left: 15,top: 10,right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text("Health & Wellness",
-                        style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontFamily: "Helvetica_Bold"),),
-
-                      const Text("See all",
-                        style: TextStyle(
-                            color: Color(0xff000000),
-                            fontWeight: FontWeight.bold,fontSize: 13
-                        ),)
-                    ],
-                  ),
-                ),
-
-                healthSlider(context),
-
-                thickBorder(context),
-
-
-                //Categories Container
-                Container(
-                  padding: const EdgeInsets.only(bottom: 15,top: 15),
-                  width: MediaQuery.of(context).size.width,
-                  // decoration: BoxDecoration(
-                  //   // color: Color(0xff00556e),
-                  //   gradient: LinearGradient(
-                  //     begin: Alignment.topLeft,
-                  //     end: Alignment.bottomRight,
-                  //     stops: [0.1,0.5],
-                  //     colors: [
-                  //       Color(0xff7dd1ef),
-                  //       Color(0xff00556e),
-                  //     ]
-                  //   )
-                  // ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-
-                    children: [
-
-                      //Cat Heading
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15,bottom: 15),
-                        child: Text("BROWSE BY CATEGORIES",
-                            style:
-                            TextStyle(fontFamily: "Helvetica_Bold",color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold, fontSize: 18)),
-                      ),
-
-                      //Categories Con
-                      categoriesCon(context)
-                    ],
-                  ),
-                )
-
-
-
+                const SizedBox(height: kToolbarHeight/2,)
               ],
             ),
           ),

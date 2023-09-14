@@ -8,6 +8,7 @@ import 'package:socialapp/Screens/Organizers.dart';
 
 import '../CustomWidgets/CustomAppBar.dart';
 import '../CustomWidgets/RoundedBottomBar.dart';
+import '../Enums/Colors.dart';
 import 'HomePage.dart';
 import 'ProfileDrawer/userDrawer.dart';
 
@@ -27,7 +28,7 @@ class _DashboardPageState extends State<DashboardPage> with SingleTickerProvider
     const HomePage(), // 0
     const ExplorePage(),
     const NotificationsTab(),
-    const Organizers()
+    const Services()
   ];
 
   late TabController _tabController;
@@ -80,14 +81,13 @@ class _DashboardPageState extends State<DashboardPage> with SingleTickerProvider
           ),
           height: kToolbarHeight+15,
           child: TabBar(
-
             dividerColor: const Color(0xfff1f1f1),
             padding: const EdgeInsets.all(0),
             physics: const NeverScrollableScrollPhysics(),
             indicator: const BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: Color(0xffff1f6f),
+                  color: appPrimary,
                   width: 3.0,
                 ),
               ),
@@ -95,7 +95,7 @@ class _DashboardPageState extends State<DashboardPage> with SingleTickerProvider
             controller: _tabController,
             indicatorColor: Colors.white,
             unselectedLabelColor: Colors.black.withOpacity(0.35),
-            labelColor: const Color(0xffff1f6f),
+            labelColor:  appPrimary,
             labelStyle: const TextStyle(
               fontSize: 11
             ),
@@ -114,21 +114,18 @@ class _DashboardPageState extends State<DashboardPage> with SingleTickerProvider
               ),
               const Tab(
                 iconMargin: EdgeInsets.only(bottom: 5),
-
                 icon: Icon(CupertinoIcons.search),
                 text: 'Explore',
               ),
               Tab(
                 iconMargin: const EdgeInsets.only(bottom: 5),
-
                 icon: Icon(widget.userTabIndex == 2? Icons.notifications :Icons.notifications_none_outlined),
                 text: 'Notifications',
               ),
               Tab(
                 iconMargin: const EdgeInsets.only(bottom: 5),
-
                 icon: Icon(widget.userTabIndex == 3? Icons.people :Icons.people_alt_outlined),
-                text: 'Organizers',
+                text: 'Services',
               ),
             ],
           ),

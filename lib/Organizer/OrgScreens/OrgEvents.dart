@@ -5,26 +5,26 @@ import '../../CustomWidgets/Headings.dart';
 import '../../CustomWidgets/TodaySlider.dart';
 import '../../CustomWidgets/UpComingEventsSlider.dart';
 
-class OrgEvents extends StatefulWidget {
-  const OrgEvents({super.key});
+class OrgVenues extends StatefulWidget {
+  const OrgVenues({super.key});
 
   @override
-  State<OrgEvents> createState() => _OrgEventsState();
+  State<OrgVenues> createState() => _OrgVenuesState();
 }
 
-class _OrgEventsState extends State<OrgEvents> {
+class _OrgVenuesState extends State<OrgVenues> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xfffaf8f8),
       appBar: AppBar(
-        backgroundColor: const Color(0xffff1f6f),
+        backgroundColor: const Color(0xff09426d),
         leading: InkWell(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back_outlined,size: 23,color: Colors.white,)),
         centerTitle: true,
         elevation: 0,
-        title: const Text("My Events",
+        title: const Text("My Venues",
           style: TextStyle(color: Colors.white,fontSize: 15,fontFamily: "Helvetica_Bold"),),
 
         bottom: PreferredSize(
@@ -59,7 +59,7 @@ class _OrgEventsState extends State<OrgEvents> {
                         borderRadius: BorderRadius.circular(12),
                         color: const Color(0xffffffff)
                     ),
-                    child: const Icon(Icons.search,color: Color(0xffff1f6f), size: 22,)),
+                    child: const Icon(Icons.search,color: Color(0xff09426d), size: 22,)),
 
                 const SizedBox(width: 10),
 
@@ -99,17 +99,17 @@ class _OrgEventsState extends State<OrgEvents> {
 
 
 
-                Headings(context, "UPCOMING EVENTS"),
+                Headings(context, "UPCOMING VENUES"),
 
                 //Upcoming Slider
-                todaySlider(context),
+                popularSlider(context),
 
 
-                Headings(context, "PAST EVENTS"),
+                Headings(context, "PAST VENUES"),
 
-                todaySlider(context),
+                popularSlider(context),
 
-                Headings(context, "REJECTED EVENTS"),
+                Headings(context, "REJECTED VENUES"),
 
                 openAirSlider(context),
 

@@ -11,27 +11,25 @@ class SortandFilter extends StatefulWidget {
 }
 
 class _SortandFilterState extends State<SortandFilter> {
-  bool BestSeller = false;
-  bool BestMatch = false;
-  bool LowToHigh = false;
-  bool HighToLow = false;
 
-  bool Stars4 = false;
-  bool Stars3 = false;
-  bool Stars2 = false;
-  bool Star1 = false;
+  bool DHA = false;
+  bool NorthNazimabad = false;
+  bool gulshan = false;
 
-  bool under10 = false;
-  bool under50 = false;
-  bool under100 = false;
-  bool under1000 = false;
+  bool photographers = false;
+  bool caterers = false;
+  bool decorators = false;
 
-  bool reduced = false;
-  bool clearance = false;
+  bool below100K = false;
+  bool from100to150k = false;
+  bool to250K = false;
+  bool above250K = false;
 
-  bool online = false;
-  bool instore = false;
-  bool scheduledorder = false;
+  bool below50 = false;
+  bool _50to100 = false;
+  bool _100to200 = false;
+  bool above250 = false;
+
 
   double _top = 0;
 
@@ -40,7 +38,7 @@ class _SortandFilterState extends State<SortandFilter> {
     return Stack(children: [
       Container(
         padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-        height: MediaQuery.of(context).size.height * 0.65,
+        height: MediaQuery.of(context).size.height * 0.6,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -65,7 +63,7 @@ class _SortandFilterState extends State<SortandFilter> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  GestureDetector(
+                  InkWell(
                       onTap: () {
                         Navigator.pop(context);
                       },
@@ -97,9 +95,9 @@ class _SortandFilterState extends State<SortandFilter> {
                 ],
               ),
 
-              //Sort Accordion
+              //Location Accordion
               FilterAccordion(
-                  title: "Sort",
+                  title: "Location",
                   content: Container(
                     width: MediaQuery.of(context).size.width,
                     child: Column(
@@ -107,11 +105,13 @@ class _SortandFilterState extends State<SortandFilter> {
                       //crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-                        //Best Seller Row
-                        GestureDetector(
+                        //DHA Row
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              BestSeller = !BestSeller;
+                              DHA = !DHA;
+                              NorthNazimabad = false;
+                              gulshan = false;
                             });
                           },
                           child: Padding(
@@ -122,7 +122,7 @@ class _SortandFilterState extends State<SortandFilter> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(
-                                  BestSeller
+                                  DHA
                                       ? Icons.check_circle
                                       : Icons.circle_outlined,
                                   size: 22,
@@ -132,9 +132,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Best Seller",
+                                  "DHA",
                                   style: TextStyle(
-                                      fontWeight: BestSeller
+                                      fontWeight: DHA
                                           ? FontWeight.bold
                                           : FontWeight.normal,
                                       color: Colors.black.withOpacity(0.8)),
@@ -144,11 +144,13 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //Best Match Row
-                        GestureDetector(
+                        //North Nazimabad Row
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              BestMatch = !BestMatch;
+                              NorthNazimabad = !NorthNazimabad;
+                              DHA = false;
+                              gulshan = false;
                             });
                           },
                           child: Padding(
@@ -159,7 +161,7 @@ class _SortandFilterState extends State<SortandFilter> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(
-                                  BestMatch
+                                  NorthNazimabad
                                       ? Icons.check_circle
                                       : Icons.circle_outlined,
                                   size: 22,
@@ -169,9 +171,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Best Match",
+                                  "North Nazimabad",
                                   style: TextStyle(
-                                      fontWeight: BestMatch
+                                      fontWeight: NorthNazimabad
                                           ? FontWeight.bold
                                           : FontWeight.normal,
                                       color: Colors.black.withOpacity(0.8)),
@@ -181,11 +183,13 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //Price: low to high Row
-                        GestureDetector(
+                        //Gulshan
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              LowToHigh = !LowToHigh;
+                              gulshan = !gulshan;
+                              NorthNazimabad = false;
+                              DHA = false;
                             });
                           },
                           child: Padding(
@@ -196,7 +200,7 @@ class _SortandFilterState extends State<SortandFilter> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(
-                                  LowToHigh
+                                  gulshan
                                       ? Icons.check_circle
                                       : Icons.circle_outlined,
                                   size: 22,
@@ -206,9 +210,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                   width: 10,
                                 ),
                                 Text(
-                                  "Price: low to high",
+                                  "Gulshan",
                                   style: TextStyle(
-                                      fontWeight: LowToHigh
+                                      fontWeight: gulshan
                                           ? FontWeight.bold
                                           : FontWeight.normal,
                                       color: Colors.black.withOpacity(0.8)),
@@ -218,371 +222,6 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //Price: high to low Row
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              HighToLow = !HighToLow;
-                            });
-                          },
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 10, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  HighToLow
-                                      ? Icons.check_circle
-                                      : Icons.circle_outlined,
-                                  size: 22,
-                                  color: Colors.black.withOpacity(0.6),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Price: high to low",
-                                  style: TextStyle(
-                                      fontWeight: HighToLow
-                                          ? FontWeight.bold
-                                          : FontWeight.normal,
-                                      color: Colors.black.withOpacity(0.8)),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-
-              //Category Accordion
-              FilterAccordion(
-                  title: "Category",
-                  content: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      //crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        //All departments
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 10, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.check_circle,
-                                  size: 22,
-                                  color: Colors.black.withOpacity(0.6),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "All departments",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black.withOpacity(0.8)),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-
-              //Customer Rating Accordion
-              FilterAccordion(
-                  title: "Customer Rating",
-                  content: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      //crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        //4 Stars Row
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              Stars4 = !Stars4;
-                            });
-                          },
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 10, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Stars4
-                                          ? Icons.check_circle
-                                          : Icons.circle_outlined,
-                                      size: 22,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    AbsorbPointer(
-                                      absorbing: true,
-                                      child: RatingBar(
-                                        initialRating: double.parse("4.5"),
-                                        allowHalfRating: true,
-                                        itemSize: 16,
-                                        ratingWidget: RatingWidget(
-                                            full: const Icon(
-                                              Icons.star,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            half: const Icon(
-                                              Icons.star_half,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            empty: const Icon(
-                                              Icons.star_border,
-                                              color: Color(0xffffc107),
-                                            )),
-                                        onRatingUpdate: (ratings) =>
-                                            print(ratings),
-                                      ),
-                                    ),
-                                    Text(
-                                      " & up",
-                                      style: TextStyle(
-                                          fontWeight: Stars4
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                          color: Colors.black.withOpacity(0.8)),
-                                    ),
-                                  ],
-                                ),
-                                const Text(
-                                  "1079",
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        //3 Stars Row
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              Stars3 = !Stars3;
-                            });
-                          },
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 10, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Stars3
-                                          ? Icons.check_circle
-                                          : Icons.circle_outlined,
-                                      size: 22,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    AbsorbPointer(
-                                      absorbing: true,
-                                      child: RatingBar(
-                                        initialRating: double.parse("3.5"),
-                                        allowHalfRating: true,
-                                        itemSize: 16,
-                                        ratingWidget: RatingWidget(
-                                            full: const Icon(
-                                              Icons.star,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            half: const Icon(
-                                              Icons.star_half,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            empty: const Icon(
-                                              Icons.star_border,
-                                              color: Color(0xffffc107),
-                                            )),
-                                        onRatingUpdate: (ratings) =>
-                                            print(ratings),
-                                      ),
-                                    ),
-                                    Text(
-                                      " & up",
-                                      style: TextStyle(
-                                          fontWeight: Stars3
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                          color: Colors.black.withOpacity(0.8)),
-                                    ),
-                                  ],
-                                ),
-                                const Text(
-                                  "79",
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        //2 Stars Row
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              Stars2 = !Stars2;
-                            });
-                          },
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 10, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Stars2
-                                          ? Icons.check_circle
-                                          : Icons.circle_outlined,
-                                      size: 22,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    AbsorbPointer(
-                                      absorbing: true,
-                                      child: RatingBar(
-                                        initialRating: double.parse("2.5"),
-                                        allowHalfRating: true,
-                                        itemSize: 16,
-                                        ratingWidget: RatingWidget(
-                                            full: const Icon(
-                                              Icons.star,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            half: const Icon(
-                                              Icons.star_half,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            empty: const Icon(
-                                              Icons.star_border,
-                                              color: Color(0xffffc107),
-                                            )),
-                                        onRatingUpdate: (ratings) =>
-                                            print(ratings),
-                                      ),
-                                    ),
-                                    Text(
-                                      " & up",
-                                      style: TextStyle(
-                                          fontWeight: Stars2
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                          color: Colors.black.withOpacity(0.8)),
-                                    ),
-                                  ],
-                                ),
-                                const Text(
-                                  "111",
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        //1 Stars Row
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              Star1 = !Star1;
-                            });
-                          },
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 10, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Star1
-                                          ? Icons.check_circle
-                                          : Icons.circle_outlined,
-                                      size: 22,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    AbsorbPointer(
-                                      absorbing: true,
-                                      child: RatingBar(
-                                        initialRating: double.parse("1.5"),
-                                        allowHalfRating: true,
-                                        itemSize: 16,
-                                        ratingWidget: RatingWidget(
-                                            full: const Icon(
-                                              Icons.star,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            half: const Icon(
-                                              Icons.star_half,
-                                              color: Color(0xffffc107),
-                                            ),
-                                            empty: const Icon(
-                                              Icons.star_border,
-                                              color: Color(0xffffc107),
-                                            )),
-                                        onRatingUpdate: (ratings) =>
-                                            print(ratings),
-                                      ),
-                                    ),
-                                    Text(
-                                      " & up",
-                                      style: TextStyle(
-                                          fontWeight: Star1
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                          color: Colors.black.withOpacity(0.8)),
-                                    ),
-                                  ],
-                                ),
-                                const Text(
-                                  "29",
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   )),
@@ -597,11 +236,11 @@ class _SortandFilterState extends State<SortandFilter> {
                       //crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-                        //Under £10
-                        GestureDetector(
+                        //Under 100,000 PKR
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              under10 = !under10;
+                              below100K = !below100K;
                             });
                           },
                           child: Padding(
@@ -614,7 +253,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                 Row(
                                   children: [
                                     Icon(
-                                      under10
+                                      below100K
                                           ? Icons.check_box
                                           : Icons
                                           .check_box_outline_blank_outlined,
@@ -625,9 +264,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "Under £10",
+                                      "Below 100,000 PKR",
                                       style: TextStyle(
-                                          fontWeight: under10
+                                          fontWeight: below100K
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: Colors.black.withOpacity(0.8)),
@@ -635,7 +274,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                   ],
                                 ),
                                 const Text(
-                                  "185",
+                                  "32",
                                   style: TextStyle(fontSize: 13),
                                 )
                               ],
@@ -643,11 +282,11 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //£10 - £50
-                        GestureDetector(
+                        //100K to 150K
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              under50 = !under50;
+                              from100to150k = !from100to150k;
                             });
                           },
                           child: Padding(
@@ -660,7 +299,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                 Row(
                                   children: [
                                     Icon(
-                                      under50
+                                      from100to150k
                                           ? Icons.check_box
                                           : Icons
                                           .check_box_outline_blank_outlined,
@@ -671,9 +310,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "£10 - £50",
+                                      "100,000 - 150,000 PKR",
                                       style: TextStyle(
-                                          fontWeight: under50
+                                          fontWeight: from100to150k
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: Colors.black.withOpacity(0.8)),
@@ -681,7 +320,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                   ],
                                 ),
                                 const Text(
-                                  "1093",
+                                  "30",
                                   style: TextStyle(fontSize: 13),
                                 )
                               ],
@@ -689,11 +328,11 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //£50 - £100
-                        GestureDetector(
+                        //below 250K
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              under100 = !under100;
+                              to250K = !to250K;
                             });
                           },
                           child: Padding(
@@ -706,7 +345,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                 Row(
                                   children: [
                                     Icon(
-                                      under100
+                                      to250K
                                           ? Icons.check_box
                                           : Icons
                                           .check_box_outline_blank_outlined,
@@ -717,9 +356,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "£50 - £100",
+                                      "150,000 - 250,000 PKR",
                                       style: TextStyle(
-                                          fontWeight: under100
+                                          fontWeight: to250K
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: Colors.black.withOpacity(0.8)),
@@ -727,7 +366,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                   ],
                                 ),
                                 const Text(
-                                  "1621",
+                                  "18",
                                   style: TextStyle(fontSize: 13),
                                 )
                               ],
@@ -735,11 +374,11 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //£100 - £1000
-                        GestureDetector(
+                        //250K +
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              under1000 = !under1000;
+                              above250K = !above250K;
                             });
                           },
                           child: Padding(
@@ -752,7 +391,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                 Row(
                                   children: [
                                     Icon(
-                                      under1000
+                                      above250K
                                           ? Icons.check_box
                                           : Icons
                                           .check_box_outline_blank_outlined,
@@ -763,9 +402,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "£100 - £1000",
+                                      "250,000 PKR +",
                                       style: TextStyle(
-                                          fontWeight: under1000
+                                          fontWeight: above250K
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: Colors.black.withOpacity(0.8)),
@@ -773,7 +412,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                   ],
                                 ),
                                 const Text(
-                                  "414",
+                                  "9",
                                   style: TextStyle(fontSize: 13),
                                 )
                               ],
@@ -784,9 +423,9 @@ class _SortandFilterState extends State<SortandFilter> {
                     ),
                   )),
 
-              //Online Savings Accordion
+              //Services Accordion
               FilterAccordion(
-                  title: "Online Savings",
+                  title: "Services",
                   content: Container(
                     width: MediaQuery.of(context).size.width,
                     child: Column(
@@ -794,104 +433,131 @@ class _SortandFilterState extends State<SortandFilter> {
                       //crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-                        //Reduced Price
-                        GestureDetector(
+
+                        //Photography Row
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              reduced = !reduced;
+                              photographers = !photographers;
+                              caterers = false;
+                              decorators = false;
                             });
                           },
                           child: Padding(
                             padding:
                             const EdgeInsets.only(bottom: 10, right: 20),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      reduced
-                                          ? Icons.check_box
-                                          : Icons
-                                          .check_box_outline_blank_outlined,
-                                      size: 22,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Reduced Price",
-                                      style: TextStyle(
-                                          fontWeight: reduced
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                          color: Colors.black.withOpacity(0.8)),
-                                    ),
-                                  ],
+                                Icon(
+                                  photographers
+                                      ? Icons.check_circle
+                                      : Icons.circle_outlined,
+                                  size: 22,
+                                  color: Colors.black.withOpacity(0.6),
                                 ),
-                                const Text(
-                                  "185",
-                                  style: TextStyle(fontSize: 13),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Photographers",
+                                  style: TextStyle(
+                                      fontWeight: photographers
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                      color: Colors.black.withOpacity(0.8)),
                                 )
                               ],
                             ),
                           ),
                         ),
 
-                        //Clearance
-                        GestureDetector(
+                        //Catering Row
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              clearance = !clearance;
+                              caterers = !caterers;
+                              photographers = false;
+                              decorators = false;
                             });
                           },
                           child: Padding(
                             padding:
                             const EdgeInsets.only(bottom: 10, right: 20),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      clearance
-                                          ? Icons.check_box
-                                          : Icons
-                                          .check_box_outline_blank_outlined,
-                                      size: 22,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Clearance",
-                                      style: TextStyle(
-                                          fontWeight: clearance
-                                              ? FontWeight.bold
-                                              : FontWeight.normal,
-                                          color: Colors.black.withOpacity(0.8)),
-                                    ),
-                                  ],
+                                Icon(
+                                  caterers
+                                      ? Icons.check_circle
+                                      : Icons.circle_outlined,
+                                  size: 22,
+                                  color: Colors.black.withOpacity(0.6),
                                 ),
-                                const Text(
-                                  "49",
-                                  style: TextStyle(fontSize: 13),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Caterers",
+                                  style: TextStyle(
+                                      fontWeight: caterers
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                      color: Colors.black.withOpacity(0.8)),
                                 )
                               ],
                             ),
                           ),
                         ),
+
+                        //Decorators
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              decorators = !decorators;
+                              photographers = false;
+                              caterers = false;
+                            });
+                          },
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.only(bottom: 10, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  decorators
+                                      ? Icons.check_circle
+                                      : Icons.circle_outlined,
+                                  size: 22,
+                                  color: Colors.black.withOpacity(0.6),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Decorators",
+                                  style: TextStyle(
+                                      fontWeight: decorators
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                      color: Colors.black.withOpacity(0.8)),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+
                       ],
                     ),
                   )),
 
-              //Availability Accordion
+              //Category Accordion
               FilterAccordion(
-                  title: "Availability",
+                  title: "Capacity",
                   content: Container(
                     width: MediaQuery.of(context).size.width,
                     child: Column(
@@ -899,11 +565,11 @@ class _SortandFilterState extends State<SortandFilter> {
                       //crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-                        //Online
-                        GestureDetector(
+                        //Under 50 Person
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              online = !online;
+                              below50 = !below50;
                             });
                           },
                           child: Padding(
@@ -916,7 +582,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                 Row(
                                   children: [
                                     Icon(
-                                      online
+                                      below50
                                           ? Icons.check_box
                                           : Icons
                                           .check_box_outline_blank_outlined,
@@ -927,9 +593,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "Online",
+                                      "Less than 50 persons",
                                       style: TextStyle(
-                                          fontWeight: online
+                                          fontWeight: below50
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: Colors.black.withOpacity(0.8)),
@@ -937,7 +603,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                   ],
                                 ),
                                 const Text(
-                                  "30085",
+                                  "32",
                                   style: TextStyle(fontSize: 13),
                                 )
                               ],
@@ -945,11 +611,11 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //In Store
-                        GestureDetector(
+                        //50 - 100
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              instore = !instore;
+                              _50to100 = !_50to100;
                             });
                           },
                           child: Padding(
@@ -962,7 +628,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                 Row(
                                   children: [
                                     Icon(
-                                      instore
+                                      _50to100
                                           ? Icons.check_box
                                           : Icons
                                           .check_box_outline_blank_outlined,
@@ -973,9 +639,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "In Store",
+                                      "50 - 100 persons",
                                       style: TextStyle(
-                                          fontWeight: instore
+                                          fontWeight: _50to100
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: Colors.black.withOpacity(0.8)),
@@ -983,7 +649,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                   ],
                                 ),
                                 const Text(
-                                  "297",
+                                  "30",
                                   style: TextStyle(fontSize: 13),
                                 )
                               ],
@@ -991,11 +657,11 @@ class _SortandFilterState extends State<SortandFilter> {
                           ),
                         ),
 
-                        //Scheduled order
-                        GestureDetector(
+                        //100 - 200
+                        InkWell(
                           onTap: () {
                             setState(() {
-                              scheduledorder = !scheduledorder;
+                              _100to200 = !_100to200;
                             });
                           },
                           child: Padding(
@@ -1008,7 +674,7 @@ class _SortandFilterState extends State<SortandFilter> {
                                 Row(
                                   children: [
                                     Icon(
-                                      scheduledorder
+                                      _100to200
                                           ? Icons.check_box
                                           : Icons
                                           .check_box_outline_blank_outlined,
@@ -1019,9 +685,9 @@ class _SortandFilterState extends State<SortandFilter> {
                                       width: 10,
                                     ),
                                     Text(
-                                      "Scheduled order",
+                                      "100 to 200 persons",
                                       style: TextStyle(
-                                          fontWeight: scheduledorder
+                                          fontWeight: _100to200
                                               ? FontWeight.bold
                                               : FontWeight.normal,
                                           color: Colors.black.withOpacity(0.8)),
@@ -1029,7 +695,53 @@ class _SortandFilterState extends State<SortandFilter> {
                                   ],
                                 ),
                                 const Text(
-                                  "124",
+                                  "18",
+                                  style: TextStyle(fontSize: 13),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        //above 250
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              above250 = !above250;
+                            });
+                          },
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.only(bottom: 10, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      above250
+                                          ? Icons.check_box
+                                          : Icons
+                                          .check_box_outline_blank_outlined,
+                                      size: 22,
+                                      color: Colors.black.withOpacity(0.6),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "More than 250 persons",
+                                      style: TextStyle(
+                                          fontWeight: above250
+                                              ? FontWeight.bold
+                                              : FontWeight.normal,
+                                          color: Colors.black.withOpacity(0.8)),
+                                    ),
+                                  ],
+                                ),
+                                const Text(
+                                  "9",
                                   style: TextStyle(fontSize: 13),
                                 )
                               ],
@@ -1040,57 +752,6 @@ class _SortandFilterState extends State<SortandFilter> {
                     ),
                   )),
 
-              //Sold by Accordion
-              FilterAccordion(
-                  title: "Sold & shipped by",
-                  content: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      //crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        //Amazon
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: Padding(
-                            padding:
-                            const EdgeInsets.only(bottom: 10, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.check_box,
-                                      size: 22,
-                                      color: Colors.black.withOpacity(0.6),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Amazon",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black.withOpacity(0.8)),
-                                    ),
-                                  ],
-                                ),
-                                const Text(
-                                  "50902",
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
 
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
@@ -1117,7 +778,7 @@ class _SortandFilterState extends State<SortandFilter> {
                 padding: const EdgeInsets.only(bottom: 0, top: 0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: const Color(0xffff1f6f),
+                    color: const Color(0xff09426d),
                     borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "View results",

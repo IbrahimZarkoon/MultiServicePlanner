@@ -6,6 +6,7 @@ import 'package:socialapp/CustomWidgets/Headings.dart';
 import 'package:socialapp/Organizer/OrganizerLogin.dart';
 import 'package:socialapp/Screens/Register.dart';
 
+import '../Enums/Colors.dart';
 import 'Dashboard.dart';
 
 class Login extends StatefulWidget {
@@ -75,20 +76,20 @@ class _LoginState extends State<Login> {
                 foregroundDecoration:  BoxDecoration(
                   color: Colors.white,
                   gradient: LinearGradient(
-                    stops: const [0.0,1],
+                    stops: const [0.0,0.7],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        Colors.black.withOpacity(0.75)
+                        Colors.black.withOpacity(0.5)
                       ]),
                 ),
                 decoration: const BoxDecoration(
 
                     image: DecorationImage(
-                        image: AssetImage("assets/images/colorful-light-show-is-lit-up-club.jpg"),
-                        fit: BoxFit.cover,
-                        alignment: Alignment.topCenter,
+                        image: AssetImage("assets/images/userLogin.jpg"),
+                        fit: BoxFit.fitHeight,
+                        //alignment: Alignment.topCenter,
                         filterQuality: FilterQuality.high
                     )
                 ),
@@ -116,7 +117,7 @@ class _LoginState extends State<Login> {
                       children: [
 
                         Container(
-                          padding: const EdgeInsets.only(top: 20,bottom: kToolbarHeight , left:15 , right:15),
+                          padding: const EdgeInsets.only(top: 20,bottom: 40 , left:15 , right:15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children:  const [
@@ -269,7 +270,7 @@ class _LoginState extends State<Login> {
 
                               const Spacer(),
 
-                              Text("Forgot password",style: TextStyle(color: Colors.white.withOpacity(1),fontWeight: FontWeight.bold),)
+                              Text("Forgot password",style: TextStyle(color:appPrimary,fontWeight: FontWeight.bold),)
                             ],
                           ),
                         ),
@@ -296,7 +297,7 @@ class _LoginState extends State<Login> {
                                 //   Colors.white,
                                 //   Color(0xffda291c)
                                 // ]),
-                                color: const Color(0xffff1f6f)
+                                color: appPrimary,
                             ),
                             child: const Text("Login",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                           ),
@@ -326,175 +327,42 @@ class _LoginState extends State<Login> {
                                 // ]),
                                 color: Colors.white,
                             ),
-                            child: const Text("Continue as an organizer",style: TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.bold),),
+                            child: const Text("Continue as an organizer",style: TextStyle(color: appPrimary,fontWeight: FontWeight.bold),),
                           ),
                         ),
 
-                        //Signup Container
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15,right: 15),
-                          child: Row(
-                            children: [
 
-                              Expanded(child: shadowLine(context)),
-
-                              Expanded(
-                                child: Container(
-                                  margin: const EdgeInsets.only(top: 15,bottom: 15),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-
-                                    children: [
-
-                                      Text("or continue with",style: TextStyle(color: Colors.white.withOpacity(1),fontSize: 12),),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Expanded(child: shadowLine(context))
-                            ],
-                          ),
-                        ),
-
-                        //Google,Facebook,Twitter Row
-                        Container(
-                          margin: const EdgeInsets.only(top: 5,bottom: 5),
-                          child: Row(
-
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            mainAxisSize: MainAxisSize.max,
-
-                            children: [
-
-                              //Google Row
-                              Container(
-                                constraints: const BoxConstraints(
-                                  minWidth: 100,
-                                ),
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 8,bottom: 8),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 25,
-                                      height: 25,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
-                                              )
-                                          )
-                                      ),
-                                    ),
-
-                                    Text("Google",
-                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "",fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                              ),
-
-                              //Facebook Row
-                              Container(
-                                constraints: const BoxConstraints(
-                                  minWidth: 100,
-                                ),
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 8,bottom: 8),
-
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 25,
-                                      height: 25,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"
-                                              )
-                                          )
-                                      ),
-                                    ),
-
-                                    Text("Facebook",
-                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "",fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                              ),
-
-                              //Twitter Row
-                              Container(
-                                constraints: const BoxConstraints(
-                                  minWidth: 100,
-                                ),
-                                padding: const EdgeInsets.only(left: 10,right: 10,top: 8,bottom: 8),
-
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 25,
-                                      height: 25,
-                                      margin: const EdgeInsets.only(right: 10),
-                                      decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png?20220821125553"
-                                              )
-                                          )
-                                      ),
-                                    ),
-
-                                    Text("Twitter",
-                                      style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "",fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                              ),
-
-
-                            ],
-                          ),
-                        ),
-
-                        const SizedBox(height: 15,),
+                        //const SizedBox(height: 15,),
 
                         InkWell(
                           onTap: ()
                           {
                             Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Register()));
                           },
-                          child: RichText(
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            text: const TextSpan(
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Not register yet ? ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: "",
-                                      color: Colors.white),
-                                ),
-                                TextSpan(
-                                  style: TextStyle(
-                                      color: Color(0xffff1f6f),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14),
-                                  text:
-                                  'Create Account',
-                                ),
-                              ],
+                          child: Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: RichText(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              text: const TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'Not register yet? ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: "",
+                                        color: Colors.white),
+                                  ),
+                                  TextSpan(
+                                    style: TextStyle(
+                                        color: appPrimary,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14),
+                                    text:
+                                    'Create Account',
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

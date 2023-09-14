@@ -4,6 +4,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'Enums/Colors.dart';
+
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
 
@@ -92,7 +94,7 @@ class _LocationPageState extends State<LocationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffff1f6f),
+        backgroundColor: appPrimary,
         leadingWidth: 30,
         automaticallyImplyLeading: true,
         title: AnimatedSwitcher(
@@ -156,7 +158,7 @@ class _LocationPageState extends State<LocationPage> {
         children: [
 
           FloatingActionButton(
-            backgroundColor: Color(0xffff1f6f),
+            backgroundColor: appPrimary,
             onPressed: () async {
               final GoogleMapController controller = await _controller.future;
               controller.animateCamera(
@@ -169,7 +171,7 @@ class _LocationPageState extends State<LocationPage> {
           const SizedBox(height: 20,),
 
           FloatingActionButton(
-            backgroundColor: Color(0xffff1f6f),
+            backgroundColor: appPrimary,
             onPressed: () {
               _getCurrentLocation(); // Refresh the map with the current location
             },
@@ -190,7 +192,7 @@ class _LocationPageState extends State<LocationPage> {
           padding: EdgeInsets.only(top: 20,bottom: 20),
           //margin: EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color:  Color(0xffff1f6f),
+            color:  appPrimary,
             //borderRadius: BorderRadius.circular(15)
           ),
 

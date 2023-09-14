@@ -973,7 +973,7 @@ class _SingleEventState extends State<SingleEvent> {
                           ],
                         ),
                       ),
-                      upComingSlider(context),
+                      featuredSlider(context),
                     ],
                   ),
                 ],

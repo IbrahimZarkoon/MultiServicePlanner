@@ -41,7 +41,7 @@ class _NotificationsTabState extends State<NotificationsTab> {
         {
           return Future.delayed(Duration(seconds: 2));
         },
-        color: const Color(0xffff1f6f),
+        color: const Color(0xff09426d),
         backgroundColor: Colors.white,
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(top: 15,bottom: 15),
@@ -63,7 +63,7 @@ class _NotificationsTabState extends State<NotificationsTab> {
                       style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 22,fontFamily: "",fontWeight: FontWeight.bold),),
 
                       const Text("Mark all as read",
-                        style: TextStyle(color: Color(0xffff1f6f),fontSize: 11,fontFamily: "",fontWeight: FontWeight.normal),),
+                        style: TextStyle(color: Color(0xff09426d),fontSize: 11,fontFamily: "",fontWeight: FontWeight.normal),),
                     ],
                   ),
                 ),
@@ -198,12 +198,12 @@ class _NotificationsTabState extends State<NotificationsTab> {
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: Color(0xff09426d),
                     value: 5,
                     strokeWidth: 1,
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
               ),
             ),
           ),
@@ -218,7 +218,7 @@ class _NotificationsTabState extends State<NotificationsTab> {
 
                 Text(time,
                   style: const TextStyle(
-                      color: Color(0xffff1f6f),
+                      color: Color(0xff09426d),
                       fontSize: 10,
                   ),),
 
@@ -234,7 +234,7 @@ class _NotificationsTabState extends State<NotificationsTab> {
 
                     TextSpan(
                       text: "@$name",
-                      style: const TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.normal,fontSize: 11)
+                      style: const TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.normal,fontSize: 11)
                     ),
 
                   ]
@@ -341,13 +341,13 @@ class _NotificationsTabState extends State<NotificationsTab> {
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: Color(0xff09426d),
                     value: 2,
                     strokeWidth: 1,
 
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
               ),
             ),
           ),
@@ -362,7 +362,7 @@ class _NotificationsTabState extends State<NotificationsTab> {
 
                 Text(time,
                   style: const TextStyle(
-                    color: Color(0xffff1f6f),
+                    color: Color(0xff09426d),
                     fontSize: 10,
                   ),),
 
@@ -378,7 +378,7 @@ class _NotificationsTabState extends State<NotificationsTab> {
 
                           TextSpan(
                               text: "@$name",
-                              style: const TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.normal,fontSize: 11)
+                              style: const TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.normal,fontSize: 11)
                           ),
 
                         ]

@@ -3,6 +3,8 @@ import 'package:socialapp/Screens/Dashboard.dart';
 import 'package:socialapp/Screens/Login.dart';
 import 'package:socialapp/Screens/LoginLetter.dart';
 
+import '../Enums/Colors.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -48,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width*0.75
                 ),
-                child: Image.asset("assets/images/8f4940ab2b110be46a20fe7efd88e9826c801ce7-3840x2160.png",
+                child: Image.asset("assets/images/logos/LOGO.png",
                   color: Colors.white,fit: BoxFit.cover,),
               ),
             ),
@@ -64,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           ),
         ],
       ),
-      backgroundColor: const Color(0xffff1f6f), // Set your desired background color
+      backgroundColor: appPrimary, // Set your desired background color
     );
   }
 }

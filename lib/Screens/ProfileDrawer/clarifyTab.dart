@@ -189,8 +189,8 @@ class _ClarifyTabState extends State<ClarifyTab> {
         //alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: T?  const Color(0xffff1f6f) : Colors.white,
-          border: Border.all(color:const Color(0xffff1f6f),width: 0.5)
+            color: T?  const Color(0xff23a3dd) : Colors.white,
+          border: Border.all(color:const Color(0xff23a3dd),width: 0.5)
         ),
         padding: const EdgeInsets.only(top: 8,bottom: 8,left: 15,right: 15),
         child: Row(
@@ -198,7 +198,7 @@ class _ClarifyTabState extends State<ClarifyTab> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(txt,style: TextStyle(
-              color: T? Colors.white : const Color(0xffff1f6f),fontSize: 12
+              color: T? Colors.white : const Color(0xff23a3dd),fontSize: 12
             ),),
           ],
         ),

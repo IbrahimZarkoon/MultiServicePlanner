@@ -159,7 +159,7 @@ Widget orgDrawer(BuildContext context)
                       onTap: () => Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (BuildContext context) => const OrgEvents())),
+                              builder: (BuildContext context) => const OrgVenues())),
                       child: profileCon(
                           context, "My events", Icons.manage_accounts_outlined)),
 

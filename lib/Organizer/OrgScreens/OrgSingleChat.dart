@@ -166,7 +166,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
         title: InkWell(
           onTap: ()
           {
-            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => SingleOrganizer(name: "Nafeel Techonza", image: "https://img.icons8.com/?size=512&id=0lg0kb05hrOz&format=png")));
+            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => SingleServiceProvider(name: "Nafeel Techonza", image: "https://img.icons8.com/?size=512&id=0lg0kb05hrOz&format=png")));
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -186,7 +186,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
                 ),
               ),
 
-              const Text('Nafeel Techonza',style: TextStyle(color: Colors.white,fontSize: 14),),
+              const Text('Ibrahim Khan Zarkoon',style: TextStyle(color: Colors.white,fontSize: 14),),
             ],
           ),
         ),

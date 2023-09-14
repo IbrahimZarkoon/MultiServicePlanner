@@ -52,7 +52,7 @@ class _preferencesTabState extends State<preferencesTab> {
                   crossAxisCount: 3,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 20,
-                  childAspectRatio: 1,
+                  childAspectRatio: 0.85
                 ),
               scrollDirection: Axis.vertical,
               physics: const NeverScrollableScrollPhysics(),
@@ -129,14 +129,14 @@ class _preferencesTabState extends State<preferencesTab> {
                   imageUrl: image,
                   cacheManager: cacheManager,
                   fit: BoxFit.cover,
-                  color: const Color(0xffff1f6f),
+                  color: const Color(0xff23a3dd),
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(
-                      color: Color(0xffff1f6f),
+                      color: Color(0xff09426d),
                       value: 1,
                     ),
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                  errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
                 ),
             ),
           ),

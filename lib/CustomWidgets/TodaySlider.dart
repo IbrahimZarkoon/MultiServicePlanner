@@ -7,7 +7,7 @@ import 'package:socialapp/Screens/SingleEvent.dart';
 
 import '../Providers/CacheManager.dart';
 
-Widget todaySlider(BuildContext context)
+Widget popularSlider(BuildContext context)
 {
   return Container(
     height: MediaQuery.of(context).size.height*0.22+30,
@@ -20,26 +20,26 @@ Widget todaySlider(BuildContext context)
 
       children: [
 
+        eventCon(context,"The Mansion Marquee",
+            "Starting from 449,999 PKR",
+            "https://lh3.googleusercontent.com/p/AF1QipMMA2FZL6AoCxpYGlnPW0j0gkxZsoutgA6C2dsL=s1360-w1360-h1020"
+        ),
+
         //1st Item
-        eventCon(context,"Twenty One Pilots",
-            "20 June",
-            "https://www.papercitymag.com/wp-content/uploads/2019/11/Twenty-One-Pilots-press-photo-2018-cr-Brad-Heaton-billboard-1548.jpg"
+        eventCon(context,"Ramada Plaza Airport",
+            "Starting from 349,999 PKR",
+            "https://ramadalewistonmaine.com/wp-content/uploads/2019/02/ritz.jpg"
         ),
 
-        eventCon(context, "50 Cent", "15 Oct", "https://climatepledgearena.com/wp-content/uploads/2023/05/23-50CENT_CPA-Web_1600x900.jpg"),
+        eventCon(context,"Sofitel Luxury Banquet",
+            "Starting from 199,000 PKR",
+            "https://lh3.googleusercontent.com/p/AF1QipNlchkC4483B9cyd0JgOSdnCJdKsNjB-P04N8nd=s1360-w1360-h1020"
+        ),
 
-        eventCon(context,"Rave Party",
-            "06 July",
-            "https://siachenstudios.com/wp-content/uploads/2021/05/what-is-rave-party.jpg"
-        ),
-        eventCon(context,"Ariana Grande",
-            "21 Oct",
-            "https://seatgeek.com/images/performers-landscape/ariana-grande-7f84f2/13852/1100x1900.jpg"
-        ),
-        eventCon(context,"Ariana Grande",
-            "21 Oct",
-            "https://seatgeek.com/images/performers-landscape/ariana-grande-7f84f2/13852/1100x1900.jpg"
-        ),
+        eventCon(context, "Ramada by Wyndham", "Starting from 299,999 PKR", "https://cdn0.weddingwire.in/vendor/3689/3_2/960/jpeg/whatsapp-image-2021-01-14-at-3-56-13-pm_15_273689-161082888490224.jpeg"),
+
+
+
       ],
     ),
 
@@ -89,11 +89,11 @@ Widget eventCon(BuildContext context,String title,String date, String image)
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: Color(0xff09426d),
                     value: 5,
                   ),
                 ),
-                errorWidget: (context, url, error) => Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => Icon(Icons.error,color: Color(0xff09426d),),
               ),
             ),
           ),

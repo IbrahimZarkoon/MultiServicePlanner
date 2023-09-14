@@ -102,12 +102,12 @@ class _MyEventsState extends State<MyEvents> {
                 Headings(context, "UPCOMING EVENTS"),
 
                 //Upcoming Slider
-                todaySlider(context),
+                popularSlider(context),
 
 
                 Headings(context, "PAST EVENTS"),
 
-                todaySlider(context),
+                popularSlider(context),
 
                 Headings(context, "REJECTED EVENTS"),
 

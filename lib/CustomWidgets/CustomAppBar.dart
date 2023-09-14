@@ -6,6 +6,7 @@ import 'package:socialapp/Routes/customRoute.dart';
 import 'package:socialapp/Screens/SearchPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../Enums/Colors.dart';
 import '../Screens/Dashboard.dart';
 
 class CustomAppBar extends StatefulWidget {
@@ -42,6 +43,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
     }
   }
 
+  String dropdown = "Current Location";
+
 
 
   @override
@@ -53,52 +56,67 @@ class _CustomAppBarState extends State<CustomAppBar> {
       centerTitle: false,
       title: Container(
         alignment: Alignment.centerLeft,
-        child: Image.network("https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
+        child: Image.asset("assets/images/logos/LOGO.png",
           color: const Color(0xffffffff),fit: BoxFit.cover,height: kToolbarHeight-10,),
       ),
-      backgroundColor: const Color(0xffff1f6f),
+      backgroundColor: const Color(0xff09426d),
 
       actions: [
 
         InkWell(
-          onTap: ()async{
+          // onTap: ()async{
+          //
+          //   LatLng result = await Navigator.push(context, customRoute(const LocationPage()));
+          //
+          //   print("Popped LATLNG: $result");
+          //
+          //   getLocationInfo(result.latitude, result.longitude);
+          //
+          //
+          //
+          //
+          // },
+          child: DropdownButton<String>(
+            underline: SizedBox(),
+            icon: Icon(Icons.keyboard_arrow_down, size: 20, color: Color(0xffffffff)),
+            elevation: 1,
+            borderRadius: BorderRadius.circular(5),
+            dropdownColor: Color(0xff09426d),
+            value: dropdown, // Set the currently selected item
+             onChanged: (String? value) {
+              setState(() {
+                dropdown = value!;
+              });
+             },
+            items: <String>[
+              'Current Location',
+              'North Nazimabad', // Add your additional items here
+              'DHA',
+              'Gulshan',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
 
-            LatLng result = await Navigator.push(context, customRoute(const LocationPage()));
-
-            print("Popped LATLNG: $result");
-
-            getLocationInfo(result.latitude, result.longitude);
-
-
-
-
-          },
-          child: Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.only(right: 10),
-            padding: const EdgeInsets.only(bottom: 10),
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-
-                Container(
-                    margin: const EdgeInsets.only(left: 15,right: 0),
-                    child: const Icon(Icons.location_on,color: Color(0xffffffff),size: 20,)),
-
-                // Icon(Icons.location_on_outlined,color: Color(0xffff1f6f),size: 20,),
-
-                const SizedBox(width: 5,),
-
-                const Text("Current Location",style: TextStyle(fontWeight: FontWeight.bold,color: Color(0xffffffff),fontSize: 13),),
-
-                const SizedBox(width: 5,),
-
-                const Icon(Icons.keyboard_arrow_down,size: 20,color: Color(0xffffffff),)
-              ],
-            ),
-          ),
+                value: value,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Container(
+                    //   margin: const EdgeInsets.only(left: 15, right: 0),
+                    //   child: const Icon(Icons.location_on, color: Color(0xffffffff), size: 20),
+                    // ),
+                    // const SizedBox(width: 5),
+                    Text(
+                      value,
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xffffffff), fontSize: 13),
+                    ),
+                    // const SizedBox(width: 5),
+                    // const Icon(Icons.keyboard_arrow_down, size: 20, color: Color(0xffffffff)),
+                  ],
+                ),
+              );
+            }).toList(),
+          )
         ),
 
       ],
@@ -218,7 +236,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ),
                   child: Hero(
                       tag: "appBarSearch",
-                      child: const Icon(Icons.search,color: Color(0xffff1f6f), size: 22,))),
+                      child: const Icon(Icons.search,color: appPrimary, size: 22,))),
 
               const SizedBox(width: 10),
 

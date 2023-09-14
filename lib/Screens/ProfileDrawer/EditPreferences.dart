@@ -36,7 +36,7 @@ class _EditPreferencesState extends State<EditPreferences> {
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 18,horizontal: 18),
-              child: Text("Back",style: TextStyle(color: Color(0xffff1f6f),fontSize: 16),),
+              child: Text("Back",style: TextStyle(color: Color(0xff09426d),fontSize: 16),),
             ),
           ) : const SizedBox(),
           leadingWidth: 100,
@@ -57,7 +57,7 @@ class _EditPreferencesState extends State<EditPreferences> {
               onTap: () => Navigator.pop(context),
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 18,horizontal: 18),
-                child: Text("Exit",style: TextStyle(color: Color(0xffff1f6f),fontSize: 16),),
+                child: Text("Exit",style: TextStyle(color: Color(0xff09426d),fontSize: 16),),
               ),
             ),
           ],
@@ -124,7 +124,7 @@ class _EditPreferencesState extends State<EditPreferences> {
                         minWidth: 220,
                       ),
                       decoration: BoxDecoration(
-                          color: const Color(0xffff1f6f),
+                          color: const Color(0xff09426d),
                           borderRadius: BorderRadius.circular(10)
                       ),
                       alignment: Alignment.center,
