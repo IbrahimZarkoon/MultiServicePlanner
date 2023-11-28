@@ -6,13 +6,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/CustomWidgets/CustomAppBar.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/CustomWidgets/OrgSlider.dart';
-import 'package:socialapp/Screens/SingleOrganizer.dart';
 
+
+import '../CustomWidgets/Headings.dart';
 import '../Providers/CacheManager.dart';
 import 'MyProfile.dart';
+import 'SingleOrganizer.dart';
 
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);

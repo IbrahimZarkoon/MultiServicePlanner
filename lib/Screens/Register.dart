@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/Enums/Colors.dart';
-import 'package:socialapp/Screens/Login.dart';
+
 
 import '../CustomWidgets/Headings.dart';
+import '../Enums/Colors.dart';
 import 'Dashboard.dart';
+import 'Login.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);

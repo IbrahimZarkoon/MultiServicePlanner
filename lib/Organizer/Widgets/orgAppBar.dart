@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
 
 class orgAppBar extends StatefulWidget {
@@ -39,15 +40,15 @@ class _orgAppBarState extends State<orgAppBar> {
             fit: BoxFit.cover,
             placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(
-                color: Color(0xffff1f6f),
+                color: appPrimary,
                 value: 5,
               ),
             ),
-            errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+            errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
           ),
         ),
       ),
-      backgroundColor: const Color(0xffff1f6f),
+      backgroundColor: appPrimary,
 
       actions: [
 
@@ -69,7 +70,7 @@ class _orgAppBarState extends State<orgAppBar> {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.white,width: 2)
             ),
-            child: const Icon(Icons.menu,size: 22,color: Color(0xffff1f6f),),
+            child: const Icon(Icons.menu,size: 22,color: appPrimary,),
           ),
         ),
 

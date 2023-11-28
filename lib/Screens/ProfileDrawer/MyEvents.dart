@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../CustomWidgets/Headings.dart';
 import '../../CustomWidgets/TodaySlider.dart';
 import '../../CustomWidgets/UpComingEventsSlider.dart';
+import '../../Enums/Colors.dart';
 
 class MyEvents extends StatefulWidget {
   const MyEvents({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _MyEventsState extends State<MyEvents> {
     return Scaffold(
       backgroundColor: const Color(0xfffaf8f8),
       appBar: AppBar(
-        backgroundColor: const Color(0xffff1f6f),
+        backgroundColor: appPrimary,
         leading: InkWell(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back_outlined,size: 23,color: Colors.white,)),
@@ -59,7 +60,7 @@ class _MyEventsState extends State<MyEvents> {
                         borderRadius: BorderRadius.circular(12),
                         color: const Color(0xffffffff)
                     ),
-                    child: const Icon(Icons.search,color: Color(0xffff1f6f), size: 22,)),
+                    child: const Icon(Icons.search,color: appPrimary, size: 22,)),
 
                 const SizedBox(width: 10),
 

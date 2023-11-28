@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker_bdaya/flutter_datetime_picker_bdaya.dart';
 import 'package:intl/intl.dart';
-import 'package:socialapp/Organizer/Widgets/CustomPicker.dart';
+
+import '../Organizer/Widgets/CustomPicker.dart';
 
 class TimeSelectionContainer extends StatefulWidget {
   @override

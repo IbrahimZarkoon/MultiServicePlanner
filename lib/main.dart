@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/Providers/CacheManager.dart';
-import 'package:socialapp/Screens/Dashboard.dart';
-import 'package:socialapp/Screens/HomePage.dart';
-import 'package:socialapp/Screens/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'Providers/CacheManager.dart';
+import 'Screens/SplashScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
 
-        title: 'Social App',
+        title: 'Multi Service Planner',
         theme: ThemeData(
 
           fontFamily: "Helvetica"

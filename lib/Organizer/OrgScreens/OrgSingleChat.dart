@@ -4,10 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:socialapp/Screens/SingleOrganizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Enums/Colors.dart';
 import '../../Screens/EventChatScreen.dart';
+import '../../Screens/SingleOrganizer.dart';
 
 class OrgSingleChat extends StatefulWidget {
   const OrgSingleChat({super.key});
@@ -160,7 +161,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
     return Scaffold(
 
       appBar: AppBar(
-        backgroundColor: const Color(0xffff1f6f),
+        backgroundColor: appPrimary,
         elevation: 0.5,
         leadingWidth: 30,
         title: InkWell(
@@ -365,7 +366,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
                 stream: getMessagesStream("Chat1"), // Replace 'chatId' with the appropriate chat identifier
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(child: const CircularProgressIndicator(color: Color(0xffff1f6f),)); // Loading indicator
+                    return Center(child: const CircularProgressIndicator(color: appPrimary,)); // Loading indicator
                   }
 
                   final messages = snapshot.data;
@@ -432,7 +433,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
             padding: const EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
             decoration: BoxDecoration(
               color: message.sender != 'User'
-                  ? const Color(0xffff1f6f)
+                  ? appPrimary
                   : const Color(0xff939393),
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -483,7 +484,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
       child: Row(
         children: <Widget>[
           IconButton(
-            icon: const Icon(Icons.attach_file,color: Color(0xffff1f6f),),
+            icon: const Icon(Icons.attach_file,color: appPrimary,),
             onPressed: () {
 
               // Implement attachment functionality
@@ -501,7 +502,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
               controller: messageCon,
               //textInputAction: TextInputAction.send,
               keyboardType: TextInputType.text,
-              cursorColor: const Color(0xffff1f6f),
+              cursorColor: appPrimary,
               decoration: const InputDecoration.collapsed(
                 hintText: 'Send a message...',
               ),
@@ -509,7 +510,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.send,color: Color(0xffff1f6f),),
+            icon: const Icon(Icons.send,color: appPrimary,),
             onPressed: () {
               // Implement send message functionality
 

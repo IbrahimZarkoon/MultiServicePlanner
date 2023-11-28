@@ -1,17 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/CustomWidgets/CustomAppBar.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/CustomWidgets/TodaySlider.dart';
-import 'package:socialapp/CustomWidgets/UpComingEventsSlider.dart';
-import 'package:socialapp/CustomWidgets/serviceProviders.dart';
-import 'package:socialapp/Screens/Dashboard.dart';
-import 'package:socialapp/Screens/ExplorePage.dart';
-import 'package:socialapp/Screens/MyProfile.dart';
-import 'package:socialapp/Screens/ProfileDrawer/userDrawer.dart';
 
+
+import '../CustomWidgets/Headings.dart';
+import '../CustomWidgets/TodaySlider.dart';
+import '../CustomWidgets/UpComingEventsSlider.dart';
+import '../CustomWidgets/serviceProviders.dart';
 import '../Enums/Colors.dart';
+import 'ProfileDrawer/userDrawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

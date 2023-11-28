@@ -2,8 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:socialapp/Screens/Dashboard.dart';
-import 'package:socialapp/Screens/Organizers.dart';
+
+import '../Screens/Dashboard.dart';
 
 Widget serviceProviders(BuildContext context) {
   return Column(

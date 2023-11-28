@@ -9,15 +9,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:socialapp/CustomWidgets/CommentWidgets.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/CustomWidgets/PopularNowSlider.dart';
-import 'package:socialapp/CustomWidgets/UpComingEventsSlider.dart';
-import 'package:socialapp/Screens/EventChatScreen.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../CustomWidgets/Headings.dart';
+import '../CustomWidgets/UpComingEventsSlider.dart';
 import '../Providers/CacheManager.dart';
+import 'EventChatScreen.dart';
 
 class SingleEvent extends StatefulWidget {
    SingleEvent({Key? key,required this.title,required this.image,required this.repeat, required this.past}) : super(key: key);

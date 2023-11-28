@@ -12,7 +12,7 @@
     <uses-permission android:name="com.google.firebase.permission.C2D_MESSAGE" />
 
    <application
-        android:label="socialapp"
+        android:label="Multi Service Planner"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

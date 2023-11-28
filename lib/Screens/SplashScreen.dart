@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:socialapp/Screens/Dashboard.dart';
-import 'package:socialapp/Screens/Login.dart';
-import 'package:socialapp/Screens/LoginLetter.dart';
+
 
 import '../Enums/Colors.dart';
+import 'Login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

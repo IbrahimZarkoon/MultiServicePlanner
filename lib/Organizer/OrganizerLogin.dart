@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/Organizer/OrgScreens/Dashboard.dart';
-import 'package:socialapp/Organizer/RegisterOrganizer.dart';
-import 'package:socialapp/Screens/Login.dart';
-
 import '../CustomWidgets/Headings.dart';
 import '../Screens/Dashboard.dart';
+import '../Screens/Login.dart';
 import '../Screens/Register.dart';
+import 'OrgScreens/Dashboard.dart';
+import 'RegisterOrganizer.dart';
 
 class OrganizerLogin extends StatefulWidget {
   const OrganizerLogin({Key? key}) : super(key: key);
@@ -283,7 +282,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                           {
                             if (_emailCtrl.text == "admin" && _passCtrl.text == "admin") {
                               // Both email and password are "admin"
-                              //Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => OrgDashboard(orgTabIndex: 0,)));
+                              Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => OrgDashboard(orgTabIndex: 0,)));
 
 
                             } else {

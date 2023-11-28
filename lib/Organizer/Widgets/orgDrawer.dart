@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:socialapp/Organizer/OrgScreens/EditOrgProfile.dart';
-import 'package:socialapp/Organizer/OrgScreens/OrgEvents.dart';
-import 'package:socialapp/Organizer/OrganizerLogin.dart';
-import 'package:socialapp/Screens/OrganizeEvent.dart';
 
 import '../../CustomWidgets/Headings.dart';
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
+import '../../Screens/OrganizeEvent.dart';
+import '../OrgScreens/EditOrgProfile.dart';
+import '../OrgScreens/OrgEvents.dart';
+import '../OrganizerLogin.dart';
 
 Widget orgDrawer(BuildContext context)
 {
@@ -27,7 +28,7 @@ Widget orgDrawer(BuildContext context)
         //Top Container
         Container(
           padding: const EdgeInsets.only(left: 15, right: 15, bottom: 30,top: 15),
-          color: const Color(0xffff1f6f),
+          color: appPrimary,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -54,13 +55,13 @@ Widget orgDrawer(BuildContext context)
                             fit: BoxFit.scaleDown,
                             placeholder: (context, url) => const Center(
                               child: CircularProgressIndicator(
-                                color: Color(0xffff1f6f),
+                                color: appPrimary,
                                 value: 5,
                               ),
                             ),
                             errorWidget: (context, url, error) => const Icon(
                               Icons.error,
-                              color: Color(0xffff1f6f),
+                              color: appPrimary,
                             ),
                           ),
                         ),
@@ -110,7 +111,7 @@ Widget orgDrawer(BuildContext context)
                           Border.all(color: Colors.white, width: 2)),
                       child: const Icon(
                         Icons.notifications_none_outlined,
-                        color: Color(0xffff1f6f),
+                        color: appPrimary,
                         size: 22,
                       )),
                 ],
@@ -216,7 +217,7 @@ Widget orgDrawer(BuildContext context)
             margin: const EdgeInsets.all(15),
             padding: const EdgeInsets.only(top: 10, bottom: 10),
             decoration: BoxDecoration(
-                color: const Color(0xffff1f6f),
+                color:  appPrimary,
                 // boxShadow: [
                 //   BoxShadow(
                 //       color: Colors.black.withOpacity(0.15),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../CustomWidgets/Headings.dart';
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
 
 class OrgNotif extends StatefulWidget {
@@ -39,7 +40,7 @@ class _OrgNotifState extends State<OrgNotif> {
         {
           return Future.delayed(const Duration(seconds: 2));
         },
-        color: const Color(0xffff1f6f),
+        color: appPrimary,
         backgroundColor: Colors.white,
         child: SingleChildScrollView(
             padding: const EdgeInsets.only(top: 15,bottom: 15),
@@ -61,7 +62,7 @@ class _OrgNotifState extends State<OrgNotif> {
                         style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 22,fontFamily: "",fontWeight: FontWeight.bold),),
 
                       const Text("Mark all as read",
-                        style: TextStyle(color: Color(0xffff1f6f),fontSize: 11,fontFamily: "",fontWeight: FontWeight.normal),),
+                        style: TextStyle(color: appPrimary,fontSize: 11,fontFamily: "",fontWeight: FontWeight.normal),),
                     ],
                   ),
                 ),
@@ -196,12 +197,12 @@ class _OrgNotifState extends State<OrgNotif> {
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: appPrimary,
                     value: 5,
                     strokeWidth: 1,
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
               ),
             ),
           ),
@@ -216,7 +217,7 @@ class _OrgNotifState extends State<OrgNotif> {
 
                 Text(time,
                   style: const TextStyle(
-                    color: Color(0xffff1f6f),
+                    color: appPrimary,
                     fontSize: 10,
                   ),),
 
@@ -232,7 +233,7 @@ class _OrgNotifState extends State<OrgNotif> {
 
                           TextSpan(
                               text: "@$name",
-                              style: const TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.normal,fontSize: 11)
+                              style: const TextStyle(color: appPrimary,fontWeight: FontWeight.normal,fontSize: 11)
                           ),
 
                         ]
@@ -339,13 +340,13 @@ class _OrgNotifState extends State<OrgNotif> {
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: appPrimary,
                     value: 2,
                     strokeWidth: 1,
 
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
               ),
             ),
           ),
@@ -360,7 +361,7 @@ class _OrgNotifState extends State<OrgNotif> {
 
                 Text(time,
                   style: const TextStyle(
-                    color: Color(0xffff1f6f),
+                    color: appPrimary,
                     fontSize: 10,
                   ),),
 
@@ -376,7 +377,7 @@ class _OrgNotifState extends State<OrgNotif> {
 
                           TextSpan(
                               text: "@$name",
-                              style: const TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.normal,fontSize: 11)
+                              style: const TextStyle(color: appPrimary,fontWeight: FontWeight.normal,fontSize: 11)
                           ),
 
                         ]

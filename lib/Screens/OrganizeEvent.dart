@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:socialapp/Screens/OrganizeEventTabs/AboutTab.dart';
-import 'package:socialapp/Screens/OrganizeEventTabs/AdditionalInfo.dart';
-import 'package:socialapp/Screens/OrganizeEventTabs/DescTab.dart';
-import 'package:socialapp/Screens/OrganizeEventTabs/LocationTab.dart';
-import 'package:socialapp/Screens/OrganizeEventTabs/NameTab.dart';
+
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+
+import 'OrganizeEventTabs/AboutTab.dart';
+import 'OrganizeEventTabs/LocationTab.dart';
+import 'OrganizeEventTabs/NameTab.dart';
 
 class OrganizeEvent extends StatefulWidget {
   const OrganizeEvent({Key? key}) : super(key: key);

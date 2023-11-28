@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/LocationPage.dart';
-import 'package:socialapp/Screens/ProfileDrawer/EditPreferences.dart';
+
+import '../CustomWidgets/Headings.dart';
+import '../LocationPage.dart';
+import 'ProfileDrawer/EditPreferences.dart';
+
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);

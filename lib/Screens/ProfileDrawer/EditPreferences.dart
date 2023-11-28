@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:socialapp/Screens/ProfileDrawer/clarifyTab.dart';
-import 'package:socialapp/Screens/ProfileDrawer/preferencesTab.dart';
+import 'package:multi_service_planner/Screens/ProfileDrawer/preferencesTab.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+
+import 'clarifyTab.dart';
 
 class EditPreferences extends StatefulWidget {
   const EditPreferences({Key? key}) : super(key: key);

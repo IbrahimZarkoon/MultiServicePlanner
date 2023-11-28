@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:stacked_chart/stacked_chart.dart';
 
+import '../../Enums/Colors.dart';
+
 enum WeekDay { monday, tuesday, wednesday, thursday, friday, saturday, sunday }
 
 class WeeklyChartDemo extends StatefulWidget {
@@ -139,7 +141,7 @@ class _WeeklyChartDemoState extends State<WeeklyChartDemo> {
                     maxWidth: 20
                 ),
                 decoration: BoxDecoration(
-                    color: const Color(0xffff1f6f),
+                    color: appPrimary,
                     borderRadius: BorderRadius.circular(10)
                 ),
               ),

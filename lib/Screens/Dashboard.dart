@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/Organizer/OrgScreens/Homepage.dart';
-import 'package:socialapp/Screens/ExplorePage.dart';
-import 'package:socialapp/Screens/MyProfile.dart';
-import 'package:socialapp/Screens/NotificationsTab.dart';
-import 'package:socialapp/Screens/Organizers.dart';
-
 import '../CustomWidgets/CustomAppBar.dart';
 import '../CustomWidgets/RoundedBottomBar.dart';
 import '../Enums/Colors.dart';
+import 'ExplorePage.dart';
 import 'HomePage.dart';
+import 'NotificationsTab.dart';
+import 'Organizers.dart';
 import 'ProfileDrawer/userDrawer.dart';
 
 class DashboardPage extends StatefulWidget {

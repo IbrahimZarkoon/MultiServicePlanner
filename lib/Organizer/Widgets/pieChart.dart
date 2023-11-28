@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+import '../../Enums/Colors.dart';
+
 class MyPieChart extends StatelessWidget {
   final Map<String, double> dataMap = {
     "Completed": 5,
@@ -43,7 +45,7 @@ class MyPieChart extends StatelessWidget {
       Color color;
       switch (title) {
         case "Completed":
-          color = const Color(0xffff1f6f);
+          color =  appPrimary;
           break;
         case "Upcoming":
           color = const Color(0xff7173ab);

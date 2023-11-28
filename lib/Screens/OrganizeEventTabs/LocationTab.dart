@@ -1,7 +1,8 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/CustomWidgets/TimeCon.dart';
+
+import '../../CustomWidgets/TimeCon.dart';
 
 class LocationTab extends StatefulWidget {
   const LocationTab({Key? key}) : super(key: key);
@@ -222,77 +223,77 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
 
                 TimeSelectionContainer(),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-
-                  children: [
-                    Text("Duration",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.8),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16)),
-                  ],
-                ),
-
-                //Duration Container
-                GestureDetector(
-                  onTap: ()
-                  {
-
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 10,bottom: 15),
-                    padding: const EdgeInsets.only(left: 15,right: 15,top: 0,bottom: 0),
-                    decoration: BoxDecoration(border: Border.all(color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5)),
-                        borderRadius: BorderRadius.circular(8)
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-
-                        Icon(CupertinoIcons.timer,size: 20,color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5),),
-
-                        const SizedBox(width: 15,),
-
-                        Expanded(
-                            child: TextField(
-                              onTap: ()
-                              {
-
-                              },
-                              focusNode: F1,
-                              //controller: T1,
-                              cursorColor: const Color(0xffff1f6f),
-                              style: TextStyle(fontSize: 13,color: Colors.black.withOpacity(0.8)),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Duration",
-                                hintStyle: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 13),
-
-                              ),
-                            )
-                        ),
-
-                        _tap?
-                        InkWell(
-                            onTap: ()
-                            {
-                              setState(() {
-                                T1.text = "";
-                                _tap = false;
-                                F1.unfocus();
-
-                              });
-                            },
-                            child: Icon(CupertinoIcons.xmark_circle_fill,color: Colors.black.withOpacity(0.5),size: 20,))
-                            :
-                        const SizedBox(),
-                      ],
-                    ),
-                  ),
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //
+                //   children: [
+                //     Text("Duration",
+                //         overflow: TextOverflow.ellipsis,
+                //         style: TextStyle(
+                //             color: Colors.black.withOpacity(0.8),
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 16)),
+                //   ],
+                // ),
+                //
+                // //Duration Container
+                // GestureDetector(
+                //   onTap: ()
+                //   {
+                //
+                //   },
+                //   child: Container(
+                //     margin: const EdgeInsets.only(top: 10,bottom: 15),
+                //     padding: const EdgeInsets.only(left: 15,right: 15,top: 0,bottom: 0),
+                //     decoration: BoxDecoration(border: Border.all(color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5)),
+                //         borderRadius: BorderRadius.circular(8)
+                //     ),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: [
+                //
+                //         Icon(CupertinoIcons.timer,size: 20,color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5),),
+                //
+                //         const SizedBox(width: 15,),
+                //
+                //         Expanded(
+                //             child: TextField(
+                //               onTap: ()
+                //               {
+                //
+                //               },
+                //               focusNode: F1,
+                //               //controller: T1,
+                //               cursorColor: const Color(0xffff1f6f),
+                //               style: TextStyle(fontSize: 13,color: Colors.black.withOpacity(0.8)),
+                //               decoration: InputDecoration(
+                //                 border: InputBorder.none,
+                //                 hintText: "Duration",
+                //                 hintStyle: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 13),
+                //
+                //               ),
+                //             )
+                //         ),
+                //
+                //         _tap?
+                //         InkWell(
+                //             onTap: ()
+                //             {
+                //               setState(() {
+                //                 T1.text = "";
+                //                 _tap = false;
+                //                 F1.unfocus();
+                //
+                //               });
+                //             },
+                //             child: Icon(CupertinoIcons.xmark_circle_fill,color: Colors.black.withOpacity(0.5),size: 20,))
+                //             :
+                //         const SizedBox(),
+                //       ],
+                //     ),
+                //   ),
+                // ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

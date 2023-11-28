@@ -25,9 +25,9 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
   File? thumbIMG;
 
   bool _tap = false;
-  bool freeEntry = false;
-  bool paidEntry = false;
-  bool donationTicket = false;
+  bool capacity1 = false;
+  bool capacity2 = false;
+  bool capacity3 = false;
 
   @override
   void initState() {
@@ -47,6 +47,19 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
 
     // Start the animation when the screen is loaded.
     _controller.forward();
+  }
+
+  List<PickedFile> images = [];
+
+  Future<void> _pickImage() async {
+    final pickedImage = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImage != null) {
+      setState(() {
+        images.add(pickedImage);
+      });
+    }
   }
 
   //bool _tap = false;
@@ -496,6 +509,137 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
 
                 const SizedBox(height: 15,),
 
+                Text("Capacity",
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Colors.black.withOpacity(0.8),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //1st Capacity Row
+                      InkWell(
+
+                        onTap: () {
+
+                          setState(() {
+                            capacity1 = !capacity1;
+                            capacity2 = false;
+                            capacity3 = false;
+                          });
+
+
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              capacity1
+                                  ? Icons.check_circle
+                                  : Icons.circle_outlined,
+                              size: 22,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "250",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: capacity1
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: Colors.black.withOpacity(0.8)),
+                            )
+                          ],
+                        ),
+                      ),
+
+                      //2nd Capacity Row
+                      InkWell(
+                        onTap: () {
+
+                          setState(() {
+                            capacity2 = !capacity2;
+                            capacity1 = false;
+                            capacity3 = false;
+                          });
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              capacity2
+                                  ? Icons.check_circle
+                                  : Icons.circle_outlined,
+                              size: 22,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "500",
+                              style: TextStyle(
+                                  fontSize: 12,
+
+                                  fontWeight: capacity2
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: Colors.black.withOpacity(0.8)),
+                            )
+                          ],
+                        ),
+                      ),
+
+                      //3rd Capacity Row
+                      InkWell(
+                        onTap: () {
+
+                          setState(() {
+                            capacity3 = !capacity3;
+                            capacity2 = false;
+                            capacity1 = false;
+                          });
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              capacity3
+                                  ? Icons.check_circle
+                                  : Icons.circle_outlined,
+                              size: 22,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "1000",
+                              style: TextStyle(
+                                  fontSize: 12,
+
+                                  fontWeight: capacity3
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: Colors.black.withOpacity(0.8)),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
                 Text("Event video",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -567,167 +711,6 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                   ),
                 ),
 
-                Text("Ticketing / Registration",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.8),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16)),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      //Free Entry Row
-                      InkWell(
-
-                        onTap: () {
-
-                          showDialog(
-                              useSafeArea: true,
-                              context: context,
-
-                              builder: (BuildContext context)
-                              {
-                                return TicketingDialog(tName: "Free Ticket",tNumber: "100",tPrice: "Price of ticket",);
-                              }
-                          );
-
-                          setState(() {
-                            freeEntry = !freeEntry;
-                            paidEntry = false;
-                            donationTicket = false;
-                          });
-
-
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              freeEntry
-                                  ? Icons.check_circle
-                                  : Icons.circle_outlined,
-                              size: 22,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Free Entry",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: freeEntry
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  color: Colors.black.withOpacity(0.8)),
-                            )
-                          ],
-                        ),
-                      ),
-
-                      //Paid Ticket Row
-                      InkWell(
-                        onTap: () {
-
-                          showDialog(
-                              useSafeArea: true,
-                              context: context,
-
-                              builder: (BuildContext context)
-                              {
-                                return TicketingDialog(tName: "Standard Ticket",tNumber: "100",tPrice: "Price of ticket",);
-                              }
-                          );
-
-                          setState(() {
-                            paidEntry = !paidEntry;
-                            freeEntry = false;
-                            donationTicket = false;
-                          });
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              paidEntry
-                                  ? Icons.check_circle
-                                  : Icons.circle_outlined,
-                              size: 22,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Paid Entry",
-                              style: TextStyle(
-                                  fontSize: 12,
-
-                                  fontWeight: paidEntry
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  color: Colors.black.withOpacity(0.8)),
-                            )
-                          ],
-                        ),
-                      ),
-
-                      //donationTicket Row
-                      InkWell(
-                        onTap: () {
-
-                          showDialog(
-                              useSafeArea: true,
-                              context: context,
-
-                              builder: (BuildContext context)
-                              {
-                                return TicketingDialog(tName: "Donation Ticket",tNumber: "100",tPrice: "Price of ticket",);
-                              }
-                          );
-
-                          setState(() {
-                            donationTicket = !donationTicket;
-                            paidEntry = false;
-                            freeEntry = false;
-                          });
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              donationTicket
-                                  ? Icons.check_circle
-                                  : Icons.circle_outlined,
-                              size: 22,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Donation Ticket",
-                              style: TextStyle(
-                                  fontSize: 12,
-
-                                  fontWeight: donationTicket
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  color: Colors.black.withOpacity(0.8)),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -744,6 +727,62 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                     )
 
                   ],
+                ),
+
+                InkWell(
+                  onTap: _pickImage,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 15,top: 15,left: 2,right: 2),
+                    padding: const EdgeInsets.all(10),
+                    decoration:  BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.15),
+                              blurRadius: 1.5,
+                              spreadRadius: 0,
+                              offset: Offset(0,0)
+                          )
+                        ]
+
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+                        Icon(CupertinoIcons.camera,size: 20,color: Colors.black.withOpacity(0.6),),
+
+                        const SizedBox(width: 10,),
+
+                        Text("Add more photos",style: TextStyle(
+                            color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "Helvetica_Bold"
+                        ),)
+                      ],
+                    ),
+                  )
+                ),
+                GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  shrinkWrap: true,
+                  children: List.generate(images.length>=3? 3 : images.length, (index) {
+                    return index == 2? Stack(children: [ClipRRect(
+                        borderRadius: BorderRadius.circular(3),
+                        child: Image.file(File(images[index].path))),
+                    Positioned(
+                        left: 20,bottom: 0,top: 0,
+                        child: Center(child: Text("+${images.length-2}",style: TextStyle(color: Colors.white,fontSize: 22),),))
+                    
+                    ]) : Stack(
+                      children: [ClipRRect(
+                          borderRadius: BorderRadius.circular(3),
+                          child: Image.file(File(images[index].path))),]
+                    );
+                  }),
                 ),
 
                 const SizedBox(height: 10,),

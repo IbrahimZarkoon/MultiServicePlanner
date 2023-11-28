@@ -3,9 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/Screens/SingleEvent.dart';
-
 import '../Providers/CacheManager.dart';
+import '../Screens/SingleEvent.dart';
 
 Widget popularSlider(BuildContext context)
 {

@@ -4,7 +4,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:socialapp/CustomWidgets/CustomAppBar.dart';
 
 import '../CustomWidgets/Headings.dart';
 import '../CustomWidgets/OrgSlider.dart';
@@ -453,18 +452,16 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
                                               children: [
                                                 Padding(
                                                   padding: const EdgeInsets.symmetric(horizontal: 2),
-                                                  child: Flexible(
-                                                    child: Text(
-                                                        widget.name,
-                                                        maxLines: 2,
-                                                        overflow:
-                                                        TextOverflow
-                                                            .ellipsis,
-                                                        style: const TextStyle(
-                                                            fontFamily:
-                                                            "Helvetica_Bold",
-                                                            fontSize: 15)),
-                                                  ),
+                                                  child: Text(
+                                                      widget.name,
+                                                      maxLines: 2,
+                                                      overflow:
+                                                      TextOverflow
+                                                          .ellipsis,
+                                                      style: const TextStyle(
+                                                          fontFamily:
+                                                          "Helvetica_Bold",
+                                                          fontSize: 15)),
                                                 ),
 
 

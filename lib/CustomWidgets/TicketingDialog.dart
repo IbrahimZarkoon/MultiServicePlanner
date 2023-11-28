@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
+
+import 'Headings.dart';
 
 class TicketingDialog extends StatefulWidget {
    TicketingDialog({Key? key,required this.tName, required this.tNumber, required this.tPrice}) : super(key: key);

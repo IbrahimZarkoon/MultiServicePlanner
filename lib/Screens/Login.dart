@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/Organizer/OrganizerLogin.dart';
-import 'package:socialapp/Screens/Register.dart';
+
 
 import '../Enums/Colors.dart';
+import '../Organizer/OrganizerLogin.dart';
 import 'Dashboard.dart';
+import 'Register.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);

@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:socialapp/CustomWidgets/TicketingDialog.dart';
+
+import '../../CustomWidgets/TicketingDialog.dart';
 
 class AdditionalInfo extends StatefulWidget {
   const AdditionalInfo({Key? key}) : super(key: key);

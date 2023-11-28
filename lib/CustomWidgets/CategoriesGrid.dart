@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:provider/provider.dart';
 
+import '../Enums/Colors.dart';
 import '../Providers/CacheManager.dart';
 
 // Widget catGrid(BuildContext context)
@@ -154,11 +155,11 @@ Widget categoriesCon(BuildContext context)
                           fit: BoxFit.cover,
                           placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xffff1f6f),
+                              color: appPrimary,
                               value: 5,
                             ),
                           ),
-                          errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                          errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
                         ),
                       ),
                     ),
@@ -246,11 +247,11 @@ Widget catCon2(BuildContext context, String title, String image)
           fit: BoxFit.cover,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(
-              color: Color(0xffff1f6f),
+              color: appPrimary,
               value: 5,
             ),
           ),
-          errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+          errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
         ),
       ),
     ),

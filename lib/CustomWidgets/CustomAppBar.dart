@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:socialapp/LocationPage.dart';
-import 'package:socialapp/Routes/customRoute.dart';
-import 'package:socialapp/Screens/SearchPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../Enums/Colors.dart';
 import '../Screens/Dashboard.dart';
+import '../Screens/SearchPage.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({Key? key}) : super(key: key);

@@ -7,12 +7,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:socialapp/CustomWidgets/CategoriesGrid.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/CustomWidgets/PopularNowSlider.dart';
-import 'package:socialapp/LocationPage.dart';
-
 import '../CustomWidgets/CustomAppBar.dart';
+import '../CustomWidgets/Headings.dart';
 import '../CustomWidgets/Sort&Filter.dart';
 import '../CustomWidgets/TodaySlider.dart';
 import '../CustomWidgets/UpComingEventsSlider.dart';

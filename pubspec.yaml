@@ -1,5 +1,5 @@
-name: socialapp
-description: Social Application which lets you get to know and explore the events near you.
+name: multi_service_planner
+description: A versatile booking app offering a one-stop solution for event planning. Discover and reserve various venues tailored to different event types, and connect with a network of service providers such as photographers, caterers, and decorators to make your event extraordinary. Simplify your event management with our comprehensive platform.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

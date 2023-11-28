@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/Organizer/OrganizerLogin.dart';
-import 'package:socialapp/Organizer/RegisterOrgTabs/DocVerification.dart';
-import 'package:socialapp/Organizer/RegisterOrgTabs/additionalInfo.dart';
-import 'package:socialapp/Organizer/RegisterOrgTabs/docUploaded.dart';
-import 'package:socialapp/Organizer/RegisterOrgTabs/passwordTab.dart';
-
+import 'OrganizerLogin.dart';
+import 'RegisterOrgTabs/DocVerification.dart';
+import 'RegisterOrgTabs/additionalInfo.dart';
+import 'RegisterOrgTabs/docUploaded.dart';
+import 'RegisterOrgTabs/passwordTab.dart';
 import 'RegisterOrgTabs/selfieImageTab.dart';
 import 'RegisterOrgTabs/firstTab.dart';
 import 'RegisterOrgTabs/imageTab.dart';

@@ -3,18 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/Organizer/OrgScreens/OrgSingleEvent.dart';
-import 'package:socialapp/Organizer/Widgets/SummaryChart.dart';
-import 'package:socialapp/Organizer/Widgets/TopStatusSlider.dart';
-import 'package:socialapp/Organizer/Widgets/dotsList.dart';
-import 'package:socialapp/Organizer/Widgets/homeAcc.dart';
+
 import 'package:stacked_chart/stacked_chart.dart';
+import '../../CustomWidgets/Headings.dart';
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
 import '../../Screens/OrganizeEvent.dart';
 import 'package:pie_chart/pie_chart.dart';
+import '../Widgets/TopStatusSlider.dart';
+import '../Widgets/dotsList.dart';
 import '../Widgets/pastEventSlider.dart';
 import '../Widgets/pieChart.dart';
+import 'OrgSingleEvent.dart';
 
 class OrgHomePage extends StatefulWidget {
   const OrgHomePage({Key? key}) : super(key: key);
@@ -109,12 +109,12 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
         child: FloatingActionButton(
           onPressed: () { Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => const OrganizeEvent())); },
           elevation: 5,
-          backgroundColor: const Color(0xffff1f6f),
+          backgroundColor:  appPrimary,
           child: Container(
 
             decoration: BoxDecoration(
 
-              color: const Color(0xffff1f6f),
+              color:  appPrimary,
               borderRadius: BorderRadius.circular(100),
 
             ),
@@ -221,7 +221,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
                                     margin: const EdgeInsets.only(right: 10),
                                     width: 20,height: 20,
                                     decoration: BoxDecoration(
-                                        color: const Color(0xffff1f6f),
+                                        color:  appPrimary,
                                         borderRadius: BorderRadius.circular(100)
                                     ),
                                   ),
@@ -337,7 +337,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 color: _tabController.index == 0
-                                    ? const Color(0xffff1f6f)
+                                    ?  appPrimary
                                     : Colors.transparent,
                                 borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(15),
@@ -357,7 +357,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
                             decoration: BoxDecoration(
                                 color: _tabController.index == 0
                                     ? Colors.transparent
-                                    : const Color(0xffff1f6f),
+                                    :  appPrimary,
                                 borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(15),
                                     bottomRight: Radius.circular(15))),
@@ -384,7 +384,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
                         //     alignment: Alignment.center,
                         //     decoration: BoxDecoration(
                         //         color: upcoming
-                        //             ? Color(0xffff1f6f)
+                        //             ? appPrimary
                         //             : Colors.transparent,
                         //         borderRadius: BorderRadius.only(
                         //             topLeft: Radius.circular(15),
@@ -411,7 +411,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
                         //     decoration: BoxDecoration(
                         //         color: upcoming
                         //             ? Colors.transparent
-                        //             : Color(0xffff1f6f),
+                        //             : appPrimary,
                         //         borderRadius: BorderRadius.only(
                         //             topRight: Radius.circular(15),
                         //             bottomRight: Radius.circular(15))),
@@ -504,8 +504,8 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       //                         value: _selectedItem,
       //                         elevation: 1,
       //                         dropdownColor: Colors.white,
-      //                         icon: Icon(Icons.keyboard_arrow_down,size: 20,color: Color(0xffff1f6f),),
-      //                         style: TextStyle(fontSize: 14,fontWeight: FontWeight.normal,color: Color(0xffff1f6f)),
+      //                         icon: Icon(Icons.keyboard_arrow_down,size: 20,color: appPrimary,),
+      //                         style: TextStyle(fontSize: 14,fontWeight: FontWeight.normal,color: appPrimary),
       //                         hint: Text('Tap to select',
       //                           style: TextStyle(fontSize: 14,fontWeight: FontWeight.normal,color: Color(
       //                               0xffff1f6f)),), // Displayed when no item is selected
@@ -549,7 +549,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       //                                 margin: EdgeInsets.only(right: 10),
       //                                 width: 20,height: 20,
       //                                 decoration: BoxDecoration(
-      //                                   color: Color(0xffff1f6f),
+      //                                   color: appPrimary,
       //                                   borderRadius: BorderRadius.circular(100)
       //                                 ),
       //                               ),
@@ -648,7 +648,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       //           //                 Container(
       //           //                   margin: EdgeInsets.only(right: 10),
       //           //                   width: 20,height: 20,
-      //           //                   color: Color(0xffff1f6f),
+      //           //                   color: appPrimary,
       //           //                 ),
       //           //
       //           //                 Text("Completed Events",
@@ -758,7 +758,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       //                         alignment: Alignment.center,
       //                         decoration: BoxDecoration(
       //                             color: _tabController.index == 0
-      //                                 ? Color(0xffff1f6f)
+      //                                 ? appPrimary
       //                                 : Colors.transparent,
       //                             borderRadius: BorderRadius.only(
       //                                 topLeft: Radius.circular(15),
@@ -778,7 +778,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       //                         decoration: BoxDecoration(
       //                             color: _tabController.index == 0
       //                                 ? Colors.transparent
-      //                                 : Color(0xffff1f6f),
+      //                                 : appPrimary,
       //                             borderRadius: BorderRadius.only(
       //                                 topRight: Radius.circular(15),
       //                                 bottomRight: Radius.circular(15))),
@@ -805,7 +805,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       //                     //     alignment: Alignment.center,
       //                     //     decoration: BoxDecoration(
       //                     //         color: upcoming
-      //                     //             ? Color(0xffff1f6f)
+      //                     //             ? appPrimary
       //                     //             : Colors.transparent,
       //                     //         borderRadius: BorderRadius.only(
       //                     //             topLeft: Radius.circular(15),
@@ -832,7 +832,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       //                     //     decoration: BoxDecoration(
       //                     //         color: upcoming
       //                     //             ? Colors.transparent
-      //                     //             : Color(0xffff1f6f),
+      //                     //             : appPrimary,
       //                     //         borderRadius: BorderRadius.only(
       //                     //             topRight: Radius.circular(15),
       //                     //             bottomRight: Radius.circular(15))),
@@ -1006,7 +1006,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
                       color: Colors.white
                     ),
                     child: const Text("Private",
-                    style: TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.bold,fontSize: 10),),
+                    style: TextStyle(color: appPrimary,fontWeight: FontWeight.bold,fontSize: 10),),
                   ),
 
                   const Text("Metal Rock Festival 2023",
@@ -1051,7 +1051,7 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
         children: [
           const Text("Going",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Color(0xffff1f6f),fontFamily: "Helvetica_Bold",fontSize: 16,fontWeight: FontWeight.bold),),
+            style: TextStyle(color: appPrimary,fontFamily: "Helvetica_Bold",fontSize: 16,fontWeight: FontWeight.bold),),
           const SizedBox(height: 2,),
           Text("NOW",
             textAlign: TextAlign.center,

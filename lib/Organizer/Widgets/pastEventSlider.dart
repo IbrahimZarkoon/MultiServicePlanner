@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/Organizer/OrgScreens/OrgSingleEvent.dart';
 
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
+import '../OrgScreens/OrgSingleEvent.dart';
 
 Widget pastEventSlider(BuildContext context)
 {
@@ -511,11 +512,11 @@ Widget bottomEventCon(BuildContext context)
                 fit: BoxFit.cover,
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
+                    color: appPrimary,
                     value: 5,
                   ),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
               ),
             ),
           ),
@@ -542,7 +543,7 @@ Widget bottomEventCon(BuildContext context)
                 const SizedBox(height: 2,),
 
                 const Text("Apr 5th, 2023",
-                  style: TextStyle(color: Color(0xffff1f6f),fontFamily: "",fontWeight: FontWeight.normal,fontSize: 12),),
+                  style: TextStyle(color: appPrimary,fontFamily: "",fontWeight: FontWeight.normal,fontSize: 12),),
 
 
                 Container(
@@ -619,7 +620,7 @@ Widget bottomEventCon(BuildContext context)
             alignment: Alignment.center,
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
-                color: const Color(0xffff1f6f),
+                color: appPrimary,
                 borderRadius: BorderRadius.circular(20)
             ),
             child: const Icon(Icons.keyboard_arrow_right,color: Colors.white,size: 20,)

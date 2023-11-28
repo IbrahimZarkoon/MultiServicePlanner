@@ -3,11 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/Screens/SingleEvent.dart';
-import 'package:socialapp/Screens/SingleOrganizer.dart';
-
 import '../Enums/Colors.dart';
 import '../Providers/CacheManager.dart';
+import '../Screens/SingleEvent.dart';
+import '../Screens/SingleOrganizer.dart';
 
 Widget featuredSlider(BuildContext context)
 {

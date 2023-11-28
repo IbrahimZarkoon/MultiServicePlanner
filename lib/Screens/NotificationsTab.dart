@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/CustomWidgets/CustomAppBar.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
 
+
+import '../CustomWidgets/Headings.dart';
 import '../Providers/CacheManager.dart';
 import 'MyProfile.dart';
 

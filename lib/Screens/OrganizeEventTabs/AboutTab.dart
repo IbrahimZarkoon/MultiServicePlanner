@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_service_planner/Enums/Colors.dart';
 import 'package:provider/provider.dart';
 
 import '../../Providers/CacheManager.dart';
@@ -132,7 +133,7 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
                   child: Container(
                     margin: const EdgeInsets.only(top: 15,bottom: 15),
                     padding: const EdgeInsets.only(left: 15,right: 15,top: 0,bottom: 0),
-                    decoration: BoxDecoration(border: Border.all(color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5)),
+                    decoration: BoxDecoration(border: Border.all(color: _tap? appPrimary : Colors.black.withOpacity(0.5)),
                         borderRadius: BorderRadius.circular(10)
                     ),
                     child: Row(

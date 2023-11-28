@@ -3,9 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/Organizer/OrgScreens/OrgNotif.dart';
-
+import '../../CustomWidgets/Headings.dart';
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
 import '../../Screens/OrganizeEvent.dart';
 import '../OrganizerLogin.dart';
@@ -79,7 +78,7 @@ class _OrgProfileState extends State<OrgProfile> {
             //Top Container
             Container(
               padding: const EdgeInsets.only(left: 15, right: 15, bottom: 30),
-              color: const Color(0xffff1f6f),
+              color: appPrimary,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -106,13 +105,13 @@ class _OrgProfileState extends State<OrgProfile> {
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(
-                                    color: Color(0xffff1f6f),
+                                    color: appPrimary,
                                     value: 5,
                                   ),
                                 ),
                                 errorWidget: (context, url, error) => const Icon(
                                   Icons.error,
-                                  color: Color(0xffff1f6f),
+                                  color: appPrimary,
                                 ),
                               ),
                             ),
@@ -162,7 +161,7 @@ class _OrgProfileState extends State<OrgProfile> {
                                   Border.all(color: Colors.white, width: 2)),
                           child: const Icon(
                             Icons.notifications_none_outlined,
-                            color: Color(0xffff1f6f),
+                            color: appPrimary,
                             size: 22,
                           )),
                     ],
@@ -256,7 +255,7 @@ class _OrgProfileState extends State<OrgProfile> {
                         margin: const EdgeInsets.all(15),
                         padding: const EdgeInsets.only(top: 10,bottom: 10),
                         decoration: BoxDecoration(
-                            color: const Color(0xffff1f6f),
+                            color:  appPrimary,
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.black.withOpacity(0.15),

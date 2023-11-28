@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
+
+import 'Headings.dart';
 
 Widget CommentCon(BuildContext context,Widget replies)
 {

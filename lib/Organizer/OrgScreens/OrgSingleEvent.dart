@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../CustomWidgets/Headings.dart';
 import '../../CustomWidgets/UpComingEventsSlider.dart';
+import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
 
 class OrgSingleEvent extends StatefulWidget {
@@ -140,13 +141,13 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                           fit: BoxFit.cover,
                           placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
-                              color: Color(0xffff1f6f),
+                              color: appPrimary,
                               value: 5,
                             ),
                           ),
                           errorWidget: (context, url, error) => const Icon(
                             Icons.error,
-                            color: Color(0xffff1f6f),
+                            color: appPrimary,
                           ),
                         ),
                       ),
@@ -223,7 +224,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                             child: const Text(
                               "Music",
                               style: TextStyle(
-                                  color: Color(0xffff1f6f),
+                                  color: appPrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12),
                             ),
@@ -245,7 +246,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                             child: const Text(
                               "Rap",
                               style: TextStyle(
-                                  color: Color(0xffff1f6f),
+                                  color: appPrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12),
                             ),
@@ -267,7 +268,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                             child: const Text(
                               "Today",
                               style: TextStyle(
-                                  color: Color(0xffff1f6f),
+                                  color: appPrimary,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12),
                             ),
@@ -302,7 +303,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                   child: const Icon(
                                     Icons.calendar_today_outlined,
                                     size: 20,
-                                    color: Color(0xffff1f6f),
+                                    color: appPrimary,
                                   ),
                                 ),
 
@@ -358,7 +359,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                   child: const Icon(
                                     Icons.access_time_rounded,
                                     size: 20,
-                                    color: Color(0xffff1f6f),
+                                    color: appPrimary,
                                   ),
                                 ),
 
@@ -415,7 +416,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                   child: const Icon(
                                     Icons.location_on_outlined,
                                     size: 20,
-                                    color: Color(0xffff1f6f),
+                                    color: appPrimary,
                                   ),
                                 ),
 
@@ -552,7 +553,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                 readDesc,
                                 style: const TextStyle(
                                     fontSize: 13,
-                                    color: Color(0xffff1f6f),
+                                    color: appPrimary,
                                     fontFamily: "Helvetica_Bold"),
                               ),
                             ),
@@ -605,11 +606,11 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) => const Center(
                                         child: CircularProgressIndicator(
-                                          color: Color(0xffff1f6f),
+                                          color: appPrimary,
                                           value: 5,
                                         ),
                                       ),
-                                      errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
+                                      errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
                                     ),
                                   ),
                                 ),
@@ -632,7 +633,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                       child: const Text(
                                         "View on Google Maps",
                                         style: TextStyle(
-                                            color: Color(0xffff1f6f),
+                                            color: appPrimary,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 11),
                                       ),
@@ -707,13 +708,13 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                             // final imageTemp = File(image.path);
                                             //setState(() => Provider.of<UserClass>(context).profilePicture = imageTemp);
                                           },
-                                          child: const Text("Choose Photo",style: TextStyle(color: Color(0xffff1f6f)),)),
+                                          child: const Text("Choose Photo",style: TextStyle(color: appPrimary),)),
 
                                       CupertinoActionSheetAction(
                                           onPressed: () async {
                                             final XFile? photo = await _BannerPicker.pickImage(source: ImageSource.camera);
                                           },
-                                          child: const Text("Take Photo",style: TextStyle(color: Color(0xffff1f6f)),)),
+                                          child: const Text("Take Photo",style: TextStyle(color: appPrimary),)),
 
                                     ],
                                   );
@@ -723,13 +724,13 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: const [
 
-                                  Icon(Icons.camera_alt,color: Color(0xffff1f6f),size: 20,),
+                                  Icon(Icons.camera_alt,color: appPrimary,size: 20,),
 
                                   SizedBox(width: 5,),
 
                                   Text("Add photos",overflow: TextOverflow.ellipsis,
                                       style:
-                                      TextStyle(color: Color(0xffff1f6f),fontWeight: FontWeight.bold,fontFamily: "", fontSize: 14)),
+                                      TextStyle(color: appPrimary,fontWeight: FontWeight.bold,fontFamily: "", fontSize: 14)),
 
 
 
@@ -760,11 +761,11 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) => const Center(
                                       child: CircularProgressIndicator(
-                                        color: Color(0xffff1f6f),
+                                        color: appPrimary,
                                         value: 5,
                                       ),
                                     ),
-                                    errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xffff1f6f)),
+                                    errorWidget: (context, url, error) => const Icon(Icons.error, color: appPrimary),
                                   ),
                                 ),
                               );
@@ -799,7 +800,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                   margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: _currentSlide == index ? const Color(0xffff1f6f) : Colors.grey,
+                                    color: _currentSlide == index ?  appPrimary : Colors.grey,
                                   ),
                                 ),
                               ),
@@ -832,7 +833,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12,
-                                  color: Color(0xffff1f6f)),
+                                  color: appPrimary),
                             ),
                             const SizedBox(
                               width: 5,
@@ -842,7 +843,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                 child: const Icon(
                                   Icons.arrow_upward,
                                   size: 20,
-                                  color: Color(0xffff1f6f),
+                                  color: appPrimary,
                                 ))
                           ],
                         ),
@@ -932,7 +933,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                       //                           border: Border.all(
                       //                               color: Colors.white,
                       //                               width: 1),
-                      //                           color: const Color(0xffff1f6f),
+                      //                           color: const appPrimary,
                       //                           borderRadius:
                       //                           BorderRadius.circular(50),
                       //                         ),
@@ -1008,7 +1009,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                       TextStyle(color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontFamily: "Helvetica_Bold", fontSize: 18)),
 
                                   const Text("View all",
-                                  style: TextStyle(color: Color(0xffff1f6f),fontSize: 13,fontWeight: FontWeight.bold),)
+                                  style: TextStyle(color: appPrimary,fontSize: 13,fontWeight: FontWeight.bold),)
                                 ],
                               ),
                             ),
@@ -1068,7 +1069,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                           //       style: TextStyle(
                           //           fontWeight: FontWeight.bold,
                           //           fontSize: 12,
-                          //           color: Color(0xffff1f6f)),
+                          //           color: appPrimary),
                           //     ),
                           //   ),
                           // ),
@@ -1124,7 +1125,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xffff1f6f),
+                  color:  appPrimary,
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.2),
@@ -1208,7 +1209,6 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
               //         alignment: Alignment.center,
               //         decoration: BoxDecoration(
               //           borderRadius: BorderRadius.circular(7),
-              //           color: Color(0xffff1f6f),
               //         ),
               //         child: Text(
               //           "Request to join",

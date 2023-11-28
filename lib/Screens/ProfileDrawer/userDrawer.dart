@@ -3,14 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:socialapp/Screens/EditProfile.dart';
-import 'package:socialapp/Screens/Login.dart';
-
 import '../../CustomWidgets/Headings.dart';
 import '../../Organizer/OrgScreens/EditOrgProfile.dart';
 import '../../Organizer/OrgScreens/OrgEvents.dart';
 import '../../Organizer/OrganizerLogin.dart';
 import '../../Providers/CacheManager.dart';
+import '../EditProfile.dart';
+import '../Login.dart';
 import '../OrganizeEvent.dart';
 import 'EditPreferences.dart';
 

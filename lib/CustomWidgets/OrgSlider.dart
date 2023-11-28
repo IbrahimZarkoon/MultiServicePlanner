@@ -2,10 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/Screens/SingleEvent.dart';
-import 'package:socialapp/Screens/SingleOrganizer.dart';
-
 import '../Providers/CacheManager.dart';
+import '../Screens/SingleOrganizer.dart';
 
 Widget OrgSlider(BuildContext context)
 {

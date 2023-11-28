@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/Screens/Dashboard.dart';
-import 'package:socialapp/Screens/Login.dart';
-import 'package:socialapp/Screens/Register.dart';
+
+import '../CustomWidgets/Headings.dart';
+import 'Dashboard.dart';
+import 'Login.dart';
+import 'Register.dart';
+
 
 class LoginLetter extends StatefulWidget {
   const LoginLetter({Key? key}) : super(key: key);

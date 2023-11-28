@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:socialapp/CustomWidgets/Headings.dart';
-import 'package:socialapp/Routes/customRoute.dart';
-import 'package:socialapp/Screens/Dashboard.dart';
-import 'package:socialapp/Screens/EditProfile.dart';
-import 'package:socialapp/Screens/ProfileDrawer/EditPreferences.dart';
-import 'package:socialapp/Screens/ProfileDrawer/MyEvents.dart';
-import 'package:socialapp/Screens/SettingsPage.dart';
 
+
+import '../Routes/customRoute.dart';
+import 'EditProfile.dart';
 import 'OrganizeEvent.dart';
+import 'ProfileDrawer/EditPreferences.dart';
+import 'ProfileDrawer/MyEvents.dart';
+import 'SettingsPage.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);

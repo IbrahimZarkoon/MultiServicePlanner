@@ -2,15 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socialapp/Organizer/OrgScreens/Homepage.dart';
-import 'package:socialapp/Organizer/OrgScreens/OrgChats.dart';
-import 'package:socialapp/Organizer/OrgScreens/OrgNotif.dart';
-import 'package:socialapp/Organizer/OrgScreens/OrgProfile.dart';
-import 'package:socialapp/Organizer/Widgets/orgAppBar.dart';
-import 'package:socialapp/Organizer/Widgets/orgDrawer.dart';
-
 import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
+import '../Widgets/orgAppBar.dart';
+import '../Widgets/orgDrawer.dart';
+import 'Homepage.dart';
+import 'OrgChats.dart';
+import 'OrgNotif.dart';
+import 'OrgProfile.dart';
 
 class OrgDashboard extends StatefulWidget {
   OrgDashboard({Key? key, required this.orgTabIndex}) : super(key: key);
@@ -100,7 +99,7 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color:  appPrimary,width: 2)
                 ),
-                child: const Icon(Icons.menu,size: 22,color: Color(0xffff1f6f),),
+                child: const Icon(Icons.menu,size: 22,color: appPrimary,),
               ),
             ),
 
@@ -143,7 +142,7 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
             indicator: const BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: Color(0xffff1f6f),
+                  color: appPrimary,
                   width: 3.0,
                 ),
               ),
@@ -151,7 +150,7 @@ class _OrgDashboardState extends State<OrgDashboard> with SingleTickerProviderSt
             controller: _tabController,
             indicatorColor: Colors.white,
             unselectedLabelColor: Colors.black.withOpacity(0.35),
-            labelColor: const Color(0xffff1f6f),
+            labelColor:  appPrimary,
             labelStyle: const TextStyle(
                 fontSize: 11
             ),
