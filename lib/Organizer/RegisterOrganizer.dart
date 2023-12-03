@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../modals/RegisterOrgProvider.dart';
 import 'OrganizerLogin.dart';
 import 'RegisterOrgTabs/DocVerification.dart';
 import 'RegisterOrgTabs/additionalInfo.dart';
@@ -8,6 +12,8 @@ import 'RegisterOrgTabs/passwordTab.dart';
 import 'RegisterOrgTabs/selfieImageTab.dart';
 import 'RegisterOrgTabs/firstTab.dart';
 import 'RegisterOrgTabs/imageTab.dart';
+import 'package:http/http.dart' as http;
+
 
 class RegisterOrganizer extends StatefulWidget {
   const RegisterOrganizer({Key? key}) : super(key: key);
@@ -29,8 +35,46 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
     const DocUploaded()
   ];
 
+  //Post Request for Org Register
+  regOrgRequest(String fn, String email, String pass, String ph, String dob, String nicF, String nicB, String selfie, String role, String serviceID) async {
+    final String url = "https://everythingforpageants.com/msp/api/signup.php";
+
+    Map<String, dynamic> requestData = {
+      "fullName": fn,
+      "email": email,
+      "password": pass,
+      "phone": ph,
+      "dob": dob,
+      "nicFront": nicF,
+      "nicBack": nicB,
+      "profilePic": selfie,
+      "role": role,
+      "service_id": serviceID,
+    };
+
+    final response = await http.post(
+      Uri.parse(url),
+      body: jsonEncode(requestData),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print("Registration successful!");
+      print("Response: ${response.body}");
+      var json = jsonDecode(response.body);
+      print(json);
+      await ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(milliseconds: 1500),content: Text("Vendor registered successfully.")));
+
+    } else {
+      print("POST request failed with status: ${response.statusCode}");
+      print("Response: ${response.body}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    var regOrgProv = Provider.of<RegisterOrgProvider>(context,listen: false);
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -118,15 +162,44 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
                     children: [
                       InkWell(
                         onTap: ()
-                        {
-                          setState(() {
-                            if(_selectedTab<7) {
+                        async{
+                          if(_selectedTab<7) {
+                            setState(() {
                               _selectedTab += 1;
-                            }else
-                              {
-                                Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => const OrganizerLogin()));
-                              }
-                          });
+                            });
+                          }
+                          else if(_selectedTab == 5)
+                            {
+                              await regOrgRequest(
+                                  regOrgProv.fullName,
+                                  regOrgProv.email,
+                                  regOrgProv.password,
+                                  regOrgProv.phone,
+                                  regOrgProv.dob,
+                                  "${regOrgProv.nicFront}",
+                                  "${regOrgProv.nicBack}",
+                                  "${regOrgProv.selfie}",
+                                  "2",
+                                  regOrgProv.serviceID
+                              );
+                              setState(() {
+                                _selectedTab += 1;
+                              });
+                            }
+                          else
+                          {
+                            print(regOrgProv.email);
+                            print(regOrgProv.fullName);
+                            print(regOrgProv.phone);
+                            print(regOrgProv.password);
+                            print("${regOrgProv.nicFront}");
+                            print("${regOrgProv.nicBack}");
+                            print("${regOrgProv.selfie}");
+
+
+
+                            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => const OrganizerLogin()));
+                          }
                         },
                         child: Container(
                           //margin: const EdgeInsets.only(top: 20,bottom: 20),

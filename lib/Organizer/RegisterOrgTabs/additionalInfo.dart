@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_service_planner/Enums/Colors.dart';
+import 'package:provider/provider.dart';
+
+import '../../modals/RegisterOrgProvider.dart';
 
 
 class additionalInfo extends StatefulWidget {
@@ -13,8 +17,11 @@ class _additionalInfoState extends State<additionalInfo> with SingleTickerProvid
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
+  TextEditingController _dobCon = TextEditingController();
+  TextEditingController _webURLCon = TextEditingController();
+
   final FocusNode _dobNode = FocusNode();
-  final FocusNode _confirmNode = FocusNode();
+  final FocusNode _webURLNode = FocusNode();
 
   @override
   void initState() {
@@ -45,8 +52,16 @@ class _additionalInfoState extends State<additionalInfo> with SingleTickerProvid
     super.dispose();
   }
 
+  String _selectedServiceType = '';
+
+  List<String> serviceTypes = ['','Photographer','Decor','Venue','Catering'];
+
   @override
   Widget build(BuildContext context) {
+
+    var regOrgProv = Provider.of<RegisterOrgProvider>(context,listen: false);
+
+
     return SlideTransition(
       position: _animation,
       child: SingleChildScrollView(
@@ -83,7 +98,11 @@ class _additionalInfoState extends State<additionalInfo> with SingleTickerProvid
                   Expanded(
                     child: TextField(
                       focusNode: _dobNode,
-
+                      controller: _dobCon,
+                      onChanged: (String value)
+                      {
+                        regOrgProv.dob = value;
+                      },
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 5),
 
@@ -104,7 +123,7 @@ class _additionalInfoState extends State<additionalInfo> with SingleTickerProvid
               ),
             ),
 
-            //Confirm Pass Container
+            //Website Url Container
             Container(
               //height: MediaQuery.of(context).size.height*0.075,
               constraints: const BoxConstraints(
@@ -123,8 +142,12 @@ class _additionalInfoState extends State<additionalInfo> with SingleTickerProvid
                 children: [
                   Expanded(
                     child: TextField(
-                      focusNode: _confirmNode,
-
+                      focusNode: _webURLNode,
+                      controller: _webURLCon,
+                      onChanged: (String value)
+                      {
+                        regOrgProv.webUrl = value;
+                      },
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 5),
 
@@ -145,9 +168,92 @@ class _additionalInfoState extends State<additionalInfo> with SingleTickerProvid
               ),
             ),
 
+            //Service Type Container
+            Container(
+              //height: MediaQuery.of(context).size.height*0.075,
+              constraints: const BoxConstraints(
+                  maxHeight: 55
+              ),
+              margin: const EdgeInsets.only(left: 15,right: 15,bottom: 15),
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.only(left: 15,top: 0,bottom: 0,right: 15),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: Colors.black.withOpacity(.1))
+              ),
+
+              child:  Row(
+                children: [
+
+                  Text("Select vendor type:",style: TextStyle(
+                    fontSize: MediaQuery.sizeOf(context).height * 0.016,
+                    fontFamily: "OpenSans_Bold",
+                  ),),
+
+                  SizedBox(width: 10,),
+
+                  Expanded(child: serviceTypeDropDown())
+                ],
+              ),
+            ),
+
+
           ],
         ),
       ),
+    );
+  }
+
+  Widget serviceTypeDropDown()
+  {
+    var regOrgProv = Provider.of<RegisterOrgProvider>(context,listen: false);
+
+    return DropdownButton<String>(
+      value: _selectedServiceType,
+      underline: SizedBox(),
+      style: TextStyle(
+        color: appPrimary,
+        fontSize: MediaQuery.sizeOf(context).height * 0.014,
+        fontFamily: "OpenSans_Bold",
+      ),
+      icon: Icon(
+        Icons.keyboard_arrow_down,
+        color: appPrimary,
+        size: MediaQuery.sizeOf(context).height * 0.02,
+      ),
+      iconSize: MediaQuery.sizeOf(context).height * 0.02,
+      elevation: 1,
+
+      items: serviceTypes.map((String serviceType) {
+        return DropdownMenuItem<String>(
+          value: serviceType,
+          child: Text(
+            serviceType,
+            style: TextStyle(
+              color: appPrimary,
+              fontSize: MediaQuery.of(context).size.height * 0.014,
+              fontFamily: "OpenSans_SemiBold",
+            ),
+          ),
+        );
+      }).toList(),
+
+      onChanged: (String? option) {
+        setState(() {
+          _selectedServiceType = option ?? '';
+        });
+        option == "Photographer" ? regOrgProv.serviceID = '1'
+            :
+        option == "Decor" ? regOrgProv.serviceID = '2'
+            :
+        option == "Venue" ? regOrgProv.serviceID = '3'
+            :
+        option == "Catering" ? regOrgProv.serviceID = '7'
+            :
+        regOrgProv.serviceID = '';
+      },
+
     );
   }
 }

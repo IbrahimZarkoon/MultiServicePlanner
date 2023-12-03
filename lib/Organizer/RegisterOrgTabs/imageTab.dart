@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../../modals/RegisterOrgProvider.dart';
 
 class imageTab extends StatefulWidget {
   const imageTab({Key? key}) : super(key: key);
@@ -58,6 +61,9 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    var regOrgProv = Provider.of<RegisterOrgProvider>(context,listen: false);
+
+
     return SlideTransition(
       position: _animation,
       child: SingleChildScrollView(
@@ -129,7 +135,8 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
                                             final imageTemp = File(image.path);
 
                                             setState(() {
-                                              frontIMGFile = imageTemp; // Assign to the File variable
+                                              frontIMGFile = imageTemp;// Assign to the File variable
+                                              regOrgProv.nicFront = imageTemp;
                                             });
                                             Navigator.pop(context);
                                             
@@ -146,6 +153,8 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
 
                                             setState(() {
                                               frontIMGFile = imageTemp; // Assign to the File variable
+                                              regOrgProv.nicFront = imageTemp;
+
                                             });
                                             Navigator.pop(context);
 
@@ -260,6 +269,8 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
 
                                             setState(() {
                                               backIMGFile = imageTemp; // Assign to the File variable
+                                              regOrgProv.nicBack = imageTemp;
+
                                             });
                                             Navigator.pop(context);
 
@@ -276,6 +287,8 @@ class _imageTabState extends State<imageTab> with SingleTickerProviderStateMixin
 
                                             setState(() {
                                               backIMGFile = imageTemp; // Assign to the File variable
+                                              regOrgProv.nicBack = imageTemp;
+
                                             });
                                             Navigator.pop(context);
 

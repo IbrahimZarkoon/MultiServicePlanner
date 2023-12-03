@@ -15,9 +15,6 @@ class _DocVerificationState extends State<DocVerification> with SingleTickerProv
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
-  FocusNode _dobNode = FocusNode();
-  FocusNode _confirmNode = FocusNode();
-
 
   @override
   void initState() {

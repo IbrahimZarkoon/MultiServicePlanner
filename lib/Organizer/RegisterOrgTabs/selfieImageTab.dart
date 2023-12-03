@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../../modals/RegisterOrgProvider.dart';
 
 class selfieImageTab extends StatefulWidget {
   const selfieImageTab({Key? key}) : super(key: key);
@@ -55,6 +58,8 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    var regOrgProv = Provider.of<RegisterOrgProvider>(context,listen: false);
+
     return SlideTransition(
       position: _animation,
       child: SingleChildScrollView(
@@ -127,6 +132,8 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
 
                                             setState(() {
                                               selfieIMG = imageTemp; // Assign to the File variable
+                                              regOrgProv.selfie = imageTemp;
+
                                             });
                                             Navigator.pop(context);
 
@@ -143,6 +150,8 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
 
                                             setState(() {
                                               selfieIMG = imageTemp; // Assign to the File variable
+                                              regOrgProv.selfie = imageTemp;
+
                                             });
                                             Navigator.pop(context);
 

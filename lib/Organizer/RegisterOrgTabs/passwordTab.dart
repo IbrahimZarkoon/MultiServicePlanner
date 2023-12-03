@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../modals/RegisterOrgProvider.dart';
 
 class passwordTab extends StatefulWidget {
   const passwordTab({Key? key}) : super(key: key);
@@ -11,6 +14,9 @@ class passwordTab extends StatefulWidget {
 class _passwordTabState extends State<passwordTab> with SingleTickerProviderStateMixin{
   late AnimationController _controller;
   late Animation<Offset> _animation;
+
+  TextEditingController _passCon = TextEditingController();
+  TextEditingController _confirmPassCon = TextEditingController();
 
   FocusNode _passNode = FocusNode();
   FocusNode _confirmNode = FocusNode();
@@ -48,6 +54,9 @@ class _passwordTabState extends State<passwordTab> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+
+    var regOrgProv = Provider.of<RegisterOrgProvider>(context,listen: false);
+
     return SlideTransition(
       position: _animation,
       child: SingleChildScrollView(
@@ -85,7 +94,7 @@ class _passwordTabState extends State<passwordTab> with SingleTickerProviderStat
                     child: TextField(
                       focusNode: _passNode,
                       obscureText: obPass,
-
+                      controller: _passCon,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 5),
 
@@ -136,7 +145,13 @@ class _passwordTabState extends State<passwordTab> with SingleTickerProviderStat
                     child: TextField(
                       focusNode: _confirmNode,
                       obscureText: obPass,
-
+                      controller: _confirmPassCon,
+                      onChanged: (String value)
+                      {
+                        if(_passCon.text == value) {
+                          regOrgProv.password = value;
+                        }
+                      },
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 5),
 

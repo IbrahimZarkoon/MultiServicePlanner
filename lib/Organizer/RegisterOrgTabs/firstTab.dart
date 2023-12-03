@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_service_planner/modals/RegisterOrgProvider.dart';
+import 'package:provider/provider.dart';
 
 class firstTab extends StatefulWidget {
   const firstTab({Key? key}) : super(key: key);
@@ -12,6 +14,10 @@ class _firstTabState extends State<firstTab> with SingleTickerProviderStateMixin
 
   late AnimationController _controller;
   late Animation<Offset> _animation;
+
+  TextEditingController _emailCon = TextEditingController();
+  TextEditingController _nameCon = TextEditingController();
+  TextEditingController _phCon = TextEditingController();
 
   FocusNode _emailNode = FocusNode();
   FocusNode _nameNode = FocusNode();
@@ -43,13 +49,18 @@ class _firstTabState extends State<firstTab> with SingleTickerProviderStateMixin
   @override
   void dispose() {
     // TODO: implement dispose
-
+    _nameNode.unfocus();
+    _emailNode.unfocus();
+    _phNode.unfocus();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    var regOrgProv = Provider.of<RegisterOrgProvider>(context,listen: false);
+
     return SlideTransition(
       position: _animation,
       child: SingleChildScrollView(
@@ -83,6 +94,11 @@ class _firstTabState extends State<firstTab> with SingleTickerProviderStateMixin
 
               child:  TextField(
                 focusNode: _nameNode,
+                controller: _nameCon,
+                onChanged: (String value)
+                {
+                  regOrgProv.fullName = value;
+                },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: 5),
 
@@ -113,7 +129,12 @@ class _firstTabState extends State<firstTab> with SingleTickerProviderStateMixin
               ),
 
               child:  TextField(
+                controller: _emailCon,
                 focusNode: _emailNode,
+                onChanged: (String value)
+                {
+                  regOrgProv.email = value;
+                },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: 5),
 
@@ -144,8 +165,13 @@ class _firstTabState extends State<firstTab> with SingleTickerProviderStateMixin
               ),
 
               child:  TextField(
+                controller: _phCon,
                 focusNode: _phNode,
                 keyboardType: TextInputType.phone,
+                onChanged: (String value)
+                {
+                  regOrgProv.phone = value;
+                },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: 5),
 
