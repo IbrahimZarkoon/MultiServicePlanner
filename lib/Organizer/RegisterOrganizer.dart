@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../modals/RegisterOrgProvider.dart';
 import 'OrganizerLogin.dart';
@@ -36,7 +36,7 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
   ];
 
   //Post Request for Org Register
-  regOrgRequest(String fn, String email, String pass, String ph, String dob, String nicF, String nicB, String selfie, String role, String serviceID) async {
+  regOrgRequest(String fn, String email, String pass, String ph, String dob,XFile nicF,XFile nicB,XFile selfie, String role, String serviceID) async {
     final String url = "https://everythingforpageants.com/msp/api/signup.php";
 
     Map<String, dynamic> requestData = {
@@ -52,21 +52,53 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
       "service_id": serviceID,
     };
 
-    final response = await http.post(
-      Uri.parse(url),
-      body: jsonEncode(requestData),
-    );
+    var request =
+    http.MultipartRequest('POST', Uri.parse("https://everythingforpageants.com/msp/api/signup.php"));
+
+    // Add the file to the request as form data
+    request.fields['fullName'] = fn;
+    request.fields['email'] = email;
+    request.fields['password'] = pass;
+    request.fields['phone'] = ph;
+    request.fields['dob'] = dob;
+    request.fields['role'] = role;
+    request.fields['service_id'] = serviceID;
+
+
+    if (nicF != null) {
+      request.files.add(
+        await http.MultipartFile.fromPath('nicFront', nicF!.path),
+      );
+    }
+
+    if (nicB != null) {
+      request.files.add(
+        await http.MultipartFile.fromPath('nicBack', nicB!.path),
+      );
+    }
+    if (selfie != null) {
+      request.files.add(
+        await http.MultipartFile.fromPath('profilePic', selfie!.path),
+      );
+    }
+    var response = await request.send();
+
+    // final response = await http.post(
+    //   Uri.parse(url),
+    //   body: jsonEncode(requestData),
+    // );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       print("Registration successful!");
-      print("Response: ${response.body}");
-      var json = jsonDecode(response.body);
-      print(json);
+      print("Response: $response");
+
       await ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(milliseconds: 1500),content: Text("Vendor registered successfully.")));
+
+      Navigator.push(context, CupertinoPageRoute(builder: (_) => const OrganizerLogin()));
 
     } else {
       print("POST request failed with status: ${response.statusCode}");
-      print("Response: ${response.body}");
+      print("Response: $response");
     }
   }
 
@@ -168,24 +200,6 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
                               _selectedTab += 1;
                             });
                           }
-                          else if(_selectedTab == 5)
-                            {
-                              await regOrgRequest(
-                                  regOrgProv.fullName,
-                                  regOrgProv.email,
-                                  regOrgProv.password,
-                                  regOrgProv.phone,
-                                  regOrgProv.dob,
-                                  "${regOrgProv.nicFront}",
-                                  "${regOrgProv.nicBack}",
-                                  "${regOrgProv.selfie}",
-                                  "2",
-                                  regOrgProv.serviceID
-                              );
-                              setState(() {
-                                _selectedTab += 1;
-                              });
-                            }
                           else
                           {
                             print(regOrgProv.email);
@@ -196,9 +210,19 @@ class _RegisterOrganizerState extends State<RegisterOrganizer> {
                             print("${regOrgProv.nicBack}");
                             print("${regOrgProv.selfie}");
 
-
-
-                            Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => const OrganizerLogin()));
+                            await regOrgRequest(
+                                regOrgProv.fullName,
+                                regOrgProv.email,
+                                regOrgProv.password,
+                                regOrgProv.phone,
+                                regOrgProv.dob,
+                                XFile(regOrgProv.nicFront.path),
+                                XFile(regOrgProv.nicBack.path),
+                                XFile(regOrgProv.selfie.path),
+                                "2",
+                                regOrgProv.serviceID
+                            );
+                            regOrgProv.resetRegOrgProv();
                           }
                         },
                         child: Container(

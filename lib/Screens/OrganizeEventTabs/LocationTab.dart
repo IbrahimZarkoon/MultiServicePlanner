@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../CustomWidgets/TimeCon.dart';
+import '../../Enums/Colors.dart';
 
 class LocationTab extends StatefulWidget {
   const LocationTab({Key? key}) : super(key: key);
@@ -130,9 +131,9 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                   child: CupertinoSegmentedControl(
 
                     padding: const EdgeInsets.all(0),
-                    selectedColor: const Color(0xffff1f6f),
+                    selectedColor: appPrimary,
                     unselectedColor: const Color(0xffffffff),
-                    borderColor: const Color(0xffff1f6f),
+                    borderColor: appPrimary,
                     children: _options,
                     groupValue: _selectedOptionIndex,
                     onValueChanged: (value) {
@@ -167,7 +168,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                   child: Container(
                     margin: const EdgeInsets.only(top: 10,bottom: 15),
                     padding: const EdgeInsets.only(left: 15,right: 15,top: 0,bottom: 0),
-                    decoration: BoxDecoration(border: Border.all(color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5)),
+                    decoration: BoxDecoration(border: Border.all(color: _tap? appPrimary : Colors.black.withOpacity(0.5)),
                     borderRadius: BorderRadius.circular(8)
                     ),
                     child: Row(
@@ -175,7 +176,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
 
-                        Icon(CupertinoIcons.search,size: 20,color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5),),
+                        Icon(CupertinoIcons.search,size: 20,color: _tap? appPrimary : Colors.black.withOpacity(0.5),),
 
                         const SizedBox(width: 15,),
 
@@ -189,7 +190,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                               },
                               focusNode: F1,
                               controller: T1,
-                              cursorColor: const Color(0xffff1f6f),
+                              cursorColor: appPrimary,
                               style: TextStyle(fontSize: 13,color: Colors.black.withOpacity(0.8)),
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -305,7 +306,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                         fontWeight: FontWeight.bold,
                         fontSize: 16)),
 
-                    CupertinoSwitch(value: repetative, activeColor: const Color(0xffff1f6f),onChanged: (value) {
+                    CupertinoSwitch(value: repetative, activeColor:  appPrimary,onChanged: (value) {
                       setState(() {
                         repetative = value;
                         if(value == true)_scrollC.animateTo(_scrollC.position.maxScrollExtent+MediaQuery.of(context).size.height*0.1, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
@@ -328,7 +329,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                         checkboxShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
                         title: Text('Days',style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 13),),
                         value: Days,
-                        activeColor: const Color(0xffff1f6f),
+                        activeColor:  appPrimary,
                         onChanged: (value) {
                           setState(() {
                             Days = value!;
@@ -348,7 +349,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                     
                     Expanded(
                       child: CheckboxListTile(
-                        activeColor: const Color(0xffff1f6f),
+                        activeColor: appPrimary,
                         checkboxShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
 
                         title: Text('Weekly',style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 13),),
@@ -390,9 +391,9 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                           margin: const EdgeInsets.only(bottom: 10),
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: weekDays[index] ? Color(0xffff1f6f) : Colors.black.withOpacity(0.6)
+                              color: weekDays[index] ? appPrimary : Colors.black.withOpacity(0.6)
                             ),
-                            color: weekDays[index] ? const Color(0xffff1f6f) : Colors.white,
+                            color: weekDays[index] ?  appPrimary : Colors.white,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
@@ -430,9 +431,9 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                           margin: const EdgeInsets.only(bottom: 10),
                           decoration: BoxDecoration(
                             border: Border.all(
-                                color: _week[index] ? Color(0xffff1f6f) : Colors.black.withOpacity(0.6)
+                                color: _week[index] ? appPrimary : Colors.black.withOpacity(0.6)
                             ),
-                            color: _week[index] ? const Color(0xffff1f6f) : Colors.white,
+                            color: _week[index] ? appPrimary : Colors.white,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(
@@ -503,7 +504,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
     final config = CalendarDatePicker2WithActionButtonsConfig(
       dayTextStyle: dayTextStyle,
       calendarType: CalendarDatePicker2Type.range,
-      selectedDayHighlightColor: const Color(0xffff1f6f),
+      selectedDayHighlightColor: appPrimary,
       closeDialogOnCancelTapped: true,
       firstDayOfWeek: 1,
       weekdayLabelTextStyle: const TextStyle(
@@ -639,7 +640,7 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
           padding: const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 8),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: const Color(0xffff1f6f)),
+              color: appPrimary),
           alignment: Alignment.center,
           child: const Text(
             "Select date",

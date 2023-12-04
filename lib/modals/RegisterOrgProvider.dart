@@ -16,6 +16,21 @@ class RegisterOrgProvider extends ChangeNotifier {
   String _role = '';
   String _serviceID = '';
 
+  resetRegOrgProv()
+  {
+     this._fullName = '';
+     this._email = '';
+     this._password = '';
+     this._phone = '';
+     this._dob = '';
+     this._webUrl = '';
+     this._nicFront = File('');
+     this._nicBack = File('');
+    this._selfie = File('');
+     this._role = '';
+     this._serviceID = '';
+  }
+
   // Getter and Setter for _fullName
   String get fullName => _fullName;
   set fullName(String value) {
