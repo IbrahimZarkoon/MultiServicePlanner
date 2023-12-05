@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:multi_service_planner/modals/OrgProvider.dart';
+import 'package:multi_service_planner/modals/OrganizeEventProvider.dart';
 import 'package:multi_service_planner/modals/RegisterOrgProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
 
       providers: [
+        ChangeNotifierProvider(create: (_) => OrgProvider()),
+        ChangeNotifierProvider(create: (_) => OrganizeEventProvider()),
         ChangeNotifierProvider(create: (_) => CacheManagerProvider()),
         ChangeNotifierProvider(create: (_) => RegisterOrgProvider())
 

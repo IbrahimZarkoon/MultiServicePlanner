@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_service_planner/Enums/Colors.dart';
+import 'package:multi_service_planner/Response/TagsResponse.dart';
+import 'package:multi_service_planner/modals/OrganizeEventProvider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
 import '../../Providers/CacheManager.dart';
 
 class AboutTab extends StatefulWidget {
@@ -17,16 +21,9 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
   FocusNode F1 = FocusNode();
   TextEditingController T1 = TextEditingController();
 
-  bool i1 = false;
-  bool i2 = false;
-  bool i3 = false;
-  bool i4 = false;
-  bool i5 = false;
-  bool i6 = false;
-  bool i7 = false;
-  bool i8 = false;
-  bool i9 = false;
-  bool i10 = false;
+  List<TagsResponse>? TagsList = [];
+
+  List<String> tags = [];
 
   bool _tap = false;
 
@@ -63,8 +60,32 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
     super.dispose();
   }
 
+  //Get Request for All Tags Data
+  Future<TagsResponse?> getAllTags() async {
+
+    var url = Uri.parse(
+      'https://everythingforpageants.com/msp/api/getTags.php',);
+
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      var json = jsonDecode(response.body);
+      List<dynamic> dataArray = json;
+      TagsList = dataArray.map((item) => new TagsResponse.fromJson(item)).toList();
+      print(TagsList?[0]);
+    } else {
+      throw Exception('Failed to retrieve All Tags');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    getAllTags();
+
+    var OrgEventProv = Provider.of<OrganizeEventProvider>(context,listen: false);
+
     return GestureDetector(
       onTap: ()
       {
@@ -141,7 +162,7 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
 
-                        Icon(CupertinoIcons.search,size: 20,color: _tap? const Color(0xffff1f6f) : Colors.black.withOpacity(0.5),),
+                        Icon(CupertinoIcons.search,size: 20,color: _tap? appPrimary : Colors.black.withOpacity(0.5),),
 
                         const SizedBox(width: 15,),
 
@@ -155,7 +176,7 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
                               },
                               focusNode: F1,
                               controller: T1,
-                              cursorColor: const Color(0xffff1f6f),
+                              cursorColor: appPrimary,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Search for topics",
@@ -224,86 +245,26 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
                 // Text("Sport",
                 //   style: TextStyle(fontFamily: "Helvetica_Bold",color: Colors.black.withOpacity(0.8),fontSize: 22),),
 
-                Container(
-                  margin: const EdgeInsets.only(bottom: 15),
-
-                  padding: const EdgeInsets.only(left: 0,right: 0,bottom: 15,top: 15),
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 15, // spacing between the interest containers
-                    runSpacing: 15, // spacing between lines
-
-                    children: <Widget>[
-
-                      interestCon(context, "Dance and Movement",true),
-
-                      interestCon(context, "Painting",i2),
-
-                      interestCon(context, "Line Dancing",true),
-
-                      interestCon(context, "Belly Dance",i4),
-
-                      interestCon(context, "Argentine Tango",i5),
-
-                      interestCon(context, "Painting",i6),
-
-                      interestCon(context, "Dance and Movement",i7),
-
-                      interestCon(context, "Line Dancing",i8),
-
-                      interestCon(context, "Belly Dance",i9),
-
-                      interestCon(context, "Argentine Tango",i10),
-
-
-
-
-
-
-                    ],
+                GridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // or the number of columns you want
+                    crossAxisSpacing: 15.0,
+                    mainAxisSpacing: 15.0,
                   ),
+                  itemBuilder: (context, index) {
+                    final tag = TagsList![index];
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          OrgEventProv.tags.add("${tag.id}");
+                        });
+                      },
+                      child: interestCon(context, "${tag.tag}", false /* Add other parameters as needed */),
+                    );
+                  },
+                  itemCount: TagsList!.length,
                 ),
-
-
-                // GridView(
-                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 3,
-                //     mainAxisSpacing: 20,
-                //     crossAxisSpacing: 20,
-                //     childAspectRatio: 0.9,
-                //   ),
-                //   scrollDirection: Axis.vertical,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   padding: const EdgeInsets.only(left: 0,right: 0,top: 10,bottom: 10),
-                //   shrinkWrap: true,
-                //   children: [
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=1938&format=png","Technology"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=40569&format=png","Education"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=aanJRSdBR4ug&format=png","Music"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=59&format=png","Sports"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=68463&format=png","Cinema"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=HzPzzQ84vzT3&format=png","Art"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=40569&format=png","Education"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=aanJRSdBR4ug&format=png","Music"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=59&format=png","Sports"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=68463&format=png","Cinema"),
-                //
-                //     interestCon(context,"https://img.icons8.com/?size=512&id=HzPzzQ84vzT3&format=png","Art"),
-                //
-                //
-                //
-                //   ],
-                // ),
 
               ],
             ),
@@ -325,8 +286,8 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
           //alignment: Alignment.center,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: T?  const Color(0xffff1f6f) : Colors.white,
-              border: Border.all(color:const Color(0xffff1f6f),width: 0.5)
+              color: T?  appPrimary : Colors.white,
+              border: Border.all(color: appPrimary,width: 0.5)
           ),
           padding: const EdgeInsets.only(top: 8,bottom: 8,left: 15,right: 15),
           child: Row(
@@ -334,117 +295,11 @@ class _AboutTabState extends State<AboutTab> with SingleTickerProviderStateMixin
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(txt,style: TextStyle(
-                  color: T? Colors.white : const Color(0xffff1f6f),fontSize: 12
+                  color: T? Colors.white : appPrimary,fontSize: 12
               ),),
             ],
           ),
         )
-    );
-  }
-
-  Widget interestCon1(BuildContext context,String image,String name)
-  {
-    final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
-
-
-    return InkWell(
-      onTap: (){
-
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            constraints: const BoxConstraints(
-                maxWidth: 85,maxHeight: 85,
-                minWidth: 75,minHeight: 75
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
-                      spreadRadius: 0,
-                      blurRadius: 1.5,
-                      offset: const Offset(0,0)
-                  )
-                ]
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: CachedNetworkImage(
-                imageUrl: image,
-                cacheManager: cacheManager,
-                fit: BoxFit.cover,
-                color: const Color(0xffff1f6f),
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(
-                    color: Color(0xffff1f6f),
-                    value: 1,
-                  ),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xffff1f6f),),
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 5,),
-
-          Text(name,
-            style: TextStyle(color: Colors.black.withOpacity(0.8),fontFamily: "Helvetica_Bold",fontSize: 12),)
-        ],
-      ),
-    );
-  }
-
-  Widget oldInterestCon(BuildContext context,String txt,bool T)
-  {
-    return InkWell(
-      onTap: ()
-      {
-        setState(() {
-          T = !T;
-        });
-        if(T1.text.isEmpty) {
-          T1.text += txt;
-        }
-        else
-        {
-          T1.text += ", $txt";
-        }
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(color: T? const Color(0xffff1f6f) : Colors.black.withOpacity(0.2),width: 0.5),
-          color: T? const Color(0xffff1f6f) :  const Color(0xFFFFFFFF),
-        ),
-        child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              txt,
-              style: TextStyle(
-                color: T? Colors.white : Colors.black.withOpacity(0.6),
-                fontSize: 12,
-                fontFamily: "Helvetica_Bold",
-              ),
-            ),
-            
-            const SizedBox(width: 10,),
-            
-            T ?
-            const Icon(CupertinoIcons.minus,size: 20,color: Colors.white,)
-                :
-            Icon(CupertinoIcons.add,size: 20,color: Colors.black.withOpacity(0.5),)
-          ],
-        ),
-      ),
     );
   }
 }

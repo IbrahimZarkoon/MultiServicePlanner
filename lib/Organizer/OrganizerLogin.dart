@@ -3,6 +3,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_service_planner/Enums/Colors.dart';
+import 'package:multi_service_planner/modals/OrgProvider.dart';
+import 'package:provider/provider.dart';
 import '../CustomWidgets/Headings.dart';
 import '../Screens/Dashboard.dart';
 import '../Screens/Login.dart';
@@ -31,8 +34,14 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
   bool rememberMe = false;
 
+  bool circularProg = false;
+
+
   void SignUpButton(context) async {
     print("SIGIN FUNC");
+    setState(() {
+      circularProg = true;
+    });
     try {
       var url = await Uri.parse(
           'https://everythingforpageants.com/msp/api/login.php');
@@ -47,12 +56,20 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
       // _signInApiResponse = SignInResp.fromJson(decodedJson);
 
       if (decodedJson["Status"] == "200") {
+
+        Provider.of<OrgProvider>(context,listen:false).orgID = decodedJson["Id"];
+
+        print("${Provider.of<OrgProvider>(context,listen:false).orgID}");
         Navigator.push(
             context,
             CupertinoPageRoute(
                 builder: (BuildContext context) => OrgDashboard(
                       orgTabIndex: 0,
                     )));
+      }
+      else{
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response.body}")));
+        
       }
     } catch (e) {
       print("An error occurred: $e");
@@ -69,7 +86,11 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
       // Show the custom Snackbar
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
     }
+    setState(() {
+      circularProg = false;
+    });
   }
 
   @override
@@ -433,7 +454,13 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                         ),
                       ],
                     ),
-                  ))
+                  )),
+
+              circularProg? Positioned(
+
+                  top: MediaQuery.sizeOf(context).height/2,
+                left: 0,right: 0,
+                  child: Center(child: CircularProgressIndicator(color: appPrimary,),)) : SizedBox()
             ]),
       ),
     );

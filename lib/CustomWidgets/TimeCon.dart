@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker_bdaya/flutter_datetime_picker_bdaya.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_service_planner/Enums/Colors.dart';
+import 'package:provider/provider.dart';
 
 import '../Organizer/Widgets/CustomPicker.dart';
+import '../modals/OrganizeEventProvider.dart';
 
 class TimeSelectionContainer extends StatefulWidget {
   @override
@@ -36,6 +39,8 @@ class _TimeSelectionContainerState extends State<TimeSelectionContainer> {
 
   @override
   Widget build(BuildContext context) {
+    var OrgEventProv = Provider.of<OrganizeEventProvider>(context,listen:false);
+
     return Container(
       //padding: EdgeInsets.all(16.0),
       child: Column(
@@ -72,6 +77,8 @@ class _TimeSelectionContainerState extends State<TimeSelectionContainer> {
                 setState(() {
                   _selectedTime = pickedTime;
                 });
+                OrgEventProv.timings = DateFormat('h:mm a').format(_selectedTime);
+
               }
             },
             // onTap: () async {
@@ -125,7 +132,7 @@ class _TimeSelectionContainerState extends State<TimeSelectionContainer> {
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: const Color(0xffff1f6f),
+                        color: appPrimary,
                       ),
                       padding: const EdgeInsets.only(left: 20,right: 20,top: 8,bottom: 8),
                       margin: const EdgeInsets.only(top: 5,bottom: 5,right: 5),

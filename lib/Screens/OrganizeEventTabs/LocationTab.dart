@@ -1,9 +1,12 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../CustomWidgets/TimeCon.dart';
 import '../../Enums/Colors.dart';
+import '../../Organizer/Widgets/PriceRangeFilter.dart';
+import '../../modals/OrganizeEventProvider.dart';
 
 class LocationTab extends StatefulWidget {
   const LocationTab({Key? key}) : super(key: key);
@@ -12,34 +15,32 @@ class LocationTab extends StatefulWidget {
   State<LocationTab> createState() => _LocationTabState();
 }
 
-class _LocationTabState extends State<LocationTab> with SingleTickerProviderStateMixin {
-
+class _LocationTabState extends State<LocationTab>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
   FocusNode F1 = FocusNode();
   TextEditingController T1 = TextEditingController();
 
-
   ScrollController _scrollC = ScrollController();
 
   bool Days = false;
   bool Weekly = false;
 
-  List<bool> weekDays = [false,false,false,false,false,false,false];
+  List<bool> weekDays = [false, false, false, false, false, false, false];
 
-  List<bool> _week = [false,false,false,false];
-
-
+  List<bool> _week = [false, false, false, false];
 
   bool _showTextField = false;
 
   bool repetative = false;
   int _selectedOptionIndex = 0;
-  final Map<int, Widget> _options = {
-    0: const Text('In door'),
-    1: const Text('Out door'),
-  };
+
+  // final Map<int, Widget> _options = {
+  //   0: const Text('In door'),
+  //   1: const Text('Out door'),
+  // };
 
   List<DateTime?> _dialogCalendarPickerValue = [
     // DateTime(2021, 8, 10),
@@ -48,8 +49,6 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
 
   bool _tap = false;
 
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -57,7 +56,8 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 750), // Adjust the duration of the animation.
+      duration: const Duration(
+          milliseconds: 750), // Adjust the duration of the animation.
     );
 
     _animation = Tween<Offset>(
@@ -83,14 +83,24 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
     super.dispose();
   }
 
-  List<String> days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  List<String> week = ['Week 1','Week 2','Week 3','Week 4'];
+  List<String> days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  List<String> week = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
 
   @override
   Widget build(BuildContext context) {
+
+    var OrgEventProv = Provider.of<OrganizeEventProvider>(context,listen:false);
+
     return GestureDetector(
-      onTap: ()
-      {
+      onTap: () {
         setState(() {
           _tap = false;
           F1.unfocus();
@@ -110,45 +120,54 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
               //crossAxisAlignment: CrossAxisAlignment.start,
 
               children: [
+                Text(
+                  "Where will your event be located?",
+                  style: TextStyle(
+                      fontFamily: "Helvetica_Bold",
+                      color: Colors.black.withOpacity(0.8),
+                      fontSize: 32),
+                ),
 
-                Text("Where will your event be located?",
-                style: TextStyle(
-                  fontFamily: "Helvetica_Bold",
-                  color: Colors.black.withOpacity(0.8),
-                  fontSize: 32
-                ),),
+                const SizedBox(
+                  height: 15,
+                ),
 
-                const SizedBox(height: 15,),
+                Text(
+                  "MSP events meet locally, in person and online. We'll connect you with people in your area and more can join you online.",
+                  style: TextStyle(
+                      color: Colors.black.withOpacity(0.8), fontSize: 15),
+                ),
 
-                Text("Techonza events meet locally, in person and online. We'll connect you with people in your area and more can join you online.",
-                style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 15),),
+                //Toggle Indoor/ Outdoor
+                // Container(
+                //   width: MediaQuery.of(context).size.width,
+                //   decoration: const BoxDecoration(),
+                //   margin: const EdgeInsets.only(top: 15,bottom: 15),
+                //
+                //   child: CupertinoSegmentedControl(
+                //
+                //     padding: const EdgeInsets.all(0),
+                //     selectedColor: appPrimary,
+                //     unselectedColor: const Color(0xffffffff),
+                //     borderColor: appPrimary,
+                //     children: _options,
+                //     groupValue: _selectedOptionIndex,
+                //     onValueChanged: (value) {
+                //       setState(() {
+                //         _selectedOptionIndex = value;
+                //       });
+                //     },
+                //   ),
+                // ),
 
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(),
-                  margin: const EdgeInsets.only(top: 15,bottom: 15),
-
-                  child: CupertinoSegmentedControl(
-
-                    padding: const EdgeInsets.all(0),
-                    selectedColor: appPrimary,
-                    unselectedColor: const Color(0xffffffff),
-                    borderColor: appPrimary,
-                    children: _options,
-                    groupValue: _selectedOptionIndex,
-                    onValueChanged: (value) {
-                      setState(() {
-                        _selectedOptionIndex = value;
-                      });
-                    },
-                  ),
+                const SizedBox(
+                  height: 10,
                 ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Select location",
-
+                    Text("Enter location",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.8),
@@ -159,70 +178,84 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
 
                 //Location Container
                 GestureDetector(
-                  onTap: ()
-                  {
+                  onTap: () {
                     setState(() {
                       _tap = true;
                     });
                   },
                   child: Container(
-                    margin: const EdgeInsets.only(top: 10,bottom: 15),
-                    padding: const EdgeInsets.only(left: 15,right: 15,top: 0,bottom: 0),
-                    decoration: BoxDecoration(border: Border.all(color: _tap? appPrimary : Colors.black.withOpacity(0.5)),
-                    borderRadius: BorderRadius.circular(8)
-                    ),
+                    margin: const EdgeInsets.only(top: 10, bottom: 15),
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 0, bottom: 0),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: _tap
+                                ? appPrimary
+                                : Colors.black.withOpacity(0.5)),
+                        borderRadius: BorderRadius.circular(8)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-
-                        Icon(CupertinoIcons.search,size: 20,color: _tap? appPrimary : Colors.black.withOpacity(0.5),),
-
-                        const SizedBox(width: 15,),
-
+                        Icon(
+                          CupertinoIcons.location,
+                          size: 20,
+                          color:
+                              _tap ? appPrimary : Colors.black.withOpacity(0.5),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
                         Expanded(
                             child: TextField(
-                              onTap: ()
+                          onTap: () {
+                            setState(() {
+                              _tap = true;
+                            });
+
+                          },
+                          focusNode: F1,
+                          controller: T1,
+                          cursorColor: appPrimary,
+                              onChanged: (String value)
                               {
-                                setState(() {
-                                  _tap = true;
-                                });
+                                OrgEventProv.location = T1.text;
                               },
-                              focusNode: F1,
-                              controller: T1,
-                              cursorColor: appPrimary,
-                              style: TextStyle(fontSize: 13,color: Colors.black.withOpacity(0.8)),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Search cities or ZIP codes",
-                                hintStyle: TextStyle(color: Colors.black.withOpacity(0.5),fontSize: 13),
-
-                              ),
-                            )
-                        ),
-
-                        _tap?
-                            InkWell(
-                                onTap: ()
-                                {
+                          style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.black.withOpacity(0.8)),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Search cities or ZIP codes",
+                            hintStyle: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                                fontSize: 13),
+                          ),
+                        )),
+                        _tap
+                            ? InkWell(
+                                onTap: () {
                                   setState(() {
                                     T1.text = "";
                                     _tap = false;
                                     F1.unfocus();
-
                                   });
                                 },
-                                child: Icon(CupertinoIcons.xmark_circle_fill,color: Colors.black.withOpacity(0.5),size: 20,))
-                            :
-                        const SizedBox(),
+                                child: Icon(
+                                  CupertinoIcons.xmark_circle_fill,
+                                  color: Colors.black.withOpacity(0.5),
+                                  size: 20,
+                                ))
+                            : const SizedBox(),
                       ],
                     ),
                   ),
                 ),
 
-                dayTab(context),
 
                 TimeSelectionContainer(),
+
+                PriceRangeFilter()
 
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.start,
@@ -295,163 +328,162 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                 //     ),
                 //   ),
                 // ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                  children: [
-
-                    Text("Repetative event",style: TextStyle(
-                        color: Colors.black.withOpacity(repetative? 0.8 : 0.4),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16)),
-
-                    CupertinoSwitch(value: repetative, activeColor:  appPrimary,onChanged: (value) {
-                      setState(() {
-                        repetative = value;
-                        if(value == true)_scrollC.animateTo(_scrollC.position.maxScrollExtent+MediaQuery.of(context).size.height*0.1, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
-
-                      });
-
-                    }
-
-    )
-
-                  ]
-                ),
-
-                repetative? Row(
-
-                  //Days Checkbox
-                  children: [
-                    Expanded(
-                      child: CheckboxListTile(
-                        checkboxShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-                        title: Text('Days',style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 13),),
-                        value: Days,
-                        activeColor:  appPrimary,
-                        onChanged: (value) {
-                          setState(() {
-                            Days = value!;
-                            Weekly = false;
-                            _showTextField = Days || Weekly ;
-                            if(Days == true)_scrollC.animateTo(_scrollC.position.maxScrollExtent+MediaQuery.of(context).size.height*0.3, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
-                          });
-                        },
-                      ),
-                    ),
-
-                    Container(
-                      width: 1,
-                      height: 20,
-                      color: Colors.black.withOpacity(0.15),
-                    ),
-                    
-                    Expanded(
-                      child: CheckboxListTile(
-                        activeColor: appPrimary,
-                        checkboxShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-
-                        title: Text('Weekly',style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 13),),
-                        value: Weekly,
-                        onChanged: (value) {
-                          setState(() {
-                            Weekly = value!;
-                            Days = false;
-                            _showTextField = Days || Weekly ;
-                            if(Weekly == true)_scrollC.animateTo(_scrollC.position.maxScrollExtent+MediaQuery.of(context).size.height*0.2, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
-                          });
-                        },
-                      ),
-                    ),
-
-                  ],
-                ) : const SizedBox(),
-
-                _showTextField ?
-                Days?
-
-                    //Days Column
-                Wrap(
-                  spacing: 15, // spacing between the interest containers
-                  runSpacing: 15,
-                  children: [
-                    for (int index = 0; index < days.length; index++)
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            weekDays[index] = !weekDays[index];
-                          });
-                        },
-                        child: Container(
-                          constraints: const BoxConstraints(
-                            minWidth: 150, maxWidth: 160
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          margin: const EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: weekDays[index] ? appPrimary : Colors.black.withOpacity(0.6)
-                            ),
-                            color: weekDays[index] ?  appPrimary : Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "${days[index]}",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: weekDays[index] ? Colors.white : Colors.black.withOpacity(0.6),
-                                fontWeight:  FontWeight.bold
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                )
-                    :
-                    //Weeks Column
-                Wrap(
-                    spacing: 15, // spacing between the interest containers
-                    runSpacing: 15,
-                  children: [
-                    for (int index = 0; index < week.length; index++)
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _week[index] = !_week[index];
-                          });
-                        },
-                        child: Container(
-                          constraints: const BoxConstraints(
-                              minWidth: 150, maxWidth: 160
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          margin: const EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: _week[index] ? appPrimary : Colors.black.withOpacity(0.6)
-                            ),
-                            color: _week[index] ? appPrimary : Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "${week[index]}",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: _week[index] ? Colors.white : Colors.black.withOpacity(0.6),
-                                  fontWeight:  FontWeight.bold
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                )
-                    : const SizedBox(),
-
+                //
+                //             Row(
+                //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //
+                //               children: [
+                //
+                //                 Text("Repetative event",style: TextStyle(
+                //                     color: Colors.black.withOpacity(repetative? 0.8 : 0.4),
+                //                     fontWeight: FontWeight.bold,
+                //                     fontSize: 16)),
+                //
+                //                 CupertinoSwitch(value: repetative, activeColor:  appPrimary,onChanged: (value) {
+                //                   setState(() {
+                //                     repetative = value;
+                //                     if(value == true)_scrollC.animateTo(_scrollC.position.maxScrollExtent+MediaQuery.of(context).size.height*0.1, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+                //
+                //                   });
+                //
+                //                 }
+                //
+                // )
+                //
+                //               ]
+                //             ),
+                //
+                //             repetative? Row(
+                //
+                //               //Days Checkbox
+                //               children: [
+                //                 Expanded(
+                //                   child: CheckboxListTile(
+                //                     checkboxShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                //                     title: Text('Days',style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 13),),
+                //                     value: Days,
+                //                     activeColor:  appPrimary,
+                //                     onChanged: (value) {
+                //                       setState(() {
+                //                         Days = value!;
+                //                         Weekly = false;
+                //                         _showTextField = Days || Weekly ;
+                //                         if(Days == true)_scrollC.animateTo(_scrollC.position.maxScrollExtent+MediaQuery.of(context).size.height*0.3, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+                //                       });
+                //                     },
+                //                   ),
+                //                 ),
+                //
+                //                 Container(
+                //                   width: 1,
+                //                   height: 20,
+                //                   color: Colors.black.withOpacity(0.15),
+                //                 ),
+                //
+                //                 Expanded(
+                //                   child: CheckboxListTile(
+                //                     activeColor: appPrimary,
+                //                     checkboxShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                //
+                //                     title: Text('Weekly',style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 13),),
+                //                     value: Weekly,
+                //                     onChanged: (value) {
+                //                       setState(() {
+                //                         Weekly = value!;
+                //                         Days = false;
+                //                         _showTextField = Days || Weekly ;
+                //                         if(Weekly == true)_scrollC.animateTo(_scrollC.position.maxScrollExtent+MediaQuery.of(context).size.height*0.2, duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+                //                       });
+                //                     },
+                //                   ),
+                //                 ),
+                //
+                //               ],
+                //             ) : const SizedBox(),
+                //
+                //             _showTextField ?
+                //             Days?
+                //
+                //                 //Days Column
+                //             Wrap(
+                //               spacing: 15, // spacing between the interest containers
+                //               runSpacing: 15,
+                //               children: [
+                //                 for (int index = 0; index < days.length; index++)
+                //                   GestureDetector(
+                //                     onTap: () {
+                //                       setState(() {
+                //                         weekDays[index] = !weekDays[index];
+                //                       });
+                //                     },
+                //                     child: Container(
+                //                       constraints: const BoxConstraints(
+                //                         minWidth: 150, maxWidth: 160
+                //                       ),
+                //                       padding: const EdgeInsets.all(10),
+                //                       margin: const EdgeInsets.only(bottom: 10),
+                //                       decoration: BoxDecoration(
+                //                         border: Border.all(
+                //                           color: weekDays[index] ? appPrimary : Colors.black.withOpacity(0.6)
+                //                         ),
+                //                         color: weekDays[index] ?  appPrimary : Colors.white,
+                //                         borderRadius: BorderRadius.circular(8),
+                //                       ),
+                //                       child: Center(
+                //                         child: Text(
+                //                           "${days[index]}",
+                //                           style: TextStyle(
+                //                             fontSize: 12,
+                //                             color: weekDays[index] ? Colors.white : Colors.black.withOpacity(0.6),
+                //                             fontWeight:  FontWeight.bold
+                //                           ),
+                //                         ),
+                //                       ),
+                //                     ),
+                //                   ),
+                //               ],
+                //             )
+                //                 :
+                //                 //Weeks Column
+                //             Wrap(
+                //                 spacing: 15, // spacing between the interest containers
+                //                 runSpacing: 15,
+                //               children: [
+                //                 for (int index = 0; index < week.length; index++)
+                //                   GestureDetector(
+                //                     onTap: () {
+                //                       setState(() {
+                //                         _week[index] = !_week[index];
+                //                       });
+                //                     },
+                //                     child: Container(
+                //                       constraints: const BoxConstraints(
+                //                           minWidth: 150, maxWidth: 160
+                //                       ),
+                //                       padding: const EdgeInsets.all(10),
+                //                       margin: const EdgeInsets.only(bottom: 10),
+                //                       decoration: BoxDecoration(
+                //                         border: Border.all(
+                //                             color: _week[index] ? appPrimary : Colors.black.withOpacity(0.6)
+                //                         ),
+                //                         color: _week[index] ? appPrimary : Colors.white,
+                //                         borderRadius: BorderRadius.circular(8),
+                //                       ),
+                //                       child: Center(
+                //                         child: Text(
+                //                           "${week[index]}",
+                //                           style: TextStyle(
+                //                               fontSize: 12,
+                //                               color: _week[index] ? Colors.white : Colors.black.withOpacity(0.6),
+                //                               fontWeight:  FontWeight.bold
+                //                           ),
+                //                         ),
+                //                       ),
+                //                     ),
+                //                   ),
+                //               ],
+                //             )
+                //                 : const SizedBox(),
               ],
             ),
           ),
@@ -461,9 +493,9 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
   }
 
   String _getValueText(
-      CalendarDatePicker2Type datePickerType,
-      List<DateTime?> values,
-      ) {
+    CalendarDatePicker2Type datePickerType,
+    List<DateTime?> values,
+  ) {
     values =
         values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
     var valueText = (values.isNotEmpty ? values[0] : null)
@@ -473,8 +505,8 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
     if (datePickerType == CalendarDatePicker2Type.multi) {
       valueText = values.isNotEmpty
           ? values
-          .map((v) => v.toString().replaceAll('00:00:00.000', ''))
-          .join(', ')
+              .map((v) => v.toString().replaceAll('00:00:00.000', ''))
+              .join(', ')
           : 'null';
     } else if (datePickerType == CalendarDatePicker2Type.range) {
       if (values.isNotEmpty) {
@@ -493,9 +525,9 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
 
   _buildCalendarDialogButton() {
     const dayTextStyle =
-    TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
     final weekendTextStyle =
-    TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
+        TextStyle(color: Colors.grey[500], fontWeight: FontWeight.w600);
     final anniversaryTextStyle = TextStyle(
       color: Colors.red[400],
       fontWeight: FontWeight.w700,
@@ -637,32 +669,28 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
         },
         child: Container(
           margin: const EdgeInsets.only(top: 5, bottom: 5, right: 5),
-          padding: const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 8),
+          padding:
+              const EdgeInsets.only(left: 25, right: 25, top: 8, bottom: 8),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: appPrimary),
+              borderRadius: BorderRadius.circular(8), color: appPrimary),
           alignment: Alignment.center,
           child: const Text(
             "Select date",
             style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 12),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
           ),
         ));
   }
 
   ///
 
-  Widget dayTab(BuildContext context)
-  {
+  Widget dayTab(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         //Date Reserved Heading
         Container(
-          padding: const EdgeInsets.only(
-              top: 0, bottom: 10, left: 0, right: 0),
+          padding: const EdgeInsets.only(top: 0, bottom: 10, left: 0, right: 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -678,12 +706,8 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
 
         //Date Reserved Container
         Container(
-          constraints: const BoxConstraints(
-              maxHeight: 50
-
-          ),
-          margin: const EdgeInsets.only(
-              top: 0, bottom: 15, left: 0, right: 0),
+          constraints: const BoxConstraints(maxHeight: 50),
+          margin: const EdgeInsets.only(top: 0, bottom: 15, left: 0, right: 0),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
@@ -698,30 +722,23 @@ class _LocationTabState extends State<LocationTab> with SingleTickerProviderStat
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: RichText(
-                    text: TextSpan(
-                      children: <TextSpan>
-                        [
-                          TextSpan(
-                            text: _dialogCalendarPickerValue.isEmpty
-                                ? "Select date"
-                                :
-                            _dialogCalendarPickerValue.length == 2?
-                                 "${_dialogCalendarPickerValue[0]?.day ?? ""}-${_dialogCalendarPickerValue[0]?.month ?? ""}-${_dialogCalendarPickerValue[0]?.year ?? ""}"
-                                " - ${_dialogCalendarPickerValue[1]?.day ?? ""}-${_dialogCalendarPickerValue[1]?.month ?? ""}-${_dialogCalendarPickerValue[1]?.year ?? ""} "
-                                :
-                            "${_dialogCalendarPickerValue[0]?.day ?? ""}-${_dialogCalendarPickerValue[0]?.month ?? ""}-${_dialogCalendarPickerValue[0]?.year ?? ""}",
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black.withOpacity(0.8)),
-                          ),
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                        text: _dialogCalendarPickerValue.isEmpty
+                            ? "Select date"
+                            : _dialogCalendarPickerValue.length == 2
+                                ? "${_dialogCalendarPickerValue[0]?.day ?? ""}-${_dialogCalendarPickerValue[0]?.month ?? ""}-${_dialogCalendarPickerValue[0]?.year ?? ""}"
+                                    " - ${_dialogCalendarPickerValue[1]?.day ?? ""}-${_dialogCalendarPickerValue[1]?.month ?? ""}-${_dialogCalendarPickerValue[1]?.year ?? ""} "
+                                : "${_dialogCalendarPickerValue[0]?.day ?? ""}-${_dialogCalendarPickerValue[0]?.month ?? ""}-${_dialogCalendarPickerValue[0]?.year ?? ""}",
+                        style: TextStyle(
+                            fontSize: 12, color: Colors.black.withOpacity(0.8)),
+                      ),
 
-                        // TextSpan(
-                        //   text:
-                        //   " to ${_dialogCalendarPickerValue[1]?.day ?? ""}-${_dialogCalendarPickerValue[1]?.month ?? ""}-${_dialogCalendarPickerValue[1]?.year ?? ""}"
-                        // )
-                      ]
-                    ),
-
+                      // TextSpan(
+                      //   text:
+                      //   " to ${_dialogCalendarPickerValue[1]?.day ?? ""}-${_dialogCalendarPickerValue[1]?.month ?? ""}-${_dialogCalendarPickerValue[1]?.year ?? ""}"
+                      // )
+                    ]),
                   ),
                 ),
               ),
