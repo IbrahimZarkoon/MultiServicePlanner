@@ -7,23 +7,22 @@ import '../Providers/CacheManager.dart';
 import '../Response/ServiceResponse.dart';
 import '../Screens/SingleEvent.dart';
 
-Widget popularSlider(BuildContext context,List<ServiceResponse> data)
-{
+Widget popularSlider(BuildContext context, List<ServiceResponse> data) {
   return Container(
-    height: MediaQuery.of(context).size.height*0.22+30,
-
+    height: MediaQuery.of(context).size.height * 0.22 + 30,
     child: ListView.builder(
       itemCount: data.length ?? 0,
-      padding: const EdgeInsets.only(left: 15,right: 15),
+      padding: const EdgeInsets.only(left: 15, right: 15),
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
-      itemBuilder: (context,index)
-      {
-        return eventCon(context,"${data[index].venueName ?? ""}",
+      itemBuilder: (context, index) {
+        return eventCon(
+            context,
+            "${data[index].venueName ?? ""}",
             "Starting from ${data[index].priceRangeStart ?? ""} PKR",
-            "https://everythingforpageants.com/msp/${data[index].bannerImg ?? ""}",
-        );
+            "https://everythingforpageants.com/msp${data[index].bannerImg ?? ""}",
+            data?[index]);
       },
       // children: [
       //
@@ -49,20 +48,24 @@ Widget popularSlider(BuildContext context,List<ServiceResponse> data)
       //
       // ],
     ),
-
   );
 }
 
-Widget eventCon(BuildContext context,String title,String date, String image)
-{
+Widget eventCon(BuildContext context, String title, String date, String image,
+    ServiceResponse? data) {
   final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
 
   return InkWell(
-    onTap: ()
-    {
+    onTap: () {
       showModalBottomSheet(
           isScrollControlled: true,
-          context: context, builder: (BuildContext context) => SingleEvent(title: title, image: image, repeat: true,past: false,));
+          context: context,
+          builder: (BuildContext context) => SingleEvent(
+              title: title,
+              image: image,
+              repeat: true,
+              past: false,
+              data: data));
     },
     child: Container(
       margin: const EdgeInsets.only(right: 10),
@@ -72,21 +75,18 @@ Widget eventCon(BuildContext context,String title,String date, String image)
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 10),
-            width: MediaQuery.of(context).size.width/1.2,
-            height: MediaQuery.of(context).size.height*0.2,
+            width: MediaQuery.of(context).size.width / 1.2,
+            height: MediaQuery.of(context).size.height * 0.2,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                gradient: LinearGradient(
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withOpacity(0.8)
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter),
-                // image: DecorationImage(
-                //     image: NetworkImage(
-                //         image),
-                //     fit: BoxFit.cover)
+              borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                  colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter),
+              // image: DecorationImage(
+              //     image: NetworkImage(
+              //         image),
+              //     fit: BoxFit.cover)
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
@@ -100,11 +100,13 @@ Widget eventCon(BuildContext context,String title,String date, String image)
                     value: 5,
                   ),
                 ),
-                errorWidget: (context, url, error) => Icon(Icons.error,color: Color(0xff09426d),),
+                errorWidget: (context, url, error) => Icon(
+                  Icons.error,
+                  color: Color(0xff09426d),
+                ),
               ),
             ),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -112,13 +114,29 @@ Widget eventCon(BuildContext context,String title,String date, String image)
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(title,maxLines: 1,overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 14,fontWeight: FontWeight.bold,fontFamily: "Helvetica_Bold"),),
-
-                  const SizedBox(height: 2,),
-
-                  Text(date,maxLines: 1,overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.black.withOpacity(0.6),fontSize: 12,fontWeight: FontWeight.normal,fontFamily: ""),),
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Colors.black.withOpacity(0.8),
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Helvetica_Bold"),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    date,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Colors.black.withOpacity(0.6),
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: ""),
+                  ),
                 ],
               ),
               //

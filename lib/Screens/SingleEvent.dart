@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_service_planner/Response/ServiceResponse.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -19,20 +20,26 @@ import '../Providers/CacheManager.dart';
 import 'EventChatScreen.dart';
 
 class SingleEvent extends StatefulWidget {
-   SingleEvent({Key? key,required this.title,required this.image,required this.repeat, required this.past}) : super(key: key);
+  SingleEvent(
+      {Key? key,
+      required this.title,
+      required this.image,
+      required this.repeat,
+      required this.past,
+      required this.data})
+      : super(key: key);
 
-   String title;
-   String image;
-   bool repeat;
-   bool past;
+  String title;
+  String image;
+  bool repeat;
+  bool past;
+  ServiceResponse? data;
 
   @override
   State<SingleEvent> createState() => _SingleEventState();
 }
 
 class _SingleEventState extends State<SingleEvent> {
-
-
   int _currentSlide = 0;
 
   final List<String> carouselImages = [
@@ -40,8 +47,6 @@ class _SingleEventState extends State<SingleEvent> {
     "https://lh3.googleusercontent.com/p/AF1QipPxsk-qmz_4x7jmKMKhcHt-tVk3Qk-Y0QubWua8=s1360-w1360-h1020",
     "https://lh3.googleusercontent.com/p/AF1QipN1emH09g5A1MDC6DXc44yaZhqiOnosRZPqZQma=s1360-w1360-h1020",
   ];
-
-
 
   // void _openCalendar() {
   //   AndroidIntent intent = AndroidIntent(
@@ -60,7 +65,8 @@ class _SingleEventState extends State<SingleEvent> {
   void launchMap() async {
     const double latitude = 37.422;
     const double longitude = -122.084;
-    const String mapUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    const String mapUrl =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
 
     if (await canLaunch(mapUrl)) {
       await launch(mapUrl);
@@ -71,22 +77,20 @@ class _SingleEventState extends State<SingleEvent> {
 
   final ImagePicker _BannerPicker = ImagePicker();
 
-
-
   @override
   Widget build(BuildContext context) {
-    final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
+    final cacheManager =
+        Provider.of<CacheManagerProvider>(context).cacheManager;
 
-
-    return Stack(
-      children: [
+    return Stack(children: [
       Container(
         color: Colors.white,
         height: MediaQuery.of(context).size.height,
-        margin:  const EdgeInsets.only(top: kToolbarHeight - 20,),
+        margin: const EdgeInsets.only(
+          top: kToolbarHeight - 20,
+        ),
         child: Scaffold(
           backgroundColor: const Color(0xfff9f9f9),
-
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.white,
@@ -98,7 +102,7 @@ class _SingleEventState extends State<SingleEvent> {
                   color: Colors.black.withOpacity(0.8),
                 )),
             title: Text(
-              "Concert Details",
+              "Service Details",
               style: TextStyle(
                   color: Colors.black.withOpacity(0.8),
                   fontFamily: "Helvetica_Bold",
@@ -123,22 +127,20 @@ class _SingleEventState extends State<SingleEvent> {
               )
             ],
           ),
-
           body: Container(
             color: const Color(0xfff9f9f9),
             margin: const EdgeInsets.only(top: 0),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height*0.1),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.1),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   //Image Container
-                  Stack(
-                    children: [
+                  Stack(children: [
                     Container(
                       margin: const EdgeInsets.only(
                           left: 15, right: 15, bottom: 15, top: 15),
@@ -169,19 +171,26 @@ class _SingleEventState extends State<SingleEvent> {
                         ),
                       ),
                     ),
-
-                     widget.repeat? Positioned(
-                          left: 25,top: 25,
-                          child: Container(
-                            padding: EdgeInsets.only(top: 5,bottom: 5,left: 10,right: 10),
-                            decoration: BoxDecoration(
-                              color: Color(0xff09426d),
-                              borderRadius: BorderRadius.circular(15)
-                            ),
-                            child: const Text("Repetitive",style: TextStyle(color: Colors.white,fontWeight: FontWeight.normal,fontSize: 12),),
-                          )) : SizedBox()
-                  ]
-                  ),
+                    widget.repeat
+                        ? Positioned(
+                            left: 25,
+                            top: 25,
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10, right: 10),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff09426d),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: const Text(
+                                "Repetitive",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 12),
+                              ),
+                            ))
+                        : SizedBox()
+                  ]),
 
                   //Heading
                   Padding(
@@ -202,13 +211,18 @@ class _SingleEventState extends State<SingleEvent> {
                     padding: const EdgeInsets.only(
                         left: 15, right: 15, bottom: 10, top: 0),
                     child: Text(
-                      "\$90 - \$300",
+                      "${widget.data?.priceRangeStart} - ${widget.data?.priceRangeEnd} ",
                       textScaleFactor: 1.3,
                       style: TextStyle(
-                          decoration: widget.past? TextDecoration.lineThrough : TextDecoration.none,
-                          color: widget.past? Colors.black.withOpacity(0.4) : Colors.black.withOpacity(0.8),
+                          decoration: widget.past
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                          color: widget.past
+                              ? Colors.black.withOpacity(0.4)
+                              : Colors.black.withOpacity(0.8),
                           fontSize: 12,
-                          fontWeight: widget.past? FontWeight.normal : FontWeight.bold,
+                          fontWeight:
+                              widget.past ? FontWeight.normal : FontWeight.bold,
                           fontFamily: ""),
                     ),
                   ),
@@ -291,7 +305,7 @@ class _SingleEventState extends State<SingleEvent> {
                   Container(
                     padding: const EdgeInsets.only(
                         left: 15, right: 15, bottom: 0, top: 0),
-                    margin: const EdgeInsets.only(bottom: 0,top: 15),
+                    margin: const EdgeInsets.only(bottom: 0, top: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,19 +337,21 @@ class _SingleEventState extends State<SingleEvent> {
                             ),
 
                             //Details Column
-                            widget.repeat? Text(
-                              "Upto 150 Persons",
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6),
-                                  fontSize: 14,
-                                  fontFamily: ""),
-                            ) : Text(
-                              "250 / 500 / 1000 Persons",
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6),
-                                  fontSize: 14,
-                                  fontFamily: ""),
-                            ),
+                            widget.repeat
+                                ? Text(
+                                    "${widget.data?.capacity}",
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 14,
+                                        fontFamily: ""),
+                                  )
+                                : Text(
+                                    '${widget.data?.capacity}',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(0.6),
+                                        fontSize: 14,
+                                        fontFamily: ""),
+                                  ),
                           ],
                         ),
 
@@ -345,7 +361,8 @@ class _SingleEventState extends State<SingleEvent> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 10,bottom: 10,left: 15,right: 15),
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 15, right: 15),
                     child: shadowLine(context),
                   ),
 
@@ -386,7 +403,7 @@ class _SingleEventState extends State<SingleEvent> {
 
                             //Details Column
                             Text(
-                              "3 - 12 hours",
+                              "${widget.data?.timings}",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 14,
@@ -401,8 +418,8 @@ class _SingleEventState extends State<SingleEvent> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 10,bottom: 10,left: 15,right: 15),
-
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 15, right: 15),
                     child: shadowLine(context),
                   ),
 
@@ -443,7 +460,7 @@ class _SingleEventState extends State<SingleEvent> {
 
                             //Details Column
                             Text(
-                              "French Beach",
+                              "${widget.data?.location}",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 14,
@@ -458,12 +475,10 @@ class _SingleEventState extends State<SingleEvent> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 5,bottom: 0,left: 0,right: 0),
+                    padding: const EdgeInsets.only(
+                        top: 5, bottom: 0, left: 0, right: 0),
                     child: thickBorder(context),
                   ),
-
-
-
 
                   //About
                   Padding(
@@ -473,14 +488,16 @@ class _SingleEventState extends State<SingleEvent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-
-                        Text("About",overflow: TextOverflow.ellipsis,
-                            style:
-                            TextStyle(color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontFamily: "Helvetica_Bold", fontSize: 18)),
-
-
-                        const SizedBox(height: 15 ,),
-
+                        Text("About",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.8),
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Helvetica_Bold",
+                                fontSize: 18)),
+                        const SizedBox(
+                          height: 15,
+                        ),
                         RichText(
                           maxLines: maxDesc,
                           overflow: TextOverflow.ellipsis,
@@ -488,58 +505,58 @@ class _SingleEventState extends State<SingleEvent> {
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
-                                text: 'The Beach Hut is a popular beachside venue located in Karachi, Pakistan. It is known for providing a unique and relaxing experience for visitors who want to enjoy the beautiful Arabian Sea coastline. Heres some brief information about The Beach Hut:\n\n',
+                                text: "${widget.data?.about}",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: "",
                                     color: Colors.black.withOpacity(0.8)),
                               ),
-                              TextSpan(
-                                text: 'Location: \n',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "Helvetica_Bold",
-                                    color: Colors.black.withOpacity(0.8),fontSize: 13),
-                              ),
-                              TextSpan(
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.8),
-                                      fontSize: 13),
-                                  text:
-                                  'The Beach Hut is situated along the Clifton Beach, which is one of the most famous beach areas in Karachi. It offers stunning views of the sea and is a popular destination for both locals and tourists.'
-                              ),
+                              //   TextSpan(
+                              //     text: 'Location: \n',
+                              //     style: TextStyle(
+                              //         fontWeight: FontWeight.bold,
+                              //         fontFamily: "Helvetica_Bold",
+                              //         color: Colors.black.withOpacity(0.8),
+                              //         fontSize: 13),
+                              //   ),
+                              //   TextSpan(
+                              //       style: TextStyle(
+                              //           color: Colors.black.withOpacity(0.8),
+                              //           fontSize: 13),
+                              //       text:
+                              //           'The Beach Hut is situated along the Clifton Beach, which is one of the most famous beach areas in Karachi. It offers stunning views of the sea and is a popular destination for both locals and tourists.'),
 
-                              //Day 2
-                              TextSpan(
-                                text: '\n\nAmbiance:\n',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "Helvetica_Bold",
-                                    color: Colors.black.withOpacity(0.8),fontSize: 13),
-                              ),
-                              TextSpan(
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.8),
-                                      fontSize: 13),
-                                  text:
-                                  'The Beach Hut provides a laid-back and serene environment. Its a great place to unwind and escape from the hustle and bustle of the city. The venue is designed to offer a rustic and beachy atmosphere.'
-                              ),
+                              //   //Day 2
+                              //   TextSpan(
+                              //     text: '\n\nAmbiance:\n',
+                              //     style: TextStyle(
+                              //         fontWeight: FontWeight.bold,
+                              //         fontFamily: "Helvetica_Bold",
+                              //         color: Colors.black.withOpacity(0.8),
+                              //         fontSize: 13),
+                              //   ),
+                              //   TextSpan(
+                              //       style: TextStyle(
+                              //           color: Colors.black.withOpacity(0.8),
+                              //           fontSize: 13),
+                              //       text:
+                              //           'The Beach Hut provides a laid-back and serene environment. Its a great place to unwind and escape from the hustle and bustle of the city. The venue is designed to offer a rustic and beachy atmosphere.'),
 
-                              //Inclusions
-                              TextSpan(
-                                text: '\n\nFacilities:\n',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "Helvetica_Bold",
-                                    color: Colors.black.withOpacity(0.8),fontSize: 13),
-                              ),
-                              TextSpan(
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.8),
-                                      fontSize: 13),
-                                  text:
-                                  'Visitors to The Beach Hut can enjoy various amenities, including comfortable seating areas, beachside huts, and private cabanas. There are often beach games and activities available, making it a fun spot for families and friends.'
-                              ),
+                              //   //Inclusions
+                              //   TextSpan(
+                              //     text: '\n\nFacilities:\n',
+                              //     style: TextStyle(
+                              //         fontWeight: FontWeight.bold,
+                              //         fontFamily: "Helvetica_Bold",
+                              //         color: Colors.black.withOpacity(0.8),
+                              //         fontSize: 13),
+                              //   ),
+                              //   TextSpan(
+                              //       style: TextStyle(
+                              //           color: Colors.black.withOpacity(0.8),
+                              //           fontSize: 13),
+                              //       text:
+                              //           'Visitors to The Beach Hut can enjoy various amenities, including comfortable seating areas, beachside huts, and private cabanas. There are often beach games and activities available, making it a fun spot for families and friends.'),
                             ],
                           ),
                         ),
@@ -578,9 +595,13 @@ class _SingleEventState extends State<SingleEvent> {
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 15, right: 15, bottom: 15, top: 15),
-                    child: Text("Location",overflow: TextOverflow.ellipsis,
-                        style:
-                        TextStyle(color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontFamily: "Helvetica_Bold", fontSize: 18)),
+                    child: Text("Location",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.8),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Helvetica_Bold",
+                            fontSize: 18)),
                   ),
 
                   //Google Maps Column
@@ -612,7 +633,8 @@ class _SingleEventState extends State<SingleEvent> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: CachedNetworkImage(
-                                  imageUrl: "https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png",
+                                  imageUrl:
+                                      "https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png",
                                   cacheManager: cacheManager,
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) => const Center(
@@ -621,7 +643,11 @@ class _SingleEventState extends State<SingleEvent> {
                                       value: 5,
                                     ),
                                   ),
-                                  errorWidget: (context, url, error) => const Icon(Icons.error,color: Color(0xff09426d),),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    Icons.error,
+                                    color: Color(0xff09426d),
+                                  ),
                                 ),
                               ),
                             ),
@@ -670,7 +696,7 @@ class _SingleEventState extends State<SingleEvent> {
                               width: 5,
                             ),
                             Text(
-                              "Dr, Keamari, Karachi, Karachi City, Sindh",
+                              "${widget.data?.location}, Karachi City, Sindh",
                               style: TextStyle(
                                   color: Colors.black.withOpacity(0.6),
                                   fontSize: 13),
@@ -681,7 +707,6 @@ class _SingleEventState extends State<SingleEvent> {
                     ),
                   ),
 
-
                   thickBorder(context),
 
                   //Photos
@@ -691,13 +716,13 @@ class _SingleEventState extends State<SingleEvent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-
-                        Text("Photos",overflow: TextOverflow.ellipsis,
-                            style:
-                            TextStyle(color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontFamily: "Helvetica_Bold", fontSize: 18)),
-
-
-
+                        Text("Photos",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.8),
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Helvetica_Bold",
+                                fontSize: 18)),
                       ],
                     ),
                   ),
@@ -707,9 +732,10 @@ class _SingleEventState extends State<SingleEvent> {
                     children: [
                       CarouselSlider.builder(
                         itemCount: carouselImages.length,
-                        itemBuilder: (BuildContext context, int index,int a) {
+                        itemBuilder: (BuildContext context, int index, int a) {
                           return Container(
-                            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                            margin: const EdgeInsets.only(
+                                left: 15, right: 15, bottom: 15),
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -725,7 +751,9 @@ class _SingleEventState extends State<SingleEvent> {
                                     value: 5,
                                   ),
                                 ),
-                                errorWidget: (context, url, error) => const Icon(Icons.error, color: Color(0xff09426d)),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error,
+                                        color: Color(0xff09426d)),
                               ),
                             ),
                           );
@@ -754,13 +782,16 @@ class _SingleEventState extends State<SingleEvent> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
                             carouselImages.length,
-                                (index) => Container(
+                            (index) => Container(
                               width: 8,
                               height: 8,
-                              margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 0, horizontal: 4),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: _currentSlide == index ? const Color(0xff09426d) : Colors.grey,
+                                color: _currentSlide == index
+                                    ? const Color(0xff09426d)
+                                    : Colors.grey,
                               ),
                             ),
                           ),
@@ -773,7 +804,8 @@ class _SingleEventState extends State<SingleEvent> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                    margin:
+                        const EdgeInsets.only(left: 15, right: 15, bottom: 15),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
@@ -945,7 +977,6 @@ class _SingleEventState extends State<SingleEvent> {
                     ],
                   ),
 
-
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -966,178 +997,166 @@ class _SingleEventState extends State<SingleEvent> {
                           ],
                         ),
                       ),
-                      featuredSlider(context,[]),
+                      featuredSlider(context, []),
                     ],
                   ),
                 ],
               ),
             ),
           ),
-
         ),
       ),
-
-        Positioned(
-
-          bottom: 15,left: 15,right: 15,
-          child: Container(
+      Positioned(
+        bottom: 15,
+        left: 15,
+        right: 15,
+        child: Container(
           //height: MediaQuery.of(context).size.height * 0.1,
           decoration: const BoxDecoration(
-              color: Colors.transparent,
-
+            color: Colors.transparent,
           ),
           child: //Request to join Container
-          Row(
+              Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 flex: 2,
                 child: InkWell(
-                  onTap: () async{
+                  onTap: () async {
                     if (request == false && widget.repeat == false) {
-                      bool result = await showModalBottomSheet(context: context,
+                      bool result = await showModalBottomSheet(
+                          context: context,
                           isDismissible: true,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))
-
-                          ),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15))),
                           isScrollControlled: true,
                           builder: (BuildContext context) {
                             return repeatDaysBottomSheet();
                           });
-                      if(result == true)
-                      {
+                      if (result == true) {
                         setState(() {
                           request = true;
                         });
                       }
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-
-                          SnackBar(
-                            margin: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height-(2.75*kToolbarHeight),
-                            ),
-                            behavior: SnackBarBehavior.floating,
-                            showCloseIcon: true,
-                            content: const Text(
-                              "Your booking will be confirmed with in 24 hours.",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "Helvetica_Bold",
-                                fontSize: 12,
-                              ),
-                            ),
-                            backgroundColor: const Color(0xff09426d),
-                            duration: const Duration(seconds: 2),
-                          ));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        margin: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height -
+                              (2.75 * kToolbarHeight),
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                        showCloseIcon: true,
+                        content: const Text(
+                          "Your booking will be confirmed with in 24 hours.",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Helvetica_Bold",
+                            fontSize: 12,
+                          ),
+                        ),
+                        backgroundColor: const Color(0xff09426d),
+                        duration: const Duration(seconds: 2),
+                      ));
                     }
 
-                    if(widget.repeat == true && request == false)
-                      {
-                       bool result = await showModalBottomSheet(context: context,
-                            isDismissible: true,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))
-
-                            ),
-                            isScrollControlled: true,
-                            builder: (BuildContext context) {
-                              return repeatDaysBottomSheet();
-                            });
-                       if(result == true)
-                       {
-                         setState(() {
-                           request = true;
-                         });
-                       }
-
-                       ScaffoldMessenger.of(context).showSnackBar(
-
-                           SnackBar(
-                             margin: EdgeInsets.only(
-                               bottom: MediaQuery.of(context).size.height-(2.75*kToolbarHeight),
-                             ),
-                             behavior: SnackBarBehavior.floating,
-                             showCloseIcon: true,
-                             content: const Text(
-                               "Your booking will be confirmed with in 24 hours.",
-                               style: TextStyle(
-                                 color: Colors.white,
-                                 fontFamily: "Helvetica_Bold",
-                                 fontSize: 12,
-                               ),
-                             ),
-                             backgroundColor: const Color(0xff09426d),
-                             duration: const Duration(seconds: 2),
-                           ));
+                    if (widget.repeat == true && request == false) {
+                      bool result = await showModalBottomSheet(
+                          context: context,
+                          isDismissible: true,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15))),
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return repeatDaysBottomSheet();
+                          });
+                      if (result == true) {
+                        setState(() {
+                          request = true;
+                        });
                       }
+
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        margin: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).size.height -
+                              (2.75 * kToolbarHeight),
+                        ),
+                        behavior: SnackBarBehavior.floating,
+                        showCloseIcon: true,
+                        content: const Text(
+                          "Your booking will be confirmed with in 24 hours.",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Helvetica_Bold",
+                            fontSize: 12,
+                          ),
+                        ),
+                        backgroundColor: const Color(0xff09426d),
+                        duration: const Duration(seconds: 2),
+                      ));
+                    }
                   },
                   child: request
                       ? Container(
-                    constraints: BoxConstraints(
-                        maxHeight: 45
-                    ),
-                    padding: const EdgeInsets.only(
-                        top: 15, bottom: 15, left: 25, right: 25),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          spreadRadius: 1,
-                          blurRadius: 1.5,
-                          offset: const Offset(0,0)
+                          constraints: BoxConstraints(maxHeight: 45),
+                          padding: const EdgeInsets.only(
+                              top: 15, bottom: 15, left: 25, right: 25),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 1.5,
+                                  offset: const Offset(0, 0))
+                            ],
+                            borderRadius: BorderRadius.circular(13),
+                            color: const Color(0xff09426d),
+                          ),
+                          child: const Text(
+                            "Booked",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Helvetica_Bold",
+                                fontSize: 13),
+                          ),
                         )
-                      ],
-                      borderRadius: BorderRadius.circular(13),
-                      color: const Color(0xff09426d),
-                    ),
-                    child: const Text(
-                      "Booked",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Helvetica_Bold",
-                          fontSize: 13),
-                    ),
-                  )
                       : Container(
-                    constraints: BoxConstraints(
-                        maxHeight: 45
-                    ),
-                    padding: const EdgeInsets.only(
-                        top: 15, bottom: 15, left: 25, right: 25),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(13),
-                      color: const Color(0xff09426d),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 1.5,
-                            offset: const Offset(0,0)
-                        )
-                      ],
-                    ),
-                    child: const Text(
-                      "Book now",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Helvetica_Bold",
-                          fontSize: 13),
-                    ),
-                  ),
+                          constraints: BoxConstraints(maxHeight: 45),
+                          padding: const EdgeInsets.only(
+                              top: 15, bottom: 15, left: 25, right: 25),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(13),
+                            color: const Color(0xff09426d),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 1.5,
+                                  offset: const Offset(0, 0))
+                            ],
+                          ),
+                          child: const Text(
+                            "Book now",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "Helvetica_Bold",
+                                fontSize: 13),
+                          ),
+                        ),
                 ),
               ),
 
               //Chat Container
               InkWell(
-                onTap: () => Navigator.push(context,CupertinoPageRoute(builder: (_) => EventChatScreen())),
+                onTap: () => Navigator.push(context,
+                    CupertinoPageRoute(builder: (_) => EventChatScreen())),
                 child: Container(
-                  constraints: BoxConstraints(
-                    maxHeight: 45
-                  ),
+                  constraints: BoxConstraints(maxHeight: 45),
                   margin: EdgeInsets.only(left: 15),
                   padding: const EdgeInsets.only(
                       top: 10, bottom: 10, left: 25, right: 25),
@@ -1148,8 +1167,7 @@ class _SingleEventState extends State<SingleEvent> {
                           color: Colors.black.withOpacity(0.2),
                           spreadRadius: 1,
                           blurRadius: 1.5,
-                          offset: const Offset(0,0)
-                      )
+                          offset: const Offset(0, 0))
                     ],
                     borderRadius: BorderRadius.circular(13),
                     color: const Color(0xffffffff),
@@ -1157,11 +1175,14 @@ class _SingleEventState extends State<SingleEvent> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
-                      Icon(CupertinoIcons.chat_bubble_2,size: 20,color: Color(0xff09426d),),
-
-                      const SizedBox(width: 5,),
-
+                      Icon(
+                        CupertinoIcons.chat_bubble_2,
+                        size: 20,
+                        color: Color(0xff09426d),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
                       const Text(
                         "Chat",
                         style: TextStyle(
@@ -1173,12 +1194,11 @@ class _SingleEventState extends State<SingleEvent> {
                   ),
                 ),
               )
-
             ],
           ),
-        ),)
-    ]
-    );
+        ),
+      )
+    ]);
   }
 
   Widget reviewCon(
@@ -1244,8 +1264,8 @@ class _SingleEventState extends State<SingleEvent> {
               const Spacer(),
               Text(
                 "03/21/2023",
-                style:
-                TextStyle(color: Colors.black.withOpacity(0.4), fontSize: 12),
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.4), fontSize: 12),
               )
             ],
           ),
@@ -1260,7 +1280,9 @@ class _SingleEventState extends State<SingleEvent> {
             child: Text(
               title,
               style: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
             ),
           ),
 
@@ -1356,7 +1378,6 @@ class _SingleEventState extends State<SingleEvent> {
     );
   }
 
-
   Widget allReviews(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -1436,7 +1457,8 @@ class _SingleEventState extends State<SingleEvent> {
                         child: Text(
                           "20",
                           style: TextStyle(
-                              color: Colors.black.withOpacity(0.6), fontSize: 12),
+                              color: Colors.black.withOpacity(0.6),
+                              fontSize: 12),
                         )),
                     //linearStrokeCap: LinearStrokeCap.butt,
                     backgroundColor: const Color(0xffd5d5d5),
@@ -1475,7 +1497,8 @@ class _SingleEventState extends State<SingleEvent> {
                         child: Text(
                           "28",
                           style: TextStyle(
-                              color: Colors.black.withOpacity(0.6), fontSize: 12),
+                              color: Colors.black.withOpacity(0.6),
+                              fontSize: 12),
                         )),
                     //linearStrokeCap: LinearStrokeCap.butt,
                     backgroundColor: const Color(0xffd5d5d5),
@@ -1513,7 +1536,8 @@ class _SingleEventState extends State<SingleEvent> {
                         child: Text(
                           "0",
                           style: TextStyle(
-                              color: Colors.black.withOpacity(0.6), fontSize: 12),
+                              color: Colors.black.withOpacity(0.6),
+                              fontSize: 12),
                         )),
                     //linearStrokeCap: LinearStrokeCap.butt,
                     backgroundColor: const Color(0xffd5d5d5),
@@ -1551,7 +1575,8 @@ class _SingleEventState extends State<SingleEvent> {
                         child: Text(
                           "0",
                           style: TextStyle(
-                              color: Colors.black.withOpacity(0.6), fontSize: 12),
+                              color: Colors.black.withOpacity(0.6),
+                              fontSize: 12),
                         )),
                     //linearStrokeCap: LinearStrokeCap.butt,
                     backgroundColor: const Color(0xffd5d5d5),
@@ -1589,7 +1614,8 @@ class _SingleEventState extends State<SingleEvent> {
                         child: Text(
                           "0",
                           style: TextStyle(
-                              color: Colors.black.withOpacity(0.6), fontSize: 12),
+                              color: Colors.black.withOpacity(0.6),
+                              fontSize: 12),
                         )),
                     //linearStrokeCap: LinearStrokeCap.butt,
                     backgroundColor: const Color(0xffd5d5d5),
@@ -1709,8 +1735,8 @@ class _SingleEventState extends State<SingleEvent> {
                             padding: const EdgeInsets.only(left: 2),
                             child: Text(
                               "States where I pretty good price and a great size I use two a day and it's something we have to buy",
-                              style:
-                              TextStyle(color: Colors.black.withOpacity(0.4)),
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.4)),
                             ),
                           ),
 
@@ -1723,8 +1749,8 @@ class _SingleEventState extends State<SingleEvent> {
                             padding: const EdgeInsets.only(left: 2),
                             child: Text(
                               "Mark$index",
-                              style:
-                              TextStyle(color: Colors.black.withOpacity(0.4)),
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.4)),
                             ),
                           ),
 
@@ -1808,8 +1834,7 @@ class repeatDaysBottomSheet extends StatefulWidget {
 }
 
 class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
-
-  List<bool> weekDays = [false,false,false];
+  List<bool> weekDays = [false, false, false];
   List<String> days = ['Friday', 'Saturday', 'Sunday'];
 
   List<DateTime> _selectedDates = [];
@@ -1821,7 +1846,6 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
     // DateTime(2023, 8, 25),
   ];
 
-
   // Function to check if a date is Friday, Saturday, or Sunday
   bool _isSelectable(DateTime date) {
     return date.weekday == DateTime.friday ||
@@ -1830,9 +1854,9 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
   }
 
   String _getValueText(
-      CalendarDatePicker2Type datePickerType,
-      List<DateTime?> values,
-      ) {
+    CalendarDatePicker2Type datePickerType,
+    List<DateTime?> values,
+  ) {
     values =
         values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
     var valueText = (values.isNotEmpty ? values[0] : null)
@@ -1842,8 +1866,8 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
     if (datePickerType == CalendarDatePicker2Type.multi) {
       valueText = values.isNotEmpty
           ? values
-          .map((v) => v.toString().replaceAll('00:00:00.000', ''))
-          .join(', ')
+              .map((v) => v.toString().replaceAll('00:00:00.000', ''))
+              .join(', ')
           : ' ';
     } else if (datePickerType == CalendarDatePicker2Type.range) {
       if (values.isNotEmpty) {
@@ -1865,9 +1889,9 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
       selectableDayPredicate: (DateTime date) {
         // Allow selection only if the day is Friday, Saturday, or Sunday.
         return (date.weekday == DateTime.friday ||
-            date.weekday == DateTime.saturday ||
-            date.weekday == DateTime.sunday) &&
-                !date.isBefore(DateTime.now());
+                date.weekday == DateTime.saturday ||
+                date.weekday == DateTime.sunday) &&
+            !date.isBefore(DateTime.now());
       },
       calendarType: CalendarDatePicker2Type.multi,
       selectedDayHighlightColor: Color(0xff09426d),
@@ -1875,9 +1899,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-
         CalendarDatePicker2(
-
           config: config,
           value: _multiDatePickerValueWithDefaultValue,
           onValueChanged: (dates) =>
@@ -1885,11 +1907,16 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
         ),
         //const SizedBox(height: 10),
         Container(
-          padding: EdgeInsets.only(left: 15,right: 15),
+          padding: EdgeInsets.only(left: 15, right: 15),
           child: Wrap(
             runSpacing: 10,
             children: [
-               Text('Selected Dates: ',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8)),),
+              Text(
+                'Selected Dates: ',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black.withOpacity(0.8)),
+              ),
               const SizedBox(width: 10),
               Text(
                 _getValueText(
@@ -1908,26 +1935,18 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-
-
     return Container(
-
       decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))
-
-      ),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
-
             Headings(context, "Choose specific day(s)"),
 
             _buildDefaultMultiDatePickerWithValue(),
@@ -1985,12 +2004,11 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
             // ),
 
             InkWell(
-              onTap: ()
-              {
-                Navigator.pop(context,true);
+              onTap: () {
+                Navigator.pop(context, true);
               },
               child: Container(
-                margin: EdgeInsets.only(left: 15,right: 15,bottom: 15),
+                margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
                 padding: const EdgeInsets.only(
                     top: 15, bottom: 15, left: 25, right: 25),
                 alignment: Alignment.center,
@@ -2002,8 +2020,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
                         color: Colors.black.withOpacity(0.2),
                         spreadRadius: 1,
                         blurRadius: 1.5,
-                        offset: const Offset(0,0)
-                    )
+                        offset: const Offset(0, 0))
                   ],
                 ),
                 child: const Text(
@@ -2015,15 +2032,9 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
                 ),
               ),
             ),
-
-
-
           ],
         ),
       ),
-
     );
   }
 }
-
-
