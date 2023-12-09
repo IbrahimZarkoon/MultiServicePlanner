@@ -37,8 +37,8 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
   bool circularProg = false;
 
 
-  void SignUpButton(context) async {
-    print("SIGIN FUNC");
+  void LoginButton(context) async {
+    print("Login Function");
     setState(() {
       circularProg = true;
     });
@@ -58,6 +58,8 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
       if (decodedJson["Status"] == "200") {
 
         Provider.of<OrgProvider>(context,listen:false).orgID = decodedJson["Id"];
+        Provider.of<OrgProvider>(context,listen:false).serviceID = decodedJson["Service_id"];
+
 
         print("${Provider.of<OrgProvider>(context,listen:false).orgID}");
         Navigator.push(
@@ -353,7 +355,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                         //Login Container
                         GestureDetector(
                           onTap: () {
-                            SignUpButton(context);
+                            LoginButton(context);
                           },
                           child: Container(
                             margin: const EdgeInsets.only(

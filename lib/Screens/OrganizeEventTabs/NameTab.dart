@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_service_planner/modals/OrganizeEventProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../../CustomWidgets/TicketingDialog.dart';
+import '../../modals/RegisterOrgProvider.dart';
 
 class NameTab extends StatefulWidget {
   const NameTab({Key? key}) : super(key: key);
@@ -14,15 +17,22 @@ class NameTab extends StatefulWidget {
 }
 
 class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
-  FocusNode F1 = FocusNode();
-  TextEditingController T1 = TextEditingController();
+  FocusNode nameNode = FocusNode();
+  TextEditingController nameCon = TextEditingController();
+
+  FocusNode descNode = FocusNode();
+  TextEditingController descCon = TextEditingController();
+
+  FocusNode linkNode = FocusNode();
+  TextEditingController linkCon = TextEditingController();
+
 
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
   final ImagePicker _BannerPicker = ImagePicker();
   File? bannerIMG;
-  File? thumbIMG;
+  //File? thumbIMG;
 
   bool _tap = false;
   bool capacity1 = false;
@@ -51,16 +61,22 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
 
   List<PickedFile> images = [];
 
-  Future<void> _pickImage() async {
-    final pickedImage = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedImage != null) {
-      setState(() {
-        images.add(pickedImage);
-      });
-    }
-  }
+
+
+//   onPressed: () async {
+//   final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
+//   if (image == null) return;
+//
+//   // Convert XFile to File
+//   final imageTemp = File(image.path);
+//
+//   setState(() {
+//   bannerIMG = imageTemp; // Assign to the File variable
+//   orgEventProv.bannerImg = imageTemp;
+//   });
+//   Navigator.pop(context);
+//
+// },
 
   //bool _tap = false;
 
@@ -68,17 +84,23 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
   void dispose() {
     // TODO: implement dispose
     _controller.dispose();
-    F1.dispose();
-    T1.dispose();
+    // descCon.dispose();
+    // descNode.dispose();
+    // nameNode.dispose();
+    // nameCon.dispose();
+    // linkCon.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    var orgEventProv = Provider.of<OrganizeEventProvider>(context,listen: false);
+
     return GestureDetector(
       onTap: ()
       {
-        F1.unfocus();
+        nameNode.unfocus();
+        descNode.unfocus();
         _tap = false;
       },
       child: Container(
@@ -101,7 +123,7 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                       //Banner IMAGE
 
                       Container(
-                        margin: EdgeInsets.only(left: 15, right: 15, top: 15,bottom: MediaQuery.of(context).size.height*0.12),
+                        margin: EdgeInsets.only(left: 15, right: 15, top: 15,bottom: 15),
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.2,
                         decoration: BoxDecoration(
@@ -149,6 +171,7 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
 
                                           setState(() {
                                             bannerIMG = imageTemp; // Assign to the File variable
+                                            orgEventProv.bannerImg = imageTemp;
                                           });
                                           Navigator.pop(context);
 
@@ -165,6 +188,8 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
 
                                           setState(() {
                                             bannerIMG = imageTemp; // Assign to the File variable
+                                            orgEventProv.bannerImg = imageTemp;
+
                                           });
                                           Navigator.pop(context);
 
@@ -206,124 +231,124 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                               ),
                             ),
                           )),
-
-                      //Thumb IMAGE
-                      Positioned(
-                          bottom: 0,left: MediaQuery.of(context).size.width/3.3,
-                          child: InkWell(
-
-                            child: Column(
-
-                              children: [
-
-                                //ImageCon
-                                Container(
-                                  width: 125,
-                                  height: 125,
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xfff8f7f7),
-                                      borderRadius: BorderRadius.circular(3),
-                                      // image: const DecorationImage(
-                                      //     image: NetworkImage(
-                                      //         "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
-                                      //     fit: BoxFit.contain),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black.withOpacity(0.2),
-                                            offset: const Offset(0, 0),
-                                            spreadRadius: 1,
-                                            blurRadius: 1.5)
-                                      ]),
-                                  child: thumbIMG != null ? Image.file(thumbIMG!,fit: BoxFit.cover,) : Image.network("https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png",fit: BoxFit.contain,),
-
-                                ),
-
-                                //Update Con
-                                InkWell(
-                                  onTap: ()
-                                  {
-                                    showCupertinoModalPopup(
-                                        context: context, builder: (BuildContext context)
-                                    {
-                                      return CupertinoActionSheet(
-                                        title: const Text("Edit Photo"),
-                                        cancelButton: CupertinoActionSheetAction(
-                                          onPressed: ()
-                                          {
-                                            Navigator.pop(context);
-                                          }, child: const Text("Cancel"),
-                                        ),
-                                        actions: [
-                                          CupertinoActionSheetAction(
-                                              onPressed: () async {
-                                                final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
-                                                if (image == null) return;
-
-                                                // Convert XFile to File
-                                                final imageTemp = File(image.path);
-
-                                                setState(() {
-                                                  thumbIMG = imageTemp; // Assign to the File variable
-                                                });
-                                                Navigator.pop(context);
-
-                                              },
-                                              child: const Text("Choose Photo")),
-
-                                          CupertinoActionSheetAction(
-                                              onPressed: () async {
-                                                final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
-                                                if (image == null) return;
-
-                                                // Convert XFile to File
-                                                final imageTemp = File(image.path);
-
-                                                setState(() {
-                                                  thumbIMG = imageTemp; // Assign to the File variable
-                                                });
-                                                Navigator.pop(context);
-
-                                              },
-                                              child: const Text("Take Photo")),
-
-                                        ],
-                                      );
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(6),
-                                    decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.2),
-                                            offset: const Offset(0,0),
-                                            blurRadius: 1.5,
-                                            spreadRadius: 1,
-                                          )
-                                        ],
-                                        color: Colors.white,
-                                        borderRadius: const BorderRadius.only(bottomRight: Radius.circular(3),bottomLeft: Radius.circular(3))
-
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-
-                                        Icon(CupertinoIcons.camera,size: 20,color: Colors.black.withOpacity(0.6),),
-
-                                        const SizedBox(width: 10,),
-
-                                        Text("Update Thumb",style: TextStyle(
-                                            color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "Helvetica_Bold"
-                                        ),)
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
+                      //
+                      // //Thumb IMAGE
+                      // Positioned(
+                      //     bottom: 0,left: MediaQuery.of(context).size.width/3.3,
+                      //     child: InkWell(
+                      //
+                      //       child: Column(
+                      //
+                      //         children: [
+                      //
+                      //           //ImageCon
+                      //           Container(
+                      //             width: 125,
+                      //             height: 125,
+                      //             decoration: BoxDecoration(
+                      //                 color: const Color(0xfff8f7f7),
+                      //                 borderRadius: BorderRadius.circular(3),
+                      //                 // image: const DecorationImage(
+                      //                 //     image: NetworkImage(
+                      //                 //         "https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png"),
+                      //                 //     fit: BoxFit.contain),
+                      //                 boxShadow: [
+                      //                   BoxShadow(
+                      //                       color: Colors.black.withOpacity(0.2),
+                      //                       offset: const Offset(0, 0),
+                      //                       spreadRadius: 1,
+                      //                       blurRadius: 1.5)
+                      //                 ]),
+                      //             child: thumbIMG != null ? Image.file(thumbIMG!,fit: BoxFit.cover,) : Image.network("https://img.icons8.com/?size=512&id=bjHuxcHTNosO&format=png",fit: BoxFit.contain,),
+                      //
+                      //           ),
+                      //
+                      //           //Update Con
+                      //           InkWell(
+                      //             onTap: ()
+                      //             {
+                      //               showCupertinoModalPopup(
+                      //                   context: context, builder: (BuildContext context)
+                      //               {
+                      //                 return CupertinoActionSheet(
+                      //                   title: const Text("Edit Photo"),
+                      //                   cancelButton: CupertinoActionSheetAction(
+                      //                     onPressed: ()
+                      //                     {
+                      //                       Navigator.pop(context);
+                      //                     }, child: const Text("Cancel"),
+                      //                   ),
+                      //                   actions: [
+                      //                     CupertinoActionSheetAction(
+                      //                         onPressed: () async {
+                      //                           final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
+                      //                           if (image == null) return;
+                      //
+                      //                           // Convert XFile to File
+                      //                           final imageTemp = File(image.path);
+                      //
+                      //                           setState(() {
+                      //                             thumbIMG = imageTemp; // Assign to the File variable
+                      //                           });
+                      //                           Navigator.pop(context);
+                      //
+                      //                         },
+                      //                         child: const Text("Choose Photo")),
+                      //
+                      //                     CupertinoActionSheetAction(
+                      //                         onPressed: () async {
+                      //                           final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
+                      //                           if (image == null) return;
+                      //
+                      //                           // Convert XFile to File
+                      //                           final imageTemp = File(image.path);
+                      //
+                      //                           setState(() {
+                      //                             thumbIMG = imageTemp; // Assign to the File variable
+                      //                           });
+                      //                           Navigator.pop(context);
+                      //
+                      //                         },
+                      //                         child: const Text("Take Photo")),
+                      //
+                      //                   ],
+                      //                 );
+                      //               });
+                      //             },
+                      //             child: Container(
+                      //               padding: const EdgeInsets.all(6),
+                      //               decoration: BoxDecoration(
+                      //                   boxShadow: [
+                      //                     BoxShadow(
+                      //                       color: Colors.black.withOpacity(0.2),
+                      //                       offset: const Offset(0,0),
+                      //                       blurRadius: 1.5,
+                      //                       spreadRadius: 1,
+                      //                     )
+                      //                   ],
+                      //                   color: Colors.white,
+                      //                   borderRadius: const BorderRadius.only(bottomRight: Radius.circular(3),bottomLeft: Radius.circular(3))
+                      //
+                      //               ),
+                      //               child: Row(
+                      //                 mainAxisAlignment: MainAxisAlignment.start,
+                      //                 crossAxisAlignment: CrossAxisAlignment.center,
+                      //                 children: [
+                      //
+                      //                   Icon(CupertinoIcons.camera,size: 20,color: Colors.black.withOpacity(0.6),),
+                      //
+                      //                   const SizedBox(width: 10,),
+                      //
+                      //                   Text("Update Thumb",style: TextStyle(
+                      //                       color: Colors.black.withOpacity(0.8),fontSize: 12,fontFamily: "Helvetica_Bold"
+                      //                   ),)
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     )),
                     ]
                 ),
 
@@ -368,8 +393,12 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                                   _tap = true;
                                 });
                               },
-                              focusNode: F1,
-                              controller: T1,
+                              onChanged: (String value)
+                              {
+                                orgEventProv.venueName = value;
+                              },
+                              focusNode: nameNode,
+                              controller: nameCon,
                               cursorColor: const Color(0xff009ed9),
                               style: TextStyle(fontSize: 16,color: Colors.black.withOpacity(0.8)),
                               decoration: InputDecoration(
@@ -386,9 +415,9 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                             onTap: ()
                             {
                               setState(() {
-                                T1.text = "";
+                                nameCon.text = "";
                                 _tap = false;
-                                F1.unfocus();
+                                nameNode.unfocus();
 
                               });
                             },
@@ -457,8 +486,12 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                                   _tap = true;
                                 });
                               },
-                              focusNode: F1,
-                              controller: T1,
+                              focusNode: descNode,
+                              controller: descCon,
+                              onChanged: (String value)
+                              {
+                                orgEventProv.desc = value;
+                              },
                               cursorColor: const Color(0xffff1f6f),
                               style: TextStyle(fontSize: 16,color: Colors.black.withOpacity(0.8)),
                               decoration: InputDecoration(
@@ -530,6 +563,7 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                             capacity1 = !capacity1;
                             capacity2 = false;
                             capacity3 = false;
+                            orgEventProv.capacity = "250";
                           });
 
 
@@ -569,6 +603,8 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                             capacity2 = !capacity2;
                             capacity1 = false;
                             capacity3 = false;
+                            orgEventProv.capacity = "500";
+
                           });
                         },
                         child: Row(
@@ -607,6 +643,8 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                             capacity3 = !capacity3;
                             capacity2 = false;
                             capacity1 = false;
+                            orgEventProv.capacity = "1000";
+
                           });
                         },
                         child: Row(
@@ -677,8 +715,12 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                                       _tap = true;
                                     });
                                   },
-                                  focusNode: F1,
-                                  controller: T1,
+                                  onChanged: (String value)
+                                  {
+                                    orgEventProv.link = value;
+                                  },
+                                  focusNode: linkNode,
+                                  controller: linkCon,
                                   cursorColor: const Color(0xff009ed9),
                                   style: TextStyle(fontSize: 13,color: Colors.black.withOpacity(0.8)),
                                   decoration: InputDecoration(
@@ -695,9 +737,9 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                                 onTap: ()
                                 {
                                   setState(() {
-                                    T1.text = "";
+                                    linkCon.text = "";
                                     _tap = false;
-                                    F1.unfocus();
+                                    linkNode.unfocus();
 
                                   });
                                 },
@@ -730,7 +772,56 @@ class _NameTabState extends State<NameTab> with SingleTickerProviderStateMixin {
                 ),
 
                 InkWell(
-                  onTap: _pickImage,
+                    onTap: ()
+                    {
+                      showCupertinoModalPopup(
+                          context: context, builder: (BuildContext context)
+                      {
+                        return CupertinoActionSheet(
+                          title: const Text("Edit Photo"),
+                          cancelButton: CupertinoActionSheetAction(
+                            onPressed: ()
+                            {
+                              Navigator.pop(context);
+                            }, child: const Text("Cancel"),
+                          ),
+                          actions: [
+                            CupertinoActionSheetAction(
+                                onPressed: () async {
+                                  final XFile? image = await _BannerPicker.pickImage(source: ImageSource.gallery);
+                                  if (image == null) return;
+
+                                  // Convert XFile to File
+                                  final imageTemp = File(image.path);
+
+                                  setState(() {
+                                    orgEventProv.relatedPics.add(image);
+                                  });
+                                  Navigator.pop(context);
+
+                                },
+                                child: const Text("Choose Photo")),
+
+                            CupertinoActionSheetAction(
+                                onPressed: () async {
+                                  final XFile? image = await _BannerPicker.pickImage(source: ImageSource.camera);
+                                  if (image == null) return;
+
+                                  // Convert XFile to File
+                                  final imageTemp = File(image.path);
+
+                                  setState(() {
+                                    orgEventProv.relatedPics.add(image);
+                                  });
+                                  Navigator.pop(context);
+
+                                },
+                                child: const Text("Take Photo")),
+
+                          ],
+                        );
+                      });
+                    },
                   child: Container(
                     margin: EdgeInsets.only(bottom: 15,top: 15,left: 2,right: 2),
                     padding: const EdgeInsets.all(10),

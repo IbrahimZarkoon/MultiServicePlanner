@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:multi_service_planner/modals/OrgProvider.dart';
 import 'package:multi_service_planner/modals/OrganizeEventProvider.dart';
 import 'package:multi_service_planner/modals/RegisterOrgProvider.dart';
+import 'package:multi_service_planner/modals/UserProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'Providers/CacheManager.dart';
 import 'Screens/SplashScreen.dart';
+import 'modals/AllServiceProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +26,10 @@ class MyApp extends StatelessWidget {
 
       providers: [
         ChangeNotifierProvider(create: (_) => OrgProvider()),
+    ChangeNotifierProvider(create: (_) => AllServiceProvider()),
+
+
+    ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => OrganizeEventProvider()),
         ChangeNotifierProvider(create: (_) => CacheManagerProvider()),
         ChangeNotifierProvider(create: (_) => RegisterOrgProvider())

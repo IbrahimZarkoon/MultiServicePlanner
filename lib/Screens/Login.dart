@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:multi_service_planner/modals/AllServiceProvider.dart';
+import 'package:multi_service_planner/modals/UserProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../Enums/Colors.dart';
 import '../Organizer/OrganizerLogin.dart';
@@ -45,6 +48,9 @@ class _LoginState extends State<Login> {
       // _signInApiResponse = SignInResp.fromJson(decodedJson);
 
       if (decodedJson["Status"] == "200") {
+
+        Provider.of<UserProvider>(context,listen:false).userID = decodedJson["Id"];
+        Provider.of<AllServiceProvider>(context,listen:false).fetchDataForAllItems();
         Navigator.push(
             context,
             CupertinoPageRoute(

@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_service_planner/Enums/Colors.dart';
+import 'package:multi_service_planner/Organizer/OrgScreens/Dashboard.dart';
+import 'package:multi_service_planner/modals/OrgProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,56 +37,74 @@ class _OrganizeEventState extends State<OrganizeEvent> {
 
 
   //Post Request for Org Event
-  orgEventRequest(String fn, String email, String pass, String ph, String dob,XFile nicF,XFile nicB,XFile selfie, String role, String serviceID) async {
-    final String url = "https://everythingforpageants.com/msp/api/serviceDetails.php";
+  orgEventRequest(
+      String loc,String about, String link, String serviceId, String userId,
+      String title, String priceStart, String priceEnd, String capacity, String timings,XFile bannerImg,List<XFile> relatedPics, String venueName, String venueMapLink) async {
 
+    final String url = "https://everythingforpageants.com/msp/api/serviceDetails.php";
+  print(loc);
+  print(about);
+  print(serviceId);
+  print(userId);
+  print(title);
+  print(priceStart);
+  print(capacity);
+  print(timings);
+  print(bannerImg);
+  print(relatedPics);
+  print(venueName);
 
     var request =
-    http.MultipartRequest('POST', Uri.parse("https://everythingforpageants.com/msp/api/signup.php"));
+    http.MultipartRequest('POST', Uri.parse(url));
 
     // Add the file to the request as form data
-    request.fields['fullName'] = fn;
-    request.fields['email'] = email;
-    request.fields['password'] = pass;
-    request.fields['phone'] = ph;
-    request.fields['dob'] = dob;
-    request.fields['role'] = role;
-    request.fields['service_id'] = serviceID;
+    request.fields['location'] = loc;
+    request.fields['title'] = title;
+    request.fields['priceRangeStart'] = priceStart;
+    request.fields['priceRangeEnd'] = priceEnd;
+    request.fields['capacity'] = capacity;
+    request.fields['timings'] = timings;
+    request.fields['venueName'] = venueName;
+    request.fields['venueMapLink'] = venueMapLink;
+    request.fields['about'] = about;
+    request.fields['link'] = link;
+    request.fields['service_id'] = serviceId;
+    request.fields['user_id'] = userId;
 
 
-    if (nicF != null) {
+    if (bannerImg != null && bannerImg.path != '') {
       request.files.add(
-        await http.MultipartFile.fromPath('nicFront', nicF!.path),
+        await http.MultipartFile.fromPath('bannerImg', bannerImg.path),
       );
     }
+    if (relatedPics.isNotEmpty) {
+      for (XFile file in relatedPics) {
+        request.files.add(
+          await http.MultipartFile.fromPath('relatedPics[]', file.path),
+        );
+      }
+    }
+    // if(relatedPics.isEmpty)
+    //   {
+    //     request.files.add(
+    //       await http.MultipartFile.fromPath('relatedPics[]', ''),
+    //     );
+    //   }
 
-    if (nicB != null) {
-      request.files.add(
-        await http.MultipartFile.fromPath('nicBack', nicB!.path),
-      );
-    }
-    if (selfie != null) {
-      request.files.add(
-        await http.MultipartFile.fromPath('profilePic', selfie!.path),
-      );
-    }
     var response = await request.send();
 
-    // final response = await http.post(
-    //   Uri.parse(url),
-    //   body: jsonEncode(requestData),
-    // );
-
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print("Registration successful!");
-      print("Response: $response");
+      print("Event upload successful!");
+      print("Response: ${response.toString()}");
 
       await ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(milliseconds: 1500),content: Text("Event added successfully.")));
 
-      Navigator.push(context, CupertinoPageRoute(builder: (_) => const OrganizerLogin()));
+      Provider.of<OrganizeEventProvider>(context,listen:false).resetRegOrgProv();
+
+      Navigator.push(context, CupertinoPageRoute(builder: (_) =>  OrgDashboard(orgTabIndex: 0)));
 
     } else {
-      print("POST request failed with status: ${response.statusCode}");
+      print("Upload event request failed with status: ${response.statusCode}");
       print("Response: $response");
     }
   }
@@ -91,6 +113,7 @@ class _OrganizeEventState extends State<OrganizeEvent> {
   @override
   Widget build(BuildContext context) {
     var OrgEventProv = Provider.of<OrganizeEventProvider>(context,listen:false);
+    var OrgProv = Provider.of<OrgProvider>(context,listen:false);
 
 
     return Scaffold(
@@ -177,20 +200,28 @@ class _OrganizeEventState extends State<OrganizeEvent> {
 
                       }
                     });
-                    if(_selectedTab == 2) {
+                    if(_selectedTab == 2 && OrgEventProv.venueName != '') {
 
-                      // await regOrgRequest(
-                      // regOrgProv.fullName,
-                      // regOrgProv.email,
-                      // regOrgProv.password,
-                      // regOrgProv.phone,
-                      // regOrgProv.dob,
-                      // XFile(regOrgProv.nicFront.path),
-                      // XFile(regOrgProv.nicBack.path),
-                      // XFile(regOrgProv.selfie.path),
-                      // "2",
-                      // regOrgProv.serviceID
-                      // );
+                      print("SERVICE ID :: ${OrgProv.serviceID}");
+                      print("USER ID :: ${OrgProv.orgID}");
+
+
+                      await orgEventRequest(
+                          OrgEventProv.location,
+                          OrgEventProv.desc,
+                          OrgEventProv.link,
+                          OrgProv.serviceID,
+                          OrgProv.orgID,
+                          '',
+                          OrgEventProv.priceRangeStart,
+                          OrgEventProv.priceRangeEnd,
+                          OrgEventProv.capacity,
+                          OrgEventProv.timings,
+                          XFile(OrgEventProv.bannerImg.path),
+                          OrgEventProv.relatedPics,
+                          OrgEventProv.venueName,
+                          ''
+                      );
 
                     }
                   },

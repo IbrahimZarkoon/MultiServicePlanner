@@ -1472,16 +1472,16 @@ class _SingleServiceProviderState extends State<SingleServiceProvider> {
                 Headings(context, "Latest Events"),
 
                 //Upcoming Slider
-                popularSlider(context),
+                popularSlider(context,[]),
 
 
                 Headings(context, "Past Events"),
 
-                popularSlider(context),
+                popularSlider(context,[]),
 
                 Headings(context, "Cancelled Events"),
 
-                openAirSlider(context),
+                //openAirSlider(context),
 
 
               ]

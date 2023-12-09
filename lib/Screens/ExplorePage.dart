@@ -13,6 +13,7 @@ import '../CustomWidgets/Sort&Filter.dart';
 import '../CustomWidgets/TodaySlider.dart';
 import '../CustomWidgets/UpComingEventsSlider.dart';
 import '../Providers/CacheManager.dart';
+import '../modals/AllServiceProvider.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
@@ -100,6 +101,7 @@ class _ExplorePageState extends State<ExplorePage> {
 
     final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
 
+    var allServiceProv = Provider.of<AllServiceProvider>(context,listen:false);
 
     return SafeArea(
       child: Scaffold(
@@ -423,7 +425,7 @@ class _ExplorePageState extends State<ExplorePage> {
                 ),
 
                 //Popular now List View
-                popularSlider(context),
+                popularSlider(context,[]),
 
                 //Outdoors & Adventure
                 Padding(
@@ -433,7 +435,7 @@ class _ExplorePageState extends State<ExplorePage> {
                     style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16,fontFamily: "Helvetica_Bold"),),
                 ),
 
-                openAirSlider(context),
+                decorSlider(context,allServiceProv.decors ?? []),
 
                 //Learning
                 Padding(
@@ -443,7 +445,7 @@ class _ExplorePageState extends State<ExplorePage> {
                     style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16,fontFamily: "Helvetica_Bold"),),
                 ),
 
-                inDoorSlider(context),
+                CatererSlider(context,allServiceProv.caterers ?? []),
 
                 const SizedBox(height: kToolbarHeight/2,)
               ],

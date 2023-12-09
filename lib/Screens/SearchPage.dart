@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:multi_service_planner/Response/ServiceResponse.dart';
+import 'package:provider/provider.dart';
+
+import '../modals/AllServiceProvider.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key? key, required this.tag}) : super(key: key);
@@ -36,8 +40,59 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
+  List<ServiceResponse>? _searchedResults = [];
+
+
   @override
   Widget build(BuildContext context) {
+    var allServiceProv = Provider.of<AllServiceProvider>(context,listen:false);
+
+    List<ServiceResponse>? _searchedCaterers = allServiceProv.caterers
+        ?.where((caterers) =>
+    caterers.venueName != null &&
+        caterers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList();
+    List<ServiceResponse>? _searchedPhotographers = allServiceProv.photographers
+        ?.where((photographers) =>
+    photographers.venueName != null &&
+        photographers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList();
+    List<ServiceResponse>? _searchedDecors = allServiceProv.decors
+        ?.where((decors) =>
+    decors.venueName != null &&
+        decors.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList();
+    List<ServiceResponse>? _searchedVenues = allServiceProv.venues
+        ?.where((venues) =>
+    venues.venueName != null &&
+        venues.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList();
+
+
+    _searchedResults?.addAll(allServiceProv.caterers
+        ?.where((caterers) =>
+    caterers.venueName != null &&
+        caterers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList() ?? []);
+
+    _searchedResults?.addAll(allServiceProv.photographers
+        ?.where((photographers) =>
+    photographers.venueName != null &&
+        photographers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList() ?? []);
+
+    _searchedResults?.addAll(allServiceProv.decors
+        ?.where((decors) =>
+    decors.venueName != null &&
+        decors.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList() ?? []);
+
+    _searchedResults?.addAll(allServiceProv.venues
+        ?.where((venues) =>
+    venues.venueName != null &&
+        venues.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+        .toList() ?? []);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -104,7 +159,9 @@ class _SearchPageState extends State<SearchPage> {
                               controller: _searchCon,
                               //controller: _searchCon,
                               focusNode: _focusNode,
-                              //onChanged: (query) => setState(() {}),
+                              onChanged: (String value) => setState(() {
+                                _searchCon.text = value;
+                              }),
                               style: const TextStyle(color: Colors.black, height: 1, fontSize: 14),
                               decoration: const InputDecoration(
                                 //prefixIcon: Icon(Icons.search, color: Color(0xFF5D5D67), size: 23),
@@ -126,24 +183,23 @@ class _SearchPageState extends State<SearchPage> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           color: Colors.white,
-
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-
-            children: [
-
-              recentSearchCon("Top Service Provers"),
-
-              recentSearchCon("Venues Nearby"),
-
-              recentSearchCon("Party venues")
-
-            ],
+          child: _searchCon.text.isEmpty
+              ? SizedBox()
+              : ListView.builder(
+            itemCount: (_searchedVenues?.length ?? 0) +
+                (_searchedDecors?.length ?? 0) +
+                (_searchedPhotographers?.length ?? 0) +
+                (_searchedCaterers?.length ?? 0),
+            itemBuilder: (context, index) {
+              return recentSearchCon("${_searchedResults?[index].venueName ?? ""}");
+            },
           ),
-        ),
+        )
       ),
     );
   }
+
+
 
   Widget recentSearchCon(String title)
   {

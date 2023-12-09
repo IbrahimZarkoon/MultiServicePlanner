@@ -878,35 +878,12 @@ class _OrgHomePageState extends State<OrgHomePage> with SingleTickerProviderStat
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, index)
       {
-        return Row(
+        return Container(
+          //color: Colors.red,
+          padding: const EdgeInsets.only(top: 15,bottom: 0,right: 15,left: 15),
+          child: eventCon(context,
+              "https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnaHQlMjBjbHVifGVufDB8fDB8fHww&w=1000&q=80"),
 
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-
-          children: [
-
-            //Status Con
-            Container(
-              padding: const EdgeInsets.only(top: 15,left: 15,right: 15),
-              constraints: BoxConstraints(
-                  minWidth: MediaQuery.of(context).size.width/4
-              ),
-              child: eventStatus(context),
-            ),
-
-            //Event Con
-            Expanded(
-              flex: 2,
-              child: Container(
-                //color: Colors.red,
-                padding: const EdgeInsets.only(top: 15,bottom: 0,right: 15),
-                child: eventCon(context,
-                    "https://images.unsplash.com/photo-1556035511-3168381ea4d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmlnaHQlMjBjbHVifGVufDB8fDB8fHww&w=1000&q=80"),
-
-              ),
-            )
-
-          ],
         );
       }
     );

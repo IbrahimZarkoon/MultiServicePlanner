@@ -966,7 +966,7 @@ class _SingleEventState extends State<SingleEvent> {
                           ],
                         ),
                       ),
-                      featuredSlider(context),
+                      featuredSlider(context,[]),
                     ],
                   ),
                 ],

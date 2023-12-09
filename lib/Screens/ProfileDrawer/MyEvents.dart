@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../CustomWidgets/Headings.dart';
 import '../../CustomWidgets/TodaySlider.dart';
 import '../../CustomWidgets/UpComingEventsSlider.dart';
 import '../../Enums/Colors.dart';
+import '../../modals/AllServiceProvider.dart';
 
 class MyEvents extends StatefulWidget {
   const MyEvents({Key? key}) : super(key: key);
@@ -16,6 +18,8 @@ class MyEvents extends StatefulWidget {
 class _MyEventsState extends State<MyEvents> {
   @override
   Widget build(BuildContext context) {
+    var allServiceProv = Provider.of<AllServiceProvider>(context,listen:false);
+
     return Scaffold(
       backgroundColor: const Color(0xfffaf8f8),
       appBar: AppBar(
@@ -103,16 +107,16 @@ class _MyEventsState extends State<MyEvents> {
                 Headings(context, "UPCOMING EVENTS"),
 
                 //Upcoming Slider
-                popularSlider(context),
+                popularSlider(context,[]),
 
 
                 Headings(context, "PAST EVENTS"),
 
-                popularSlider(context),
+                popularSlider(context,[]),
 
                 Headings(context, "REJECTED EVENTS"),
 
-                openAirSlider(context),
+                decorSlider(context,allServiceProv.decors ?? []),
 
 
               ]

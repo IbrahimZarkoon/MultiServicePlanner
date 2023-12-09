@@ -102,16 +102,16 @@ class _OrgVenuesState extends State<OrgVenues> {
                 Headings(context, "UPCOMING VENUES"),
 
                 //Upcoming Slider
-                popularSlider(context),
+                popularSlider(context,[]),
 
 
                 Headings(context, "PAST VENUES"),
 
-                popularSlider(context),
+                popularSlider(context,[]),
 
                 Headings(context, "REJECTED VENUES"),
 
-                openAirSlider(context),
+                //openAirSlider(context),
 
 
               ]

@@ -20,8 +20,8 @@ class _LocationTabState extends State<LocationTab>
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
-  FocusNode F1 = FocusNode();
-  TextEditingController T1 = TextEditingController();
+  FocusNode locNode = FocusNode();
+  TextEditingController locCon = TextEditingController();
 
   ScrollController _scrollC = ScrollController();
 
@@ -52,8 +52,7 @@ class _LocationTabState extends State<LocationTab>
   @override
   void initState() {
     // TODO: implement initState
-    T1.text = "NewYork, NY";
-
+    locCon.text = "DHA, KARACHI";
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(
@@ -78,8 +77,8 @@ class _LocationTabState extends State<LocationTab>
   void dispose() {
     // TODO: implement dispose
     _controller.dispose();
-    F1.dispose();
-    T1.dispose();
+    // locNode.dispose();
+    // locCon.dispose();
     super.dispose();
   }
 
@@ -103,7 +102,7 @@ class _LocationTabState extends State<LocationTab>
       onTap: () {
         setState(() {
           _tap = false;
-          F1.unfocus();
+          locNode.unfocus();
         });
       },
       child: Container(
@@ -214,12 +213,12 @@ class _LocationTabState extends State<LocationTab>
                             });
 
                           },
-                          focusNode: F1,
-                          controller: T1,
+                          focusNode: locNode,
+                          controller: locCon,
                           cursorColor: appPrimary,
                               onChanged: (String value)
                               {
-                                OrgEventProv.location = T1.text;
+                                OrgEventProv.location = locCon.text;
                               },
                           style: TextStyle(
                               fontSize: 13,
@@ -236,9 +235,9 @@ class _LocationTabState extends State<LocationTab>
                             ? InkWell(
                                 onTap: () {
                                   setState(() {
-                                    T1.text = "";
+                                    locCon.text = "";
                                     _tap = false;
-                                    F1.unfocus();
+                                    locNode.unfocus();
                                   });
                                 },
                                 child: Icon(
