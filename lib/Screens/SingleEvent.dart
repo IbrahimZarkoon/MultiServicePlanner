@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:intl/intl.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -7,9 +10,11 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_service_planner/Response/ServiceResponse.dart';
+import 'package:multi_service_planner/modals/UserProvider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:url_launcher/url_launcher.dart';
 import 'package:android_intent/android_intent.dart';
@@ -1033,7 +1038,7 @@ class _SingleEventState extends State<SingleEvent> {
                                   topRight: Radius.circular(15))),
                           isScrollControlled: true,
                           builder: (BuildContext context) {
-                            return repeatDaysBottomSheet();
+                            return repeatDaysBottomSheet(widget.data);
                           });
                       if (result == true) {
                         setState(() {
@@ -1071,7 +1076,7 @@ class _SingleEventState extends State<SingleEvent> {
                                   topRight: Radius.circular(15))),
                           isScrollControlled: true,
                           builder: (BuildContext context) {
-                            return repeatDaysBottomSheet();
+                            return repeatDaysBottomSheet(widget.data);
                           });
                       if (result == true) {
                         setState(() {
@@ -1827,15 +1832,24 @@ class _SingleEventState extends State<SingleEvent> {
 }
 
 class repeatDaysBottomSheet extends StatefulWidget {
-  const repeatDaysBottomSheet({super.key});
+  ServiceResponse? data;
+  repeatDaysBottomSheet(this.data);
 
   @override
   State<repeatDaysBottomSheet> createState() => _repeatDaysBottomSheetState();
 }
 
 class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
-  List<bool> weekDays = [false, false, false];
-  List<String> days = ['Friday', 'Saturday', 'Sunday'];
+  List<bool> weekDays = [false, false, false, false, false, false, false];
+  List<String> days = [
+    'Monday',
+    'Tuesday',
+    "Wednesday",
+    "Thursday",
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
 
   List<DateTime> _selectedDates = [];
   List<DateTime?> _multiDatePickerValueWithDefaultValue = [
@@ -1851,6 +1865,35 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
     return date.weekday == DateTime.friday ||
         date.weekday == DateTime.saturday ||
         date.weekday == DateTime.sunday;
+  }
+
+  List<String> _getSelectedDatesText(
+    CalendarDatePicker2Type datePickerType,
+    List<DateTime?> values,
+  ) {
+    values =
+        values.map((e) => e != null ? DateUtils.dateOnly(e) : null).toList();
+
+    List<String> selectedDates = [];
+
+    if (datePickerType == CalendarDatePicker2Type.multi) {
+      selectedDates = values
+          .map((v) => v != null ? DateFormat('d-M-yyyy').format(v) : '')
+          .toList();
+    } else if (datePickerType == CalendarDatePicker2Type.range) {
+      if (values.isNotEmpty) {
+        final startDate =
+            values[0] != null ? DateFormat('d-M-yyyy').format(values[0]!) : '';
+        final endDate = values.length > 1
+            ? (values[1] != null
+                ? DateFormat('d-M-yyyy').format(values[1]!)
+                : '')
+            : '';
+        selectedDates.add('$startDate to $endDate');
+      }
+    }
+
+    return selectedDates;
   }
 
   String _getValueText(
@@ -1888,10 +1931,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
     final config = CalendarDatePicker2Config(
       selectableDayPredicate: (DateTime date) {
         // Allow selection only if the day is Friday, Saturday, or Sunday.
-        return (date.weekday == DateTime.friday ||
-                date.weekday == DateTime.saturday ||
-                date.weekday == DateTime.sunday) &&
-            !date.isBefore(DateTime.now());
+        return !date.isBefore(DateTime.now());
       },
       calendarType: CalendarDatePicker2Type.multi,
       selectedDayHighlightColor: Color(0xff09426d),
@@ -1937,6 +1977,63 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    final config = CalendarDatePicker2Config(
+      selectableDayPredicate: (DateTime date) {
+        // Allow selection only if the day is Friday, Saturday, or Sunday.
+        return !date.isBefore(DateTime.now());
+      },
+      calendarType: CalendarDatePicker2Type.multi,
+      selectedDayHighlightColor: Color(0xff09426d),
+    );
+    void BookService(UserProvider userProvider) async {
+      print(widget.data?.serviceId);
+      print(userProvider.userID);
+      print(_getSelectedDatesText(
+          config.calendarType, _multiDatePickerValueWithDefaultValue));
+      var url = await Uri.parse(
+          'https://everythingforpageants.com/msp/api/bookPackage.php');
+      var response = await http.post(url,
+          body: json.encode({
+            "user_id": userProvider.userID,
+            "service_id": widget.data?.serviceId,
+            "date": _getSelectedDatesText(
+                config.calendarType, _multiDatePickerValueWithDefaultValue)
+          }));
+
+      print(response.body);
+      var decodedJson = jsonDecode(response.body) as Map<String, dynamic>;
+      Navigator.pop(context);
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - (2.75 * kToolbarHeight),
+        ),
+        behavior: SnackBarBehavior.floating,
+        showCloseIcon: true,
+        content: const Text(
+          "Your booking will be confirmed with in 24 hours.",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: "Helvetica_Bold",
+            fontSize: 12,
+          ),
+        ),
+        backgroundColor: const Color(0xff09426d),
+        duration: const Duration(seconds: 2),
+      ));
+      // _signInApiResponse = SignInResp.fromJson(decodedJson);
+
+      // if (_signInApiResponse?.status == "200") {
+      //   // print(_signInApiResponse?.modelId);
+      //   authProvider.setUser(_signInApiResponse);
+      //   Navigator.pushNamed(context, "/Dashboard");
+      //   setState(() {
+      //     isLoading = false;
+      //   });
+      // }
+    }
+
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -2005,7 +2102,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
 
             InkWell(
               onTap: () {
-                Navigator.pop(context, true);
+                BookService(userProvider);
               },
               child: Container(
                 margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
