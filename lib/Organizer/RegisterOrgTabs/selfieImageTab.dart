@@ -20,12 +20,12 @@ class _selfieImageTabState extends State<selfieImageTab> with SingleTickerProvid
   late Animation<Offset> _animation;
 
   final ImagePicker _BannerPicker = ImagePicker();
+  File? selfieIMG;
 
 
   FocusNode _dobNode = FocusNode();
   FocusNode _confirmNode = FocusNode();
 
-  File? selfieIMG;
 
   @override
   void initState() {

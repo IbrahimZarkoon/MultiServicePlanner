@@ -136,7 +136,56 @@ class _ServicesState extends State<Services> {
                     childAspectRatio: 0.85,
                   ), itemBuilder: (BuildContext context, int index) {
                   return orgContainer(context, "${allServiceProv.photographers?[index].venueName ?? ""}",
-                      "https://everythingforpageants.com/msp/${allServiceProv.photographers?[index].bannerImg ?? ""}");
+                      "https://everythingforpageants.com/msp/${allServiceProv.photographers?[index].bannerImg ?? ""}",
+                      "${allServiceProv.photographers?[index].userId ?? ""}");
+
+                },
+                  // children: [
+                  //   orgContainer(context, "PixelPerfect Moments", "https://img.freepik.com/free-photo/people-working-together-new-movie_23-2149066321.jpg?w=2000&t=st=1694219857~exp=1694220457~hmac=af7b18895070ba727c2600f473252abe1bed9c514d2d9d53ce52cdc150656561",true),
+                  //   orgContainer(context, "LensCrafted Photography", "https://img.freepik.com/free-photo/people-working-together-new-film_23-2149066343.jpg?w=2000&t=st=1694219850~exp=1694220450~hmac=fdbfd1e6651231c7add8e2b84f875b8ad90133ac2af6792416cb9b7172482d84",false),
+                  //   orgContainer(context, "ShutterMagic Studios", "https://img.freepik.com/free-photo/meeting-with-other-photographers-office_329181-12371.jpg?w=2000&t=st=1694219851~exp=1694220451~hmac=0d0c3d4540b3698c8a1d832517fdf0ba9f3771de736570ab1ca22c38f396c916",true),
+                  //   orgContainer(context, "FocusEra Photography", "https://img.freepik.com/free-photo/woman-man-looking-camera-photos_23-2148532473.jpg?w=2000&t=st=1694219852~exp=1694220452~hmac=1700f48a97efcefba80a4cbda5dd68dc8482d0a339ad11bcb907a69fe92e51d9",true),
+                  //   orgContainer(context, "SnapVista Creations", "https://img.freepik.com/free-photo/man-filming-with-professional-camera_23-2149066342.jpg?w=2000&t=st=1694219854~exp=1694220454~hmac=035045ebd35cfb6ef2f6b97992e6ab9a57417b4ed7f64facff02a10a2616a113",false),
+                  //
+                  // ],
+                ),
+
+                //shadow line
+                Padding(
+                  padding: const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                  child: shadowLine(context),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 5,right: 5,top: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Headings(context, "Venues"),
+                    ],
+                  ),
+                ),
+
+                //Venues Grid
+                GridView.builder(
+                  padding: const EdgeInsets.only(left: 15,right: 15,top: 5,bottom: 5),
+
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  // crossAxisCount: 3,
+                  // mainAxisSpacing: 10,
+                  // crossAxisSpacing: 10,
+                  // childAspectRatio: 0.85,
+                  itemCount: allServiceProv.venues?.length ?? 0,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 0.85,
+                  ), itemBuilder: (BuildContext context, int index) {
+                  return orgContainer(context, "${allServiceProv.venues?[index].venueName ?? ""}",
+                      "https://everythingforpageants.com/msp/${allServiceProv.venues?[index].bannerImg ?? ""}",
+                      "${allServiceProv.venues?[index].userId ?? ""}");
 
                 },
                   // children: [
@@ -183,7 +232,8 @@ class _ServicesState extends State<Services> {
                     childAspectRatio: 0.85,
                   ), itemBuilder: (BuildContext context, int index) {
                   return orgContainer(context, "${allServiceProv.decors?[index].venueName ?? ""}",
-                      "https://everythingforpageants.com/msp/${allServiceProv.decors?[index].bannerImg ?? ""}");
+                      "https://everythingforpageants.com/msp/${allServiceProv.decors?[index].bannerImg ?? ""}",
+                      "${allServiceProv.decors?[index].userId ?? ""}");
 
                 },
                   // children: [
@@ -230,7 +280,8 @@ class _ServicesState extends State<Services> {
                     childAspectRatio: 0.85,
                   ), itemBuilder: (BuildContext context, int index) {
                   return orgContainer(context, "${allServiceProv.caterers?[index].venueName ?? ""}",
-                      "https://everythingforpageants.com/msp/${allServiceProv.caterers?[index].bannerImg ?? ""}");
+                      "https://everythingforpageants.com/msp/${allServiceProv.caterers?[index].bannerImg ?? ""}",
+                      "${allServiceProv.caterers?[index].userId ?? ""}");
 
                 },
                   // children: [
@@ -280,14 +331,14 @@ class _ServicesState extends State<Services> {
     );
   }
 
-  Widget orgContainer(BuildContext context,String title, String image)
+  Widget orgContainer(BuildContext context,String title, String image,String vendorID)
   {
     final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
 
     return GestureDetector(
       onTap: ()
       {
-        Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => SingleServiceProvider(image: image,name: title,)));
+        Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => SingleServiceProvider(image: image,name: title,id: vendorID,)));
       },
       child: Stack(
         children:[

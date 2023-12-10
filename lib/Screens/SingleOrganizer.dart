@@ -14,10 +14,11 @@ import 'MyProfile.dart';
 import 'ProfileDrawer/userDrawer.dart';
 
 class SingleServiceProvider extends StatefulWidget {
-   SingleServiceProvider({Key? key,required this.name, required this.image}) : super(key: key);
+   SingleServiceProvider({Key? key,required this.name, required this.image,required this.id,}) : super(key: key);
 
-  String name;
-  String image;
+  final String name;
+  final String image;
+  final String id;
 
   @override
   State<SingleServiceProvider> createState() => _SingleServiceProviderState();

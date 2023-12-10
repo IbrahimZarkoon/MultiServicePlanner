@@ -31,61 +31,67 @@ class _HomePageState extends State<HomePage> {
     //   {
     //     fetchDataForAllItems();
     //   }
-    return Scaffold(
+    return FutureBuilder(
+      future: allServiceProv.fetchDataForAllItems(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        return Scaffold(
 
-      backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
 
-      endDrawer: Drawer(
-        elevation: 10,
-        shadowColor: Colors.black.withOpacity(0.5),
-        child: userDrawer(context),
-
-
-      ),
-
-      body: RefreshIndicator(
-        onRefresh: ()
-        {
-          return Future.delayed(Duration(seconds: 2));
-        },
-        color:  appPrimary,
-        backgroundColor: Colors.white,
-        child: SingleChildScrollView(
-            padding: const EdgeInsets.only(bottom: kToolbarHeight),
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-
-                  Headings(context, "Featured Photographers"),
-
-                  //Upcoming Slider
-                  featuredSlider(context,allServiceProv.photographers ?? []),
-
-                  Headings(context, "Trending Venues"),
-
-                  popularSlider(context, allServiceProv.venues ?? []),
-
-                  Headings(context, "Services"),
-
-                  serviceProviders(context),
+          endDrawer: Drawer(
+            elevation: 10,
+            shadowColor: Colors.black.withOpacity(0.5),
+            child: userDrawer(context),
 
 
+          ),
 
-                  Headings(context, "Top Decors"),
+          body: RefreshIndicator(
+            onRefresh: ()
+            {
+              return Future.delayed(Duration(seconds: 2));
+            },
+            color:  appPrimary,
+            backgroundColor: Colors.white,
+            child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: kToolbarHeight),
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-                  decorSlider(context,allServiceProv.decors ?? []),
+                    children: [
 
-                  Headings(context, "Popular Caterers"),
+                      Headings(context, "Featured Photographers"),
 
-                  CatererSlider(context,allServiceProv.caterers ?? [])
+                      //Upcoming Slider
+                      featuredSlider(context,allServiceProv.photographers ?? []),
 
-                ]
-            )),
-      ),
+                      Headings(context, "Trending Venues"),
+
+                      popularSlider(context, allServiceProv.venues ?? []),
+
+                      Headings(context, "Services"),
+
+                      serviceProviders(context),
+
+
+
+                      Headings(context, "Top Decors"),
+
+                      decorSlider(context,allServiceProv.decors ?? []),
+
+                      Headings(context, "Popular Caterers"),
+
+                      CatererSlider(context,allServiceProv.caterers ?? [])
+
+                    ]
+                )),
+          ),
+        );
+      },
+
     );
   }
 

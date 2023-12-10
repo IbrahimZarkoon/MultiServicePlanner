@@ -25,7 +25,7 @@ Widget featuredSlider(BuildContext context, List<ServiceResponse> data) {
             "Starting from ${data[index].priceRangeStart ?? ""} PKR",
             "https://everythingforpageants.com/msp${data[index].bannerImg ?? ""}",
             true,
-            data?[index]);
+            data[index]);
       },
     ),
   );
@@ -47,7 +47,7 @@ Widget decorSlider(BuildContext context, List<ServiceResponse> data) {
             "",
             "https://everythingforpageants.com/msp${data[index].bannerImg ?? ""}",
             true,
-            data?[index]);
+            data[index]);
       },
     ),
   );
@@ -69,7 +69,7 @@ Widget CatererSlider(BuildContext context, List<ServiceResponse> data) {
             "",
             "https://everythingforpageants.com/msp${data[index].bannerImg ?? ""}",
             false,
-            data?[index]);
+            data[index]);
       },
     ),
   );
@@ -96,7 +96,7 @@ Widget eventCon(BuildContext context, String title, String date, String image,
               context,
               CupertinoPageRoute(
                   builder: (BuildContext context) =>
-                      SingleServiceProvider(name: title, image: image)));
+                      SingleServiceProvider(name: title, image: image,id: "${data?.bannerImg ?? ""}",)));
     },
     child: Container(
       margin: const EdgeInsets.only(right: 10),
