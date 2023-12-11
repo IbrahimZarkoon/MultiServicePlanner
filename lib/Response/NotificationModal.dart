@@ -8,14 +8,14 @@ class NotificationModal {
   NotificationModal.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     serviceId = json['service_id'];
-    date = json['date'];
+    date = json['dates'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['service_id'] = this.serviceId;
-    data['date'] = this.date;
+    data['dates'] = this.date;
     return data;
   }
 }

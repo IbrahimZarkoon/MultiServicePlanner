@@ -44,9 +44,11 @@ class _DashboardPageState extends State<DashboardPage>
         await http.post(url, body: json.encode({"id": userProvider.userID}));
     var decodedJson = jsonDecode(response.body);
     List<dynamic> dataArray = decodedJson;
-    _notifications =
+    final _notifications =
         dataArray.map((item) => NotificationModal.fromJson(item)).toList();
+
     userProvider.setNotifications(_notifications);
+    print(_notifications[0].date);
   }
 
   @override

@@ -6,7 +6,8 @@ class UserProvider extends ChangeNotifier {
   List<NotificationModal>? notifications;
 
   setNotifications(data) {
-    notifications = data;
+    this.notifications = data;
+    notifyListeners();
   }
 
   String get userID => _userID;

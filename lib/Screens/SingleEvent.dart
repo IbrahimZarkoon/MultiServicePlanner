@@ -1987,16 +1987,13 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
       selectedDayHighlightColor: Color(0xff09426d),
     );
     void BookService(UserProvider userProvider) async {
-      print(widget.data?.serviceId);
-      print(userProvider.userID);
-      print(_getSelectedDatesText(
-          config.calendarType, _multiDatePickerValueWithDefaultValue));
-      var url = await Uri.parse(
+      
+        var url = await Uri.parse(
           'https://everythingforpageants.com/msp/api/bookPackage.php');
       var response = await http.post(url,
           body: json.encode({
             "user_id": userProvider.userID,
-            "service_id": widget.data?.serviceId,
+            "service_id": widget.data?.id,
             "date": _getSelectedDatesText(
                 config.calendarType, _multiDatePickerValueWithDefaultValue)
           }));
