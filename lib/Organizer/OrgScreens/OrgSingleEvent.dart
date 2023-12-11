@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_service_planner/Response/SingleVendorPackagesResponse.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -16,11 +17,12 @@ import '../../Enums/Colors.dart';
 import '../../Providers/CacheManager.dart';
 
 class OrgSingleEvent extends StatefulWidget {
-  OrgSingleEvent({Key? key,required this.title,required this.image,required this.past}) : super(key: key);
+  OrgSingleEvent({Key? key,required this.title,required this.image,required this.past,required this.data}) : super(key: key);
 
   String title;
   String image;
   bool past;
+  SingleVendorPackagesResponse data;
 
   @override
   State<OrgSingleEvent> createState() => _OrgSingleEventState();
@@ -46,15 +48,18 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
     }
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    carouselImages = widget.data.relatedImg;
+  }
+
   final ImagePicker _BannerPicker = ImagePicker();
 
   int _currentSlide = 0;
 
-  final List<String> carouselImages = [
-    "https://i.ytimg.com/vi/_M_6jkBZ4Ck/maxresdefault.jpg",
-    "https://www.brandcreators.com/wp-content/uploads/2023/03/ai-art-etsy-print-on-demand-game-changer.jpg",
-    "https://i.ytimg.com/vi/4_A7FmtWInc/maxresdefault.jpg",
-  ];
+   List<String>? carouselImages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +96,8 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                 automaticallyImplyLeading: false,
                 actions: [
                   InkWell(
-                    onTap: () => Share.share("123"),
+                    onTap: () => Share.share(                                 " ${widget.data.venueMapLink}",
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(0),
                       child: Icon(
@@ -191,7 +197,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                         padding: const EdgeInsets.only(
                             left: 15, right: 15, bottom: 10, top: 0),
                         child: Text(
-                          "\$90 - \$300",
+                          "\$${widget.data.priceRangeStart} - \$${widget.data.priceRangeEnd}",
                           textScaleFactor: 1.3,
                           style: TextStyle(
                             decoration: widget.past? TextDecoration.lineThrough : TextDecoration.none,
@@ -202,79 +208,79 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                         ),
                       ),
 
-                      //CAT ROW
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 15),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 1,
-                                      blurRadius: 1.5)
-                                ]),
-                            padding: const EdgeInsets.only(
-                                top: 5, bottom: 5, left: 15, right: 15),
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "Music",
-                              style: TextStyle(
-                                  color: appPrimary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 15),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 1,
-                                      blurRadius: 1.5)
-                                ]),
-                            padding: const EdgeInsets.only(
-                                top: 5, bottom: 5, left: 15, right: 15),
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "Rap",
-                              style: TextStyle(
-                                  color: appPrimary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 15),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
-                                      spreadRadius: 1,
-                                      blurRadius: 1.5)
-                                ]),
-                            padding: const EdgeInsets.only(
-                                top: 5, bottom: 5, left: 15, right: 15),
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "Today",
-                              style: TextStyle(
-                                  color: appPrimary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // //CAT ROW
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   children: [
+                      //     Container(
+                      //       margin: const EdgeInsets.only(left: 15),
+                      //       decoration: BoxDecoration(
+                      //           color: Colors.white,
+                      //           borderRadius: BorderRadius.circular(20),
+                      //           boxShadow: [
+                      //             BoxShadow(
+                      //                 color: Colors.black.withOpacity(0.1),
+                      //                 spreadRadius: 1,
+                      //                 blurRadius: 1.5)
+                      //           ]),
+                      //       padding: const EdgeInsets.only(
+                      //           top: 5, bottom: 5, left: 15, right: 15),
+                      //       alignment: Alignment.center,
+                      //       child: const Text(
+                      //         "Music",
+                      //         style: TextStyle(
+                      //             color: appPrimary,
+                      //             fontWeight: FontWeight.bold,
+                      //             fontSize: 12),
+                      //       ),
+                      //     ),
+                      //     Container(
+                      //       margin: const EdgeInsets.only(left: 15),
+                      //       decoration: BoxDecoration(
+                      //           color: Colors.white,
+                      //           borderRadius: BorderRadius.circular(20),
+                      //           boxShadow: [
+                      //             BoxShadow(
+                      //                 color: Colors.black.withOpacity(0.1),
+                      //                 spreadRadius: 1,
+                      //                 blurRadius: 1.5)
+                      //           ]),
+                      //       padding: const EdgeInsets.only(
+                      //           top: 5, bottom: 5, left: 15, right: 15),
+                      //       alignment: Alignment.center,
+                      //       child: const Text(
+                      //         "Rap",
+                      //         style: TextStyle(
+                      //             color: appPrimary,
+                      //             fontWeight: FontWeight.bold,
+                      //             fontSize: 12),
+                      //       ),
+                      //     ),
+                      //     Container(
+                      //       margin: const EdgeInsets.only(left: 15),
+                      //       decoration: BoxDecoration(
+                      //           color: Colors.white,
+                      //           borderRadius: BorderRadius.circular(20),
+                      //           boxShadow: [
+                      //             BoxShadow(
+                      //                 color: Colors.black.withOpacity(0.1),
+                      //                 spreadRadius: 1,
+                      //                 blurRadius: 1.5)
+                      //           ]),
+                      //       padding: const EdgeInsets.only(
+                      //           top: 5, bottom: 5, left: 15, right: 15),
+                      //       alignment: Alignment.center,
+                      //       child: const Text(
+                      //         "Today",
+                      //         style: TextStyle(
+                      //             color: appPrimary,
+                      //             fontWeight: FontWeight.bold,
+                      //             fontSize: 12),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
 
                       //Date Container
                       Container(
@@ -301,7 +307,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                             offset: const Offset(0, 0))
                                       ]),
                                   child: const Icon(
-                                    Icons.calendar_today_outlined,
+                                    Icons.access_time_rounded,
                                     size: 20,
                                     color: appPrimary,
                                   ),
@@ -313,7 +319,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
 
                                 //Details Column
                                 Text(
-                                  "Thursday, June 29, 2023",
+                                 " ${widget.data.timings}",
                                   style: TextStyle(
                                       color: Colors.black.withOpacity(0.6),
                                       fontSize: 14,
@@ -357,7 +363,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                             offset: const Offset(0, 0))
                                       ]),
                                   child: const Icon(
-                                    Icons.access_time_rounded,
+                                    Icons.reduce_capacity,
                                     size: 20,
                                     color: appPrimary,
                                   ),
@@ -369,7 +375,8 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
 
                                 //Details Column
                                 Text(
-                                  "Duration about 3 hours",
+                                  " ${widget.data.capacity}",
+
                                   style: TextStyle(
                                       color: Colors.black.withOpacity(0.6),
                                       fontSize: 14,
@@ -426,7 +433,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
 
                                 //Details Column
                                 Text(
-                                  "Foschini Park",
+                                    " ${widget.data.location}",
                                   style: TextStyle(
                                       color: Colors.black.withOpacity(0.6),
                                       fontSize: 14,
@@ -471,64 +478,64 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                 style: DefaultTextStyle.of(context).style,
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: 'Tentative Schedule:\n\n',
+                                    text: '${widget.data.about}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: "Helvetica_Bold",
                                         color: Colors.black.withOpacity(0.8)),
                                   ),
-                            TextSpan(
-                            text: 'Day: 1\n',
-                            style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Helvetica_Bold",
-                            color: Colors.black.withOpacity(0.8),fontSize: 13),
-            ),
-                                  TextSpan(
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.8),
-                                        fontSize: 13),
-                                    text:
-                                    '07:00 AM - 09:00 AM: Reach Kodaikanal on your own transport, Have Freshen Up & Breakfast.\n09:00 AM: Start trek from KodaikanaI(Dolphin Nose) to Vellagavi\n01:00 PM; Reach Campsite & have Lunch\n02:00 PM: Trek to View point'
-                                "\n05:00 PM: Reach back to Campsite"
-                                "\n07:00 PM: Enjoy Campfire & have Dinner(Overnight stay in Tents)"
-                                  ),
-
-                                  //Day 2
-                                  TextSpan(
-                                    text: '\n\nDay: 2\n',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Helvetica_Bold",
-                                        color: Colors.black.withOpacity(0.8),fontSize: 13),
-                                  ),
-                                  TextSpan(
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.8),
-                                          fontSize: 13),
-                                      text:
-                                      '07:00 AM - 09:00 AM: Reach Kodaikanal on your own transport, Have Freshen Up & Breakfast.\n09:00 AM: Start trek from KodaikanaI(Dolphin Nose) to Vellagavi\n01:00 PM; Reach Campsite & have Lunch\n02:00 PM: Trek to View point'
-                                          "\n05:00 PM: Reach back to Campsite"
-                                          "\n07:00 PM: Enjoy Campfire & have Dinner(Overnight stay in Tents)"
-                                  ),
-
-                                  //Inclusions
-                                  TextSpan(
-                                    text: '\n\nInclusions\n',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Helvetica_Bold",
-                                        color: Colors.black.withOpacity(0.8),fontSize: 13),
-                                  ),
-                                  TextSpan(
-                                      style: TextStyle(
-                                          color: Colors.black.withOpacity(0.8),
-                                          fontSize: 13),
-                                      text:
-                                      'Trekking Guide.\nAccomodation(Sharing Tents)\nCampfire\n1 Breakfast / 1 Lunch / 1 Dinner'
-                                          "\nForest Permissions"
-                                          "\nBasic First-Aid"
-                                  ),
+            //                 TextSpan(
+            //                 text: 'Day: 1\n',
+            //                 style: TextStyle(
+            //                 fontWeight: FontWeight.bold,
+            //                 fontFamily: "Helvetica_Bold",
+            //                 color: Colors.black.withOpacity(0.8),fontSize: 13),
+            // ),
+            //                       TextSpan(
+            //                         style: TextStyle(
+            //                             color: Colors.black.withOpacity(0.8),
+            //                             fontSize: 13),
+            //                         text:
+            //                         '07:00 AM - 09:00 AM: Reach Kodaikanal on your own transport, Have Freshen Up & Breakfast.\n09:00 AM: Start trek from KodaikanaI(Dolphin Nose) to Vellagavi\n01:00 PM; Reach Campsite & have Lunch\n02:00 PM: Trek to View point'
+            //                     "\n05:00 PM: Reach back to Campsite"
+            //                     "\n07:00 PM: Enjoy Campfire & have Dinner(Overnight stay in Tents)"
+            //                       ),
+            //
+            //                       //Day 2
+            //                       TextSpan(
+            //                         text: '\n\nDay: 2\n',
+            //                         style: TextStyle(
+            //                             fontWeight: FontWeight.bold,
+            //                             fontFamily: "Helvetica_Bold",
+            //                             color: Colors.black.withOpacity(0.8),fontSize: 13),
+            //                       ),
+            //                       TextSpan(
+            //                           style: TextStyle(
+            //                               color: Colors.black.withOpacity(0.8),
+            //                               fontSize: 13),
+            //                           text:
+            //                           '07:00 AM - 09:00 AM: Reach Kodaikanal on your own transport, Have Freshen Up & Breakfast.\n09:00 AM: Start trek from KodaikanaI(Dolphin Nose) to Vellagavi\n01:00 PM; Reach Campsite & have Lunch\n02:00 PM: Trek to View point'
+            //                               "\n05:00 PM: Reach back to Campsite"
+            //                               "\n07:00 PM: Enjoy Campfire & have Dinner(Overnight stay in Tents)"
+            //                       ),
+            //
+            //                       //Inclusions
+            //                       TextSpan(
+            //                         text: '\n\nInclusions\n',
+            //                         style: TextStyle(
+            //                             fontWeight: FontWeight.bold,
+            //                             fontFamily: "Helvetica_Bold",
+            //                             color: Colors.black.withOpacity(0.8),fontSize: 13),
+            //                       ),
+            //                       TextSpan(
+            //                           style: TextStyle(
+            //                               color: Colors.black.withOpacity(0.8),
+            //                               fontSize: 13),
+            //                           text:
+            //                           'Trekking Guide.\nAccomodation(Sharing Tents)\nCampfire\n1 Breakfast / 1 Lunch / 1 Dinner'
+            //                               "\nForest Permissions"
+            //                               "\nBasic First-Aid"
+            //                       ),
                                 ],
                               ),
                             ),
@@ -746,7 +753,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                       Column(
                         children: [
                           CarouselSlider.builder(
-                            itemCount: carouselImages.length,
+                            itemCount: carouselImages?.length ?? 0,
                             itemBuilder: (BuildContext context, int index,int a) {
                               return Container(
                                 margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
@@ -757,7 +764,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: CachedNetworkImage(
-                                    imageUrl: carouselImages[index],
+                                    imageUrl: carouselImages![index],
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) => const Center(
                                       child: CircularProgressIndicator(
@@ -793,7 +800,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: List.generate(
-                                carouselImages.length,
+                                carouselImages?.length ?? 0,
                                     (index) => Container(
                                   width: 8,
                                   height: 8,
@@ -980,101 +987,101 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
 
                       thickBorder(context),
 
-                      //Comments Column
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20))),
-                                  isScrollControlled: true,
-                                  builder: (BuildContext context) {
-                                    return allReviews(context);
-                                  });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 15,right: 15,bottom: 15,top: 15),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-
-                                  Text("Comments",overflow: TextOverflow.ellipsis,
-                                      style:
-                                      TextStyle(color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontFamily: "Helvetica_Bold", fontSize: 18)),
-
-                                  const Text("View all",
-                                  style: TextStyle(color: appPrimary,fontSize: 13,fontWeight: FontWeight.bold),)
-                                ],
-                              ),
-                            ),
-                          ),
-
-
-                          //Comments Slider Container
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 0.275,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                padding: const EdgeInsets.only(
-                                    top: 3, bottom: 3, left: 15, right: 15),
-                                itemCount: 5,
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (BuildContext context, index) {
-                                  return reviewCon(
-                                      context,
-                                      "Got to have 'em",
-                                      "States where I pretty good price and a great size I use two a day and it's something we have to buy",
-                                      "Mark$index");
-                                }),
-                          ),
-
-                          // InkWell(
-                          //   onTap: () {
-                          //     showModalBottomSheet(
-                          //         context: context,
-                          //         shape: const RoundedRectangleBorder(
-                          //             borderRadius: BorderRadius.only(
-                          //                 topLeft: Radius.circular(20),
-                          //                 topRight: Radius.circular(20))),
-                          //         isScrollControlled: true,
-                          //         builder: (BuildContext context) {
-                          //           return allReviews(context);
-                          //         });
-                          //   },
-                          //   child: Container(
-                          //     width: MediaQuery.of(context).size.width,
-                          //     padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          //     margin: const EdgeInsets.only(
-                          //         left: 15, right: 15, bottom: 15, top: 15),
-                          //     decoration: BoxDecoration(
-                          //         borderRadius: BorderRadius.circular(10),
-                          //         color: const Color(0xffffffff),
-                          //         boxShadow: [
-                          //           BoxShadow(
-                          //               color: Colors.black.withOpacity(0.1),
-                          //               spreadRadius: 1,
-                          //               blurRadius: 1)
-                          //         ]),
-                          //     alignment: Alignment.center,
-                          //     child: const Text(
-                          //       "View all",
-                          //       style: TextStyle(
-                          //           fontWeight: FontWeight.bold,
-                          //           fontSize: 12,
-                          //           color: appPrimary),
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
-                      ),
+                      // //Comments Column
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //
+                      //     InkWell(
+                      //       onTap: () {
+                      //         showModalBottomSheet(
+                      //             context: context,
+                      //             shape: const RoundedRectangleBorder(
+                      //                 borderRadius: BorderRadius.only(
+                      //                     topLeft: Radius.circular(20),
+                      //                     topRight: Radius.circular(20))),
+                      //             isScrollControlled: true,
+                      //             builder: (BuildContext context) {
+                      //               return allReviews(context);
+                      //             });
+                      //       },
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.only(left: 15,right: 15,bottom: 15,top: 15),
+                      //         child: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //
+                      //             Text("Comments",overflow: TextOverflow.ellipsis,
+                      //                 style:
+                      //                 TextStyle(color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontFamily: "Helvetica_Bold", fontSize: 18)),
+                      //
+                      //             const Text("View all",
+                      //             style: TextStyle(color: appPrimary,fontSize: 13,fontWeight: FontWeight.bold),)
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //
+                      //
+                      //     //Comments Slider Container
+                      //     SizedBox(
+                      //       width: MediaQuery.of(context).size.width,
+                      //       height: MediaQuery.of(context).size.height * 0.275,
+                      //       child: ListView.builder(
+                      //           shrinkWrap: true,
+                      //           padding: const EdgeInsets.only(
+                      //               top: 3, bottom: 3, left: 15, right: 15),
+                      //           itemCount: 5,
+                      //           physics: const BouncingScrollPhysics(),
+                      //           scrollDirection: Axis.horizontal,
+                      //           itemBuilder: (BuildContext context, index) {
+                      //             return reviewCon(
+                      //                 context,
+                      //                 "Got to have 'em",
+                      //                 "States where I pretty good price and a great size I use two a day and it's something we have to buy",
+                      //                 "Mark$index");
+                      //           }),
+                      //     ),
+                      //
+                      //     // InkWell(
+                      //     //   onTap: () {
+                      //     //     showModalBottomSheet(
+                      //     //         context: context,
+                      //     //         shape: const RoundedRectangleBorder(
+                      //     //             borderRadius: BorderRadius.only(
+                      //     //                 topLeft: Radius.circular(20),
+                      //     //                 topRight: Radius.circular(20))),
+                      //     //         isScrollControlled: true,
+                      //     //         builder: (BuildContext context) {
+                      //     //           return allReviews(context);
+                      //     //         });
+                      //     //   },
+                      //     //   child: Container(
+                      //     //     width: MediaQuery.of(context).size.width,
+                      //     //     padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      //     //     margin: const EdgeInsets.only(
+                      //     //         left: 15, right: 15, bottom: 15, top: 15),
+                      //     //     decoration: BoxDecoration(
+                      //     //         borderRadius: BorderRadius.circular(10),
+                      //     //         color: const Color(0xffffffff),
+                      //     //         boxShadow: [
+                      //     //           BoxShadow(
+                      //     //               color: Colors.black.withOpacity(0.1),
+                      //     //               spreadRadius: 1,
+                      //     //               blurRadius: 1)
+                      //     //         ]),
+                      //     //     alignment: Alignment.center,
+                      //     //     child: const Text(
+                      //     //       "View all",
+                      //     //       style: TextStyle(
+                      //     //           fontWeight: FontWeight.bold,
+                      //     //           fontSize: 12,
+                      //     //           color: appPrimary),
+                      //     //     ),
+                      //     //   ),
+                      //     // ),
+                      //   ],
+                      // ),
 
                     ],
                   ),
