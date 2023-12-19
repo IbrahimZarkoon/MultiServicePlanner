@@ -42,17 +42,6 @@ class _OrganizeEventState extends State<OrganizeEvent> {
       String title, String priceStart, String priceEnd, String capacity, String timings,XFile bannerImg,List<XFile> relatedPics, String venueName, String venueMapLink) async {
 
     final String url = "https://everythingforpageants.com/msp/api/serviceDetails.php";
-  print(loc);
-  print(about);
-  print(serviceId);
-  print(userId);
-  print(title);
-  print(priceStart);
-  print(capacity);
-  print(timings);
-  print(bannerImg);
-  print(relatedPics);
-  print(venueName);
 
     var request =
     http.MultipartRequest('POST', Uri.parse(url));
@@ -84,12 +73,6 @@ class _OrganizeEventState extends State<OrganizeEvent> {
         );
       }
     }
-    // if(relatedPics.isEmpty)
-    //   {
-    //     request.files.add(
-    //       await http.MultipartFile.fromPath('relatedPics[]', ''),
-    //     );
-    //   }
 
     var response = await request.send();
 

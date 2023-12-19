@@ -39,9 +39,7 @@ class _ExplorePageState extends State<ExplorePage> {
     // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
+
       return Future.error('Location services are disabled.');
     }
 
@@ -49,11 +47,7 @@ class _ExplorePageState extends State<ExplorePage> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
+
         return Future.error('Location permissions are denied');
       }
     }
@@ -128,200 +122,200 @@ class _ExplorePageState extends State<ExplorePage> {
               children: [
 
                 //Filters Con
-                Container(
-                  height: MediaQuery.of(context).size.height*0.065,
-
-                  decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.1)))
-                  ),
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.only(left: 10,bottom: 10,top: 10),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-
-                      //Sort By
-                      GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            isScrollControlled: true,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                            context: context,
-                            builder: (BuildContext context) => const SortandFilter(),
-                          );
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          //width: MediaQuery.of(context).size.width*0.25,
-
-                          margin: const EdgeInsets.only(right: 15),
-                          padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
-
-                          decoration: BoxDecoration(
-                              color: const Color(0xfffcfafa),
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(0.15),
-                                    blurRadius: 1,
-                                    offset: const Offset(0, 0))
-                              ]),
-                          child: Row(
-                            children: [
-
-                              Transform(
-                                alignment: Alignment.center,
-                                transform: Matrix4.identity()..scale(-1.0, 1.0, 1.0),
-                                child: const Icon(Icons.sort,size: 17,color: Color(0xff09426d)),
-                              ),
-
-                              const SizedBox(width: 5,),
-
-                              Text(
-                                "$_selectedSize",
-                                style: const TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.bold,fontSize: 12),
-                              ),
-
-                              const SizedBox(width: 5,),
-
-                              const Icon(Icons.keyboard_arrow_down,size: 18,color: Color(0xff09426d))
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      //In Door Container
-                      GestureDetector(
-                        onTap: ()
-                        {
-                          setState(() {
-                            inDoorColor = const Color(0xff09426d);
-                          });
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          //width: MediaQuery.of(context).size.width*0.25,
-
-                          margin: const EdgeInsets.only(right: 15),
-                          padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
-                          decoration: BoxDecoration(
-                              color: inDoorColor,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black.withOpacity(0.15),
-                                    blurRadius: 1,
-                                    offset: const Offset(0, 0))
-                              ]),
-                          child: Text(
-                            "In Door",
-                            style:  TextStyle(color: (inDoorColor == const Color(0xff09426d))? Colors.white : Color(0xff09426d) ,fontWeight: FontWeight.bold,fontSize: 12),
-                          ),
-                        ),
-                      ),
-
-                      // //Price Range
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     showModalBottomSheet(
-                      //
-                      //       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(
-                      //         top: Radius.circular(15),
-                      //       ),),
-                      //       context: context,
-                      //       builder: (BuildContext context) {
-                      //         return  Container(
-                      //             height: MediaQuery.of(context).size.height*0.35,
-                      //             decoration: BoxDecoration(
-                      //               borderRadius: BorderRadius.circular(15),
-                      //             ),
-                      //             child: PriceRangeFilter());
-                      //       },
-                      //     );
-                      //   },
-                      //   child: Container(
-                      //     alignment: Alignment.center,
-                      //     //width: MediaQuery.of(context).size.width*0.25,
-                      //
-                      //     margin: const EdgeInsets.only(right: 0),
-                      //     padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
-                      //
-                      //     decoration: BoxDecoration(
-                      //         color: const Color(0xfff3f5f7),
-                      //         borderRadius: BorderRadius.circular(15),
-                      //         boxShadow: [
-                      //           BoxShadow(
-                      //               color: Colors.black.withOpacity(0.15),
-                      //               blurRadius: 1,
-                      //               offset: const Offset(0, 0))
-                      //         ]),
-                      //     child: Row(
-                      //       children: [
-                      //
-                      //         Container(
-                      //             decoration: BoxDecoration(
-                      //                 borderRadius: BorderRadius.circular(50),
-                      //                 color: const Color(0xfff3f5f7),
-                      //                 border: Border.all(color: Colors.black.withOpacity(0.5))
-                      //               // boxShadow: [
-                      //               //   BoxShadow(
-                      //               //     color: Colors.black.withOpacity(0.5),
-                      //               //     spreadRadius: 1,
-                      //               //     blurRadius: 0.5,
-                      //               //     offset: Offset(0,0)
-                      //               //   )
-                      //               // ]
-                      //             ),
-                      //             padding: const EdgeInsets.all(2),
-                      //             child: const Icon(Icons.price_check,size: 12,)),
-                      //
-                      //         const SizedBox(width: 5,),
-                      //
-                      //         const Text(
-                      //           "Price Range",
-                      //           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
-                      //         ),
-                      //
-                      //         const SizedBox(width: 5,),
-                      //
-                      //         const Icon(Icons.keyboard_arrow_down,size: 18,)
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-
-                      //Clear all Filters
-                      GestureDetector(
-                        onTap: ()
-                        {
-                          setState(() {
-                            inDoorColor = Color(0xfffcfafa);
-                          });
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          //width: MediaQuery.of(context).size.width*0.25,
-
-                          padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
-                          // decoration: BoxDecoration(
-                          //     color: inStoreColor,
-                          //     borderRadius: BorderRadius.circular(20),
-                          //     boxShadow: [
-                          //       BoxShadow(
-                          //           color: Colors.black.withOpacity(0.15),
-                          //           blurRadius: 1,
-                          //           offset: const Offset(0, 0))
-                          //     ]),
-                          child:  Text(
-                            "Clear all",
-                            style:  TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                ),
+                // Container(
+                //   height: MediaQuery.of(context).size.height*0.065,
+                //
+                //   decoration: BoxDecoration(
+                //       border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.1)))
+                //   ),
+                //   child: ListView(
+                //     physics: const BouncingScrollPhysics(),
+                //     padding: const EdgeInsets.only(left: 10,bottom: 10,top: 10),
+                //     scrollDirection: Axis.horizontal,
+                //     children: [
+                //
+                //       //Sort By
+                //       GestureDetector(
+                //         onTap: () {
+                //           showModalBottomSheet(
+                //             isScrollControlled: true,
+                //             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                //             context: context,
+                //             builder: (BuildContext context) => const SortandFilter(),
+                //           );
+                //         },
+                //         child: Container(
+                //           alignment: Alignment.center,
+                //           //width: MediaQuery.of(context).size.width*0.25,
+                //
+                //           margin: const EdgeInsets.only(right: 15),
+                //           padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
+                //
+                //           decoration: BoxDecoration(
+                //               color: const Color(0xfffcfafa),
+                //               borderRadius: BorderRadius.circular(20),
+                //               boxShadow: [
+                //                 BoxShadow(
+                //                     color: Colors.black.withOpacity(0.15),
+                //                     blurRadius: 1,
+                //                     offset: const Offset(0, 0))
+                //               ]),
+                //           child: Row(
+                //             children: [
+                //
+                //               Transform(
+                //                 alignment: Alignment.center,
+                //                 transform: Matrix4.identity()..scale(-1.0, 1.0, 1.0),
+                //                 child: const Icon(Icons.sort,size: 17,color: Color(0xff09426d)),
+                //               ),
+                //
+                //               const SizedBox(width: 5,),
+                //
+                //               Text(
+                //                 "$_selectedSize",
+                //                 style: const TextStyle(color: Color(0xff09426d),fontWeight: FontWeight.bold,fontSize: 12),
+                //               ),
+                //
+                //               const SizedBox(width: 5,),
+                //
+                //               const Icon(Icons.keyboard_arrow_down,size: 18,color: Color(0xff09426d))
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //
+                //       //In Door Container
+                //       GestureDetector(
+                //         onTap: ()
+                //         {
+                //           setState(() {
+                //             inDoorColor = const Color(0xff09426d);
+                //           });
+                //         },
+                //         child: Container(
+                //           alignment: Alignment.center,
+                //           //width: MediaQuery.of(context).size.width*0.25,
+                //
+                //           margin: const EdgeInsets.only(right: 15),
+                //           padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
+                //           decoration: BoxDecoration(
+                //               color: inDoorColor,
+                //               borderRadius: BorderRadius.circular(20),
+                //               boxShadow: [
+                //                 BoxShadow(
+                //                     color: Colors.black.withOpacity(0.15),
+                //                     blurRadius: 1,
+                //                     offset: const Offset(0, 0))
+                //               ]),
+                //           child: Text(
+                //             "In Door",
+                //             style:  TextStyle(color: (inDoorColor == const Color(0xff09426d))? Colors.white : Color(0xff09426d) ,fontWeight: FontWeight.bold,fontSize: 12),
+                //           ),
+                //         ),
+                //       ),
+                //
+                //       // //Price Range
+                //       // GestureDetector(
+                //       //   onTap: () {
+                //       //     showModalBottomSheet(
+                //       //
+                //       //       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(
+                //       //         top: Radius.circular(15),
+                //       //       ),),
+                //       //       context: context,
+                //       //       builder: (BuildContext context) {
+                //       //         return  Container(
+                //       //             height: MediaQuery.of(context).size.height*0.35,
+                //       //             decoration: BoxDecoration(
+                //       //               borderRadius: BorderRadius.circular(15),
+                //       //             ),
+                //       //             child: PriceRangeFilter());
+                //       //       },
+                //       //     );
+                //       //   },
+                //       //   child: Container(
+                //       //     alignment: Alignment.center,
+                //       //     //width: MediaQuery.of(context).size.width*0.25,
+                //       //
+                //       //     margin: const EdgeInsets.only(right: 0),
+                //       //     padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
+                //       //
+                //       //     decoration: BoxDecoration(
+                //       //         color: const Color(0xfff3f5f7),
+                //       //         borderRadius: BorderRadius.circular(15),
+                //       //         boxShadow: [
+                //       //           BoxShadow(
+                //       //               color: Colors.black.withOpacity(0.15),
+                //       //               blurRadius: 1,
+                //       //               offset: const Offset(0, 0))
+                //       //         ]),
+                //       //     child: Row(
+                //       //       children: [
+                //       //
+                //       //         Container(
+                //       //             decoration: BoxDecoration(
+                //       //                 borderRadius: BorderRadius.circular(50),
+                //       //                 color: const Color(0xfff3f5f7),
+                //       //                 border: Border.all(color: Colors.black.withOpacity(0.5))
+                //       //               // boxShadow: [
+                //       //               //   BoxShadow(
+                //       //               //     color: Colors.black.withOpacity(0.5),
+                //       //               //     spreadRadius: 1,
+                //       //               //     blurRadius: 0.5,
+                //       //               //     offset: Offset(0,0)
+                //       //               //   )
+                //       //               // ]
+                //       //             ),
+                //       //             padding: const EdgeInsets.all(2),
+                //       //             child: const Icon(Icons.price_check,size: 12,)),
+                //       //
+                //       //         const SizedBox(width: 5,),
+                //       //
+                //       //         const Text(
+                //       //           "Price Range",
+                //       //           style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),
+                //       //         ),
+                //       //
+                //       //         const SizedBox(width: 5,),
+                //       //
+                //       //         const Icon(Icons.keyboard_arrow_down,size: 18,)
+                //       //       ],
+                //       //     ),
+                //       //   ),
+                //       // ),
+                //
+                //       //Clear all Filters
+                //       GestureDetector(
+                //         onTap: ()
+                //         {
+                //           setState(() {
+                //             inDoorColor = Color(0xfffcfafa);
+                //           });
+                //         },
+                //         child: Container(
+                //           alignment: Alignment.center,
+                //           //width: MediaQuery.of(context).size.width*0.25,
+                //
+                //           padding: const EdgeInsets.only(left: 25,right: 25,bottom: 5,top: 5),
+                //           // decoration: BoxDecoration(
+                //           //     color: inStoreColor,
+                //           //     borderRadius: BorderRadius.circular(20),
+                //           //     boxShadow: [
+                //           //       BoxShadow(
+                //           //           color: Colors.black.withOpacity(0.15),
+                //           //           blurRadius: 1,
+                //           //           offset: const Offset(0, 0))
+                //           //     ]),
+                //           child:  Text(
+                //             "Clear all",
+                //             style:  TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontWeight: FontWeight.bold),
+                //           ),
+                //         ),
+                //       ),
+                //
+                //     ],
+                //   ),
+                // ),
 
                 Column(
                   children: [

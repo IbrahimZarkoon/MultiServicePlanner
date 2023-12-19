@@ -3,6 +3,7 @@ import 'package:multi_service_planner/Response/ServiceResponse.dart';
 import 'package:provider/provider.dart';
 
 import '../modals/AllServiceProvider.dart';
+import 'SingleEvent.dart';
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key? key, required this.tag}) : super(key: key);
@@ -35,63 +36,57 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void dispose()
   {
+    var allServiceProv = Provider.of<AllServiceProvider>(context,listen:false);
+
     _searchCon.dispose();
     _focusNode.dispose();
+
+
     super.dispose();
   }
 
   List<ServiceResponse>? _searchedResults = [];
+  List<ServiceResponse>? _servicesList = [];
 
 
   @override
   Widget build(BuildContext context) {
     var allServiceProv = Provider.of<AllServiceProvider>(context,listen:false);
 
-    List<ServiceResponse>? _searchedCaterers = allServiceProv.caterers
-        ?.where((caterers) =>
-    caterers.venueName != null &&
-        caterers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
-        .toList();
-    List<ServiceResponse>? _searchedPhotographers = allServiceProv.photographers
-        ?.where((photographers) =>
-    photographers.venueName != null &&
-        photographers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
-        .toList();
-    List<ServiceResponse>? _searchedDecors = allServiceProv.decors
-        ?.where((decors) =>
-    decors.venueName != null &&
-        decors.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
-        .toList();
-    List<ServiceResponse>? _searchedVenues = allServiceProv.venues
-        ?.where((venues) =>
-    venues.venueName != null &&
-        venues.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
-        .toList();
+    if(_servicesList == [] || _servicesList?.length == 0)
+      {
+        _servicesList?.addAll(allServiceProv.photographers!);
+        _servicesList?.addAll(allServiceProv.decors!);
+        _servicesList?.addAll(allServiceProv.venues!);
+        _servicesList?.addAll(allServiceProv.caterers!);
+      }
+    print("_SERVICE LIST :: ${_servicesList}");
 
 
-    _searchedResults?.addAll(allServiceProv.caterers
-        ?.where((caterers) =>
-    caterers.venueName != null &&
-        caterers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+    _searchedResults?.clear();
+    _searchedResults?.addAll(_servicesList
+        ?.where((vendor) =>
+    vendor.venueName != null &&
+        vendor.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
         .toList() ?? []);
-
-    _searchedResults?.addAll(allServiceProv.photographers
-        ?.where((photographers) =>
-    photographers.venueName != null &&
-        photographers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
-        .toList() ?? []);
-
-    _searchedResults?.addAll(allServiceProv.decors
-        ?.where((decors) =>
-    decors.venueName != null &&
-        decors.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
-        .toList() ?? []);
-
-    _searchedResults?.addAll(allServiceProv.venues
-        ?.where((venues) =>
-    venues.venueName != null &&
-        venues.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
-        .toList() ?? []);
+    //
+    // _searchedResults?.addAll(allServiceProv.photographers
+    //     ?.where((photographers) =>
+    // photographers.venueName != null &&
+    //     photographers.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+    //     .toList() ?? []);
+    //
+    // _searchedResults?.addAll(allServiceProv.decors
+    //     ?.where((decors) =>
+    // decors.venueName != null &&
+    //     decors.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+    //     .toList() ?? []);
+    //
+    // _searchedResults?.addAll(allServiceProv.venues
+    //     ?.where((venues) =>
+    // venues.venueName != null &&
+    //     venues.venueName!.toLowerCase().contains(_searchCon.text.toLowerCase()))
+    //     .toList() ?? []);
 
     return SafeArea(
       child: Scaffold(
@@ -186,12 +181,24 @@ class _SearchPageState extends State<SearchPage> {
           child: _searchCon.text.isEmpty
               ? SizedBox()
               : ListView.builder(
-            itemCount: (_searchedVenues?.length ?? 0) +
-                (_searchedDecors?.length ?? 0) +
-                (_searchedPhotographers?.length ?? 0) +
-                (_searchedCaterers?.length ?? 0),
+            itemCount: _searchedResults?.length ?? 0,
             itemBuilder: (context, index) {
-              return recentSearchCon("${_searchedResults?[index].venueName ?? ""}");
+              return InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (BuildContext context) => SingleEvent(
+                      title: "${_searchedResults?[index].venueName ?? ""}",
+                      image: "${_searchedResults?[index].bannerImg ?? ""}",
+                      repeat: false,
+                      past: false,
+                      data: _searchedResults?[index],
+                    ),
+                  );
+                },
+                child: recentSearchCon("${_searchedResults?[index].venueName ?? ""}"),
+              );
             },
           ),
         )

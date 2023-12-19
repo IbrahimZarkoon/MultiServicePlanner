@@ -20,7 +20,6 @@ class AllServiceProvider extends ChangeNotifier{
     var response = await http.post(url, body: json.encode({"service_id": id}));
     var decodedJson = jsonDecode(response.body);
     List<dynamic> dataArray = decodedJson;
-    print("KHHHHH===================== $dataArray");
 
     if (id == "1") {
       photographers =

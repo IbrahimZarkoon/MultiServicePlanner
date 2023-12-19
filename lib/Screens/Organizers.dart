@@ -14,6 +14,7 @@ import '../Providers/CacheManager.dart';
 import '../Response/ServiceResponse.dart';
 import '../modals/AllServiceProvider.dart';
 import 'MyProfile.dart';
+import 'SingleEvent.dart';
 import 'SingleOrganizer.dart';
 
 class Services extends StatefulWidget {
@@ -118,7 +119,7 @@ class _ServicesState extends State<Services> {
                   ),
                 ),
 
-                //Popular Org Grid
+                //Photographers Grid
                 GridView.builder(
                   padding: const EdgeInsets.only(left: 15,right: 15,top: 5,bottom: 5),
 
@@ -137,7 +138,8 @@ class _ServicesState extends State<Services> {
                   ), itemBuilder: (BuildContext context, int index) {
                   return orgContainer(context, "${allServiceProv.photographers?[index].venueName ?? ""}",
                       "https://everythingforpageants.com/msp/${allServiceProv.photographers?[index].bannerImg ?? ""}",
-                      "${allServiceProv.photographers?[index].userId ?? ""}");
+                      "${allServiceProv.photographers?[index].userId ?? ""}",
+                      allServiceProv.photographers![index]);
 
                 },
                   // children: [
@@ -185,7 +187,8 @@ class _ServicesState extends State<Services> {
                   ), itemBuilder: (BuildContext context, int index) {
                   return orgContainer(context, "${allServiceProv.venues?[index].venueName ?? ""}",
                       "https://everythingforpageants.com/msp/${allServiceProv.venues?[index].bannerImg ?? ""}",
-                      "${allServiceProv.venues?[index].userId ?? ""}");
+                      "${allServiceProv.venues?[index].userId ?? ""}",
+                      allServiceProv.venues![index]);
 
                 },
                   // children: [
@@ -233,7 +236,8 @@ class _ServicesState extends State<Services> {
                   ), itemBuilder: (BuildContext context, int index) {
                   return orgContainer(context, "${allServiceProv.decors?[index].venueName ?? ""}",
                       "https://everythingforpageants.com/msp/${allServiceProv.decors?[index].bannerImg ?? ""}",
-                      "${allServiceProv.decors?[index].userId ?? ""}");
+                      "${allServiceProv.decors?[index].userId ?? ""}",
+                      allServiceProv.decors![index]);
 
                 },
                   // children: [
@@ -281,7 +285,8 @@ class _ServicesState extends State<Services> {
                   ), itemBuilder: (BuildContext context, int index) {
                   return orgContainer(context, "${allServiceProv.caterers?[index].venueName ?? ""}",
                       "https://everythingforpageants.com/msp/${allServiceProv.caterers?[index].bannerImg ?? ""}",
-                      "${allServiceProv.caterers?[index].userId ?? ""}");
+                      "${allServiceProv.caterers?[index].userId ?? ""}",
+                      allServiceProv.caterers![index]);
 
                 },
                   // children: [
@@ -331,14 +336,22 @@ class _ServicesState extends State<Services> {
     );
   }
 
-  Widget orgContainer(BuildContext context,String title, String image,String vendorID)
+  Widget orgContainer(BuildContext context,String title, String image,String vendorID,ServiceResponse data)
   {
     final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
 
     return GestureDetector(
       onTap: ()
       {
-        Navigator.push(context, CupertinoPageRoute(builder: (BuildContext context) => SingleServiceProvider(image: image,name: title,id: vendorID,)));
+        showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (BuildContext context) => SingleEvent(
+                title: title,
+                image: image,
+                repeat: true,
+                past: false,
+                data: data));
       },
       child: Stack(
         children:[

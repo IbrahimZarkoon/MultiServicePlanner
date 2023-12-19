@@ -47,12 +47,14 @@ class SingleEvent extends StatefulWidget {
 class _SingleEventState extends State<SingleEvent> {
   int _currentSlide = 0;
 
-  final List<String> carouselImages = [
-    "https://lh3.googleusercontent.com/p/AF1QipPGwn8inAs_Rn6d8ytRdMmE20h5Uk6MIDQDE3SV=s1360-w1360-h1020",
-    "https://lh3.googleusercontent.com/p/AF1QipPxsk-qmz_4x7jmKMKhcHt-tVk3Qk-Y0QubWua8=s1360-w1360-h1020",
-    "https://lh3.googleusercontent.com/p/AF1QipN1emH09g5A1MDC6DXc44yaZhqiOnosRZPqZQma=s1360-w1360-h1020",
-  ];
+  List<String>? carouselImages = [];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    carouselImages = widget.data?.relatedImg;
+  }
   // void _openCalendar() {
   //   AndroidIntent intent = AndroidIntent(
   //     action: 'android.intent.action.MAIN',
@@ -68,8 +70,8 @@ class _SingleEventState extends State<SingleEvent> {
   bool request = false;
 
   void launchMap() async {
-    const double latitude = 37.422;
-    const double longitude = -122.084;
+    const double latitude = 24.802308;
+    const double longitude = 67.046165;
     const String mapUrl =
         'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
 
@@ -176,25 +178,7 @@ class _SingleEventState extends State<SingleEvent> {
                         ),
                       ),
                     ),
-                    widget.repeat
-                        ? Positioned(
-                            left: 25,
-                            top: 25,
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  top: 5, bottom: 5, left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                  color: Color(0xff09426d),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: const Text(
-                                "Repetitive",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 12),
-                              ),
-                            ))
-                        : SizedBox()
+
                   ]),
 
                   //Heading
@@ -629,31 +613,11 @@ class _SingleEventState extends State<SingleEvent> {
                               height: MediaQuery.of(context).size.height * 0.25,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                // image: const DecorationImage(
-                                //   image: NetworkImage(
-                                //       "https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png"),
-                                //   fit: BoxFit.cover,
-                                // )
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      "https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png",
-                                  cacheManager: cacheManager,
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/logos/Maps_Img.png"),
                                   fit: BoxFit.cover,
-                                  placeholder: (context, url) => const Center(
-                                    child: CircularProgressIndicator(
-                                      color: Color(0xff09426d),
-                                      value: 5,
-                                    ),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(
-                                    Icons.error,
-                                    color: Color(0xff09426d),
-                                  ),
-                                ),
+                                )
                               ),
                             ),
                             Positioned(
@@ -736,7 +700,7 @@ class _SingleEventState extends State<SingleEvent> {
                   Column(
                     children: [
                       CarouselSlider.builder(
-                        itemCount: carouselImages.length,
+                        itemCount: carouselImages?.length ?? 0,
                         itemBuilder: (BuildContext context, int index, int a) {
                           return Container(
                             margin: const EdgeInsets.only(
@@ -748,7 +712,7 @@ class _SingleEventState extends State<SingleEvent> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: CachedNetworkImage(
-                                imageUrl: carouselImages[index],
+                                imageUrl: carouselImages![index],
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator(
@@ -786,7 +750,7 @@ class _SingleEventState extends State<SingleEvent> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
-                            carouselImages.length,
+                            carouselImages?.length ?? 0,
                             (index) => Container(
                               width: 8,
                               height: 8,
@@ -806,205 +770,76 @@ class _SingleEventState extends State<SingleEvent> {
                   ),
 
                   //Visit Site Con
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    margin:
-                        const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              spreadRadius: 1,
-                              blurRadius: 1)
-                        ]),
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "To the event site",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: Color(0xff09426d)),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Transform.rotate(
-                            angle: 45 * 3.1415926535 / 180,
-                            child: const Icon(
-                              Icons.arrow_upward,
-                              size: 20,
-                              color: Color(0xff09426d),
-                            ))
-                      ],
+                  InkWell(
+                    onTap: ()
+                      {
+                        launchUrl(Uri.parse("${widget.data?.webLink ?? "https://cms.bahria.edu.pk/"}"));
+                      },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      margin:
+                          const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                spreadRadius: 1,
+                                blurRadius: 1)
+                          ]),
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "To the event site",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: Color(0xff09426d)),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Transform.rotate(
+                              angle: 45 * 3.1415926535 / 180,
+                              child: const Icon(
+                                Icons.arrow_upward,
+                                size: 20,
+                                color: Color(0xff09426d),
+                              ))
+                        ],
+                      ),
                     ),
                   ),
 
-                  //Comments Column
-                  Column(
-                    children: [
-                      //Headings(context, "RATING OF ORGANIZER"),
-
-                      // Row(
-                      //     mainAxisAlignment: MainAxisAlignment.start,
-                      //     crossAxisAlignment: CrossAxisAlignment.center,
-                      //     children: [
-                      //       //Image
-                      //       Container(
-                      //         margin: const EdgeInsets.only(left: 15, right: 15),
-                      //         width: 50,
-                      //         height: 50,
-                      //         decoration: BoxDecoration(
-                      //             borderRadius: BorderRadius.circular(50),
-                      //             image: const DecorationImage(
-                      //                 image: NetworkImage(
-                      //                     "https://cf.ltkcdn.net/kids/images/std/314009-800x533-boys-clothing-size.jpg"),
-                      //                 fit: BoxFit.cover)),
-                      //       ),
-                      //
-                      //       Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         mainAxisAlignment: MainAxisAlignment.center,
-                      //         children: [
-                      //           Text(
-                      //             "Melon Music",
-                      //             style: TextStyle(
-                      //                 fontFamily: "Helvetica_Bold",
-                      //                 color: Colors.black.withOpacity(0.8),
-                      //                 fontWeight: FontWeight.normal,
-                      //                 fontSize: 12),
-                      //           ),
-                      //           const SizedBox(
-                      //             height: 5,
-                      //           ),
-                      //           Container(
-                      //             padding: const EdgeInsets.only(
-                      //                 top: 5, bottom: 5, left: 10, right: 10),
-                      //             decoration: BoxDecoration(
-                      //                 color: Colors.white,
-                      //                 borderRadius: BorderRadius.circular(50)),
-                      //             child: Row(
-                      //               mainAxisAlignment: MainAxisAlignment.start,
-                      //               crossAxisAlignment:
-                      //                   CrossAxisAlignment.center,
-                      //               children: [
-                      //                 const Icon(
-                      //                   Icons.star,
-                      //                   size: 15,
-                      //                   color: Color(0xfffdc337),
-                      //                 ),
-                      //                 const SizedBox(
-                      //                   width: 5,
-                      //                 ),
-                      //                 Text(
-                      //                   "4.6",
-                      //                   style: TextStyle(
-                      //                       fontFamily: "Helvetica_Bold",
-                      //                       color:
-                      //                           Colors.black.withOpacity(0.8),
-                      //                       fontWeight: FontWeight.normal,
-                      //                       fontSize: 10),
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ]),
-                      //
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-
-                      // //Comments Slider Container
-                      // Container(
-                      //   width: MediaQuery.of(context).size.width,
-                      //   height: MediaQuery.of(context).size.height * 0.275,
-                      //   child: ListView.builder(
-                      //       shrinkWrap: true,
-                      //       padding: const EdgeInsets.only(
-                      //           top: 3, bottom: 3, left: 15, right: 15),
-                      //       itemCount: 5,
-                      //       physics: const BouncingScrollPhysics(),
-                      //       scrollDirection: Axis.horizontal,
-                      //       itemBuilder: (BuildContext context, index) {
-                      //         return reviewCon(
-                      //             context,
-                      //             "Got to have 'em",
-                      //             "States where I pretty good price and a great size I use two a day and it's something we have to buy",
-                      //             "Mark$index");
-                      //       }),
-                      // ),
-                      //
-                      // InkWell(
-                      //   onTap: () {
-                      //     showModalBottomSheet(
-                      //         context: context,
-                      //         shape: const RoundedRectangleBorder(
-                      //             borderRadius: BorderRadius.only(
-                      //                 topLeft: Radius.circular(20),
-                      //                 topRight: Radius.circular(20))),
-                      //         isScrollControlled: true,
-                      //         builder: (BuildContext context) {
-                      //           return allReviews(context);
-                      //         });
-                      //   },
-                      //   child: Container(
-                      //     width: MediaQuery.of(context).size.width,
-                      //     padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      //     margin: const EdgeInsets.only(
-                      //         left: 15, right: 15, bottom: 15, top: 15),
-                      //     decoration: BoxDecoration(
-                      //         borderRadius: BorderRadius.circular(5),
-                      //         color: const Color(0xfffffbfc),
-                      //         boxShadow: [
-                      //           BoxShadow(
-                      //               color: Colors.black.withOpacity(0.1),
-                      //               spreadRadius: 1,
-                      //               blurRadius: 1)
-                      //         ]),
-                      //     alignment: Alignment.center,
-                      //     child: const Text(
-                      //       "View all",
-                      //       style: TextStyle(
-                      //           fontWeight: FontWeight.bold,
-                      //           fontSize: 12,
-                      //           color: Color(0xff09426d)),
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 15, right: 15, bottom: 15, top: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            //Heading
-                            const Text(
-                              "Similar Venues",
-                              style: TextStyle(
-                                  fontSize: 18, fontFamily: "Helvetica_Bold"),
-                            ),
-                          ],
-                        ),
-                      ),
-                      featuredSlider(context, []),
-                    ],
-                  ),
+                  //
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   mainAxisAlignment: MainAxisAlignment.start,
+                  //   children: [
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(
+                  //           left: 15, right: 15, bottom: 15, top: 15),
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: [
+                  //           //Heading
+                  //           const Text(
+                  //             "Similar Venues",
+                  //             style: TextStyle(
+                  //                 fontSize: 18, fontFamily: "Helvetica_Bold"),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     featuredSlider(context, []),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
@@ -1158,8 +993,9 @@ class _SingleEventState extends State<SingleEvent> {
 
               //Chat Container
               InkWell(
-                onTap: () => Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => EventChatScreen())),
+                onTap: (){
+                  launchUrl(Uri.parse("https://api.whatsapp.com/send/?phone=%2B923363434322"));
+                },
                 child: Container(
                   constraints: BoxConstraints(maxHeight: 45),
                   margin: EdgeInsets.only(left: 15),

@@ -81,22 +81,16 @@ Widget eventCon(BuildContext context, String title, String date, String image,
 
   return InkWell(
     onTap: () {
-      venue
-          ? showModalBottomSheet(
-              isScrollControlled: true,
-              context: context,
-              builder: (BuildContext context) => SingleEvent(
-                  title: title,
-                  image: image,
-                  repeat: false,
-                  past: false,
-                  data: data),
-            )
-          : Navigator.push(
-              context,
-              CupertinoPageRoute(
-                  builder: (BuildContext context) =>
-                      SingleServiceProvider(name: title, image: image,id: "${data?.bannerImg ?? ""}",)));
+      showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) => SingleEvent(
+            title: title,
+            image: image,
+            repeat: false,
+            past: false,
+            data: data),
+      );
     },
     child: Container(
       margin: const EdgeInsets.only(right: 10),
