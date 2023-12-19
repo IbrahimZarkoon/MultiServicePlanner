@@ -404,22 +404,22 @@ class _ExplorePageState extends State<ExplorePage> {
                 thickBorder(context),
 
 
-                const Padding(
-                  padding: EdgeInsets.only(left: 15,top: 15,bottom: 0),
-                  child: Text("Explore",overflow: TextOverflow.ellipsis,
-                      style:
-                      TextStyle(fontFamily: "Helvetica_Bold",color: Color(0xff000000),fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
+                // const Padding(
+                //   padding: EdgeInsets.only(left: 15,top: 15,bottom: 0),
+                //   child: Text("Explore",overflow: TextOverflow.ellipsis,
+                //       style:
+                //       TextStyle(fontFamily: "Helvetica_Bold",color: Color(0xff000000),fontWeight: FontWeight.bold, fontSize: 18)),
+                // ),
 
-                //Popular Now
-                Padding(
-                  padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
-                  child: Text("Popular now",
-                  style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16,fontFamily: "Helvetica_Bold"),),
-                ),
+                // //Popular Now
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
+                //   child: Text("Popular now",
+                //   style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 16,fontFamily: "Helvetica_Bold"),),
+                // ),
 
                 //Popular now List View
-                popularSlider(context,[]),
+                // popularSlider(context,[]),
 
                 //Outdoors & Adventure
                 Padding(
