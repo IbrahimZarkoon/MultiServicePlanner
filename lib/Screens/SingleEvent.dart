@@ -178,7 +178,6 @@ class _SingleEventState extends State<SingleEvent> {
                         ),
                       ),
                     ),
-
                   ]),
 
                   //Heading
@@ -200,7 +199,7 @@ class _SingleEventState extends State<SingleEvent> {
                     padding: const EdgeInsets.only(
                         left: 15, right: 15, bottom: 10, top: 0),
                     child: Text(
-                      "${widget.data?.priceRangeStart} - ${widget.data?.priceRangeEnd} ",
+                      "${widget.data?.priceRangeStart}PKR - ${widget.data?.priceRangeEnd}PKR ",
                       textScaleFactor: 1.3,
                       style: TextStyle(
                           decoration: widget.past
@@ -612,13 +611,12 @@ class _SingleEventState extends State<SingleEvent> {
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.25,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                      "assets/images/logos/Maps_Img.png"),
-                                  fit: BoxFit.cover,
-                                )
-                              ),
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/logos/Maps_Img.png"),
+                                    fit: BoxFit.cover,
+                                  )),
                             ),
                             Positioned(
                                 right: 10,
@@ -771,15 +769,15 @@ class _SingleEventState extends State<SingleEvent> {
 
                   //Visit Site Con
                   InkWell(
-                    onTap: ()
-                      {
-                        launchUrl(Uri.parse("${widget.data?.webLink ?? "https://cms.bahria.edu.pk/"}"));
-                      },
+                    onTap: () {
+                      launchUrl(Uri.parse(
+                          "${widget.data?.webLink ?? "https://cms.bahria.edu.pk/"}"));
+                    },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      margin:
-                          const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                      margin: const EdgeInsets.only(
+                          left: 15, right: 15, bottom: 15),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white,
@@ -993,8 +991,9 @@ class _SingleEventState extends State<SingleEvent> {
 
               //Chat Container
               InkWell(
-                onTap: (){
-                  launchUrl(Uri.parse("https://api.whatsapp.com/send/?phone=%2B923363434322"));
+                onTap: () {
+                  launchUrl(Uri.parse(
+                      "https://api.whatsapp.com/send/?phone=%2B923363434322"));
                 },
                 child: Container(
                   constraints: BoxConstraints(maxHeight: 45),
@@ -1823,8 +1822,7 @@ class _repeatDaysBottomSheetState extends State<repeatDaysBottomSheet> {
       selectedDayHighlightColor: Color(0xff09426d),
     );
     void BookService(UserProvider userProvider) async {
-      
-        var url = await Uri.parse(
+      var url = await Uri.parse(
           'https://everythingforpageants.com/msp/api/bookPackage.php');
       var response = await http.post(url,
           body: json.encode({

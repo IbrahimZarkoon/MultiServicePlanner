@@ -764,7 +764,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
                                   child: CachedNetworkImage(
-                                    imageUrl: "https://everythingforpageants.com/msp${carouselImages![index]}",
+                                    imageUrl: carouselImages![index],
                                     fit: BoxFit.cover,
                                     placeholder: (context, url) => const Center(
                                       child: CircularProgressIndicator(
