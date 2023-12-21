@@ -4,15 +4,13 @@ import 'package:flutter/cupertino.dart';
 
 import '../Response/ServiceResponse.dart';
 
-class AllServiceProvider extends ChangeNotifier{
-
+class AllServiceProvider extends ChangeNotifier {
   List<ServiceResponse>? photographers;
   List<ServiceResponse>? decors;
   List<ServiceResponse>? caterers;
   List<ServiceResponse>? venues;
 
   List<String> items = ["1", "2", "3", "4"];
-
 
   Future<void> fetchData(String id) async {
     var url = Uri.parse(
@@ -27,22 +25,17 @@ class AllServiceProvider extends ChangeNotifier{
       notifyListeners();
     }
     if (id == "2") {
-      decors =
-          dataArray.map((item) => ServiceResponse.fromJson(item)).toList();
+      decors = dataArray.map((item) => ServiceResponse.fromJson(item)).toList();
       notifyListeners();
-
     }
     if (id == "3") {
-      venues =
-          dataArray.map((item) => ServiceResponse.fromJson(item)).toList();
+      venues = dataArray.map((item) => ServiceResponse.fromJson(item)).toList();
       notifyListeners();
-
     }
-    if (id == "7") {
+    if (id == "4") {
       caterers =
           dataArray.map((item) => ServiceResponse.fromJson(item)).toList();
       notifyListeners();
-
     }
   }
 

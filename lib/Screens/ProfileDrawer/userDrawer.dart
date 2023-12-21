@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_service_planner/modals/UserProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../CustomWidgets/Headings.dart';
@@ -13,11 +14,8 @@ import '../Login.dart';
 import '../OrganizeEvent.dart';
 import 'EditPreferences.dart';
 
-
-Widget userDrawer(BuildContext context)
-{
+Widget userDrawer(BuildContext context) {
   final cacheManager = Provider.of<CacheManagerProvider>(context).cacheManager;
-
 
   return Container(
     color: const Color(0xfffafafa),
@@ -31,7 +29,8 @@ Widget userDrawer(BuildContext context)
       children: [
         //Top Container
         Container(
-          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15,top: 15),
+          padding:
+              const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 15),
           color: const Color(0xff09426d),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,7 +50,7 @@ Widget userDrawer(BuildContext context)
                       borderRadius: BorderRadius.circular(100),
                       child: CachedNetworkImage(
                         imageUrl:
-                        "https://www.sainly.com/cdn/shop/products/MenSuitsOnionPink3PieceSlimFitSuitElegantFormalFashionSuitsSainly-2023-04-19T133324.316_800x.png?v=1681891795",
+                            "https://www.sainly.com/cdn/shop/products/MenSuitsOnionPink3PieceSlimFitSuitElegantFormalFashionSuitsSainly-2023-04-19T133324.316_800x.png?v=1681891795",
                         cacheManager: cacheManager,
                         fit: BoxFit.scaleDown,
                         placeholder: (context, url) => const Center(
@@ -73,26 +72,31 @@ Widget userDrawer(BuildContext context)
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
-                        children: const [
+                        children: [
                           Text(
-                            "Ibrahim Zarkoon",
+                            Provider.of<UserProvider>(context, listen: false)
+                                .email,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "Helvetica_Bold"),
                           ),
-
-                          SizedBox(width: 5,),
-
-                          Icon(Icons.verified,color: Colors.white,size: 15,)
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.verified,
+                            color: Colors.white,
+                            size: 15,
+                          )
                         ],
                       ),
                       const SizedBox(
                         height: 10,
                       ),
                       const Text(
-                        "i********@gmail.com",
+                        "",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
@@ -108,14 +112,13 @@ Widget userDrawer(BuildContext context)
                     context,
                     CupertinoPageRoute(
                         builder: (BuildContext context) =>
-                        const EditProfile())),
+                            const EditProfile())),
                 child: Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                         color: const Color(0xffffffff),
                         borderRadius: BorderRadius.circular(10),
-                        border:
-                        Border.all(color: Colors.white, width: 2)),
+                        border: Border.all(color: Colors.white, width: 2)),
                     child: const Icon(
                       Icons.edit_outlined,
                       color: Color(0xff09426d),
@@ -130,16 +133,15 @@ Widget userDrawer(BuildContext context)
           child: Container(
             decoration: BoxDecoration(
                 color: const Color(0xfffafafa),
+
                 ///borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.black.withOpacity(0.1),
                       blurRadius: 1.5,
                       spreadRadius: 0,
-                      offset: const Offset(0,-3)
-                  )
-                ]
-            ),
+                      offset: const Offset(0, -3))
+                ]),
             //margin: EdgeInsets.only(left: kToolbarHeight),
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -149,7 +151,6 @@ Widget userDrawer(BuildContext context)
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-
                   firstHeading(context, "My Profile"),
 
                   InkWell(
@@ -157,9 +158,9 @@ Widget userDrawer(BuildContext context)
                           context,
                           CupertinoPageRoute(
                               builder: (BuildContext context) =>
-                              const EditPreferences())),
-                      child:
-                      profileCon(context, "Edit Preferences", Icons.room_preferences_outlined)),
+                                  const EditPreferences())),
+                      child: profileCon(context, "Edit Preferences",
+                          Icons.room_preferences_outlined)),
 
                   // InkWell(
                   //     onTap: () {
@@ -275,9 +276,10 @@ Widget userDrawer(BuildContext context)
                       onTap: () => Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (BuildContext context) => const OrgVenues())),
-                      child: profileCon(
-                          context, "My venues", Icons.manage_accounts_outlined)),
+                              builder: (BuildContext context) =>
+                                  const OrgVenues())),
+                      child: profileCon(context, "My venues",
+                          Icons.manage_accounts_outlined)),
 
                   // InkWell(
                   //     onTap: () => Navigator.push(
@@ -292,8 +294,8 @@ Widget userDrawer(BuildContext context)
                       onTap: () {
                         Share.share("Share Profile ");
                       },
-                      child:
-                      profileCon(context, "Share profile", CupertinoIcons.share)),
+                      child: profileCon(
+                          context, "Share profile", CupertinoIcons.share)),
 
                   //profileCon(context, "Manage events", Icons.manage_accounts_outlined),
                   //profileCon(context, "Availability", Icons.event_available),
@@ -302,7 +304,8 @@ Widget userDrawer(BuildContext context)
                       onTap: () {
                         Share.share("Invite Friends");
                       },
-                      child: profileCon(context, "Invite friends", Icons.share)),
+                      child:
+                          profileCon(context, "Invite friends", Icons.share)),
 
                   Headings(context, "Settings"),
 
@@ -314,10 +317,6 @@ Widget userDrawer(BuildContext context)
 
                   profileCon(context, "Terms of service", Icons.book_outlined),
                   profileCon(context, "Cookie policy", Icons.cookie_outlined),
-
-
-
-
                 ],
               ),
             ),
@@ -328,8 +327,7 @@ Widget userDrawer(BuildContext context)
           onTap: () => Navigator.push(
               context,
               CupertinoPageRoute(
-                  builder: (BuildContext context) =>
-                  const Login())),
+                  builder: (BuildContext context) => const Login())),
           child: Container(
             margin: const EdgeInsets.all(15),
             padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -353,8 +351,6 @@ Widget userDrawer(BuildContext context)
             ),
           ),
         ),
-
-
 
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -387,30 +383,39 @@ Widget userDrawer(BuildContext context)
   );
 }
 
-Widget profileCon(BuildContext context,String title, IconData icon)
-{
+Widget profileCon(BuildContext context, String title, IconData icon) {
   return Container(
     padding: const EdgeInsets.all(15),
     decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.2),width: 0.5))
-    ),
+        border: Border(
+            bottom:
+                BorderSide(color: Colors.black.withOpacity(0.2), width: 0.5))),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-
-        Icon(icon,size: 18,color: Colors.black.withOpacity(0.6),),
-
-        const SizedBox(width: 15,),
-
-        Text(title,
-          style: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 12,fontWeight: FontWeight.bold),),
-
+        Icon(
+          icon,
+          size: 18,
+          color: Colors.black.withOpacity(0.6),
+        ),
+        const SizedBox(
+          width: 15,
+        ),
+        Text(
+          title,
+          style: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 12,
+              fontWeight: FontWeight.bold),
+        ),
         const Spacer(),
-
-        Icon(Icons.arrow_forward_ios_outlined,size: 18,color: Colors.black.withOpacity(0.4),)
-
+        Icon(
+          Icons.arrow_forward_ios_outlined,
+          size: 18,
+          color: Colors.black.withOpacity(0.4),
+        )
       ],
     ),
   );

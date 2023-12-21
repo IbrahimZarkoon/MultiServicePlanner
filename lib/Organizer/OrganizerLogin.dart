@@ -36,7 +36,6 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
   bool circularProg = false;
 
-
   void LoginButton(context) async {
     print("Login Function");
     setState(() {
@@ -56,22 +55,23 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
       // _signInApiResponse = SignInResp.fromJson(decodedJson);
 
       if (decodedJson["Status"] == "200") {
+        Provider.of<OrgProvider>(context, listen: false).orgID =
+            decodedJson["Id"];
+        Provider.of<OrgProvider>(context, listen: false).serviceID =
+            decodedJson["Service_id"];
+        Provider.of<OrgProvider>(context, listen: false).email =
+            decodedJson["Email"];
 
-        Provider.of<OrgProvider>(context,listen:false).orgID = decodedJson["Id"];
-        Provider.of<OrgProvider>(context,listen:false).serviceID = decodedJson["Service_id"];
-
-
-        print("${Provider.of<OrgProvider>(context,listen:false).orgID}");
+        print("${Provider.of<OrgProvider>(context, listen: false).orgID}");
         Navigator.push(
             context,
             CupertinoPageRoute(
                 builder: (BuildContext context) => OrgDashboard(
                       orgTabIndex: 0,
                     )));
-      }
-      else{
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response.body}")));
-        
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("${response.body}")));
       }
     } catch (e) {
       print("An error occurred: $e");
@@ -88,7 +88,6 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
       // Show the custom Snackbar
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
     }
     setState(() {
       circularProg = false;
@@ -457,12 +456,17 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                       ],
                     ),
                   )),
-
-              circularProg? Positioned(
-
-                  top: MediaQuery.sizeOf(context).height/2,
-                left: 0,right: 0,
-                  child: Center(child: CircularProgressIndicator(color: appPrimary,),)) : SizedBox()
+              circularProg
+                  ? Positioned(
+                      top: MediaQuery.sizeOf(context).height / 2,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: appPrimary,
+                        ),
+                      ))
+                  : SizedBox()
             ]),
       ),
     );

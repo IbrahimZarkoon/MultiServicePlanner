@@ -48,9 +48,13 @@ class _LoginState extends State<Login> {
       // _signInApiResponse = SignInResp.fromJson(decodedJson);
 
       if (decodedJson["Status"] == "200") {
+        Provider.of<UserProvider>(context, listen: false).userID =
+            decodedJson["Id"];
+        Provider.of<UserProvider>(context, listen: false).emailUser =
+            decodedJson["Email"];
 
-        Provider.of<UserProvider>(context,listen:false).userID = decodedJson["Id"];
-        Provider.of<AllServiceProvider>(context,listen:false).fetchDataForAllItems();
+        Provider.of<AllServiceProvider>(context, listen: false)
+            .fetchDataForAllItems();
         Navigator.push(
             context,
             CupertinoPageRoute(

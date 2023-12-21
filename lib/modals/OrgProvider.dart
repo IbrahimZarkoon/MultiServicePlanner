@@ -5,9 +5,10 @@ import 'package:http/http.dart' as https;
 
 import '../Response/SingleVendorPackagesResponse.dart';
 
-class OrgProvider extends ChangeNotifier{
+class OrgProvider extends ChangeNotifier {
   String _orgID = '';
   String _serviceID = '';
+  String ee = '';
 
   List<SingleVendorPackagesResponse> _packagesList = [];
 
@@ -20,13 +21,20 @@ class OrgProvider extends ChangeNotifier{
   set packagesList(List<SingleVendorPackagesResponse> newList) {
     _packagesList = newList;
   }
-  Future<void> getPackagesData(String id)
-  async {
-    print("$id");
-    var bodyJson = {"id":id};
 
-    var request =
-    https.post(Uri.parse("https://everythingforpageants.com/msp/api/getServiceDetailsById.php"),body: jsonEncode(bodyJson));
+  set email(String value) {
+    ee = value;
+    notifyListeners();
+  }
+
+  Future<void> getPackagesData(String id) async {
+    print("$id");
+    var bodyJson = {"id": id};
+
+    var request = https.post(
+        Uri.parse(
+            "https://everythingforpageants.com/msp/api/getServiceDetailsById.php"),
+        body: jsonEncode(bodyJson));
 
     // Add the id to the request as form data
 
@@ -46,7 +54,6 @@ class OrgProvider extends ChangeNotifier{
       //await ScaffoldMessenger.of(context).showSnackBar(SnackBar(duration: Duration(milliseconds: 1500),content: Text("Got packages successfully.")));
 
       //Navigator.push(context, CupertinoPageRoute(builder: (_) => const OrganizerLogin()));
-
     } else {
       print("Get packages request failed with status: ${response.statusCode}");
       print("Response: $response");
@@ -55,18 +62,16 @@ class OrgProvider extends ChangeNotifier{
     notifyListeners();
   }
 
- String get orgID => _orgID;
+  String get orgID => _orgID;
 
- set orgID(String value)
- {
-   _orgID = value;
-   notifyListeners();
- }
+  set orgID(String value) {
+    _orgID = value;
+    notifyListeners();
+  }
 
   String get serviceID => _serviceID;
 
-  set serviceID(String value)
-  {
+  set serviceID(String value) {
     _serviceID = value;
     notifyListeners();
   }
