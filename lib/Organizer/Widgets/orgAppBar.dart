@@ -30,23 +30,15 @@ class _orgAppBarState extends State<orgAppBar> {
       centerTitle: false,
       title: Container(
         alignment: Alignment.centerLeft,
+        height: kToolbarHeight,
+        width: MediaQuery.sizeOf(context).width * 0.25,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: CachedNetworkImage(
-            color: Colors.white,
-            height: kToolbarHeight-10,
-            imageUrl: "https://www.nexarce.com/wp-content/uploads/2023/04/NexarceLogo.png",
-            cacheManager: cacheManager,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => const Center(
-              child: CircularProgressIndicator(
-                color: appPrimary,
-                value: 5,
-              ),
-            ),
-            errorWidget: (context, url, error) => const Icon(Icons.error,color: appPrimary,),
-          ),
-        ),
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              "assets/images/logos/LOGO.png",
+              fit: BoxFit.scaleDown,
+              color: Colors.white,
+            )),
       ),
       backgroundColor: appPrimary,
 

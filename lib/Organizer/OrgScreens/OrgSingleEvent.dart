@@ -615,33 +615,12 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.25,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                // image: const DecorationImage(
-                                //   image: NetworkImage(
-                                //       "https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png"),
-                                //   fit: BoxFit.cover,
-                                // )
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      "https://developers.google.com/static/maps/images/landing/hero_maps_static_api.png",
-                                  cacheManager: cacheManager,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) => const Center(
-                                    child: CircularProgressIndicator(
-                                      color: appPrimary,
-                                      value: 5,
-                                    ),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(
-                                    Icons.error,
-                                    color: appPrimary,
-                                  ),
-                                ),
-                              ),
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/logos/Maps_Img.png"),
+                                    fit: BoxFit.cover,
+                                  )),
                             ),
                             Positioned(
                                 right: 10,
@@ -662,7 +641,7 @@ class _OrgSingleEventState extends State<OrgSingleEvent> {
                                   child: const Text(
                                     "View on Google Maps",
                                     style: TextStyle(
-                                        color: appPrimary,
+                                        color: Color(0xff09426d),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 11),
                                   ),

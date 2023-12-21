@@ -992,8 +992,8 @@ class _SingleEventState extends State<SingleEvent> {
               //Chat Container
               InkWell(
                 onTap: () {
-                  launchUrl(Uri.parse(
-                      "https://api.whatsapp.com/send/?phone=%2B923363434322"));
+                  Navigator.push(context, CupertinoPageRoute(builder: (context) => EventChatScreen(data: widget.data!)));
+
                 },
                 child: Container(
                   constraints: BoxConstraints(maxHeight: 45),

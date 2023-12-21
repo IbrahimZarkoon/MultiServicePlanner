@@ -122,7 +122,7 @@ class _OrgProfileState extends State<OrgProfile> {
                               Row(
                                 children: const [
                                   Text(
-                                    "Ibrahim Zarkoonsss",
+                                    "Ibrahim Zarkoon",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 14,

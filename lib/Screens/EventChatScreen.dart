@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_service_planner/Response/ServiceResponse.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventChatScreen extends StatefulWidget {
-  const EventChatScreen({super.key});
+   EventChatScreen({super.key,required this.data});
 
+  ServiceResponse data;
   @override
   State<EventChatScreen> createState() => _EventChatScreenState();
 }
@@ -114,14 +116,14 @@ class _EventChatScreenState extends State<EventChatScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: Colors.white,
-                  image: const DecorationImage(
-                    image: NetworkImage("https://img.icons8.com/?size=512&id=0lg0kb05hrOz&format=png"),
+                  image:  DecorationImage(
+                    image: NetworkImage("${widget.data.bannerImg}"),
                     fit: BoxFit.cover
                   )
                 ),
               ),
 
-              const Text('Zarkoon',style: TextStyle(color: Colors.white,fontSize: 14),),
+               Text("${widget.data.venueName}",style: TextStyle(color: Colors.white,fontSize: 14),),
             ],
           ),
         ),
@@ -142,7 +144,7 @@ class _EventChatScreenState extends State<EventChatScreen> {
 
           InkWell(
               onTap: ()async{
-                Uri sms = Uri.parse('sms:101022?body=Hi, I am messaging from Events Application.');
+                Uri sms = Uri.parse('sms:101022?body=Hi, I am messaging from Multi Service Planner.');
                 if (await launchUrl(sms)) {
                   //app opened
                 }else{
@@ -233,59 +235,57 @@ class _EventChatScreenState extends State<EventChatScreen> {
         children: <Widget>[
 
           //View Add container
-          InkWell(
-              onTap: () => Navigator.pop(context),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.2),width: 0.5))
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.2),width: 0.5))
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+
+              children: [
+
+                //Event Image Con
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  width: kToolbarHeight,
+                  height: kToolbarHeight,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white,
+                      image:  DecorationImage(
+                          image: NetworkImage("${widget.data.bannerImg}"),
+                          fit: BoxFit.cover
+                      )
+                  ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
 
-                  children: [
+                //Event Details
+                Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
-                    //Event Image Con
-                    Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      width: kToolbarHeight,
-                      height: kToolbarHeight,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                          image: const DecorationImage(
-                              image: NetworkImage("https://lh3.googleusercontent.com/p/AF1QipN1emH09g5A1MDC6DXc44yaZhqiOnosRZPqZQma=s1360-w1360-h1020"),
-                              fit: BoxFit.cover
-                          )
-                      ),
-                    ),
+                        Text("${widget.data.venueName}",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 14),),
 
-                    //Event Details
-                    Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                        const SizedBox(height: 5,),
 
-                            Text('The Beach Hut',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 14),),
-
-                            const SizedBox(height: 5,),
-
-                            Text('150,000 PKR',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 12),),
+                        Text('${widget.data.priceRangeStart} PKR',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 12),),
 
 
-                          ],
-                        )
-                    ),
-
-
-                    Icon(Icons.keyboard_arrow_right,color: Colors.black.withOpacity(0.8),size: 30,)
-
-                  ],
+                      ],
+                    )
                 ),
-              )),
+
+
+                Icon(Icons.keyboard_arrow_right,color: Colors.black.withOpacity(0.8),size: 30,)
+
+              ],
+            ),
+          ),
 
           //StreamBuilder for messages
           Expanded(

@@ -74,82 +74,14 @@ class _OrgNotifState extends State<OrgNotif> {
 
                   children: [
 
-                    oldNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                        "This event dives into the world of digital marketing and whatever comes into it",
-                        "June 31,2023","zarkoon","Digital Marketing Function"),
 
                     newNotifCon(context, "https://images.pexels.com/photos/2114703/pexels-photo-2114703.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                         "This event dives into the world of digital marketing and whatever comes into it",
-                        "July 3,2023","khan","Events World"),
-
-                    newNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                        "This event dives into the world of digital marketing and whatever comes into it",
-                        "June 31,2023","ibrahim","Digital Marketing Function"),
-
-                    oldNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                        "This event dives into the world of digital marketing and whatever comes into it",
-                        "June 31,2023","mohammad","Eventify Strategies"),
-
-                    oldNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                        "This event dives into the world of digital marketing and whatever comes into it",
-                        "June 31,2023","zarkoon","Digital Marketing Function"),
-
-                    newNotifCon(context, "https://images.pexels.com/photos/2114703/pexels-photo-2114703.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                        "This event dives into the world of digital marketing and whatever comes into it",
-                        "July 3,2023","zarkoon","Digital Marketing Function"),
-
-                    newNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                        "This event dives into the world of digital marketing and whatever comes into it",
-                        "June 31,2023","zarkoon","Digital Marketing Function"),
-
-                    oldNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                        "This event dives into the world of digital marketing and whatever comes into it",
-                        "June 31,2023","zarkoon","Digital Marketing Function"),
+                        "July 3,2023","khan","Digital Marketing Event"),
 
                   ],
                 ),
 
-                // Headings(context, "Earlier"),
-                //
-                // ListView(
-                //   shrinkWrap: true,
-                //   scrollDirection: Axis.vertical,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //
-                //   children: [
-                //     oldNotifCon(context, "https://e0.pxfuel.com/wallpapers/37/903/desktop-wallpaper-always-on-display-thumbnail.jpg",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "1h"),
-                //
-                //     oldNotifCon(context, "https://images.pexels.com/photos/2114703/pexels-photo-2114703.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "3h"),
-                //
-                //     oldNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "5h"),
-                //
-                //     oldNotifCon(context, "https://st3.depositphotos.com/1039187/17860/i/600/depositphotos_178608154-stock-photo-couple-in-love.jpg",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "9h"),
-                //
-                //     oldNotifCon(context, "https://e0.pxfuel.com/wallpapers/37/903/desktop-wallpaper-always-on-display-thumbnail.jpg",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "1h"),
-                //
-                //     oldNotifCon(context, "https://images.pexels.com/photos/2114703/pexels-photo-2114703.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "3h"),
-                //
-                //     oldNotifCon(context, "https://images.pexels.com/photos/1004014/pexels-photo-1004014.jpeg?cs=srgb&dl=pexels-min-an-1004014.jpg&fm=jpg",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "5h"),
-                //
-                //     oldNotifCon(context, "https://st3.depositphotos.com/1039187/17860/i/600/depositphotos_178608154-stock-photo-couple-in-love.jpg",
-                //         "Good 5k with friends. Whole crew hit our sub-20 min goal, but that before and after photo shows we had to push!",
-                //         "9h"),
-                //   ],
-                // ),
 
               ],
             )),

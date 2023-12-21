@@ -208,7 +208,7 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
 
           InkWell(
               onTap: ()async{
-                Uri sms = Uri.parse('sms:101022?body=Hi, I am messaging from Events Application.');
+                Uri sms = Uri.parse('sms:101022?body=Hi, I am messaging from Multi Service Planner.');
                 if (await launchUrl(sms)) {
                   //app opened
                 }else{
@@ -295,61 +295,61 @@ class _OrgSingleChatState extends State<OrgSingleChat> {
       ),
       body: Column(
         children: <Widget>[
-
-          //View Add container
-          InkWell(
-              onTap: () => Navigator.pop(context),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.2),width: 0.5))
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-
-                  children: [
-
-                    //Event Image Con
-                    Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      width: kToolbarHeight,
-                      height: kToolbarHeight,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                          image: const DecorationImage(
-                              image: NetworkImage("https://climatepledgearena.com/wp-content/uploads/2023/05/23-50CENT_CPA-Web_1600x900.jpg"),
-                              fit: BoxFit.cover
-                          )
-                      ),
-                    ),
-
-                    //Event Details
-                    Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-
-                            Text('Oasis Party',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 14),),
-
-                            const SizedBox(height: 5,),
-
-                            Text('\$ 29.99',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 12),),
-
-
-                          ],
-                        )
-                    ),
-
-
-                    Icon(Icons.keyboard_arrow_right,color: Colors.black.withOpacity(0.8),size: 30,)
-
-                  ],
-                ),
-              )),
+          //
+          // //View Add container
+          // InkWell(
+          //     onTap: () => Navigator.pop(context),
+          //     child: Container(
+          //       padding: const EdgeInsets.all(10),
+          //       width: MediaQuery.of(context).size.width,
+          //       decoration: BoxDecoration(
+          //           border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.2),width: 0.5))
+          //       ),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.start,
+          //
+          //         children: [
+          //
+          //           //Event Image Con
+          //           Container(
+          //             margin: const EdgeInsets.only(right: 10),
+          //             width: kToolbarHeight,
+          //             height: kToolbarHeight,
+          //             decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(5),
+          //                 color: Colors.white,
+          //                 image: const DecorationImage(
+          //                     image: NetworkImage("https://climatepledgearena.com/wp-content/uploads/2023/05/23-50CENT_CPA-Web_1600x900.jpg"),
+          //                     fit: BoxFit.cover
+          //                 )
+          //             ),
+          //           ),
+          //
+          //           //Event Details
+          //           Expanded(
+          //               child: Column(
+          //                 mainAxisSize: MainAxisSize.min,
+          //                 mainAxisAlignment: MainAxisAlignment.start,
+          //                 crossAxisAlignment: CrossAxisAlignment.start,
+          //                 children: [
+          //
+          //                   Text('Oasis Party',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 14),),
+          //
+          //                   const SizedBox(height: 5,),
+          //
+          //                   Text('\$ 29.99',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black.withOpacity(0.8),fontSize: 12),),
+          //
+          //
+          //                 ],
+          //               )
+          //           ),
+          //
+          //
+          //           Icon(Icons.keyboard_arrow_right,color: Colors.black.withOpacity(0.8),size: 30,)
+          //
+          //         ],
+          //       ),
+          //     )),
 
           //StreamBuilder for messages
           Expanded(

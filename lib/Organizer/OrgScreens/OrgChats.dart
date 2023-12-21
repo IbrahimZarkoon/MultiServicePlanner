@@ -116,7 +116,7 @@ class _OrgChatsState extends State<OrgChats> {
               ),
 
               ListView.builder(
-                itemCount: 5,
+                itemCount: 1,
                   shrinkWrap: true,
                   primary: true,
                   scrollDirection: Axis.vertical,
@@ -166,10 +166,10 @@ class _OrgChatsState extends State<OrgChats> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Ibrahim Khan Zarkoon $index",
+              Text("Ibrahim Khan Zarkoon",
                 style: TextStyle(color: Colors.black.withOpacity(0.8),fontWeight: FontWeight.bold,fontSize: 14),),
 
-              Text("Event $index",
+              Text("seen",
                 style: TextStyle(color: Colors.black.withOpacity(0.6),fontSize: 12),)
             ],
           ),
